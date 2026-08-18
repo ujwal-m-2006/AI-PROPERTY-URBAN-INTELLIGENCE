@@ -350,17 +350,44 @@ plt.tight_layout(); plt.show()
 """),
 
     md("""
-## 8 · Chennai — where this would have fooled anyone
+## 8 · Chennai — and a trap inside the trap
 
 Chennai's dataset covers only **7 localities**, so there are only 7 spatial
 blocks. Hold out a whole locality and the models fall apart, while a random
-split reports near-perfect accuracy.
+split still reports respectable accuracy.
+
+But there is a subtler problem first, and an earlier version of this notebook
+walked straight into it. The `AREA` column is **misspelt**: `Chrompet` also
+appears as `Chrompt`, `Chrmpet` and `Chormpet`; `Anna Nagar` as `Ana Nagar` and
+`Ann Nagar`. Group by the raw column and you get **17** groups instead of 7 — so
+the same locality lands on *both* sides of the split, and the leakage this
+notebook exists to measure quietly leaks back in.
+
+The mapping below is the one the platform's `ml/pipelines/city_config.py`
+applies, not an ad-hoc guess.
 """),
     code("""
 chn = chn_raw.copy()
-chn.columns = [c.strip() for c in chn.columns]
+chn.columns = [c.strip().upper() for c in chn.columns]
+
+# Typo'd categoricals, normalised exactly as the platform pipeline does.
+AREA_FIXES = {
+    "Karapakam": "Karapakkam", "Ana Nagar": "Anna Nagar",
+    "Ann Nagar": "Anna Nagar", "Adyr": "Adyar", "Velchery": "Velachery",
+    "KKNagar": "KK Nagar", "TNagar": "T Nagar", "Chrompt": "Chrompet",
+    "Chrmpet": "Chrompet", "Chormpet": "Chrompet",
+}
+raw_groups = chn["AREA"].astype(str).str.strip().nunique()
+chn["locality"] = chn["AREA"].astype(str).str.strip().replace(AREA_FIXES)
+fixed_groups = chn["locality"].nunique()
+
+print(f"distinct AREA values before normalising : {raw_groups}")
+print(f"                                  after : {fixed_groups}")
+print(f"=> {raw_groups - fixed_groups} were misspellings of a locality that")
+print("   already existed. Left alone, each becomes its own spatial group and")
+print("   the same locality spans the train/test split.\\n")
+
 chn["price_per_sqft"] = chn["SALES_PRICE"] / chn["INT_SQFT"]
-chn["locality"] = chn["AREA"].astype(str).str.strip()
 chn = chn.dropna(subset=["price_per_sqft", "INT_SQFT", "locality"])
 lo, hi = chn["price_per_sqft"].quantile([0.01, 0.99])
 chn = chn[(chn["price_per_sqft"] >= lo) & (chn["price_per_sqft"] <= hi)]
@@ -388,8 +415,11 @@ for name, est in [("random_forest", RandomForestRegressor(
           f"gap {rand-spat:+.4f}")
 
 print("\\nA negative spatial R² means the model does WORSE than predicting the")
-print("mean. With 7 localities there is nothing to generalise from, and the")
-print("platform refuses to quote the random-split figure as accuracy.")
+print(f"mean. With {chn['locality'].nunique()} localities there is almost nothing to")
+print("generalise from, and the platform refuses to quote the random-split")
+print("figure as accuracy.")
+print("\\nNote how much larger the gap is here than in Bengaluru. Fewer, bigger")
+print("blocks make the leakage worse, not better.")
 """),
 
     md("""
