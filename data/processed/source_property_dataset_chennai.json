@@ -1,0 +1,24 @@
+{
+  "name": "Chennai housing sales price \u2014 recorded sale prices",
+  "organisation": "Kaggle community dataset (uploader: kunwarakash)",
+  "source_url": "https://www.kaggle.com/datasets/kunwarakash/chennai-housing-sales-price",
+  "download_url": "https://raw.githubusercontent.com/Ravi8149/Chennai-House-Price-Prediction/HEAD/chennai-house-price.csv",
+  "dataset_name": "chennai-housing-sales-price",
+  "tier": "T4",
+  "availability": "DOWNLOAD",
+  "licence": null,
+  "licence_status": "UNVERIFIED",
+  "attribution": "Chennai housing sales price, Kaggle (uploader: kunwarakash)",
+  "retrieval_path": "Fetched from a GitHub mirror, NOT from Kaggle. Kaggle's API requires an authenticated token; the mirror is unauthenticated, which is what lets the Colab notebook run with no credentials and no setup step.",
+  "method": "http_download_via_mirror",
+  "max_confidence": 0.55,
+  "verification_status": "UNVERIFIED",
+  "caveats": [
+    "UPSTREAM ATTRIBUTION IS INFERRED, NOT CONFIRMED. The mirror's columns (SALES_PRICE, INT_SQFT, N_BEDROOM, DATE_SALE, AREA) match the well-known Kaggle dataset named above, but the mirror does not cite its own source and the Kaggle page could not be read programmatically. Treat the upstream link as the most likely origin, not an established one.",
+    "LICENCE UNVERIFIED for the same reason.",
+    "These ARE recorded sale prices including registration fee and commission \u2014 genuinely closer to transaction value than the Bengaluru asking-price data.",
+    "PERIOD ENDS AROUND 2015. The absolute levels describe a historical market and must not be read as current values.",
+    "ONLY 7 LOCALITIES, so spatial validation has 7 blocks. Every model trained on it carries a low-block warning."
+  ],
+  "why_not_kaggle_api": "Using the Kaggle API would improve provenance \u2014 a dataset page, a version number and a stated licence. It also requires a kaggle.json token, which this project will not handle on a user's behalf and which would break 'Run all' in Colab. The trade is documented rather than hidden: weaker provenance, zero credential handling."
+}

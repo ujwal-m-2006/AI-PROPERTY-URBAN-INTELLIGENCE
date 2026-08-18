@@ -1,0 +1,23 @@
+{
+  "name": "Bengaluru house price data \u2014 asking prices from listings",
+  "organisation": "Kaggle community dataset (uploader: amitabhajoy)",
+  "source_url": "https://www.kaggle.com/datasets/amitabhajoy/bengaluru-house-price-data",
+  "download_url": "https://raw.githubusercontent.com/dphi-official/Datasets/master/Bengaluru_House_Data.csv",
+  "dataset_name": "bengaluru-house-price-data",
+  "tier": "T4",
+  "availability": "DOWNLOAD",
+  "licence": null,
+  "licence_status": "UNVERIFIED",
+  "attribution": "Bengaluru house price data, Kaggle (uploader: amitabhajoy)",
+  "retrieval_path": "Fetched from a GitHub mirror, NOT from Kaggle. Kaggle's API requires an authenticated token; the mirror is unauthenticated, which is what lets the Colab notebook run with no credentials and no setup step.",
+  "method": "http_download_via_mirror",
+  "max_confidence": 0.55,
+  "verification_status": "UNVERIFIED",
+  "caveats": [
+    "UPSTREAM ATTRIBUTION IS RECORDED, LICENCE IS NOT. The Kaggle dataset page is JavaScript-rendered and could not be read programmatically, so the licence is recorded as UNVERIFIED rather than guessed. Confirm it on the dataset page before any redistribution or commercial use.",
+    "RETRIEVED FROM A MIRROR, so the mirror's fidelity to the Kaggle original has not been byte-verified. The column set matches the well-known dataset, which is evidence, not proof.",
+    "NOT A GOVERNMENT REGISTER. These are ASKING prices scraped from listings, carrying a systematic upward bias of unknown size against transaction prices.",
+    "VINTAGE IS UNSTATED. Neither the mirror nor the notebook establishes when these listings were collected, which is why model confidence is capped at 0.45 regardless of validation score."
+  ],
+  "why_not_kaggle_api": "Using the Kaggle API would improve provenance \u2014 a dataset page, a version number and a stated licence. It also requires a kaggle.json token, which this project will not handle on a user's behalf and which would break 'Run all' in Colab. The trade is documented rather than hidden: weaker provenance, zero credential handling."
+}

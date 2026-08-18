@@ -42,6 +42,10 @@ class SourceOut(BaseModel):
     download_url: str | None = None
     transformation: str | None = None
     caveats: list[str] = []
+    # A null licence can mean "none stated" or "we could not read it". Those are
+    # different and the difference matters before redistribution.
+    licence_status: str | None = None
+    retrieval_path: str | None = None
 
 
 class SourceListResponse(BaseModel):
@@ -80,52 +84,17 @@ def _sidecar(path: Path) -> SourceOut | None:
         access_notes=d.get("access_notes"),
         transformation=d.get("transformation"),
         caveats=list(d.get("caveats", [])),
+        licence_status=d.get("licence_status"),
+        retrieval_path=d.get("retrieval_path"),
     )
 
 
-def _training_datasets() -> list[SourceOut]:
-    """The property datasets the models are trained on.
-
-    These are T4 — a public dataset of listings or recorded sales, not a
-    government register — and the registry must say so next to the boundary
-    layers, not quietly omit them.
-    """
-    out: list[SourceOut] = []
-    for city in cities.all_cities():
-        path = ARTIFACTS / city.id / "metrics.json"
-        if not path.exists():
-            continue
-        try:
-            m = json.loads(path.read_text(encoding="utf-8"))
-        except ValueError:
-            continue
-        ds = m.get("dataset", {})
-        url = ds.get("source_url", "")
-        if not url:
-            continue
-        out.append(SourceOut(
-            id=uuid5(NAMESPACE_URL, url),
-            name=f"{city.name} property dataset — {m.get('target_label', 'price')}",
-            organisation="Public dataset (not a government register)",
-            source_url=url,
-            download_url=url,
-            tier=ds.get("tier", "T4"),
-            availability="DOWNLOAD",
-            licence="As published by the dataset host",
-            attribution=None,
-            retrieved_at=None,
-            source_updated=None,
-            max_confidence=0.55,
-            verification_status="UNVERIFIED",
-            access_notes=(
-                f"{ds.get('rows_clean', 0):,} cleaned rows · "
-                f"{ds.get('spatial_blocks', 0)} spatial blocks · "
-                f"{ds.get('n_features', 0)} features"
-            ),
-            transformation="Cleaned per ml/pipelines/city_config.py",
-            caveats=[m["target_note"]] if m.get("target_note") else [],
-        ))
-    return out
+# _training_datasets() used to synthesise registry rows from metrics.json. It
+# asserted a licence of "As published by the dataset host", which was a
+# fabrication — nobody had read the licence. Both property datasets now have
+# real provenance sidecars in data/processed/ recording their Kaggle upstream,
+# the mirror actually fetched, and licence_status UNVERIFIED. The sidecar
+# scanner below picks them up like any other layer.
 
 
 @router.get("", response_model=SourceListResponse, summary="List registered data sources")
@@ -136,7 +105,6 @@ async def list_sources() -> SourceListResponse:
     """
     found = [s for p in sorted(PROCESSED.glob("source_*.json"))
              if (s := _sidecar(p)) is not None]
-    found.extend(_training_datasets())
     # Highest-trust first, so a T2 boundary layer never sits below a T4 dataset.
     found.sort(key=lambda s: (s.tier, s.name))
     return SourceListResponse(data=found, count=len(found))
