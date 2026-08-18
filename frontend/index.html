@@ -280,6 +280,7 @@ body.contrast .maplegend{background:#000;color:#fff}
     <button role="tab" aria-selected="false" data-tab="feasibility">Development feasibility</button>
     <button role="tab" aria-selected="false" data-tab="planning">Urban Planning</button>
     <button role="tab" aria-selected="false" data-tab="compare">Compare Cities</button>
+    <button role="tab" aria-selected="false" data-tab="planningml">Planning ML</button>
     <button role="tab" aria-selected="false" data-tab="registry">Trained Models</button>
     <button role="tab" aria-selected="false" data-tab="negotiation">Negotiation</button>
     <button role="tab" aria-selected="false" data-tab="documents">Documents</button>
@@ -830,7 +831,7 @@ async function selectPoint(lat, lng){
 /* ---------------- tabs ---------------- */
 // Mark the tabs whose output comes from a trained model, so "where is the ML?"
 // is answerable at a glance.
-const ML_TABS = ["market", "models", "mlperf", "insights", "future", "buyer", "investor", "extra", "negotiation", "registry"];
+const ML_TABS = ["market", "models", "mlperf", "insights", "future", "buyer", "investor", "extra", "negotiation", "registry", "planningml"];
 document.querySelectorAll('nav button').forEach(btn=>{
   if (ML_TABS.includes(btn.dataset.tab)) {
     btn.insertAdjacentHTML("beforeend", '<span class="navdot" title="Uses a trained ML model"></span>');
@@ -850,6 +851,7 @@ const TAB_TITLES = {
   models:["ML Models & Prediction","ಎಂಎಲ್ ಮಾದರಿಗಳು","ML மாதிரிகள்"],
   mlperf:["ML Performance","ಎಂಎಲ್ ಕಾರ್ಯಕ್ಷಮತೆ","ML செயல்திறன்"],
   future:["Future Price Analysis","ಭವಿಷ್ಯದ ಬೆಲೆ","எதிர்கால விலை"],
+  planningml:["Planning ML","ಯೋಜನಾ ಎಂ.ಎಲ್.","திட்ட எம்.எல்."],
   registry:["Trained Models","ತರಬೇತಿ ಪಡೆದ ಮಾದರಿಗಳು","பயிற்சி பெற்ற மாதிரிகள்"],
   negotiation:["Negotiation Band","ಚೌಕಾಸಿ ಶ್ರೇಣಿ","பேரம் வரம்பு"],
   documents:["Document Check","ದಾಖಲೆ ಪರಿಶೀಲನೆ","ஆவணச் சரிபார்ப்பு"],
@@ -880,6 +882,7 @@ function renderTab(){
   if (activeTab === "mlperf") return renderMLPerformance();
   if (activeTab === "models") return renderModels();
   if (activeTab === "future") return renderFuturePrice();
+  if (activeTab === "planningml") return renderPlanningML();
   if (activeTab === "registry") return renderRegistry();
   if (activeTab === "negotiation") return renderNegotiation();
   if (activeTab === "documents") return renderDocuments();
@@ -1185,6 +1188,126 @@ async function runPredict(){
 
 
 
+
+
+/* ---------------- Planning ML: layer ablation + ward typologies ----------
+   The direct answer to "are you using all the datasets". Yes — and each one
+   was measured under the same spatial-block CV. One layer made the model
+   WORSE, and that row is the point of the tab: a feature that does not improve
+   out-of-locality generalisation is noise with a plausible name. ----------*/
+const VERDICT_BADGE = { "HELPS":"GREEN", "no effect":"AMBER",
+                        "HURTS":"RED", "baseline":"GREY" };
+
+async function renderPlanningML(){
+  setPanel(`<div class="hint">Loading layer ablation&hellip;</div>`);
+  let ab, ty;
+  try{
+    const [r1, r2] = await Promise.all([
+      fetch(`${API}/planning-ml/ablation?city=${currentCity}`),
+      fetch(`${API}/planning-ml/typology?city=${currentCity}`)
+    ]);
+    ab = await r1.json();
+    if (r1.status !== 200) throw new Error(ab.detail || ab.title);
+    ty = await r2.json();
+  }catch(e){
+    return setPanel(`<div class="section"><h2>Planning ML</h2>
+      <p class="notice red">${escapeHtml(String(e.message||e))}</p></div>`);
+  }
+
+  const sm = ab.summary || {};
+  const excluded = Object.entries(ab.excluded_by_name || {});
+
+  setPanel(`
+    <div class="section"><h2>Does every dataset earn its place?</h2>
+      <p class="why">Each layer is added in turn and scored under the <b>same
+        spatial-block cross-validation</b> as the headline model, so these R²
+        values are directly comparable with it. The deltas are what matter.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:11px 0">
+        <span class="mlbadge ML">${sm.layers_tested} layers tested</span>
+        <span class="mlbadge RULE"><span class="badge GREEN"></span>
+          ${sm.helped} helped</span>
+        <span class="mlbadge RULE"><span class="badge AMBER"></span>
+          ${sm.no_effect} no effect</span>
+        <span class="mlbadge RULE"><span class="badge RED"></span>
+          ${sm.hurt} hurt</span>
+      </div>
+
+      <table class="data">
+        <tr><th style="width:auto">Feature set</th>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">spatial R²</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">delta</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">verdict</td></tr>
+        ${(ab.steps||[]).map(s=>`
+          <tr><th style="width:auto">${escapeHtml(s.features)}
+              <div class="why">${s.n_features} features</div></th>
+            <td style="text-align:right"><b>${s.spatial_cv_r2}</b></td>
+            <td style="text-align:right;${s.delta<0?'color:var(--danger)':''}">
+              ${s.delta===null?'&mdash;':(s.delta>0?'+':'')+s.delta}</td>
+            <td style="text-align:right">
+              <span class="badge ${VERDICT_BADGE[s.verdict]||'GREY'}"></span>
+              ${escapeHtml(s.verdict)}</td></tr>`).join("")}
+      </table>
+
+      <p class="notice ${sm.hurt ? 'red' : ''}" style="margin-top:11px">
+        ${escapeHtml(ab.verdict||"")}</p>
+      <p class="why" style="margin-top:8px">${escapeHtml(ab.why_this_matters||"")}</p>
+    </div>
+
+    ${excluded.length ? `
+    <div class="section"><h2>Excluded by name</h2>
+      ${excluded.map(([k,v])=>`
+        <p class="why"><b><code>${escapeHtml(k)}</code></b> &mdash;
+          ${escapeHtml(v)}</p>`).join("")}
+      <p class="notice" style="margin-top:9px">A model cannot be trusted not to
+        use a column that is available to it. This one is removed before
+        training, and an assertion in the pipeline fails if it ever reappears.</p>
+    </div>` : ""}
+
+    <div class="section"><h2>Ward typologies
+        <span class="mlbadge ML">unsupervised</span></h2>
+      ${ty.available === false ? `
+        <p class="notice">${escapeHtml(ty.reason||"")}</p>
+        <p class="why">${escapeHtml(ty.not_a_finding||"")}</p>`
+      : `
+        <table class="data">
+          <tr><th style="width:150px">Method</th>
+            <td class="why">${escapeHtml(ty.method||"")}</td></tr>
+          <tr><th>Typologies (k)</th>
+            <td style="text-align:right"><b>${ty.k}</b>
+              <div class="why">${escapeHtml(ty.k_selection||"")}</div></td></tr>
+          <tr><th>Silhouette</th>
+            <td style="text-align:right">
+              <span class="badge ${ty.well_separated?'GREEN':'RED'}"></span>
+              <b>${ty.silhouette}</b>
+              <div class="why">${ty.well_separated
+                ? "Above 0.35 — the groups are separated enough to use"
+                : "Below 0.35 — the groups overlap substantially"}</div></td></tr>
+          <tr><th>Wards grouped</th>
+            <td style="text-align:right">${ty.wards_clustered}</td></tr>
+          <tr><th>Usable to classify a ward</th>
+            <td style="text-align:right">
+              <span class="badge ${ty.usable_for_classification?'GREEN':'RED'}"></span>
+              <b>${ty.usable_for_classification ? "Yes" : "No"}</b></td></tr>
+        </table>
+
+        ${ty.warning ? `<p class="notice red" style="margin-top:10px">
+          <b>${escapeHtml(ty.warning)}</b></p>` : ""}
+
+        <table class="data" style="margin-top:10px">
+          ${(ty.clusters||[]).map(c=>`
+            <tr><th style="width:auto">Typology ${c.typology}
+                <div class="why">${c.wards} wards &middot;
+                  ${(c.examples||[]).slice(0,2).map(escapeHtml).join(", ")}</div></th>
+              <td class="why" style="text-align:right">
+                ${Object.entries(c.profile||{}).slice(0,4)
+                  .map(([k,v])=>`${escapeHtml(k.replace(/_/g," "))} <b>${v}</b>`)
+                  .join("<br>")}</td></tr>`).join("")}
+        </table>
+
+        <p class="notice" style="margin-top:11px">
+          ${escapeHtml(ty.not_a_ranking||"")}</p>`}
+    </div>`);
+}
 
 /* ---------------- Trained model registry --------------------------------
    Every model on disk, with a verdict that can be negative. The point of the

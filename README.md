@@ -100,7 +100,7 @@ not comparable at row level. Enforced by tests in `backend/tests/test_cities.py`
 
 ## Status
 
-**219 tests passing.** `cd backend && pytest`
+**242 tests passing.** `cd backend && pytest`
 
 **97/97 end-to-end checks passing**, every endpoint in both cities:
 ```bash
@@ -266,6 +266,46 @@ exception is the corporation itself: `பெருநகர சென்னை �
 published Tamil name, not derived.
 
 Ward search indexes the local name too, so typing `எண்ணூர்` finds Ward 1.
+
+### Planning ML — does every dataset earn its place?
+
+The shipped price model used 20 features from two layers. Four more had been
+ingested and no model had ever seen them: the road width map, reported flooding,
+district/taluk boundaries, and the revenue sheets.
+
+"Use all the datasets" is easy to satisfy dishonestly — bolt every column on and
+report a number. So each layer was added in turn and scored under the **same
+spatial-block CV** as the headline model, making the R² values directly
+comparable:
+
+| Feature set | Bengaluru R² | delta | verdict |
+|---|---|---|---|
+| property only | 0.3427 | — | baseline |
+| + OSM amenities / wards *(shipped)* | 0.4109 | +0.0682 | **HELPS** |
+| + road width & distance | 0.4217 | +0.0108 | **HELPS** |
+| + reported flooding distance | 0.4151 | −0.0065 | **HURTS** |
+| + taluk | 0.4216 | +0.0064 | **HELPS** |
+
+**Reported-flooding distance makes the model worse.** It is reported as HURTS
+rather than quietly kept — a feature that does not improve out-of-locality
+generalisation is noise with a plausible name, and keeping it is how a model
+degrades while its feature list grows. On Chennai, taluk hurts (−0.0120).
+
+`width_proposed_m` is **excluded by name**, with a pipeline assertion that fails
+if it reappears: it encodes a road-widening intention, not a present condition,
+and feeding it to a price model would leak a planning decision into a market
+prediction.
+
+**Ward typologies** are unsupervised (KMeans, k by silhouette) because no dataset
+carries an observed "development pressure" or "underserved" label — training
+against a formula the project itself computed would be circular. Bengaluru scores
+silhouette **0.2653**, below the 0.35 threshold, so it is flagged
+`usable_for_classification: false`: the groups describe a gradient, not distinct
+ward types. Chennai reaches 0.4445 and is usable.
+
+```bash
+curl "localhost:8000/api/v1/planning-ml/ablation?city=bengaluru"
+```
 
 ### The trained-model registry — `Trained Models` tab
 

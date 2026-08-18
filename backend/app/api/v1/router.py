@@ -24,6 +24,7 @@ from app.api.v1 import meta as meta_routes
 from app.api.v1 import ml as ml_routes
 from app.api.v1 import nearby as nearby_routes
 from app.api.v1 import planning as planning_routes
+from app.api.v1 import planning_ml as planning_ml_routes
 from app.api.v1 import predict as predict_routes
 from app.api.v1 import report as report_routes
 from app.api.v1 import roads as road_routes
@@ -59,3 +60,4 @@ api_router.include_router(road_routes.router, prefix="/roads", tags=["roads"])
 api_router.include_router(flood_routes.router, prefix="/flood", tags=["environment"])
 api_router.include_router(document_routes.router, prefix="/documents", tags=["documents"])
 api_router.include_router(advisory_ml_routes.router, prefix="/advisory-ml", tags=["advisory-ml"])
+api_router.include_router(planning_ml_routes.router, prefix="/planning-ml", tags=["planning-ml"])

@@ -1,0 +1,121 @@
+{
+  "city": "chennai",
+  "display": "Chennai",
+  "generated_at": "2026-08-18T17:41:43.930384+00:00",
+  "target": "price_per_sqft",
+  "target_label": "recorded sale price per sq.ft (INR)",
+  "validation": "GroupKFold(5) by ward/locality \u2014 the same spatial-block scheme as every other model here, so these R\u00b2 values are comparable with the headline one",
+  "layers_joined": {
+    "road": false,
+    "flood": false,
+    "admin_taluk": true
+  },
+  "excluded_features": {
+    "width_proposed_m": "The road layer's proposed width exceeds the existing one on 100% of segments. It encodes a planning intention, not a present condition, and feeding it to a price model would leak that intention into a market prediction."
+  },
+  "ablation": [
+    {
+      "features": "property only",
+      "n_features": 16,
+      "spatial_cv_r2": 0.6585,
+      "delta": null,
+      "verdict": "baseline"
+    },
+    {
+      "features": "+ OSM amenities / wards (shipped)",
+      "n_features": 29,
+      "spatial_cv_r2": 0.8267,
+      "delta": 0.1682,
+      "verdict": "HELPS"
+    },
+    {
+      "features": "+ taluk",
+      "n_features": 30,
+      "spatial_cv_r2": 0.8148,
+      "delta": -0.0119,
+      "verdict": "HURTS"
+    }
+  ],
+  "best": {
+    "features": "+ OSM amenities / wards (shipped)",
+    "n_features": 29,
+    "spatial_cv_r2": 0.8267,
+    "delta": 0.1682,
+    "verdict": "HELPS"
+  },
+  "layers_that_helped": [
+    "+ OSM amenities / wards (shipped)"
+  ],
+  "layers_that_did_not": [
+    "+ taluk"
+  ],
+  "honest_reading": "Adding every remaining layer moved spatial-CV R\u00b2 to 0.8267. 1 of 2 additions did not improve out-of-locality generalisation and are reported as such rather than quietly kept.",
+  "ward_typology": {
+    "available": true,
+    "well_separated": true,
+    "warning": null,
+    "method": "KMeans on standardised ward-level service metrics",
+    "k": 2,
+    "k_selection": "highest silhouette over k=2..6, not assumed",
+    "silhouette": 0.4445,
+    "wards_clustered": 200,
+    "features_used": [
+      "area_km2",
+      "facilities_total",
+      "facility_density_per_km2",
+      "counts_healthcare",
+      "counts_education",
+      "counts_transport",
+      "counts_government",
+      "counts_daily_life",
+      "nearest_m_healthcare",
+      "nearest_m_education",
+      "nearest_m_transport",
+      "nearest_m_government",
+      "nearest_m_daily_life",
+      "scores_healthcare",
+      "scores_education",
+      "scores_transport",
+      "scores_government",
+      "scores_daily_life",
+      "infrastructure_score"
+    ],
+    "clusters": [
+      {
+        "typology": 0,
+        "wards": 24,
+        "examples": [
+          "Ward 197 - Uthandi",
+          "Ward 15 - Edayanchavadi",
+          "Ward 16 - Saidayankuppam"
+        ],
+        "profile": {
+          "area_km2": 4.3,
+          "facilities_total": 2.8,
+          "facility_density_per_km2": 0.7,
+          "counts_healthcare": 0.6,
+          "counts_education": 0.4,
+          "counts_transport": 1.7
+        }
+      },
+      {
+        "typology": 1,
+        "wards": 176,
+        "examples": [
+          "Ward 168 - SIDCO Industrial Estate",
+          "Ward 169 - Little Mount",
+          "Ward 170 - Kotturpuram"
+        ],
+        "profile": {
+          "area_km2": 1.9,
+          "facilities_total": 16.6,
+          "facility_density_per_km2": 10.7,
+          "counts_healthcare": 4.5,
+          "counts_education": 2.9,
+          "counts_transport": 5.2
+        }
+      }
+    ],
+    "not_a_label": "These are typologies, not rankings. No dataset carries an observed 'development pressure' or 'underserved' label, so none is predicted. A cluster number carries no ordering \u2014 typology 0 is not worse or better than typology 2."
+  }
+}
