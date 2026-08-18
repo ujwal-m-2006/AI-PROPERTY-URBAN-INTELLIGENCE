@@ -294,6 +294,25 @@ def run_city(city: str) -> None:
           code == 200 and len(wards) == expected,
           f"{len(wards)} wards (expected {expected})")
 
+    # --- total price (Model 1) -------------------------------------------
+    code, d = get("/api/v1/total-price", city=city)
+    algos = d.get("algorithms", []) if code == 200 else []
+    comp = d.get("comparison", {}) if code == 200 else {}
+    check(city, "total price model",
+          code == 200 and len(algos) >= 8 and comp.get("winner"),
+          f"{len(algos)} algorithms, {comp.get('winner')} formulation wins "
+          f"by {comp.get('r2_gap')} R²")
+
+    check(city, "price_per_sqft blocked as a feature",
+          "price_per_sqft" in (d.get("leakage_guard", {})
+                               .get("forbidden_columns", [])),
+          "the answer divided by a column already present")
+
+    # An implausible score on held-out localities means a leak, not skill.
+    check(city, "no implausible R²",
+          all(a["r2"] < 0.97 for a in algos),
+          f"best {max((a['r2'] for a in algos), default=0)} — plausible")
+
     # --- planning ML: layer ablation (Module 21 / 33) -------------------
     code, d = get("/api/v1/planning-ml/ablation", city=city)
     steps = d.get("steps", []) if code == 200 else []

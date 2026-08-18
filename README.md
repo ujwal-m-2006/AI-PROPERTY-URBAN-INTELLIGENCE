@@ -100,9 +100,9 @@ not comparable at row level. Enforced by tests in `backend/tests/test_cities.py`
 
 ## Status
 
-**281 tests passing.** `cd backend && pytest`
+**300 tests passing.** `cd backend && pytest`
 
-**132/132 end-to-end checks passing**, every endpoint in both cities:
+**138/138 end-to-end checks passing**, every endpoint in both cities:
 ```bash
 cd backend && PYTHONPATH=. python scripts/e2e_check.py
 ```
@@ -266,6 +266,45 @@ exception is the corporation itself: `பெருநகர சென்னை �
 published Tamil name, not derived.
 
 Ward search indexes the local name too, so typing `எண்ணூர்` finds Ward 1.
+
+### Model 1 — total price, and whether to model it directly
+
+The project predicted price *per sq.ft* and never modelled what a buyer asks:
+what does this cost. Adding it raised a question worth answering — model total
+price directly, or model price per sq.ft and multiply by area?
+
+Seven algorithms plus a median baseline, spatial-block CV, Bengaluru:
+
+| Algorithm | R² | MAE | MAPE |
+|---|---|---|---|
+| baseline (median) | −0.076 | ₹5,509,009 | 48.0% |
+| linear / ridge / lasso | 0.596 | ₹3,545,650 | 38.3% |
+| decision_tree | 0.526 | ₹3,289,873 | 29.4% |
+| random_forest | 0.645 | ₹3,096,470 | 29.0% |
+| extra_trees | 0.657 | ₹3,078,378 | 28.9% |
+| gradient_boosting | **0.674** | ₹3,030,257 | 29.1% |
+| **indirect** (price/sq.ft × area) | **0.700** | **₹2,937,233** | **27.9%** |
+
+**Indirect wins in both cities** — by 0.026 R² on Bengaluru and 0.087 on
+Chennai. Total price spans two orders of magnitude and is dominated by area;
+price per sq.ft is closer to stationary, leaving the model free to learn
+location and quality rather than size. That retroactively justifies the target
+this project already used.
+
+**The instructive row is on Chennai.** Ridge scores **−2.36** and Lasso **+0.47**
+— two linear models differing only in penalty, 2.8 R² apart. With 7 spatial
+blocks the unpenalised fit extrapolates catastrophically onto held-out
+localities; L1 shrinkage drops the features that cause it. Reporting only the
+best model would have hidden that entirely.
+
+**The number to quote is not R².** The best Bengaluru model is out by **27.9%**
+on a median property of ₹68 lakh — roughly ₹19 lakh. That is what a buyer would
+feel.
+
+A leakage guard **raises rather than warns**: `price_per_sqft = price / area`, so
+handing it to a model predicting price gives it the answer divided by a column it
+already has. A leaked run still produces a number — a spectacular one — which is
+why the guard is a hard failure and a test asserts no algorithm scores above 0.97.
 
 ### Cross-city transfer — the experiment, and why it fails
 

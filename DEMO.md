@@ -31,7 +31,7 @@ Open **http://localhost:3000**. No database, no Docker, no internet needed.
 | 200 GCC wards, 15 zones | Official GCC 2022 ward + zone KML; ward→zone by spatial join |
 | 13,921 Bengaluru OSM features | Overpass, 22 categories |
 | 12,038 + 7,109 property records | Two separate public datasets, never pooled |
-| 281 passing tests | `cd backend && pytest` |
+| 300 passing tests | `cd backend && pytest` |
 | 4,151 survey parcels, 3 taluks, 7 hoblis | Digitised Bengaluru Urban revenue map sheets |
 | Every metric on screen | Read from `ml/artifacts/<city>/metrics.json`, written by an actual run |
 
@@ -426,7 +426,7 @@ Exercises all 39 endpoints (40 operations) in both cities — jurisdiction, map 
 valuation, all three prediction strategies, ML dashboard, future price,
 planning, buyer, investor, builder, feasibility, insights, PDF generation, the
 extra models, guidance value, transaction price and revenue coverage.
-Expect **132/132**. It needs no running server.
+Expect **138/138**. It needs no running server.
 
 It also asserts the behaviours that matter, not just HTTP 200:
 

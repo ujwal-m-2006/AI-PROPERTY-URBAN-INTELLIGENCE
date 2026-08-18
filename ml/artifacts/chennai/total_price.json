@@ -1,0 +1,98 @@
+{
+  "city": "chennai",
+  "display": "Chennai",
+  "generated_at": "2026-08-18T18:50:21.509941+00:00",
+  "target": "SALES_PRICE",
+  "target_label": "total property price (INR), chennai",
+  "median_price": 10335050.0,
+  "validation": "GroupKFold(5) by ward/locality \u2014 the same spatial-block scheme as every other model here",
+  "leakage_guard": {
+    "forbidden_columns": [
+      "price",
+      "price_inr",
+      "price_per_sqft",
+      "SALES_PRICE",
+      "REG_FEE",
+      "COMMIS",
+      "INT_SQFT_TOTAL"
+    ],
+    "note": "price_per_sqft = price / area. Using it to predict price hands the model the answer divided by a column it already has. The guard raises rather than warns, because a leaked run still produces a number \u2014 a spectacular one."
+  },
+  "direct": [
+    {
+      "model": "baseline_median",
+      "r2": -0.0221,
+      "mae": 2912046,
+      "mape_pct": 29.49,
+      "fit_seconds": 0.0
+    },
+    {
+      "model": "linear_regression",
+      "r2": -2.2733,
+      "mae": 4785051,
+      "mape_pct": 47.98,
+      "fit_seconds": 3.5
+    },
+    {
+      "model": "ridge",
+      "r2": -2.3572,
+      "mae": 4816209,
+      "mape_pct": 48.21,
+      "fit_seconds": 2.2
+    },
+    {
+      "model": "lasso",
+      "r2": 0.473,
+      "mae": 2322345,
+      "mape_pct": 25.36,
+      "fit_seconds": 3.1
+    },
+    {
+      "model": "decision_tree",
+      "r2": 0.342,
+      "mae": 2377978,
+      "mape_pct": 25.69,
+      "fit_seconds": 0.2
+    },
+    {
+      "model": "random_forest",
+      "r2": 0.3616,
+      "mae": 2483397,
+      "mape_pct": 27.68,
+      "fit_seconds": 5.0
+    },
+    {
+      "model": "extra_trees",
+      "r2": 0.6914,
+      "mae": 1612405,
+      "mape_pct": 17.95,
+      "fit_seconds": 4.8
+    },
+    {
+      "model": "gradient_boosting",
+      "r2": 0.7825,
+      "mae": 1377115,
+      "mape_pct": 15.15,
+      "fit_seconds": 5.0
+    }
+  ],
+  "best_direct": {
+    "model": "gradient_boosting",
+    "r2": 0.7825,
+    "mae": 1377115,
+    "mape_pct": 15.15,
+    "fit_seconds": 5.0
+  },
+  "indirect": {
+    "model": "gradient_boosting on price_per_sqft x area",
+    "r2": 0.8699,
+    "mae": 961481,
+    "mape_pct": 9.46
+  },
+  "comparison": {
+    "winner": "indirect",
+    "r2_gap": 0.0874,
+    "reading": "Going via price per sq.ft beats modelling total price directly by 0.0874 R\u00b2. Total price spans two orders of magnitude and is dominated by area; price per sq.ft is closer to stationary, which leaves the model free to learn location and quality rather than size.",
+    "why_it_matters": "Both answer 'what does this cost'. They are trained on the same folds with the same features and the same algorithm, so the difference is the target formulation alone."
+  }
+}
