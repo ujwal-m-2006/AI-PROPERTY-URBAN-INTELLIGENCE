@@ -100,9 +100,9 @@ not comparable at row level. Enforced by tests in `backend/tests/test_cities.py`
 
 ## Status
 
-**268 tests passing.** `cd backend && pytest`
+**281 tests passing.** `cd backend && pytest`
 
-**128/128 end-to-end checks passing**, every endpoint in both cities:
+**132/132 end-to-end checks passing**, every endpoint in both cities:
 ```bash
 cd backend && PYTHONPATH=. python scripts/e2e_check.py
 ```
@@ -266,6 +266,50 @@ exception is the corporation itself: `பெருநகர சென்னை �
 published Tamil name, not derived.
 
 Ward search indexes the local name too, so typing `எண்ணூர்` finds Ward 1.
+
+### Cross-city transfer — the experiment, and why it fails
+
+Transfer between the two cities was impossible until the schemas were
+harmonised: of every column in the two datasets, **exactly one name matched**
+(`area_per_room`). `sqft`/`INT_SQFT` and `rooms`/`N_BEDROOM` are the same
+quantities under different names. That is a naming problem, not a research
+finding, and fixing it unblocked the experiment.
+
+Four experiments on a shared 16-feature vocabulary — 11 of them GIS features
+that already matched — with one algorithm throughout:
+
+| Experiment | Result |
+|---|---|
+| A · Bengaluru → Bengaluru | R² 0.328, Spearman **0.502** |
+| B · Chennai → Chennai | R² 0.216, Spearman **0.496** |
+| C · Bengaluru → Chennai | raw R² −0.923 · rank Spearman **0.105** |
+| D · Chennai → Bengaluru | raw R² −1.617 · rank Spearman **−0.060** |
+
+Every transfer is scored twice. **Raw** predicts rupees directly and is dominated
+by the fact that Bengaluru's target is *asking* price and Chennai's is *recorded
+sale* price — reporting that as model failure would be a misattribution.
+**Rank** predicts within-city percentile, so price level cancels.
+
+**The finding is negative and it survives the correction.** Within each city the
+same model reaches Spearman ≈0.50; across cities it falls to roughly zero. What
+identifies an expensive property in Bengaluru does not identify one in Chennai,
+on the features the two datasets share.
+
+**And a trap worth showing an examiner.** The combined model looks better:
+
+| | R² | MAE |
+|---|---|---|
+| Separate (size-weighted) | 0.2863 | ₹1,723 |
+| Combined + city flag | 0.3812 | ₹1,713 |
+
+**R² +0.0949, MAE −10.** Pooling two different targets widens the variance R² is
+scored against; MAE is in rupees and immune to that, and it barely moves. The
+apparent gain is arithmetic, not skill — and a test fails if that verdict is
+ever softened.
+
+```bash
+curl "localhost:8000/api/v1/cross-city"
+```
 
 ### Planning ML — does every dataset earn its place?
 

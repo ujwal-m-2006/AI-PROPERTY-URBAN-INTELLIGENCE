@@ -516,6 +516,33 @@ def main() -> int:
           all(s.get("tier") and s.get("verification_status") for s in srcs),
           "every dataset carries a tier and verification status")
 
+    # --- cross-city transfer (city-independent, checked once) -----------
+    code, d = get("/api/v1/cross-city")
+    within = d.get("within_city", []) if code == 200 else []
+    trans = d.get("transfer", []) if code == 200 else []
+    check("-", "cross-city experiments",
+          code == 200 and len(within) == 2 and len(trans) == 2,
+          f"{len(within)} within-city + {len(trans)} transfer experiments")
+
+    rhos = d.get("headline", {}).get("rank_spearman", []) if code == 200 else []
+    check("-", "transfer reported as failing",
+          bool(rhos) and all(abs(r) < 0.25 for r in rhos),
+          f"rank Spearman {rhos} — near zero in both directions")
+
+    cmb = d.get("separate_vs_combined", {}) if code == 200 else {}
+    check("-", "combined gain called variance inflation",
+          cmb.get("r2_gain", 0) > 0 and abs(cmb.get("mae_change", 999)) < 100
+          and "variance" in (cmb.get("verdict") or "").lower(),
+          f"R² {cmb.get('r2_gain'):+} but MAE {cmb.get('mae_change'):+} "
+          "— not a better model")
+
+    code, d = get("/api/v1/cross-city/schema")
+    check("-", "shared schema states its claims",
+          code == 200 and d.get("shared_feature_count", 0) >= 15
+          and all(f.get("claim") for f in d.get("property_features", [])),
+          f"{d.get('shared_feature_count')} shared features, "
+          f"{len(d.get('not_mapped', {}))} deliberately not mapped")
+
     code, d = get("/api/v1/ml/compare")
     avail = sum(1 for c in d.get("data", []) if c.get("available")) if code == 200 else 0
     check("-", "city comparison", code == 200 and avail == 2,

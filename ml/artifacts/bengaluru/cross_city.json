@@ -1,0 +1,129 @@
+{
+  "generated_at": "2026-08-18T18:42:33.192506+00:00",
+  "shared_schema": {
+    "shared_feature_count": 16,
+    "property_features": [
+      {
+        "shared": "built_up_sqft",
+        "bengaluru": "sqft",
+        "chennai": "INT_SQFT",
+        "claim": "Interior/built-up floor area in square feet. Bengaluru's parses from the messy `total_sqft` string; Chennai's is already numeric."
+      },
+      {
+        "shared": "bedrooms",
+        "bengaluru": "rooms",
+        "chennai": "N_BEDROOM",
+        "claim": "Bedroom count. Bengaluru's derives from the '2 BHK' size string, which is a bedroom count by construction."
+      },
+      {
+        "shared": "bathrooms",
+        "bengaluru": "bath",
+        "chennai": "N_BATHROOM",
+        "claim": "Bathroom count. Directly equivalent."
+      },
+      {
+        "shared": "area_per_room",
+        "bengaluru": "area_per_room",
+        "chennai": "area_per_room",
+        "claim": "Built-up area divided by bedroom count. The only column that already shared a name."
+      },
+      {
+        "shared": "bath_per_bedroom",
+        "bengaluru": "bath_per_room",
+        "chennai": "bath_per_bedroom",
+        "claim": "Bathrooms per bedroom. Same derivation, different name."
+      }
+    ],
+    "gis_features": [
+      "metro_distance_m",
+      "railway_distance_m",
+      "bus_distance_m",
+      "hospital_distance_m",
+      "school_distance_m",
+      "college_distance_m",
+      "govt_office_distance_m",
+      "bank_distance_m",
+      "park_distance_m",
+      "supermarket_distance_m",
+      "amenity_count_1km"
+    ],
+    "gis_note": "Already identical in both cities \u2014 computed by the same code from each city's own OpenStreetMap layer, so no mapping is needed. 11 of the 16 shared features are urban context.",
+    "not_mapped": {
+      "area_type / BUILDTYPE": "Bengaluru's area_type is a measurement convention (Super built-up, Plot, Carpet); Chennai's BUILDTYPE is a use class (Commercial, House). Different variables that happen to both be categorical.",
+      "balcony, ready_to_move": "Bengaluru only; no Chennai counterpart.",
+      "N_ROOM, DIST_MAINROAD, QS_OVERALL, property_age_years, sale_year": "Chennai only. property_age_years and sale_year would be especially damaging to impute \u2014 a constant would encode city identity.",
+      "SALE_COND, PARK_FACIL, UTILITY_AVAIL, STREET, MZZONE": "Chennai only."
+    },
+    "target_warning": "Harmonising features does NOT make the targets comparable. Bengaluru's is ASKING price per sq.ft; Chennai's is RECORDED SALE price per sq.ft over a period ending around 2015. A model transferred between them is predicting a different quantity, and the transfer experiment reports that separately from model skill."
+  },
+  "estimator": "GradientBoostingRegressor, identical across all experiments",
+  "within_city": [
+    {
+      "experiment": "A  bengaluru -> bengaluru",
+      "kind": "within-city",
+      "n": 12038,
+      "r2": 0.3281,
+      "mae": 1707.2,
+      "spearman": 0.5017,
+      "validation": "GroupKFold(5) by ward/locality"
+    },
+    {
+      "experiment": "B  chennai -> chennai",
+      "kind": "within-city",
+      "n": 7109,
+      "r2": 0.2156,
+      "mae": 1749.2,
+      "spearman": 0.4961,
+      "validation": "GroupKFold(5) by ward/locality"
+    }
+  ],
+  "transfer": [
+    {
+      "experiment": "C  bengaluru -> chennai",
+      "kind": "transfer",
+      "n_train": 12038,
+      "n_test": 7109,
+      "raw": {
+        "r2": -0.923,
+        "mae": 2776.8,
+        "spearman": 0.1854,
+        "reading": "Predicting the other city's price level directly. The targets measure different things, so a poor score here is mostly that mismatch and must not be read as the model failing to learn."
+      },
+      "rank": {
+        "r2": -0.1149,
+        "spearman": 0.1051,
+        "reading": "Predicting within-city percentile, so price level cancels. Spearman here answers the question that matters: do the same features identify an expensive property in both cities?"
+      }
+    },
+    {
+      "experiment": "D  chennai -> bengaluru",
+      "kind": "transfer",
+      "n_train": 7109,
+      "n_test": 12038,
+      "raw": {
+        "r2": -1.6174,
+        "mae": 4499.7,
+        "spearman": -0.1034,
+        "reading": "Predicting the other city's price level directly. The targets measure different things, so a poor score here is mostly that mismatch and must not be read as the model failing to learn."
+      },
+      "rank": {
+        "r2": -0.9174,
+        "spearman": -0.0596,
+        "reading": "Predicting within-city percentile, so price level cancels. Spearman here answers the question that matters: do the same features identify an expensive property in both cities?"
+      }
+    }
+  ],
+  "separate_vs_combined": {
+    "separate_weighted_r2": 0.2863,
+    "separate_weighted_mae": 1722.8,
+    "combined_mae": 1746.9,
+    "combined_with_city_flag_mae": 1712.6,
+    "r2_gain": 0.0949,
+    "mae_change": -10.2,
+    "verdict": "R\u00b2 improved while MAE did not. Pooling two different targets widens the variance R\u00b2 is measured against, so the apparent gain is arithmetic. MAE, which is in rupees and immune to that, is flat \u2014 the combined model is not better.",
+    "combined_r2": 0.3562,
+    "combined_with_city_flag_r2": 0.3812,
+    "caveat": "The combined model is fitted across two different targets \u2014 asking price and recorded sale price. Pooling them widens the spread of y, and R\u00b2 rises with the variance it has to explain. A higher combined R\u00b2 is therefore NOT evidence that pooling helps, and is reported here only so the comparison is not silently omitted."
+  },
+  "how_to_read": "The RANK results are the interpretable ones. Raw transfer is dominated by the difference between asking and recorded-sale prices, which no amount of feature harmonising can remove."
+}

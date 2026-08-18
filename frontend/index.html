@@ -280,6 +280,7 @@ body.contrast .maplegend{background:#000;color:#fff}
     <button role="tab" aria-selected="false" data-tab="feasibility">Development feasibility</button>
     <button role="tab" aria-selected="false" data-tab="planning">Urban Planning</button>
     <button role="tab" aria-selected="false" data-tab="compare">Compare Cities</button>
+    <button role="tab" aria-selected="false" data-tab="crosscity">Cross-City</button>
     <button role="tab" aria-selected="false" data-tab="planningml">Planning ML</button>
     <button role="tab" aria-selected="false" data-tab="registry">Trained Models</button>
     <button role="tab" aria-selected="false" data-tab="negotiation">Negotiation</button>
@@ -831,7 +832,7 @@ async function selectPoint(lat, lng){
 /* ---------------- tabs ---------------- */
 // Mark the tabs whose output comes from a trained model, so "where is the ML?"
 // is answerable at a glance.
-const ML_TABS = ["market", "models", "mlperf", "insights", "future", "buyer", "investor", "extra", "negotiation", "registry", "planningml"];
+const ML_TABS = ["market", "models", "mlperf", "insights", "future", "buyer", "investor", "extra", "negotiation", "registry", "planningml", "crosscity"];
 document.querySelectorAll('nav button').forEach(btn=>{
   if (ML_TABS.includes(btn.dataset.tab)) {
     btn.insertAdjacentHTML("beforeend", '<span class="navdot" title="Uses a trained ML model"></span>');
@@ -851,6 +852,7 @@ const TAB_TITLES = {
   models:["ML Models & Prediction","ಎಂಎಲ್ ಮಾದರಿಗಳು","ML மாதிரிகள்"],
   mlperf:["ML Performance","ಎಂಎಲ್ ಕಾರ್ಯಕ್ಷಮತೆ","ML செயல்திறன்"],
   future:["Future Price Analysis","ಭವಿಷ್ಯದ ಬೆಲೆ","எதிர்கால விலை"],
+  crosscity:["Cross-City Transfer","ನಗರಗಳ ನಡುವೆ","நகரங்களுக்கிடையே"],
   planningml:["Planning ML","ಯೋಜನಾ ಎಂ.ಎಲ್.","திட்ட எம்.எல்."],
   registry:["Trained Models","ತರಬೇತಿ ಪಡೆದ ಮಾದರಿಗಳು","பயிற்சி பெற்ற மாதிரிகள்"],
   negotiation:["Negotiation Band","ಚೌಕಾಸಿ ಶ್ರೇಣಿ","பேரம் வரம்பு"],
@@ -882,6 +884,7 @@ function renderTab(){
   if (activeTab === "mlperf") return renderMLPerformance();
   if (activeTab === "models") return renderModels();
   if (activeTab === "future") return renderFuturePrice();
+  if (activeTab === "crosscity") return renderCrossCity();
   if (activeTab === "planningml") return renderPlanningML();
   if (activeTab === "registry") return renderRegistry();
   if (activeTab === "negotiation") return renderNegotiation();
@@ -1189,6 +1192,117 @@ async function runPredict(){
 
 
 
+
+
+/* ---------------- Cross-city transfer -----------------------------------
+   Every headline number here is negative, each for a different reason. A
+   transfer study where everything worked would mean nothing was tested. ---*/
+async function renderCrossCity(){
+  setPanel(`<div class="hint">Loading cross-city experiments&hellip;</div>`);
+  let d, sc;
+  try{
+    const [r1, r2] = await Promise.all([
+      fetch(`${API}/cross-city`), fetch(`${API}/cross-city/schema`)
+    ]);
+    d = await r1.json();
+    if (r1.status !== 200) throw new Error(d.detail || d.title);
+    sc = await r2.json();
+  }catch(e){
+    return setPanel(`<div class="section"><h2>Cross-city transfer</h2>
+      <p class="notice red">${escapeHtml(String(e.message||e))}</p></div>`);
+  }
+
+  const cmb = d.separate_vs_combined || {};
+  const h = d.headline || {};
+
+  setPanel(`
+    <div class="section"><h2>Does a price model transfer between cities?</h2>
+      <p class="why">Four experiments on a shared
+        <b>${sc.shared_feature_count}-feature</b> vocabulary, one algorithm
+        throughout, so any difference is the data rather than the model.</p>
+
+      <p class="why" style="margin-top:9px"><b>Within each city</b> &mdash; the
+        honest baseline, spatial-block CV.</p>
+      <table class="data">
+        <tr><th style="width:auto">Experiment</th>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">R²</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">MAE</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">Spearman</td></tr>
+        ${(d.within_city||[]).map(w=>`
+          <tr><th style="width:auto">${escapeHtml(w.experiment)}
+              <div class="why">${w.n.toLocaleString("en-IN")} rows</div></th>
+            <td style="text-align:right"><b>${w.r2}</b></td>
+            <td style="text-align:right">${inr(w.mae)}</td>
+            <td style="text-align:right">${w.spearman}</td></tr>`).join("")}
+      </table>
+
+      <p class="why" style="margin-top:12px"><b>Across cities</b> &mdash; scored
+        twice. RAW predicts rupees directly; RANK predicts within-city
+        percentile so the price level cancels.</p>
+      <table class="data">
+        ${(d.transfer||[]).map(t=>`
+          <tr><th style="width:auto">${escapeHtml(t.experiment)}
+              <div class="why">train ${t.n_train.toLocaleString("en-IN")} &rarr;
+                test ${t.n_test.toLocaleString("en-IN")}</div></th>
+            <td style="text-align:right">
+              <div><span class="badge RED"></span> RAW R² <b>${t.raw.r2}</b></div>
+              <div style="margin-top:4px"><span class="badge RED"></span>
+                RANK &rho; <b>${t.rank.spearman}</b></div>
+            </td></tr>`).join("")}
+      </table>
+
+      <p class="notice red" style="margin-top:11px">
+        <b>${escapeHtml(h.finding||"")}</b></p>
+      <p class="why" style="margin-top:8px">${escapeHtml(d.how_to_read||"")}</p>
+    </div>
+
+    <div class="section"><h2>Separate models vs one combined model</h2>
+      <table class="data">
+        <tr><th style="width:auto">Separate (size-weighted)</th>
+          <td style="text-align:right">R² <b>${cmb.separate_weighted_r2}</b>
+            <div class="why">MAE ${inr(cmb.separate_weighted_mae||0)}</div></td></tr>
+        <tr><th style="width:auto">Combined, no city flag</th>
+          <td style="text-align:right">R² <b>${cmb.combined_r2}</b>
+            <div class="why">MAE ${inr(cmb.combined_mae||0)}</div></td></tr>
+        <tr><th style="width:auto">Combined + city flag</th>
+          <td style="text-align:right">R² <b>${cmb.combined_with_city_flag_r2}</b>
+            <div class="why">MAE ${inr(cmb.combined_with_city_flag_mae||0)}</div></td></tr>
+      </table>
+      <p class="notice red" style="margin-top:10px">
+        <b>R² ${cmb.r2_gain>0?"+":""}${cmb.r2_gain} but MAE only
+        ${cmb.mae_change>0?"+":""}${cmb.mae_change}.</b>
+        ${escapeHtml(cmb.verdict||"")}</p>
+      <p class="why" style="margin-top:7px">${escapeHtml(cmb.caveat||"")}</p>
+    </div>
+
+    <div class="section"><h2>The shared vocabulary</h2>
+      <p class="why">Transfer was impossible until these were mapped: exactly one
+        column name matched between the two datasets. Each row is a claim that
+        two columns measure the same thing, listed so it can be disputed
+        individually rather than hidden inside a rename.</p>
+      <table class="data">
+        <tr><th style="width:auto">Shared name</th>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">Bengaluru</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">Chennai</td></tr>
+        ${(sc.property_features||[]).map(f=>`
+          <tr><th style="width:auto"><code>${escapeHtml(f.shared)}</code>
+              <div class="why">${escapeHtml(f.claim)}</div></th>
+            <td style="text-align:right"><code>${escapeHtml(f.bengaluru)}</code></td>
+            <td style="text-align:right"><code>${escapeHtml(f.chennai)}</code></td></tr>`).join("")}
+      </table>
+      <p class="why" style="margin-top:9px"><b>Plus
+        ${(sc.gis_features||[]).length} GIS features</b> that already matched.
+        ${escapeHtml(sc.gis_note||"")}</p>
+
+      <p class="why" style="margin-top:10px"><b>Deliberately not mapped</b></p>
+      ${Object.entries(sc.not_mapped||{}).map(([k,v])=>`
+        <p class="why" style="margin-top:5px"><code>${escapeHtml(k)}</code>
+          &mdash; ${escapeHtml(v)}</p>`).join("")}
+
+      <p class="notice" style="margin-top:11px">
+        ${escapeHtml(sc.target_warning||"")}</p>
+    </div>`);
+}
 
 /* ---------------- Planning ML: layer ablation + ward typologies ----------
    The direct answer to "are you using all the datasets". Yes — and each one

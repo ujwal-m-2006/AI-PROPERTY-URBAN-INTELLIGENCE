@@ -85,6 +85,8 @@ TRAIN: list[tuple[str, str, Path]] = [
     ("Planning models / ablation — Chennai",
      "ml/pipelines/train_planning_models.py chennai",
      ROOT / "ml" / "artifacts" / "chennai" / "planning_models.json"),
+    ("Cross-city transfer (both cities)", "ml/pipelines/train_cross_city.py",
+     ROOT / "ml" / "artifacts" / "bengaluru" / "cross_city.json"),
     ("Future price — Bengaluru", "ml/pipelines/train_future_price.py bengaluru",
      ROOT / "ml" / "artifacts" / "bengaluru" / "future_price.json"),
     ("Future price — Chennai", "ml/pipelines/train_future_price.py chennai",
