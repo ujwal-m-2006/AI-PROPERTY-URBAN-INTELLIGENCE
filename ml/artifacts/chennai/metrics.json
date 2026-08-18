@@ -1,0 +1,581 @@
+{
+  "city": "chennai",
+  "display": "Chennai",
+  "algorithm": "hist_gradient_boosting",
+  "target": "price_per_sqft",
+  "target_label": "recorded sale price per sq.ft (INR)",
+  "target_note": "RECORDED SALE price with registration fee and commission \u2014 closer to transaction value than the Bengaluru asking-price data. Sales span roughly 2004-2015, so absolute levels are historical.",
+  "dataset": {
+    "source_url": "https://raw.githubusercontent.com/Ravi8149/Chennai-House-Price-Prediction/HEAD/chennai-house-price.csv",
+    "tier": "T4",
+    "rows_clean": 7109,
+    "train": 4976,
+    "calibration": 1066,
+    "test": 1067,
+    "spatial_blocks": 7,
+    "n_features": 30,
+    "n_gis_features": 11
+  },
+  "cleaning_log": [
+    "loaded 7,109 raw sale records",
+    "normalised known category typos (AREA, SALE_COND, BUILDTYPE, ...)",
+    "dropped 0 rows missing sqft / price / area",
+    "dropped 0 rows outside Rs 500-30,000/sq.ft",
+    "dropped 0 duplicate property ids",
+    "derived property_age_years (median 23.0 yr) and sale_year (2004-2015)",
+    "final: 7,109 rows"
+  ],
+  "gis": {
+    "city": "chennai",
+    "rows": 7109,
+    "gazetteer_size": 781,
+    "locality_match_rate": 1.0,
+    "amenity_categories": 3,
+    "amenity_features": 1125,
+    "ward_polygons": 200,
+    "unique_locations": 7,
+    "ward_match_rate": 0.6203,
+    "features_added": [
+      "metro_distance_m",
+      "railway_distance_m",
+      "bus_distance_m",
+      "hospital_distance_m",
+      "school_distance_m",
+      "college_distance_m",
+      "govt_office_distance_m",
+      "bank_distance_m",
+      "park_distance_m",
+      "supermarket_distance_m",
+      "amenity_count_1km",
+      "gis_ward_no",
+      "gis_corporation",
+      "gis_zone"
+    ],
+    "caveats": [
+      "Locality-level resolution: properties in the same locality share identical GIS features",
+      "Locality->coordinate match is derived (T5) from OpenStreetMap place names, capped at 0.70 confidence",
+      "Straight-line distance, not road or walking distance",
+      "50000 m is a sentinel meaning 'no facility of this category in the city layer', not a measured distance"
+    ]
+  },
+  "eda": {
+    "rows": 7109,
+    "columns": 45,
+    "dtypes": {
+      "PRT_ID": "str",
+      "AREA": "str",
+      "INT_SQFT": "int64",
+      "DATE_SALE": "datetime64[us]",
+      "DIST_MAINROAD": "int64",
+      "N_BEDROOM": "float64",
+      "N_BATHROOM": "float64",
+      "N_ROOM": "int64",
+      "SALE_COND": "str",
+      "PARK_FACIL": "str",
+      "DATE_BUILD": "datetime64[us]",
+      "BUILDTYPE": "str",
+      "UTILITY_AVAIL": "str",
+      "STREET": "str",
+      "MZZONE": "str",
+      "QS_ROOMS": "float64",
+      "QS_BATHROOM": "float64",
+      "QS_BEDROOM": "float64",
+      "QS_OVERALL": "float64",
+      "REG_FEE": "int64",
+      "COMMIS": "int64",
+      "SALES_PRICE": "int64",
+      "price_per_sqft": "float64",
+      "property_age_years": "float64",
+      "sale_year": "int32",
+      "sale_month": "int32",
+      "area_per_room": "float64",
+      "bath_per_bedroom": "float64",
+      "gis_lat": "float64",
+      "gis_lng": "float64",
+      "metro_distance_m": "int64",
+      "railway_distance_m": "object",
+      "bus_distance_m": "int64",
+      "hospital_distance_m": "object",
+      "school_distance_m": "object",
+      "college_distance_m": "object",
+      "govt_office_distance_m": "object",
+      "bank_distance_m": "object",
+      "park_distance_m": "object",
+      "supermarket_distance_m": "object",
+      "amenity_count_1km": "int64",
+      "gis_ward_no": "float64",
+      "gis_corporation": "str",
+      "gis_zone": "str",
+      "has_gis": "int64"
+    },
+    "missing_values": {
+      "QS_OVERALL": 48,
+      "railway_distance_m": 7109,
+      "hospital_distance_m": 7109,
+      "school_distance_m": 7109,
+      "college_distance_m": 7109,
+      "govt_office_distance_m": 7109,
+      "bank_distance_m": 7109,
+      "park_distance_m": 7109,
+      "supermarket_distance_m": 7109,
+      "gis_ward_no": 2699,
+      "gis_corporation": 2699,
+      "gis_zone": 2699
+    },
+    "duplicate_rows": 0,
+    "target": {
+      "name": "price_per_sqft",
+      "mean": 8244.92,
+      "median": 7923.72,
+      "std": 2458.44,
+      "min": 2983.24,
+      "max": 18543.86,
+      "skew": 0.533
+    },
+    "target_outliers_iqr": 30,
+    "excluded_from_correlation": [
+      "COMMIS",
+      "REG_FEE",
+      "SALES_PRICE"
+    ],
+    "correlation_with_target": {
+      "INT_SQFT": -0.4449,
+      "N_BEDROOM": -0.4414,
+      "N_ROOM": -0.3946,
+      "N_BATHROOM": -0.3856,
+      "area_per_room": -0.3658,
+      "bath_per_bedroom": 0.3094,
+      "metro_distance_m": -0.2991,
+      "gis_ward_no": -0.2681,
+      "gis_lng": -0.1912,
+      "property_age_years": -0.1388,
+      "gis_lat": -0.1348,
+      "sale_year": 0.1155,
+      "amenity_count_1km": 0.0828,
+      "DIST_MAINROAD": 0.0157,
+      "sale_month": 0.0146
+    },
+    "top_localities": {
+      "Chrompet": {
+        "count": 1702,
+        "mean_psf": 10117.0
+      },
+      "Karapakkam": {
+        "count": 1366,
+        "mean_psf": 6994.0
+      },
+      "KK Nagar": {
+        "count": 997,
+        "mean_psf": 6767.0
+      },
+      "Velachery": {
+        "count": 981,
+        "mean_psf": 6354.0
+      },
+      "Anna Nagar": {
+        "count": 788,
+        "mean_psf": 8667.0
+      },
+      "Adyar": {
+        "count": 774,
+        "mean_psf": 9784.0
+      },
+      "T Nagar": {
+        "count": 501,
+        "mean_psf": 8897.0
+      }
+    },
+    "plots": [
+      "target_distribution.png",
+      "correlation_heatmap.png",
+      "price_by_locality.png"
+    ]
+  },
+  "model_comparison": {
+    "baseline_median": {
+      "random_cv": {
+        "mae": 1954.8,
+        "rmse": 2479.28,
+        "r2": -0.0177,
+        "mape_pct": 25.178
+      },
+      "spatial_cv": {
+        "mae": 2072.08,
+        "rmse": 2548.48,
+        "r2": -0.7303,
+        "mape_pct": 27.654
+      },
+      "leakage_gap_r2": 0.7126
+    },
+    "linear_regression": {
+      "random_cv": {
+        "mae": 354.86,
+        "rmse": 458.28,
+        "r2": 0.9652,
+        "mape_pct": 4.69
+      },
+      "spatial_cv": {
+        "mae": 870.6,
+        "rmse": 1004.82,
+        "r2": 0.7292,
+        "mape_pct": 11.4
+      },
+      "leakage_gap_r2": 0.236
+    },
+    "random_forest": {
+      "random_cv": {
+        "mae": 286.6,
+        "rmse": 414.84,
+        "r2": 0.9715,
+        "mape_pct": 3.614
+      },
+      "spatial_cv": {
+        "mae": 1758.52,
+        "rmse": 1965.76,
+        "r2": -0.247,
+        "mape_pct": 24.186
+      },
+      "leakage_gap_r2": 1.2185
+    },
+    "gradient_boosting": {
+      "random_cv": {
+        "mae": 204.8,
+        "rmse": 280.02,
+        "r2": 0.987,
+        "mape_pct": 2.562
+      },
+      "spatial_cv": {
+        "mae": 1509.36,
+        "rmse": 1685.32,
+        "r2": 0.2293,
+        "mape_pct": 19.88
+      },
+      "leakage_gap_r2": 0.7577
+    },
+    "hist_gradient_boosting": {
+      "random_cv": {
+        "mae": 100.12,
+        "rmse": 150.42,
+        "r2": 0.9962,
+        "mape_pct": 1.256
+      },
+      "spatial_cv": {
+        "mae": 1272.24,
+        "rmse": 1459.22,
+        "r2": 0.3809,
+        "mape_pct": 17.334
+      },
+      "leakage_gap_r2": 0.6153
+    },
+    "xgboost": {
+      "random_cv": {
+        "mae": 104.46,
+        "rmse": 162.94,
+        "r2": 0.9956,
+        "mape_pct": 1.302
+      },
+      "spatial_cv": {
+        "mae": 1378.96,
+        "rmse": 1545.06,
+        "r2": 0.2745,
+        "mape_pct": 19.02
+      },
+      "leakage_gap_r2": 0.7211
+    }
+  },
+  "tuning": {
+    "hist_gradient_boosting": {
+      "best_params": {
+        "min_samples_leaf": 10,
+        "max_leaf_nodes": 15,
+        "max_iter": 600,
+        "learning_rate": 0.03
+      },
+      "best_cv_r2": 0.5242
+    }
+  },
+  "final_test_metrics": {
+    "mae": 94.4,
+    "rmse": 137.4,
+    "r2": 0.9969,
+    "mape_pct": 1.19
+  },
+  "test_split_warning": "The held-out test R2 of 0.9969 is measured on a RANDOM split and is optimistic. Spatial-block CV over 7 block(s) gives R2 0.3809, a difference of 0.616. With this few distinct localities the model is mostly interpolating within areas it has already seen; treat the spatial-block figure as the honest estimate of generalisation.",
+  "honest_generalisation_r2": 0.3809,
+  "conformal": {
+    "alpha": 0.1,
+    "half_width": 202.8,
+    "empirical_coverage": 0.9128
+  },
+  "saved_models": {
+    "linear_regression": {
+      "file": "model_linear_regression.joblib",
+      "test_metrics": {
+        "mae": 349.5,
+        "rmse": 450.8,
+        "r2": 0.9661,
+        "mape_pct": 4.62
+      },
+      "conformal_half_width": 687.7,
+      "spatial_cv_r2": 0.7292
+    },
+    "random_forest": {
+      "file": "model_random_forest.joblib",
+      "test_metrics": {
+        "mae": 288.5,
+        "rmse": 415.2,
+        "r2": 0.9713,
+        "mape_pct": 3.65
+      },
+      "conformal_half_width": 641.5,
+      "spatial_cv_r2": -0.247
+    },
+    "gradient_boosting": {
+      "file": "model_gradient_boosting.joblib",
+      "test_metrics": {
+        "mae": 201.4,
+        "rmse": 267.3,
+        "r2": 0.9881,
+        "mape_pct": 2.53
+      },
+      "conformal_half_width": 447.5,
+      "spatial_cv_r2": 0.2293
+    },
+    "hist_gradient_boosting": {
+      "file": "model_hist_gradient_boosting.joblib",
+      "test_metrics": {
+        "mae": 100.6,
+        "rmse": 158.2,
+        "r2": 0.9958,
+        "mape_pct": 1.25
+      },
+      "conformal_half_width": 217.2,
+      "spatial_cv_r2": 0.3809
+    },
+    "xgboost": {
+      "file": "model_xgboost.joblib",
+      "test_metrics": {
+        "mae": 102.9,
+        "rmse": 159.3,
+        "r2": 0.9958,
+        "mape_pct": 1.27
+      },
+      "conformal_half_width": 243.8,
+      "spatial_cv_r2": 0.2745
+    }
+  },
+  "permutation_importance": [
+    {
+      "feature": "BUILDTYPE",
+      "importance": 0.76238
+    },
+    {
+      "feature": "INT_SQFT",
+      "importance": 0.40785
+    },
+    {
+      "feature": "MZZONE",
+      "importance": 0.22074
+    },
+    {
+      "feature": "metro_distance_m",
+      "importance": 0.19374
+    },
+    {
+      "feature": "PARK_FACIL",
+      "importance": 0.06196
+    },
+    {
+      "feature": "STREET",
+      "importance": 0.04888
+    },
+    {
+      "feature": "bath_per_bedroom",
+      "importance": 0.03835
+    },
+    {
+      "feature": "gis_zone",
+      "importance": 0.0309
+    },
+    {
+      "feature": "amenity_count_1km",
+      "importance": 0.02878
+    },
+    {
+      "feature": "property_age_years",
+      "importance": 0.01234
+    },
+    {
+      "feature": "area_per_room",
+      "importance": 0.0099
+    },
+    {
+      "feature": "SALE_COND",
+      "importance": 0.00858
+    },
+    {
+      "feature": "N_BATHROOM",
+      "importance": 0.00577
+    },
+    {
+      "feature": "bus_distance_m",
+      "importance": 0.00392
+    },
+    {
+      "feature": "UTILITY_AVAIL",
+      "importance": 0.00266
+    },
+    {
+      "feature": "N_BEDROOM",
+      "importance": 0.00117
+    },
+    {
+      "feature": "QS_OVERALL",
+      "importance": 0.00048
+    },
+    {
+      "feature": "N_ROOM",
+      "importance": 0.00046
+    },
+    {
+      "feature": "DIST_MAINROAD",
+      "importance": -0.0
+    },
+    {
+      "feature": "sale_year",
+      "importance": -0.0
+    },
+    {
+      "feature": "railway_distance_m",
+      "importance": 0.0
+    },
+    {
+      "feature": "hospital_distance_m",
+      "importance": 0.0
+    },
+    {
+      "feature": "school_distance_m",
+      "importance": 0.0
+    },
+    {
+      "feature": "college_distance_m",
+      "importance": 0.0
+    },
+    {
+      "feature": "govt_office_distance_m",
+      "importance": 0.0
+    },
+    {
+      "feature": "bank_distance_m",
+      "importance": 0.0
+    },
+    {
+      "feature": "park_distance_m",
+      "importance": 0.0
+    },
+    {
+      "feature": "supermarket_distance_m",
+      "importance": 0.0
+    },
+    {
+      "feature": "has_gis",
+      "importance": 0.0
+    },
+    {
+      "feature": "gis_corporation",
+      "importance": 0.0
+    }
+  ],
+  "shap_importance": [
+    {
+      "feature": "BUILDTYPE_Commercial",
+      "mean_abs_shap": 1250.776
+    },
+    {
+      "feature": "INT_SQFT",
+      "mean_abs_shap": 835.204
+    },
+    {
+      "feature": "metro_distance_m",
+      "mean_abs_shap": 467.074
+    },
+    {
+      "feature": "MZZONE_RM",
+      "mean_abs_shap": 395.149
+    },
+    {
+      "feature": "PARK_FACIL_No",
+      "mean_abs_shap": 361.142
+    },
+    {
+      "feature": "MZZONE_RL",
+      "mean_abs_shap": 245.286
+    },
+    {
+      "feature": "BUILDTYPE_House",
+      "mean_abs_shap": 219.561
+    },
+    {
+      "feature": "STREET_No Access",
+      "mean_abs_shap": 199.639
+    },
+    {
+      "feature": "amenity_count_1km",
+      "mean_abs_shap": 190.736
+    },
+    {
+      "feature": "STREET_Gravel",
+      "mean_abs_shap": 181.714
+    },
+    {
+      "feature": "property_age_years",
+      "mean_abs_shap": 155.785
+    },
+    {
+      "feature": "MZZONE_A",
+      "mean_abs_shap": 153.606
+    },
+    {
+      "feature": "bath_per_bedroom",
+      "mean_abs_shap": 151.563
+    },
+    {
+      "feature": "MZZONE_RH",
+      "mean_abs_shap": 107.923
+    },
+    {
+      "feature": "N_BATHROOM",
+      "mean_abs_shap": 91.02
+    },
+    {
+      "feature": "area_per_room",
+      "mean_abs_shap": 89.41
+    },
+    {
+      "feature": "SALE_COND_AdjLand",
+      "mean_abs_shap": 88.913
+    },
+    {
+      "feature": "gis_zone_ADYAR",
+      "mean_abs_shap": 81.978
+    },
+    {
+      "feature": "MZZONE_C",
+      "mean_abs_shap": 70.065
+    },
+    {
+      "feature": "bus_distance_m",
+      "mean_abs_shap": 56.784
+    }
+  ],
+  "plots": [
+    "actual_vs_predicted.png",
+    "residuals.png",
+    "model_comparison.png",
+    "shap_importance.png",
+    "eda/target_distribution.png",
+    "eda/correlation_heatmap.png",
+    "eda/price_by_locality.png"
+  ],
+  "trained_at": "2026-08-10T20:00:46.901920+00:00"
+}

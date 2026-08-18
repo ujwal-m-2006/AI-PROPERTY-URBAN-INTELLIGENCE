@@ -1,0 +1,22 @@
+{
+  "name": "OpenStreetMap amenities, transport and government offices",
+  "organisation": "OpenStreetMap contributors",
+  "source_url": "https://overpass-api.de/api/interpreter",
+  "dataset_name": "overpass-bengaluru-amenities",
+  "tier": "T3",
+  "availability": "API",
+  "licence": "Open Database License (ODbL) 1.0",
+  "licence_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "attribution": "\u00a9 OpenStreetMap contributors",
+  "retrieved_at": "2026-08-11T14:57:08.281587+00:00",
+  "method": "http_download",
+  "transformation": "Overpass QL per category; nodes and way centroids; unnamed features dropped except bus stops and ATMs",
+  "access_notes": "bbox=12.83,80.10,13.25,80.35; 3987 features; counts={'bus_stop': 973, 'metro_station': 61, 'bus_station': 91, 'railway_station': 55, 'airport': 3, 'government_office': 137, 'police_station': 91, 'fire_station': 8, 'post_office': 37, 'courthouse': 6, 'hospital': 814, 'clinic': 0, 'pharmacy': 235, 'school': 485, 'college': 145, 'university': 20, 'bank': 392, 'atm': 0, 'fuel': 0, 'supermarket': 214, 'park': 0, 'lake': 220}",
+  "max_confidence": 0.7,
+  "verification_status": "COMMUNITY_SOURCED",
+  "caveats": [
+    "OSM completeness varies across Greater Bengaluru; absence of a facility in this layer is not evidence that none exists",
+    "Government/private classification relies on OSM tagging and is unreliable; it is not an official directory",
+    "Jurisdiction is NOT determined by proximity \u2014 the nearest office is not necessarily the office with jurisdiction"
+  ]
+}

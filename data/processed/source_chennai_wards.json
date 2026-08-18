@@ -1,0 +1,22 @@
+{
+  "name": "Greater Chennai Corporation ward and zone boundaries (2022)",
+  "organisation": "Greater Chennai Corporation",
+  "source_url": "https://data.opencity.in/dataset/gcc-ward-information",
+  "dataset_name": "gcc-ward-information",
+  "tier": "T2",
+  "availability": "DOWNLOAD",
+  "licence": "As published by the OpenCity urban data portal",
+  "attribution": "Greater Chennai Corporation, via OpenCity Urban Data Portal",
+  "retrieved_at": "2026-08-18T15:38:22.943456+00:00",
+  "source_updated": "2022-01-01",
+  "method": "http_download",
+  "transformation": "KML parsed to GeoJSON; ward count and ring closure validated; zone/region assigned by centroid-in-polygon join against the GCC zones layer (DERIVED)",
+  "access_notes": "sha256=be48ef7eb4320279e790f59da1691ece9efc92b34459ca73c492957943c347e0; 200 wards; 16 zones",
+  "max_confidence": 0.85,
+  "verification_status": "VERIFIED_COUNTS",
+  "caveats": [
+    "Ward names are not published in this source \u2014 wards are identified by number only",
+    "Zone assignment is derived by spatial join, not read from the ward source file",
+    "Ward map vintage is 2022; re-check for later delimitation"
+  ]
+}

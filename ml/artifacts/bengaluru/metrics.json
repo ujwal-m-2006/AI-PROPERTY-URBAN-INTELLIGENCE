@@ -1,0 +1,584 @@
+{
+  "city": "bengaluru",
+  "display": "Greater Bengaluru",
+  "algorithm": "hist_gradient_boosting",
+  "target": "price_per_sqft",
+  "target_label": "asking price per sq.ft (INR)",
+  "target_note": "ASKING price from listings. Karnataka does not publish transaction prices, so this carries a systematic upward bias of unknown size.",
+  "dataset": {
+    "source_url": "https://raw.githubusercontent.com/dphi-official/Datasets/master/Bengaluru_House_Data.csv",
+    "tier": "T4",
+    "rows_clean": 12038,
+    "train": 8426,
+    "calibration": 1806,
+    "test": 1806,
+    "spatial_blocks": 858,
+    "n_features": 22,
+    "n_gis_features": 11
+  },
+  "cleaning_log": [
+    "loaded 13,320 raw listing rows",
+    "dropped 17 rows missing sqft / rooms / price / location",
+    "dropped 748 rows under 300 sq.ft per room",
+    "dropped 48 rows outside Rs 1,500-40,000/sq.ft",
+    "dropped 469 rows beyond 2 SD of their locality mean",
+    "final: 12,038 rows"
+  ],
+  "gis": {
+    "city": "bengaluru",
+    "rows": 12038,
+    "gazetteer_size": 1885,
+    "locality_match_rate": 0.6606,
+    "amenity_categories": 20,
+    "amenity_features": 13921,
+    "ward_polygons": 369,
+    "unique_locations": 477,
+    "ward_match_rate": 0.519,
+    "features_added": [
+      "metro_distance_m",
+      "railway_distance_m",
+      "bus_distance_m",
+      "hospital_distance_m",
+      "school_distance_m",
+      "college_distance_m",
+      "govt_office_distance_m",
+      "bank_distance_m",
+      "park_distance_m",
+      "supermarket_distance_m",
+      "amenity_count_1km",
+      "gis_ward_no",
+      "gis_corporation",
+      "gis_zone"
+    ],
+    "caveats": [
+      "Locality-level resolution: properties in the same locality share identical GIS features",
+      "Locality->coordinate match is derived (T5) from OpenStreetMap place names, capped at 0.70 confidence",
+      "Straight-line distance, not road or walking distance",
+      "50000 m is a sentinel meaning 'no facility of this category in the city layer', not a measured distance"
+    ]
+  },
+  "eda": {
+    "rows": 12038,
+    "columns": 33,
+    "dtypes": {
+      "area_type": "str",
+      "availability": "str",
+      "location": "str",
+      "size": "str",
+      "society": "str",
+      "total_sqft": "str",
+      "bath": "float64",
+      "balcony": "float64",
+      "price": "float64",
+      "sqft": "float64",
+      "rooms": "float64",
+      "price_inr": "float64",
+      "price_per_sqft": "float64",
+      "ready_to_move": "int64",
+      "area_per_room": "float64",
+      "bath_per_room": "float64",
+      "gis_lat": "float64",
+      "gis_lng": "float64",
+      "metro_distance_m": "float64",
+      "railway_distance_m": "float64",
+      "bus_distance_m": "float64",
+      "hospital_distance_m": "float64",
+      "school_distance_m": "float64",
+      "college_distance_m": "float64",
+      "govt_office_distance_m": "float64",
+      "bank_distance_m": "float64",
+      "park_distance_m": "float64",
+      "supermarket_distance_m": "float64",
+      "amenity_count_1km": "float64",
+      "gis_ward_no": "float64",
+      "gis_corporation": "str",
+      "gis_zone": "str",
+      "has_gis": "int64"
+    },
+    "missing_values": {
+      "society": 4493,
+      "bath": 57,
+      "balcony": 460,
+      "bath_per_room": 57,
+      "gis_lat": 4086,
+      "gis_lng": 4086,
+      "metro_distance_m": 4086,
+      "railway_distance_m": 4086,
+      "bus_distance_m": 4086,
+      "hospital_distance_m": 4086,
+      "school_distance_m": 4086,
+      "college_distance_m": 4086,
+      "govt_office_distance_m": 4086,
+      "bank_distance_m": 4086,
+      "park_distance_m": 4086,
+      "supermarket_distance_m": 4086,
+      "amenity_count_1km": 4086,
+      "gis_ward_no": 5790,
+      "gis_corporation": 5790,
+      "gis_zone": 5790
+    },
+    "duplicate_rows": 515,
+    "target": {
+      "name": "price_per_sqft",
+      "mean": 6014.6,
+      "median": 5225.61,
+      "std": 3169.67,
+      "min": 1578.95,
+      "max": 37500.0,
+      "skew": 3.086
+    },
+    "target_outliers_iqr": 855,
+    "excluded_from_correlation": [
+      "price",
+      "price_inr"
+    ],
+    "correlation_with_target": {
+      "amenity_count_1km": 0.4303,
+      "bath": 0.3532,
+      "sqft": 0.3111,
+      "rooms": 0.3003,
+      "area_per_room": 0.2025,
+      "bath_per_room": 0.1615,
+      "railway_distance_m": -0.1488,
+      "park_distance_m": -0.1378,
+      "govt_office_distance_m": -0.1355,
+      "college_distance_m": -0.132,
+      "gis_ward_no": 0.1314,
+      "school_distance_m": -0.1312,
+      "metro_distance_m": -0.1265,
+      "gis_lng": -0.1225,
+      "bank_distance_m": -0.1165
+    },
+    "top_localities": {
+      "Whitefield": {
+        "count": 511,
+        "mean_psf": 5681.0
+      },
+      "Sarjapur  Road": {
+        "count": 375,
+        "mean_psf": 5806.0
+      },
+      "Electronic City": {
+        "count": 290,
+        "mean_psf": 4412.0
+      },
+      "Kanakpura Road": {
+        "count": 252,
+        "mean_psf": 5081.0
+      },
+      "Thanisandra": {
+        "count": 232,
+        "mean_psf": 5422.0
+      },
+      "Yelahanka": {
+        "count": 198,
+        "mean_psf": 5120.0
+      },
+      "Uttarahalli": {
+        "count": 175,
+        "mean_psf": 4121.0
+      },
+      "Hebbal": {
+        "count": 171,
+        "mean_psf": 7124.0
+      },
+      "Raja Rajeshwari Nagar": {
+        "count": 165,
+        "mean_psf": 4213.0
+      },
+      "Marathahalli": {
+        "count": 162,
+        "mean_psf": 5657.0
+      },
+      "Hennur Road": {
+        "count": 147,
+        "mean_psf": 5840.0
+      },
+      "Bannerghatta Road": {
+        "count": 143,
+        "mean_psf": 5273.0
+      },
+      "7th Phase JP Nagar": {
+        "count": 139,
+        "mean_psf": 6045.0
+      },
+      "Haralur Road": {
+        "count": 137,
+        "mean_psf": 5099.0
+      },
+      "Electronic City Phase II": {
+        "count": 126,
+        "mean_psf": 3669.0
+      }
+    },
+    "plots": [
+      "target_distribution.png",
+      "correlation_heatmap.png",
+      "price_by_locality.png"
+    ]
+  },
+  "model_comparison": {
+    "baseline_median": {
+      "random_cv": {
+        "mae": 1892.88,
+        "rmse": 3263.66,
+        "r2": -0.0623,
+        "mape_pct": 28.71
+      },
+      "spatial_cv": {
+        "mae": 1895.02,
+        "rmse": 3266.08,
+        "r2": -0.0653,
+        "mape_pct": 28.77
+      },
+      "leakage_gap_r2": 0.003
+    },
+    "linear_regression": {
+      "random_cv": {
+        "mae": 1657.8,
+        "rmse": 2571.8,
+        "r2": 0.3406,
+        "mape_pct": 28.836
+      },
+      "spatial_cv": {
+        "mae": 1743.46,
+        "rmse": 2655.64,
+        "r2": 0.2959,
+        "mape_pct": 30.646
+      },
+      "leakage_gap_r2": 0.0447
+    },
+    "random_forest": {
+      "random_cv": {
+        "mae": 1263.7,
+        "rmse": 2160.58,
+        "r2": 0.5346,
+        "mape_pct": 21.168
+      },
+      "spatial_cv": {
+        "mae": 1589.48,
+        "rmse": 2447.5,
+        "r2": 0.4022,
+        "mape_pct": 27.842
+      },
+      "leakage_gap_r2": 0.1324
+    },
+    "gradient_boosting": {
+      "random_cv": {
+        "mae": 1407.08,
+        "rmse": 2213.52,
+        "r2": 0.5116,
+        "mape_pct": 24.286
+      },
+      "spatial_cv": {
+        "mae": 1566.84,
+        "rmse": 2404.14,
+        "r2": 0.4231,
+        "mape_pct": 27.318
+      },
+      "leakage_gap_r2": 0.0885
+    },
+    "hist_gradient_boosting": {
+      "random_cv": {
+        "mae": 1285.16,
+        "rmse": 2130.72,
+        "r2": 0.5473,
+        "mape_pct": 21.628
+      },
+      "spatial_cv": {
+        "mae": 1593.22,
+        "rmse": 2424.7,
+        "r2": 0.4132,
+        "mape_pct": 27.868
+      },
+      "leakage_gap_r2": 0.1341
+    },
+    "xgboost": {
+      "random_cv": {
+        "mae": 1283.28,
+        "rmse": 2152.52,
+        "r2": 0.5381,
+        "mape_pct": 21.634
+      },
+      "spatial_cv": {
+        "mae": 1581.54,
+        "rmse": 2426.72,
+        "r2": 0.4121,
+        "mape_pct": 27.7
+      },
+      "leakage_gap_r2": 0.126
+    }
+  },
+  "tuning": {
+    "gradient_boosting": {
+      "best_params": {
+        "subsample": 0.8,
+        "n_estimators": 150,
+        "max_depth": 4,
+        "learning_rate": 0.03
+      },
+      "best_cv_r2": 0.3844
+    },
+    "hist_gradient_boosting": {
+      "best_params": {
+        "min_samples_leaf": 10,
+        "max_leaf_nodes": 15,
+        "max_iter": 200,
+        "learning_rate": 0.03
+      },
+      "best_cv_r2": 0.3923
+    }
+  },
+  "final_test_metrics": {
+    "mae": 1356.9,
+    "rmse": 2169.2,
+    "r2": 0.5247,
+    "mape_pct": 23.45
+  },
+  "test_split_warning": null,
+  "honest_generalisation_r2": 0.4132,
+  "conformal": {
+    "alpha": 0.1,
+    "half_width": 2643.0,
+    "empirical_coverage": 0.8898
+  },
+  "saved_models": {
+    "linear_regression": {
+      "file": "model_linear_regression.joblib",
+      "test_metrics": {
+        "mae": 1638.9,
+        "rmse": 2541.6,
+        "r2": 0.3475,
+        "mape_pct": 28.14
+      },
+      "conformal_half_width": 3153.6,
+      "spatial_cv_r2": 0.2959
+    },
+    "random_forest": {
+      "file": "model_random_forest.joblib",
+      "test_metrics": {
+        "mae": 1271.7,
+        "rmse": 2194.9,
+        "r2": 0.5134,
+        "mape_pct": 21.5
+      },
+      "conformal_half_width": 2579.6,
+      "spatial_cv_r2": 0.4022
+    },
+    "gradient_boosting": {
+      "file": "model_gradient_boosting.joblib",
+      "test_metrics": {
+        "mae": 1393.6,
+        "rmse": 2218.5,
+        "r2": 0.5028,
+        "mape_pct": 24.11
+      },
+      "conformal_half_width": 2668.4,
+      "spatial_cv_r2": 0.4231
+    },
+    "hist_gradient_boosting": {
+      "file": "model_hist_gradient_boosting.joblib",
+      "test_metrics": {
+        "mae": 1277.7,
+        "rmse": 2141.0,
+        "r2": 0.537,
+        "mape_pct": 21.64
+      },
+      "conformal_half_width": 2594.2,
+      "spatial_cv_r2": 0.4132
+    },
+    "xgboost": {
+      "file": "model_xgboost.joblib",
+      "test_metrics": {
+        "mae": 1289.1,
+        "rmse": 2213.1,
+        "r2": 0.5052,
+        "mape_pct": 21.97
+      },
+      "conformal_half_width": 2609.8,
+      "spatial_cv_r2": 0.4121
+    }
+  },
+  "permutation_importance": [
+    {
+      "feature": "area_type",
+      "importance": 0.18095
+    },
+    {
+      "feature": "amenity_count_1km",
+      "importance": 0.11776
+    },
+    {
+      "feature": "bath",
+      "importance": 0.08102
+    },
+    {
+      "feature": "area_per_room",
+      "importance": 0.05331
+    },
+    {
+      "feature": "sqft",
+      "importance": 0.04986
+    },
+    {
+      "feature": "gis_corporation",
+      "importance": 0.02111
+    },
+    {
+      "feature": "metro_distance_m",
+      "importance": 0.01672
+    },
+    {
+      "feature": "hospital_distance_m",
+      "importance": 0.01474
+    },
+    {
+      "feature": "park_distance_m",
+      "importance": 0.01125
+    },
+    {
+      "feature": "bank_distance_m",
+      "importance": 0.01043
+    },
+    {
+      "feature": "railway_distance_m",
+      "importance": 0.00952
+    },
+    {
+      "feature": "college_distance_m",
+      "importance": 0.00826
+    },
+    {
+      "feature": "gis_zone",
+      "importance": 0.00597
+    },
+    {
+      "feature": "ready_to_move",
+      "importance": 0.0053
+    },
+    {
+      "feature": "balcony",
+      "importance": 0.00521
+    },
+    {
+      "feature": "school_distance_m",
+      "importance": 0.00479
+    },
+    {
+      "feature": "bus_distance_m",
+      "importance": 0.00458
+    },
+    {
+      "feature": "rooms",
+      "importance": 0.0044
+    },
+    {
+      "feature": "govt_office_distance_m",
+      "importance": 0.00257
+    },
+    {
+      "feature": "supermarket_distance_m",
+      "importance": 0.00167
+    },
+    {
+      "feature": "has_gis",
+      "importance": 0.00124
+    },
+    {
+      "feature": "bath_per_room",
+      "importance": -0.00045
+    }
+  ],
+  "shap_importance": [
+    {
+      "feature": "area_type_Plot  Area",
+      "mean_abs_shap": 473.111
+    },
+    {
+      "feature": "bath",
+      "mean_abs_shap": 432.954
+    },
+    {
+      "feature": "amenity_count_1km",
+      "mean_abs_shap": 367.64
+    },
+    {
+      "feature": "sqft",
+      "mean_abs_shap": 329.598
+    },
+    {
+      "feature": "area_per_room",
+      "mean_abs_shap": 327.847
+    },
+    {
+      "feature": "metro_distance_m",
+      "mean_abs_shap": 117.547
+    },
+    {
+      "feature": "hospital_distance_m",
+      "mean_abs_shap": 115.029
+    },
+    {
+      "feature": "railway_distance_m",
+      "mean_abs_shap": 80.247
+    },
+    {
+      "feature": "college_distance_m",
+      "mean_abs_shap": 68.756
+    },
+    {
+      "feature": "school_distance_m",
+      "mean_abs_shap": 64.448
+    },
+    {
+      "feature": "bank_distance_m",
+      "mean_abs_shap": 59.353
+    },
+    {
+      "feature": "park_distance_m",
+      "mean_abs_shap": 55.725
+    },
+    {
+      "feature": "balcony",
+      "mean_abs_shap": 55.722
+    },
+    {
+      "feature": "gis_corporation_West",
+      "mean_abs_shap": 38.758
+    },
+    {
+      "feature": "govt_office_distance_m",
+      "mean_abs_shap": 37.935
+    },
+    {
+      "feature": "gis_corporation_Central",
+      "mean_abs_shap": 37.761
+    },
+    {
+      "feature": "bus_distance_m",
+      "mean_abs_shap": 34.488
+    },
+    {
+      "feature": "has_gis",
+      "mean_abs_shap": 33.922
+    },
+    {
+      "feature": "bath_per_room",
+      "mean_abs_shap": 32.944
+    },
+    {
+      "feature": "ready_to_move",
+      "mean_abs_shap": 29.377
+    }
+  ],
+  "plots": [
+    "actual_vs_predicted.png",
+    "residuals.png",
+    "model_comparison.png",
+    "shap_importance.png",
+    "eda/target_distribution.png",
+    "eda/correlation_heatmap.png",
+    "eda/price_by_locality.png"
+  ],
+  "trained_at": "2026-08-10T20:14:43.509918+00:00"
+}

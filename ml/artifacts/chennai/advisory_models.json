@@ -1,0 +1,168 @@
+{
+  "city": "chennai",
+  "display": "Chennai",
+  "generated_at": "2026-08-14T15:46:28.094125+00:00",
+  "target": "price_per_sqft",
+  "target_label": "recorded sale price per sq.ft (INR)",
+  "split": "GroupShuffleSplit by locality/ward \u2014 no locality spans the split",
+  "spatial_blocks": 7,
+  "negotiation_band": {
+    "method": "Gradient boosting under pinball (quantile) loss \u2014 supervised ML",
+    "quantiles": [
+      0.1,
+      0.5,
+      0.9
+    ],
+    "pinball_loss": {
+      "p10": 71.02,
+      "p50": 149.1,
+      "p90": 88.88
+    },
+    "nominal_coverage": 0.8,
+    "measured_coverage": 0.6369,
+    "calibrated": false,
+    "calibration_note": "A P10-P90 band should contain 80% of held-out actuals. It contains 63.7%. That is more than 5 points away, so the band is MISCALIBRATED \u2014 treat its width as indicative only.",
+    "quantile_crossing": {
+      "rows": 0,
+      "rate": 0.0,
+      "handling": "Independently fitted quantiles can produce P10 > P90. Every band is sorted per row before use, so a crossed prediction cannot reach a user."
+    },
+    "median_band_width": 693,
+    "median_band_width_pct_of_price": 0.088,
+    "conformalized": {
+      "method": "Conformalized Quantile Regression (CQR) \u2014 the raw band is widened by a constant learned on a held-out calibration fold, giving distribution-free coverage",
+      "qhat": 688.9,
+      "calibration_rows": 1978,
+      "target_coverage": 0.8,
+      "measured_coverage": 1.0,
+      "calibrated": false,
+      "direction": "OVER-COVERS",
+      "reliable": false,
+      "few_blocks_warning": "Only 7 spatial blocks. The conformal adjustment is estimated from very few independent localities, so its coverage is not a guarantee \u2014 a band that covers 100% is over-conservative and uninformative, not accurate.",
+      "median_width": 2070,
+      "median_width_pct_of_price": 0.262,
+      "why": "Raw quantile regression covered 63.7% against a nominal 80% \u2014 it under-covers on localities the model never saw. CQR widens the band to reach 100.0% (OVER-COVERS). Where that lands on target the wider band is the honest one; where it overshoots, the band is too wide to be useful and says so.",
+      "use_this_one": true,
+      "exchangeability_check": {
+        "spatial_split_coverage": 1.0,
+        "random_split_coverage": 0.7711,
+        "finding": "The same conformal procedure reaches 77.1% under a random split but only 100.0% under the spatial split. Conformal prediction guarantees coverage only when calibration and test rows are exchangeable, and holding out whole localities breaks that on purpose. The shortfall is the honest cost of spatial validation, not a defect in the method \u2014 and the spatial number is the one reported."
+      }
+    },
+    "interpretation": {
+      "buyer": "P10 is a defensible opening offer \u2014 10% of comparable properties transact at or below it. Below P10 you are arguing against the market.",
+      "seller": "P90 is an ambitious but evidenced ask \u2014 10% achieve it. P50 is the realistic midpoint.",
+      "investor": "Band width is the market's disagreement about this property type in this area. A wide band means comparable homes vary a lot, so entry price matters more than the headline estimate."
+    },
+    "caveat": "These are quantiles of ASKING price where the city's dataset is listings, and of RECORDED SALE price where it is transactions. They are not a valuation and not a negotiating position endorsed by anyone."
+  },
+  "what_moves_price": {
+    "method": "Partial dependence on a gradient-boosting model \u2014 ML-derived",
+    "features": [
+      {
+        "feature": "N_BEDROOM",
+        "grid": [
+          1.0,
+          2.0
+        ],
+        "predicted": [
+          8972.7,
+          8920.5
+        ],
+        "swing": 52.2,
+        "swing_pct_of_median": 0.007,
+        "direction": "falls",
+        "stable_across_seeds": true,
+        "seed_directions": [
+          "falls",
+          "falls",
+          "falls"
+        ],
+        "seed_swing_range": [
+          0.5,
+          236.6
+        ],
+        "note": "Direction is consistent across 3 independent spatial splits."
+      },
+      {
+        "feature": "area_per_room",
+        "grid": [
+          364.6,
+          371.89,
+          379.18,
+          386.47,
+          393.76,
+          401.05,
+          408.34,
+          415.63,
+          422.92,
+          430.21,
+          437.5,
+          444.78
+        ],
+        "predicted": [
+          8965.8,
+          8965.8,
+          8965.8,
+          8965.6,
+          8946.8,
+          8941.8,
+          8936.6,
+          8935.4,
+          8935.4,
+          8935.4,
+          8935.4,
+          8935.4
+        ],
+        "swing": 30.4,
+        "swing_pct_of_median": 0.004,
+        "direction": "falls",
+        "stable_across_seeds": true,
+        "seed_directions": [
+          "falls",
+          "falls",
+          "falls"
+        ],
+        "seed_swing_range": [
+          15.7,
+          137.1
+        ],
+        "note": "Direction is consistent across 3 independent spatial splits."
+      },
+      {
+        "feature": "N_BATHROOM",
+        "grid": [
+          1.0
+        ],
+        "predicted": [
+          8954.4
+        ],
+        "swing": 0.0,
+        "swing_pct_of_median": 0.0,
+        "direction": "flat",
+        "stable_across_seeds": true,
+        "seed_directions": [
+          "flat",
+          "flat",
+          "flat"
+        ],
+        "seed_swing_range": [
+          0.0,
+          0.0
+        ],
+        "note": "Direction is consistent across 3 independent spatial splits."
+      }
+    ],
+    "stability": {
+      "seeds_tested": [
+        42,
+        7,
+        2024
+      ],
+      "unstable_features": [],
+      "note": "Partial dependence on correlated features can flip direction with the training fold. Each curve was refit on 3 independent spatial-block splits; any feature whose direction disagreed across them is labelled UNSTABLE and must not be read as advice. Varying only the estimator seed would not have caught this \u2014 the flip that prompted the check came from a fold change."
+    },
+    "not_causal": "THIS IS NOT A CAUSAL ESTIMATE. Partial dependence shows what the MODEL learned from observed data, not what would happen if you changed the property. Homes with more bathrooms differ in many other ways too, and the model cannot separate those. Read it as 'how the model responds', never as 'what adding one would earn'.",
+    "note": "Only features a seller or builder could plausibly change are shown. Location features move price far more, but nobody can act on them \u2014 they are in the SHAP importance chart instead."
+  }
+}

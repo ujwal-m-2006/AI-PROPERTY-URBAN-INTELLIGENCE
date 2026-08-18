@@ -1,0 +1,33 @@
+{
+  "name": "Reported flooding locations, Bengaluru Urban",
+  "organisation": "Bruhat Bengaluru Mahanagara Palike (BBMP)",
+  "source_url": "https://data.opencity.in/dataset/flooding-locations-in-bengaluru-urban",
+  "dataset_name": "flooding-locations-in-bengaluru-urban",
+  "tier": "T2",
+  "availability": "DOWNLOAD",
+  "licence": "Other (Public Domain) as stated by the OpenCity portal",
+  "attribution": "BBMP flooding locations, via OpenCity Urban Data Portal",
+  "retrieved_at": "2026-08-18T15:48:40.968980+00:00",
+  "source_updated": "2025-11-27",
+  "method": "http_download",
+  "transformation": "Three KML layers parsed to points; first vertex used where a placemark carries a line or polygon; duplicates removed at 5 dp",
+  "access_notes": "391 points, 3 layers, sha16=0850ab7913c68352",
+  "max_confidence": 0.7,
+  "verification_status": "PARTIAL_COVERAGE",
+  "caveats": [
+    "These are reported flooding locations, not a hazard model. No return period, depth, drainage capacity or terrain analysis is attached. Distance to the nearest reported point is NOT a flood risk score.",
+    "No reported point nearby does NOT mean the property does not flood. It means none was recorded in this dataset.",
+    "POINT DATA, NOT INUNDATION GEOMETRY. A point marks a reported location, not the extent of flooding around it.",
+    "No date is attached per point, so the reporting period is unknown and conditions may have changed since.",
+    "This layer does NOT feed the environmental risk score. Flood remains listed as excluded there (audit R7)."
+  ],
+  "coverage": {
+    "city": "bengaluru",
+    "points": 391,
+    "kinds": {
+      "Location vulnerable to flooding": 194,
+      "Flood-prone location": 70,
+      "BBMP low-lying area": 127
+    }
+  }
+}

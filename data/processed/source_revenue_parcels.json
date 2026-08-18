@@ -1,0 +1,32 @@
+{
+  "name": "Bengaluru Urban revenue maps \u2014 taluk, hobli, village, survey number",
+  "organisation": "Karnataka Revenue Department (digitised sheets)",
+  "source_url": "https://data.opencity.in/dataset/bengaluru-urban-revenue-maps",
+  "dataset_name": "bengaluru-urban-revenue-maps",
+  "tier": "T2",
+  "availability": "DOWNLOAD",
+  "licence": "As published by the OpenCity urban data portal",
+  "attribution": "Revenue maps via OpenCity Urban Data Portal",
+  "retrieved_at": "2026-08-12T03:56:08.571630+00:00",
+  "source_updated": "2020-01-01",
+  "method": "http_download",
+  "transformation": "One KML per hobli sheet; TALUK/HOBLI/VILLAGE and survey number read from each placemark's description; geometry converted to GeoJSON",
+  "access_notes": "92 sheets, 4151 parcels, sha16=54cf3e36fc975ae2",
+  "max_confidence": 0.8,
+  "verification_status": "PARTIAL_COVERAGE",
+  "caveats": [
+    "COVERAGE IS PARTIAL \u2014 only the taluks and hoblis published in this dataset are present. Points outside them return UNAVAILABLE.",
+    "A survey number from a digitised revenue sheet is INDICATIVE. It is not a legal determination of boundary or title; those are settled by the Sub-Registrar and a licensed surveyor.",
+    "Sheet vintage is not stated per file; treat as historical and re-verify before relying on it."
+  ],
+  "coverage": {
+    "district": "Bengaluru Urban",
+    "taluks": [
+      "Bangalore East",
+      "Bangalore North",
+      "Bangalore South"
+    ],
+    "hobli_count": 7,
+    "village_count": 35
+  }
+}

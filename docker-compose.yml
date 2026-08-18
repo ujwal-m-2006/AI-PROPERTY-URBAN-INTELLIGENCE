@@ -1,0 +1,74 @@
+name: gba-property-intelligence
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: gba
+      POSTGRES_PASSWORD: gba
+      POSTGRES_DB: gba
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./infra/docker/initdb:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gba -d gba"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "60", "1"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: gba
+      MINIO_ROOT_PASSWORD: gba-dev-secret
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: ../infra/docker/api.Dockerfile
+    environment:
+      GBA_DATABASE_URL: postgresql+psycopg://gba:gba@db:5432/gba
+      GBA_REDIS_URL: redis://redis:6379/0
+      GBA_ENVIRONMENT: development
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+  # Vector tiles straight from PostGIS — no tile build step.
+  # Enabled in Phase 3 when the boundary tables exist.
+  tiles:
+    image: ghcr.io/maplibre/martin:latest
+    environment:
+      DATABASE_URL: postgresql://gba:gba@db:5432/gba
+    ports:
+      - "3001:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles: ["phase3"]
+
+volumes:
+  db_data:
+  redis_data:
+  minio_data:

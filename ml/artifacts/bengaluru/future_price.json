@@ -1,0 +1,58 @@
+{
+  "city": "bengaluru",
+  "available": false,
+  "forecast_supported": false,
+  "temporal_basis": "possession_year",
+  "reason": "The Greater Bengaluru dataset records POSSESSION timing, not sale dates. Every price was observed at a single point in time, so no price series over time exists and no market forecast can be produced from this data.",
+  "why_this_matters": "A trend across possession years would measure the discount on unfinished property, not market appreciation. Presenting it as a price forecast would be wrong.",
+  "what_would_be_needed": [
+    "Sale or listing dates on each record (as the Chennai dataset has), or",
+    "A published locality-level price index over several years, or",
+    "Repeated scrapes of the same listings over time"
+  ],
+  "supported_analysis": {
+    "name": "Possession-timing premium",
+    "method": "Median price per sq.ft by possession year, plus a linear fit",
+    "ready_to_move_rows": 9428,
+    "ready_to_move_median_psf": 5208,
+    "under_construction_rows": 2610,
+    "under_construction_median_psf": 5273,
+    "ready_premium_pct": -1.2,
+    "slope_per_possession_year": 203.0,
+    "by_possession_year": [
+      {
+        "year": 2017,
+        "median_psf": 5559,
+        "listings": 122
+      },
+      {
+        "year": 2018,
+        "median_psf": 5000,
+        "listings": 1614
+      },
+      {
+        "year": 2019,
+        "median_psf": 5767,
+        "listings": 448
+      },
+      {
+        "year": 2020,
+        "median_psf": 5336,
+        "listings": 175
+      },
+      {
+        "year": 2021,
+        "median_psf": 5300,
+        "listings": 181
+      },
+      {
+        "year": 2022,
+        "median_psf": 6886,
+        "listings": 49
+      }
+    ],
+    "interpretation": "Ready-to-move properties are listed at a premium over under-construction ones. This is a possession-timing effect, NOT a market trend over time."
+  },
+  "checked_at": "2026-08-10T20:25:41.960711+00:00",
+  "plot": "future_price.png"
+}

@@ -1,0 +1,163 @@
+{
+  "model": "hist_gradient_boosting",
+  "target": "asking price per sq.ft (INR)",
+  "trained_at": "2026-08-09T16:20:46.456162+00:00",
+  "n_rows": 12038,
+  "n_blocks": 1146,
+  "ward_match_rate": 0.4009,
+  "shipped_feature_set": "without_locality",
+  "results_by_feature_set": {
+    "without_locality": {
+      "baseline_median": {
+        "random_cv": {
+          "mae": 1892.9,
+          "rmse_r2": -0.0623,
+          "mape_pct": 28.71
+        },
+        "spatial_cv": {
+          "mae": 1893.2,
+          "rmse_r2": -0.0624,
+          "mape_pct": 28.73
+        },
+        "leakage_gap_r2": 0.0001
+      },
+      "linear_regression": {
+        "random_cv": {
+          "mae": 1770.9,
+          "rmse_r2": 0.2477,
+          "mape_pct": 31.02
+        },
+        "spatial_cv": {
+          "mae": 1827.4,
+          "rmse_r2": 0.1994,
+          "mape_pct": 32.17
+        },
+        "leakage_gap_r2": 0.0483
+      },
+      "random_forest": {
+        "random_cv": {
+          "mae": 1503.2,
+          "rmse_r2": 0.3975,
+          "mape_pct": 25.63
+        },
+        "spatial_cv": {
+          "mae": 1703.8,
+          "rmse_r2": 0.2868,
+          "mape_pct": 29.3
+        },
+        "leakage_gap_r2": 0.1107
+      },
+      "hist_gradient_boosting": {
+        "random_cv": {
+          "mae": 1538.7,
+          "rmse_r2": 0.4025,
+          "mape_pct": 26.34
+        },
+        "spatial_cv": {
+          "mae": 1675.2,
+          "rmse_r2": 0.3078,
+          "mape_pct": 28.69
+        },
+        "leakage_gap_r2": 0.0947
+      }
+    },
+    "with_locality": {
+      "baseline_median": {
+        "random_cv": {
+          "mae": 1892.9,
+          "rmse_r2": -0.0623,
+          "mape_pct": 28.71
+        },
+        "spatial_cv": {
+          "mae": 1893.2,
+          "rmse_r2": -0.0624,
+          "mape_pct": 28.73
+        },
+        "leakage_gap_r2": 0.0001
+      },
+      "linear_regression": {
+        "random_cv": {
+          "mae": 1572.4,
+          "rmse_r2": 0.3588,
+          "mape_pct": 26.92
+        },
+        "spatial_cv": {
+          "mae": 1786.1,
+          "rmse_r2": 0.2221,
+          "mape_pct": 30.47
+        },
+        "leakage_gap_r2": 0.1367
+      },
+      "random_forest": {
+        "random_cv": {
+          "mae": 1350.6,
+          "rmse_r2": 0.4559,
+          "mape_pct": 22.46
+        },
+        "spatial_cv": {
+          "mae": 1656.2,
+          "rmse_r2": 0.2227,
+          "mape_pct": 26.44
+        },
+        "leakage_gap_r2": 0.2332
+      },
+      "hist_gradient_boosting": {
+        "random_cv": {
+          "mae": 1367.9,
+          "rmse_r2": 0.4729,
+          "mape_pct": 22.78
+        },
+        "spatial_cv": {
+          "mae": 1641.3,
+          "rmse_r2": 0.2477,
+          "mape_pct": 26.19
+        },
+        "leakage_gap_r2": 0.2252
+      }
+    }
+  },
+  "conformal": {
+    "alpha": 0.1,
+    "half_width_inr_per_sqft": 3363.5,
+    "empirical_coverage": 0.8995
+  },
+  "permutation_importance": [
+    {
+      "feature": "sqft",
+      "importance": 0.3312
+    },
+    {
+      "feature": "bath",
+      "importance": 0.2381
+    },
+    {
+      "feature": "area_type",
+      "importance": 0.1769
+    },
+    {
+      "feature": "gba_corporation",
+      "importance": 0.116
+    },
+    {
+      "feature": "rooms",
+      "importance": 0.0973
+    },
+    {
+      "feature": "balcony",
+      "importance": 0.0369
+    },
+    {
+      "feature": "ready_to_move",
+      "importance": 0.0289
+    }
+  ],
+  "cleaning_log": [
+    "loaded 13,320 raw listing rows",
+    "dropped 17 rows missing sqft / rooms / price / location",
+    "dropped 748 rows under 300 sq.ft per room (implausible listings)",
+    "dropped 48 rows outside Rs 1,500-40,000/sq.ft",
+    "dropped 469 rows beyond 2 SD of their locality mean",
+    "matched 40.1% of listings to one of the 369 official GBA wards by locality name (derived, T5)",
+    "final dataset: 12,038 rows, 1,146 spatial blocks"
+  ]
+}

@@ -1,0 +1,2986 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Greater Bengaluru Property &amp; Urban Intelligence</title>
+<link href="vendor/maplibre-gl.css" rel="stylesheet" />
+<style>
+/* ------------------------------------------------------------------
+   Visual language follows GIGW (Guidelines for Indian Government
+   Websites): utility bar with accessibility controls, bilingual
+   English/Kannada labelling, Karnataka red-gold-navy palette.
+   Deliberately NO state emblem and NO government wordmark — this is a
+   student research prototype and must not imply official status.
+   ------------------------------------------------------------------ */
+:root{
+  --red:#9E1B1B; --red-dark:#7A1414; --red-soft:#FDF2F2;
+  --gold:#E9A800; --gold-soft:#FFF8E6;
+  --navy:#1B365D; --navy-soft:#EEF2F8;
+  --ink:#1F2430; --muted:#5C6675; --faint:#8A94A3;
+  --bg:#F1F3F6; --card:#FFFFFF; --line:#DCE1E8;
+  --green:#1B7F3B; --amber:#B57200; --danger:#C0342B; --grey:#8A94A3;
+  --radius:6px;
+  --fs:15px;
+}
+*{box-sizing:border-box}
+html{font-size:var(--fs)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;
+  font-size:.86rem;line-height:1.5}
+.kn,.local{font-family:"Nirmala UI","Noto Sans Kannada","Noto Sans Tamil","Latha","Segoe UI",sans-serif}
+
+/* ---------- utility bar ---------- */
+.utility{background:var(--navy);color:#fff;font-size:.72rem}
+.utility .wrap{max-width:1600px;margin:0 auto;padding:5px 16px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.utility .note{opacity:.9}
+.utility .spacer{margin-left:auto}
+.utility button{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.28);
+  border-radius:3px;padding:1px 7px;font-size:.72rem;cursor:pointer;font-family:inherit}
+.utility button:hover{background:rgba(255,255,255,.26)}
+.utility button[aria-pressed="true"]{background:var(--gold);color:#1a1a1a;border-color:var(--gold)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:8px;top:8px;z-index:99;background:#fff;color:var(--navy);padding:8px 12px;border-radius:4px}
+
+/* ---------- masthead ---------- */
+.masthead{background:var(--card);border-bottom:3px solid var(--red)}
+.masthead .wrap{max-width:1600px;margin:0 auto;padding:12px 16px;
+  display:flex;align-items:center;gap:14px}
+.mark{width:44px;height:44px;border-radius:50%;flex:0 0 44px;
+  background:linear-gradient(140deg,var(--red) 0%,var(--red-dark) 55%,var(--gold) 100%);
+  display:grid;place-items:center;color:#fff;font-weight:700;font-size:.82rem;
+  letter-spacing:.02em;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.titles h1{margin:0;font-size:1.02rem;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.titles .kn-title{font-size:.82rem;color:var(--red);margin-top:1px}
+.titles .tag{font-size:.7rem;color:var(--muted);margin-top:2px}
+.cityswitch{margin-left:auto;display:flex;flex-direction:column;gap:3px}
+.cs-label{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.cs-buttons{display:flex;gap:0;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.cs-buttons button{background:#fff;border:0;padding:7px 14px;font-size:.78rem;
+  font-family:inherit;cursor:pointer;color:var(--muted);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;align-items:flex-start;line-height:1.25}
+.cs-buttons button:last-child{border-right:0}
+.cs-buttons button small{font-size:.62rem;opacity:.75}
+.cs-buttons button:hover{background:var(--navy-soft)}
+.cs-buttons button[aria-pressed="true"]{background:var(--red);color:#fff;font-weight:600}
+.cs-buttons button[aria-pressed="true"] small{color:#FFE9A8;opacity:1}
+.cs-buttons button[disabled]{opacity:.45;cursor:not-allowed}
+
+.searchbox{display:flex;flex-direction:column;gap:2px}
+.searchbox label{font-size:.64rem;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.05em}
+.searchbox input{width:270px;padding:6px 10px;border:1px solid var(--line);
+  border-radius:4px;font-size:.8rem;font-family:inherit;background:#fff;color:var(--ink)}
+.searchbox input:focus{outline:2px solid var(--navy);outline-offset:-1px}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat{background:var(--navy-soft);border:1px solid #D6DEEA;border-radius:var(--radius);
+  padding:5px 11px;text-align:center;min-width:74px}
+.stat b{display:block;font-size:1rem;color:var(--navy);line-height:1.15}
+.stat span{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* ---------- nav ---------- */
+nav{background:var(--red)}
+nav .wrap{max-width:1600px;margin:0 auto;padding:0 16px;display:flex;gap:2px;flex-wrap:wrap}
+nav button{background:transparent;border:0;color:#fff;opacity:.86;padding:9px 15px;
+  font-size:.78rem;cursor:pointer;font-family:inherit;border-bottom:3px solid transparent}
+nav button:hover{opacity:1;background:rgba(0,0,0,.13)}
+nav button[aria-selected="true"]{opacity:1;background:var(--red-dark);
+  border-bottom-color:var(--gold);font-weight:600}
+
+/* ---------- layout ---------- */
+main{max-width:1600px;margin:0 auto;padding:12px 16px 20px;
+  display:grid;grid-template-columns:minmax(0,1fr) 418px;gap:12px;
+  height:calc(100vh - 158px);min-height:520px}
+#mapwrap{position:relative;background:linear-gradient(160deg,#EEF3F7 0%,#E3EBF2 60%,#DCE6EF 100%);border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden;min-height:340px}
+#map{position:absolute;inset:0}
+
+aside{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  display:flex;flex-direction:column;overflow:hidden}
+.panel-head{background:var(--navy);color:#fff;padding:9px 14px;font-size:.78rem;
+  font-weight:600;display:flex;align-items:center;gap:8px}
+.panel-head .kn{font-weight:400;opacity:.82;font-size:.72rem}
+.panel-body{overflow-y:auto;flex:1}
+
+.section{padding:12px 14px;border-bottom:1px solid var(--line)}
+.section:last-child{border-bottom:0}
+.section h2{margin:0 0 9px;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--red);font-weight:700;display:flex;align-items:center;gap:7px}
+.section h2::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* ---------- data rows ---------- */
+table.data{width:100%;border-collapse:collapse}
+table.data tr{border-bottom:1px solid #EEF1F5}
+table.data tr:last-child{border-bottom:0}
+table.data th{text-align:left;font-weight:500;color:var(--muted);font-size:.74rem;
+  padding:7px 8px 7px 0;width:124px;vertical-align:top}
+table.data td{padding:7px 0;font-size:.82rem;vertical-align:top}
+.badge{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;
+  vertical-align:middle}
+.badge.GREEN{background:var(--green)} .badge.AMBER{background:var(--amber)}
+.badge.RED{background:var(--danger)} .badge.GREY{background:var(--grey)}
+.na{color:var(--faint);font-style:italic;font-size:.78rem}
+.why{font-size:.72rem;color:var(--muted);margin-top:3px;line-height:1.45}
+.srcbtn{font-size:.7rem;color:var(--navy);background:0;border:0;padding:0;margin-top:3px;
+  cursor:pointer;font-family:inherit;text-decoration:underline}
+.srcbtn:hover{color:var(--red)}
+
+.hint{padding:26px 18px;color:var(--muted);font-size:.82rem;line-height:1.7}
+.hint b{color:var(--ink)}
+.notice{background:var(--gold-soft);border:1px solid #F0DCA0;border-left:3px solid var(--gold);
+  border-radius:4px;padding:9px 11px;font-size:.74rem;color:#6B4E00;line-height:1.5;margin:0}
+.notice.red{background:var(--red-soft);border-color:#F2C9C9;border-left-color:var(--red);color:#7A1414}
+
+/* ---------- gauge ---------- */
+.gauge{display:flex;align-items:center;gap:11px}
+.gauge .pct{font-size:1.5rem;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
+.bar{flex:1;height:8px;background:#E8ECF1;border-radius:4px;overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--amber),var(--gold))}
+
+/* ---------- form ---------- */
+.form{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px}
+.field{display:flex;flex-direction:column;gap:2px}
+.field label{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.field input{width:76px;padding:5px 7px;border:1px solid var(--line);border-radius:4px;
+  font-size:.8rem;font-family:inherit;background:#fff;color:var(--ink)}
+.field input:focus{outline:2px solid var(--navy);outline-offset:-1px}
+/* --- ML prediction-strategy selector --- */
+.modes{display:flex;gap:7px}
+.modebtn{flex:1;background:#fff;border:1px solid var(--line);border-radius:5px;
+  padding:8px 6px;cursor:pointer;font-family:inherit;text-align:center;
+  display:flex;flex-direction:column;gap:2px;color:var(--ink)}
+.modebtn b{font-size:.76rem;color:var(--navy)}
+.modebtn span{font-size:.64rem;color:var(--muted)}
+.modebtn:hover{background:var(--navy-soft)}
+.modebtn.on{background:var(--navy);border-color:var(--navy)}
+.modebtn.on b{color:#fff}
+.modebtn.on span{color:#C9D6E8}
+
+/* --- method badges: makes ML vs formula vs geometry unmistakable --- */
+.mlbadge{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.04em;
+  padding:1px 5px;border-radius:3px;vertical-align:middle;margin-right:5px;
+  font-family:"Segoe UI",sans-serif}
+.mlbadge.ML{background:#1B7F3B;color:#fff}
+.mlbadge.GIS{background:#1B365D;color:#fff}
+.mlbadge.SCORE{background:#B57200;color:#fff}
+.mlbadge.COMPOSITE{background:#6D4E9E;color:#fff}
+.mlbadge.RULE{background:#8A94A3;color:#fff}
+.legend-row{display:flex;flex-direction:column;gap:3px}
+nav button .navdot{display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:#5CD68A;margin-left:5px;vertical-align:middle}
+
+.btn{background:var(--red);color:#fff;border:0;border-radius:4px;padding:6px 14px;
+  font-size:.78rem;cursor:pointer;font-family:inherit;font-weight:600}
+.btn:hover{background:var(--red-dark)}
+
+/* ---------- map furniture ---------- */
+.maplegend{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.96);
+  border:1px solid var(--line);border-radius:var(--radius);padding:9px 11px;
+  font-size:.7rem;box-shadow:0 2px 8px rgba(20,30,50,.1);max-width:210px}
+.maplegend h3{margin:0 0 6px;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;
+  color:var(--muted)}
+.maplegend div.item{display:flex;align-items:center;gap:7px;margin:3px 0;color:var(--ink)}
+.sw{width:15px;height:11px;border-radius:2px;border:1px solid rgba(0,0,0,.16);flex:0 0 15px}
+.maplegend label{display:flex;align-items:center;gap:6px;margin-top:7px;cursor:pointer;
+  padding-top:7px;border-top:1px solid var(--line);color:var(--muted)}
+
+.corp-label{background:rgba(255,255,255,.95);border:1.5px solid;border-radius:13px;
+  padding:2px 9px;font-size:.7rem;font-weight:700;white-space:nowrap;
+  box-shadow:0 1px 4px rgba(20,30,50,.16);pointer-events:none;letter-spacing:.01em}
+.ward-label{background:rgba(27,54,93,.92);color:#fff;border-radius:3px;padding:1px 6px;
+  font-size:.64rem;white-space:nowrap;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+#hovertip{position:absolute;z-index:5;pointer-events:none;display:none;
+  background:rgba(31,36,48,.95);color:#fff;border-radius:4px;padding:5px 9px;
+  font-size:.72rem;box-shadow:0 2px 8px rgba(0,0,0,.3);max-width:230px}
+#hovertip .t2{opacity:.82;font-size:.68rem;margin-top:1px}
+
+/* ---------- dialog ---------- */
+dialog{border:0;border-radius:var(--radius);padding:0;max-width:540px;width:92%;
+  box-shadow:0 10px 40px rgba(20,30,50,.3)}
+dialog::backdrop{background:rgba(27,54,93,.45)}
+.dlg-head{background:var(--navy);color:#fff;padding:11px 16px;font-size:.85rem;font-weight:600}
+.dlg-body{padding:14px 16px;background:#fff}
+.dlg-body dt{font-size:.64rem;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.06em;margin-top:10px}
+.dlg-body dd{margin:2px 0 0;font-size:.8rem;word-break:break-word}
+.dlg-body a{color:var(--navy)}
+.dlg-foot{padding:11px 16px;background:#F7F8FA;border-top:1px solid var(--line);text-align:right}
+
+footer{background:var(--navy);color:#C9D2E0;font-size:.7rem;line-height:1.6}
+footer .wrap{max-width:1600px;margin:0 auto;padding:12px 16px}
+footer b{color:#fff}
+
+/* ---------- accessibility modes ---------- */
+body.contrast{--bg:#000;--card:#000;--ink:#fff;--muted:#e8e8e8;--faint:#c8c8c8;
+  --line:#fff;--navy:#000;--red:#000;--red-dark:#000;--navy-soft:#000;
+  --gold-soft:#000;--red-soft:#000}
+body.contrast .stat,body.contrast .notice{border-width:2px}
+body.contrast .maplegend{background:#000;color:#fff}
+
+@media (max-width:1050px){
+  main{grid-template-columns:1fr;height:auto}
+  #mapwrap{height:56vh}
+  aside{max-height:70vh}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<div class="utility">
+  <div class="wrap">
+    <span class="note">Research prototype · not an official government portal</span>
+    <span class="spacer"></span>
+    <span>Text size</span>
+    <button onclick="setFont(-1)" title="Decrease text size">A−</button>
+    <button onclick="setFont(0)" title="Normal text size">A</button>
+    <button onclick="setFont(1)" title="Increase text size">A+</button>
+    <button id="contrastBtn" aria-pressed="false" onclick="toggleContrast()">High contrast</button>
+    <button id="langBtn" aria-pressed="false" onclick="toggleLang()">ಕನ್ನಡ</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="mark" aria-hidden="true">GBA</div>
+    <div class="titles">
+      <h1>Greater Bengaluru Property &amp; Urban Intelligence Platform</h1>
+      <div class="kn kn-title">ಬೃಹತ್ ಬೆಂಗಳೂರು ಆಸ್ತಿ ಮತ್ತು ನಗರ ಮಾಹಿತಿ ವೇದಿಕೆ</div>
+      <div class="tag">Machine learning · property intelligence · urban analytics</div>
+    </div>
+
+    <div class="cityswitch" role="group" aria-label="Select city">
+      <span class="cs-label">City</span>
+      <div class="cs-buttons" id="cityButtons"></div>
+    </div>
+    <div class="searchbox">
+      <label for="wardSearch">Search ward or locality</label>
+      <input id="wardSearch" list="wardList" type="search" autocomplete="off"
+             placeholder="e.g. Jayanagar, Whitefield, ward 42…"
+             onchange="pickWard(this.value)">
+      <datalist id="wardList"></datalist>
+    </div>
+    <div class="stats" id="cityStats"></div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap" role="tablist">
+    <button role="tab" aria-selected="true"  data-tab="jurisdiction">Jurisdiction</button>
+    <button role="tab" aria-selected="false" data-tab="nearby">Nearby &amp; connectivity</button>
+    <button role="tab" aria-selected="false" data-tab="market">Market estimate</button>
+    <button role="tab" aria-selected="false" data-tab="models">ML Models</button>
+    <button role="tab" aria-selected="false" data-tab="mlperf">ML Performance</button>
+    <button role="tab" aria-selected="false" data-tab="future">Future Price</button>
+    <button role="tab" aria-selected="false" data-tab="insights">Investment Score</button>
+    <button role="tab" aria-selected="false" data-tab="buyer">BUYER MODE</button>
+    <button role="tab" aria-selected="false" data-tab="investor">INVESTOR MODE</button>
+    <button role="tab" aria-selected="false" data-tab="builder">BUILDER MODE</button>
+    <button role="tab" aria-selected="false" data-tab="feasibility">Development feasibility</button>
+    <button role="tab" aria-selected="false" data-tab="planning">Urban Planning</button>
+    <button role="tab" aria-selected="false" data-tab="compare">Compare Cities</button>
+    <button role="tab" aria-selected="false" data-tab="registry">Trained Models</button>
+    <button role="tab" aria-selected="false" data-tab="negotiation">Negotiation</button>
+    <button role="tab" aria-selected="false" data-tab="documents">Documents</button>
+    <button role="tab" aria-selected="false" data-tab="extra">More ML</button>
+    <button role="tab" aria-selected="false" data-tab="glossary">Glossary</button>
+    <button role="tab" aria-selected="false" data-tab="report">360 Report</button>
+    <button role="tab" aria-selected="false" data-tab="sources">Data sources</button>
+  </div>
+</nav>
+
+<main id="main">
+  <div id="mapwrap">
+    <div id="map"></div>
+    <div id="hovertip"></div>
+    <div class="maplegend">
+      <h3>City Corporations</h3>
+      <div id="legendItems"></div>
+      <label><input type="checkbox" id="wardLabels" onchange="renderWardLabels()"> Ward names (zoom in)</label>
+      <label style="border:0;padding-top:0;margin-top:3px">
+        <input type="checkbox" id="bmToggle" onchange="toggleBasemap(this.checked)"> OSM basemap (needs internet)</label>
+    </div>
+  </div>
+
+  <aside>
+    <div class="panel-head">
+      <span id="panelTitle">Property Intelligence</span>
+      <span class="kn" id="panelTitleKn">ಆಸ್ತಿ ಮಾಹಿತಿ</span>
+    </div>
+    <div class="panel-body" id="content">
+      <div class="hint">
+        <b>Select any location on the map.</b><br><br>
+        The platform identifies the city corporation, zone, ward, revenue
+        division and sub-division containing that point — each with its source
+        and a confidence score.<br><br>
+        Fields with no available data source are shown in grey with the reason.
+        Nothing is filled in with an assumed value.
+      </div>
+    </div>
+  </aside>
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>Disclaimer:</b> This is a decision-support and research prototype. It is not an
+    official government system and is not affiliated with, endorsed by, or operated by
+    any government body. It does not replace government approval, legal title
+    verification, building-plan sanction, surveyor verification, planning authority
+    confirmation, property registration verification or professional valuation.
+    Ward boundaries are sourced from the Greater Bengaluru Authority final delimitation
+    (19 November 2025) via the OpenCity urban data portal.
+  </div>
+</footer>
+
+<dialog id="srcDialog"></dialog>
+
+<script src="vendor/maplibre-gl.js"></script>
+<script>
+const API = "http://localhost:8000/api/v1";
+
+const CORP_COLOR = {
+  North:"#2563EB", South:"#059669", East:"#D97706", West:"#7C3AED", Central:"#DC2626"
+};
+const CORP_KN = {
+  North:"ಉತ್ತರ", South:"ದಕ್ಷಿಣ", East:"ಪೂರ್ವ", West:"ಪಶ್ಚಿಮ", Central:"ಕೇಂದ್ರ"
+};
+
+/* Field labels in English, Kannada (Bengaluru) and Tamil (Chennai).
+   The second language follows the selected city — Kannada is meaningless in
+   Chennai and Tamil is meaningless in Bengaluru. */
+const LABELS = {
+  corporation:        ["Corporation",           "ನಿಗಮ",                "மாநகராட்சி"],
+  corporation_kn:     ["Corporation (local)",   "ನಿಗಮ",                "மாநகராட்சி"],
+  ward_no:            ["Ward number",           "ವಾರ್ಡ್ ಸಂಖ್ಯೆ",        "வார்டு எண்"],
+  ward_name:          ["Ward",                  "ವಾರ್ಡ್",              "வார்டு"],
+  ward_name_kn:       ["Ward (local)",          "ವಾರ್ಡ್",              "வார்டு"],
+  zone:               ["Zone",                  "ವಲಯ",                 "மண்டலம்"],
+  division:           ["Revenue division",      "ಕಂದಾಯ ವಿಭಾಗ",         "வருவாய் பிரிவு"],
+  sub_division:       ["Sub-division",          "ಉಪ ವಿಭಾಗ",            "உட்பிரிவு"],
+  assembly:           ["Assembly constituency", "ವಿಧಾನಸಭಾ ಕ್ಷೇತ್ರ",      "சட்டமன்றத் தொகுதி"],
+  district:           ["District",              "ಜಿಲ್ಲೆ",               "மாவட்டம்"],
+  taluk:              ["Taluk",                 "ತಾಲೂಕು",              "வட்டம்"],
+  hobli:              ["Hobli",                 "ಹೋಬಳಿ",               "ஹோப்ளி"],
+  village:            ["Village",               "ಗ್ರಾಮ",               "கிராமம்"],
+  planning_authority: ["Planning authority",    "ಯೋಜನಾ ಪ್ರಾಧಿಕಾರ",     "திட்டமிடல் ஆணையம்"],
+  population:         ["Ward population",       "ವಾರ್ಡ್ ಜನಸಂಖ್ಯೆ",      "வார்டு மக்கள்தொகை"],
+  planning_authority: ["Planning authority",   "ಯೋಜನಾ ಪ್ರಾಧಿಕಾರ",    "திட்ட ஆணையம்"],
+  building_permission_authority: ["Building permission by", "ಕಟ್ಟಡ ಅನುಮತಿ", "கட்டட அனுமதி"],
+  survey_number:      ["Survey number",     "ಸರ್ವೇ ಸಂಖ್ಯೆ",        "சர்வே எண்"],
+  nearest_reported_flooding_m: ["Nearest reported flooding", "ಹತ್ತಿರದ ಪ್ರವಾಹ ವರದಿ", "அருகில் வெள்ள அறிக்கை"],
+  reported_flooding_within_2km: ["Reported flooding within 2 km", "2 ಕಿಮೀ ಒಳಗೆ ವರದಿಗಳು", "2 கி.மீ.க்குள் அறிக்கைகள்"],
+  nearest_road_distance_m: ["Distance to nearest mapped road", "ಹತ್ತಿರದ ರಸ್ತೆ ಅಂತರ", "அருகிலுள்ள சாலை தூரம்"],
+  road_hierarchy_code:     ["Road hierarchy code",             "ರಸ್ತೆ ಶ್ರೇಣಿ ಸಂಕೇತ",  "சாலை நிலைக் குறியீடு"],
+  road_width_existing_m:   ["Road width — existing",           "ರಸ್ತೆ ಅಗಲ — ಪ್ರಸ್ತುತ", "சாலை அகலம் — தற்போதைய"],
+  road_width_proposed_m:   ["Road width — proposed",           "ರಸ್ತೆ ಅಗಲ — ಪ್ರಸ್ತಾವಿತ", "சாலை அகலம் — முன்மொழியப்பட்ட"],
+  place_name:         ["Locality",              "ಪ್ರದೇಶ",              "பகுதி"],
+  region:             ["Region",                "ಪ್ರದೇಶ",              "வட்டாரம்"]
+};
+
+/* Which local language belongs to which city. */
+const CITY_LANG = {
+  bengaluru: { idx: 1, name: "ಕನ್ನಡ",  english: "English", script: "kn" },
+  chennai:   { idx: 2, name: "தமிழ்",  english: "English", script: "ta" }
+};
+// Grouped by the layer that produced each field, so the tab shows where every
+// value came from rather than one undifferentiated list.
+const CORE = ["corporation","corporation_kn","ward_no","ward_name","ward_name_kn",
+              "zone","division","sub_division","assembly"];
+
+// District and taluk resolve everywhere (administrative boundary layer);
+// hobli, village and survey number only inside published revenue sheets.
+const REVENUE = ["district","taluk","hobli","village","survey_number"];
+const GAPS = ["population"];
+const AUTHORITY = ["planning_authority","building_permission_authority"];
+const ROAD = ["nearest_road_distance_m","road_hierarchy_code",
+              "road_width_existing_m","road_width_proposed_m"];
+const ENVIRONMENT = ["nearest_reported_flooding_m","reported_flooding_within_2km"];
+
+
+let sources = {}, currentCorp = null, currentData = null, activeTab = "jurisdiction";
+let lang = "en", layersReady = false, corpMarkers = [], wardMarkers = [];
+let currentPoint = null, wardIndex = {}, layerAttempts = 0;
+
+/* ---------------- city state ---------------- */
+// Bengaluru is the primary city and the default. City data, models and
+// pipelines are entirely separate — nothing is shared or pooled.
+let currentCity = "bengaluru";
+let cityMeta = {};
+
+const CITY_LAYERS = {
+  bengaluru: { wards: "wards", zones: "corporations" },
+  chennai:   { wards: "chennai_wards", zones: "chennai_zones" },
+};
+
+// What each city's wards are grouped and coloured by.
+const CITY_GROUPING = {
+  bengaluru: { key: "corporation", title: "City Corporations",
+               titleLocal: "ನಗರ ನಿಗಮಗಳು" },
+  chennai:   { key: "zone",        title: "GCC Zones",
+               titleLocal: "மண்டலங்கள்" },
+};
+
+// 15 distinguishable hues for Chennai's zones. Bengaluru keeps CORP_COLOR.
+const ZONE_PALETTE = ["#2563EB","#059669","#D97706","#7C3AED","#DC2626",
+  "#0891B2","#65A30D","#DB2777","#C2410C","#4F46E5",
+  "#0D9488","#B45309","#9333EA","#BE123C","#1D4ED8"];
+
+let groupColours = {};   // built from the data actually loaded
+
+async function loadCities(){
+  let payload;
+  try{
+    payload = await (await fetch(`${API}/cities`)).json();
+  }catch(e){ return; }
+
+  const box = document.getElementById("cityButtons");
+  box.innerHTML = "";
+  payload.data.forEach(c=>{
+    cityMeta[c.id] = c;
+    const b = document.createElement("button");
+    b.setAttribute("aria-pressed", String(c.id === currentCity));
+    b.innerHTML = `${escapeHtml(c.name)}<small>${c.ward_count} wards`
+      + (c.ready ? "" : " · model pending") + `</small>`;
+    b.onclick = ()=> switchCity(c.id);
+    box.appendChild(b);
+  });
+  syncLangButton();   // keep the language button in step with the active city
+  drawCityStats();
+}
+
+function drawCityStats(){
+  const c = cityMeta[currentCity];
+  const box = document.getElementById("cityStats");
+  if (!box || !c) return;
+  const subdiv = currentCity === "bengaluru" ? 5 : 15;   // corporations vs zones
+  box.innerHTML = `
+    <div class="stat"><b>${subdiv}</b><span>${escapeHtml(c.subdivision_label)}s</span></div>
+    <div class="stat"><b>${c.ward_count}</b><span>Wards</span></div>`;
+}
+
+async function switchCity(id){
+  if (id === currentCity) return;
+  currentCity = id;
+  document.querySelectorAll("#cityButtons button").forEach((b,i)=>{
+    b.setAttribute("aria-pressed", String(Object.keys(cityMeta)[i] === id));
+  });
+
+  // Reset selection — a Bengaluru ward means nothing in Chennai.
+  currentData = null; currentCorp = null; currentPoint = null; sources = {};
+  wardIndex = {}; layersReady = false; layerAttempts = 0;
+  try{ marker.remove(); }catch(e){}
+
+  document.querySelector("header h1").textContent =
+    `${cityMeta[id].name} Property & Urban Intelligence Platform`;
+  document.querySelector(".kn-title").textContent =
+    cityMeta[id].name_local || "";
+  document.querySelector(".mark").textContent = cityMeta[id].authority_short || "";
+  syncLangButton();
+  drawCityStats();
+
+  await loadWardList();
+  await swapMapLayers(id);
+  renderTab();
+}
+
+async function swapMapLayers(cityId){
+  if (!map.isStyleLoaded()) return;
+  for (const lid of ["ward-sel","ward-line","ward-fill","corp-line"]) {
+    if (map.getLayer(lid)) map.removeLayer(lid);
+  }
+  for (const sid of ["wards","corps"]) {
+    if (map.getSource(sid)) map.removeSource(sid);
+  }
+  corpMarkers.forEach(m=>m.remove()); corpMarkers = [];
+  wardMarkers.forEach(m=>m.remove()); wardMarkers = [];
+  layersReady = false; layerAttempts = 0;
+  await addLayers();
+  const c = cityMeta[cityId];
+  if (c) map.flyTo({ center:[c.centre.lng, c.centre.lat], zoom: 10.2 });
+}
+
+/* ---------------- ward search (works without the map) ---------------- */
+async function loadWardList(){
+  try{
+    const r = await fetch(`${API}/jurisdiction/wards?city=${currentCity}`);
+    const j = await r.json();
+    const dl = document.getElementById("wardList");
+    dl.innerHTML = j.data.map(w=>{
+      const local = w.ward_name_kn || "";
+      // Show the local name in the option so it is findable by sight, and
+      // index it so typing Tamil or Kannada actually matches.
+      const key = local
+        ? `${w.ward_name} — ${local} — ${w.corporation}`
+        : `${w.ward_name} — ${w.corporation}`;
+      wardIndex[key.toLowerCase()] = w;
+      wardIndex[String(w.ward_name||"").toLowerCase()] = w;
+      if (local){
+        wardIndex[local.toLowerCase()] = w;
+        // Also index the bare local place name, without the "வார்டு 12 - " prefix.
+        const bare = local.replace(/^\S+\s*\d+\s*-\s*/, "").trim();
+        if (bare) wardIndex[bare.toLowerCase()] = w;
+      }
+      return `<option value="${escapeHtml(key)}">`;
+    }).join("");
+  }catch(e){ /* search is an enhancement; the map still works */ }
+}
+// Boot: cities first (populates the switcher), then the ward list.
+loadCities().then(loadWardList);
+
+function pickWard(value){
+  const w = wardIndex[String(value||"").trim().toLowerCase()];
+  if (!w) return;
+  if (layersReady) { try{ map.flyTo({center:[w.lng,w.lat],zoom:13}); }catch(e){} }
+  selectPoint(w.lat, w.lng);
+}
+
+/* ---------------- accessibility ---------------- */
+let fontStep = 0;
+function setFont(dir){
+  fontStep = dir === 0 ? 0 : Math.max(-2, Math.min(3, fontStep + dir));
+  document.documentElement.style.fontSize = (15 + fontStep) + "px";
+}
+function toggleContrast(){
+  const on = document.body.classList.toggle("contrast");
+  document.getElementById("contrastBtn").setAttribute("aria-pressed", String(on));
+}
+function toggleLang(){
+  lang = lang === "en" ? "local" : "en";
+  syncLangButton();
+  if (currentData || activeTab) renderTab();
+}
+
+function syncLangButton(){
+  const b = document.getElementById("langBtn");
+  const cl = CITY_LANG[currentCity];
+  b.textContent = lang === "en" ? cl.name : cl.english;
+  b.setAttribute("aria-pressed", String(lang === "local"));
+  b.title = `Switch between English and ${cl.name}`;
+}
+
+/* ---------------- map ---------------- */
+const map = new maplibregl.Map({
+  container:"map",
+  style:{ version:8, sources:{},
+    layers:[{id:"bg",type:"background",paint:{"background-color":"#EEF3F7"}}] },
+  center:[77.5946,12.9716], zoom:10.1, attributionControl:false
+});
+map.addControl(new maplibregl.NavigationControl({showCompass:false}),"top-right");
+map.addControl(new maplibregl.ScaleControl({maxWidth:110,unit:"metric"}),"bottom-right");
+
+function toggleBasemap(on){
+  try{
+    if (on && !map.getSource("osm")){
+      map.addSource("osm",{type:"raster",
+        tiles:["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+        tileSize:256, attribution:"© OpenStreetMap contributors"});
+      map.addLayer({id:"osm",type:"raster",source:"osm",
+        paint:{"raster-saturation":-0.55,"raster-opacity":0.55}},"ward-fill");
+    } else if (!on && map.getLayer("osm")){
+      map.removeLayer("osm"); map.removeSource("osm");
+    }
+  }catch(e){}
+}
+
+function centroid(geom){
+  // Area-weighted enough for label placement: mean vertex of the largest ring.
+  const polys = geom.type === "Polygon" ? [geom.coordinates] : geom.coordinates;
+  let best = null, bestLen = -1;
+  for (const poly of polys){
+    const ring = poly[0];
+    if (ring && ring.length > bestLen){ bestLen = ring.length; best = ring; }
+  }
+  if (!best) return null;
+  let x = 0, y = 0;
+  for (const p of best){ x += p[0]; y += p[1]; }
+  return [x / best.length, y / best.length];
+}
+
+async function addLayers(){
+  if (layersReady || !map.isStyleLoaded()) return;
+  layersReady = true;
+
+  document.getElementById("mapFallback")?.remove();
+
+  // Map layers are presentation. If they fail to load, the panel — which is
+  // the substance — must still work, so never let this throw upward.
+  const L = CITY_LAYERS[currentCity];
+  let wards, corps;
+  try {
+    wards = await (await fetch(`${API}/map/layers/${L.wards}`)).json();
+    corps = await (await fetch(`${API}/map/layers/${L.zones}`)).json();
+  } catch (e) {
+    // Do NOT reset layersReady on failure. The map fires `idle` repeatedly, so
+    // retrying forever floods the connection and starves the panel's requests.
+    layerAttempts++;
+    if (layerAttempts < 3) layersReady = false;
+    else console.warn("map layers unavailable after 3 attempts; panel still works");
+    return;
+  }
+  if (!wards || !wards.features) {
+    layerAttempts++;
+    if (layerAttempts < 3) layersReady = false;
+    return;
+  }
+  layerAttempts = 0;
+  window._wards = wards;
+
+  map.addSource("wards",{type:"geojson",data:wards});
+  map.addSource("corps",{type:"geojson",data:corps});
+
+  const grouping = CITY_GROUPING[currentCity];
+  const values = [...new Set(wards.features
+    .map(f => f.properties[grouping.key]).filter(Boolean))].sort();
+
+  groupColours = {};
+  values.forEach((v, i) => {
+    groupColours[v] = (currentCity === "bengaluru" && CORP_COLOR[v])
+      ? CORP_COLOR[v]
+      : ZONE_PALETTE[i % ZONE_PALETTE.length];
+  });
+
+  const colorExpr = ["match", ["get", grouping.key],
+    ...values.flatMap(v => [v, groupColours[v]]), "#8A94A3"];
+
+  map.addLayer({id:"ward-fill",type:"fill",source:"wards",
+    paint:{"fill-color":colorExpr,
+      "fill-opacity":["case",["boolean",["feature-state","hover"],false],0.80,0.42]}});
+  map.addLayer({id:"ward-line",type:"line",source:"wards",
+    paint:{"line-color":"#FFFFFF","line-width":0.9,"line-opacity":0.9}});
+
+  // Corporation boundary is DERIVED — dashed, so it can never be mistaken
+  // for a notified boundary.
+  map.addLayer({id:"corp-line",type:"line",source:"corps",
+    paint:{"line-color":"#1B365D","line-width":2.2,"line-dasharray":[4,2],"line-opacity":0.8}});
+
+  map.addLayer({id:"ward-sel",type:"line",source:"wards",
+    filter:["==","ward_name",""],
+    paint:{"line-color":"#1F2430","line-width":2.6}});
+
+  // Corporation name labels as HTML markers — no glyph server needed, so the
+  // map still labels itself with no internet connection.
+  for (const f of corps.features){
+    const c = centroid(f.geometry); if (!c) continue;
+    const corp = f.properties.corporation || f.properties.zone_name
+      || f.properties.zone;
+    if (!corp) continue;
+    const el = document.createElement("div");
+    el.className = "corp-label";
+    const col = groupColours[corp] || CORP_COLOR[corp] || "#1B365D";
+    el.style.color = col;
+    el.style.borderColor = col;
+    el.innerHTML = `${corp} <span class="kn" style="font-weight:400;opacity:.75">${CORP_KN[corp]||""}</span>`;
+    corpMarkers.push(new maplibregl.Marker({element:el}).setLngLat(c).addTo(map));
+  }
+
+  // Fit to the data rather than a hard-coded centre/zoom: the two cities have
+  // different extents, and the map pane is a different size on every screen.
+  try {
+    let minX = 180, minY = 90, maxX = -180, maxY = -90;
+    for (const f of wards.features) {
+      const g = f.geometry;
+      const polys = g.type === "Polygon" ? [g.coordinates] : g.coordinates;
+      for (const poly of polys) for (const ring of poly) for (const pt of ring) {
+        if (pt[0] < minX) minX = pt[0];
+        if (pt[0] > maxX) maxX = pt[0];
+        if (pt[1] < minY) minY = pt[1];
+        if (pt[1] > maxY) maxY = pt[1];
+      }
+    }
+    if (minX < maxX && minY < maxY) {
+      map.fitBounds([[minX, minY], [maxX, maxY]], { padding: 34, duration: 0 });
+    }
+  } catch (e) { /* fitting is cosmetic; never block the layers */ }
+
+  drawLegend();
+  map.on("zoomend", renderWardLabels);
+  map.on("moveend", renderWardLabels);
+}
+map.on("load", addLayers);
+map.on("idle", addLayers);
+window.addEventListener("resize", () => { try { map.resize(); } catch (e) {} });
+
+// The legend is plain HTML and must never depend on the map initialising.
+function drawLegend(){
+  const g = CITY_GROUPING[currentCity];
+  const heading = document.querySelector(".maplegend h3");
+  if (heading) heading.textContent = g.title;
+
+  const entries = Object.keys(groupColours).length
+    ? Object.entries(groupColours)
+    : (currentCity === "bengaluru" ? Object.entries(CORP_COLOR) : []);
+
+  document.getElementById("legendItems").innerHTML =
+    (entries.length
+      ? entries.map(([k,v]) =>
+          `<div class="item"><span class="sw" style="background:${v};opacity:.62"></span>
+            ${escapeHtml(String(k))}${CORP_KN[k]
+              ? ` <span class="kn" style="color:var(--muted)">${CORP_KN[k]}</span>` : ""}</div>`).join("")
+      : `<div class="item why">Loading…</div>`)
+    + `<div class="item" style="margin-top:5px">
+        <span class="sw" style="background:transparent;border:1.5px dashed #1B365D"></span>
+        ${currentCity === "bengaluru" ? "Corporation" : "Zone"} outline</div>`;
+}
+drawLegend();
+
+// If WebGL or the style fails, say so plainly instead of showing a blank panel.
+// The jurisdiction, market and feasibility panels work without the map.
+setTimeout(()=>{
+  if (layersReady) return;
+  const el = document.createElement("div");
+  el.style.cssText = "position:absolute;inset:0;display:grid;place-items:center;"
+    + "padding:24px;text-align:center;background:#E8EEF4;color:#5C6675;font-size:.82rem";
+  el.innerHTML = `<div><b style="color:#1F2430">Map could not initialise</b><br><br>
+    The panel on the right still works — use the tabs above.<br>
+    This usually means WebGL is unavailable in this browser.</div>`;
+  el.id = "mapFallback";
+  document.getElementById("mapwrap").appendChild(el);
+}, 7000);
+
+/* hover highlight + tooltip */
+let hoverId = null;
+map.on("mousemove","ward-fill",(e)=>{
+  if (!e.features.length) return;
+  map.getCanvas().style.cursor = "pointer";
+  const p = e.features[0].properties;
+  const tip = document.getElementById("hovertip");
+  tip.style.display = "block";
+  tip.style.left = (e.point.x + 14) + "px";
+  tip.style.top  = (e.point.y + 14) + "px";
+  const localName = p.ward_name_kn || p.place_name || "";
+  tip.innerHTML = `<div><b>${escapeHtml(p.ward_name||"")}</b></div>
+    ${localName ? `<div class="t2 kn">${escapeHtml(localName)}</div>` : ""}
+    <div class="t2">${escapeHtml(p.corporation||"")} · ${escapeHtml(p.zone||"")}</div>`;
+});
+map.on("mouseleave","ward-fill",()=>{
+  map.getCanvas().style.cursor = "";
+  document.getElementById("hovertip").style.display = "none";
+});
+
+function renderWardLabels(){
+  wardMarkers.forEach(m => m.remove()); wardMarkers = [];
+  const on = document.getElementById("wardLabels")?.checked;
+  if (!on || !window._wards || map.getZoom() < 12) return;
+
+  const b = map.getBounds();
+  let count = 0;
+  for (const f of window._wards.features){
+    if (count >= 45) break;
+    const c = centroid(f.geometry); if (!c) continue;
+    if (c[0] < b.getWest() || c[0] > b.getEast() || c[1] < b.getSouth() || c[1] > b.getNorth())
+      continue;
+    const el = document.createElement("div");
+    el.className = "ward-label";
+    const localName = f.properties.ward_name_kn || "";
+    if (localName){
+      // Two lines: official English name, then the derived local-script name.
+      const en = document.createElement("div");
+      en.textContent = f.properties.ward_name || "";
+      const loc = document.createElement("div");
+      loc.className = "kn";
+      loc.textContent = localName;
+      el.appendChild(en); el.appendChild(loc);
+    } else {
+      el.textContent = f.properties.ward_name || "";
+    }
+    wardMarkers.push(new maplibregl.Marker({element:el}).setLngLat(c).addTo(map));
+    count++;
+  }
+}
+
+function highlight(name){
+  try{ if (layersReady && map.getLayer("ward-sel"))
+    map.setFilter("ward-sel",["==","ward_name",name||""]); }catch(e){}
+}
+
+const marker = new maplibregl.Marker({color:"#9E1B1B"});
+
+map.on("click", (e)=> selectPoint(e.lngLat.lat, e.lngLat.lng));
+
+async function selectPoint(lat, lng){
+  currentPoint = {lat, lng};
+  try{ marker.setLngLat([lng,lat]).addTo(map); }catch(e){}
+  setPanel(`<div class="hint">Identifying jurisdiction…</div>`);
+
+  const res = await fetch(`${API}/jurisdiction?lat=${lat}&lng=${lng}&city=${currentCity}`);
+  const body = await res.json();
+
+  if (res.status !== 200){
+    highlight(""); currentData = null; currentCorp = null;
+    setPanel(`<div class="section"><h2>Result</h2>
+      <p class="notice red"><b>${escapeHtml(body.title)}</b><br>${escapeHtml(body.detail)}</p></div>`);
+    return;
+  }
+  if (!body.found){
+    highlight(""); currentData = null; currentCorp = null;
+    setPanel(`<div class="section"><h2>No ward matched</h2>
+      <p class="notice">${escapeHtml(body.data.corporation.reason)}</p></div>`);
+    return;
+  }
+
+  currentData = body;
+  currentCorp = body.data.corporation.value;
+  highlight(body.data.ward_name.value);
+  sources = {};
+  Object.entries(body.data).forEach(([k,f])=>{ if (f.source) sources[k]=f.source; });
+  renderTab();
+}
+
+/* ---------------- tabs ---------------- */
+// Mark the tabs whose output comes from a trained model, so "where is the ML?"
+// is answerable at a glance.
+const ML_TABS = ["market", "models", "mlperf", "insights", "future", "buyer", "investor", "extra", "negotiation", "registry"];
+document.querySelectorAll('nav button').forEach(btn=>{
+  if (ML_TABS.includes(btn.dataset.tab)) {
+    btn.insertAdjacentHTML("beforeend", '<span class="navdot" title="Uses a trained ML model"></span>');
+  }
+  btn.onclick = ()=>{
+    document.querySelectorAll('nav button').forEach(b=>b.setAttribute("aria-selected","false"));
+    btn.setAttribute("aria-selected","true");
+    activeTab = btn.dataset.tab;
+    renderTab();
+  };
+});
+
+const TAB_TITLES = {
+  jurisdiction:["Administrative Jurisdiction","ಆಡಳಿತಾತ್ಮಕ ವ್ಯಾಪ್ತಿ","நிர்வாக எல்லை"],
+  nearby:["Nearby & Connectivity","ಸಮೀಪದ ಸೌಲಭ್ಯಗಳು","அருகிலுள்ள வசதிகள்"],
+  market:["Market Estimate","ಮಾರುಕಟ್ಟೆ ಅಂದಾಜು","சந்தை மதிப்பீடு"],
+  models:["ML Models & Prediction","ಎಂಎಲ್ ಮಾದರಿಗಳು","ML மாதிரிகள்"],
+  mlperf:["ML Performance","ಎಂಎಲ್ ಕಾರ್ಯಕ್ಷಮತೆ","ML செயல்திறன்"],
+  future:["Future Price Analysis","ಭವಿಷ್ಯದ ಬೆಲೆ","எதிர்கால விலை"],
+  registry:["Trained Models","ತರಬೇತಿ ಪಡೆದ ಮಾದರಿಗಳು","பயிற்சி பெற்ற மாதிரிகள்"],
+  negotiation:["Negotiation Band","ಚೌಕಾಸಿ ಶ್ರೇಣಿ","பேரம் வரம்பு"],
+  documents:["Document Check","ದಾಖಲೆ ಪರಿಶೀಲನೆ","ஆவணச் சரிபார்ப்பு"],
+  extra:["More ML Models","ಹೆಚ್ಚಿನ ಮಾದರಿಗಳು","கூடுதல் மாதிரிகள்"],
+  glossary:["Glossary & Where ML Works","ಪದಕೋಶ","சொற்களஞ்சியம்"],
+  insights:["Investment Score","ಹೂಡಿಕೆ ಸ್ಕೋರ್","முதலீட்டு மதிப்பெண்"],
+  buyer:["BUYER MODE","ಖರೀದಿದಾರ ಮೋಡ್","வாடிக்கையாளர்"],
+  investor:["INVESTOR MODE","ಹೂಡಿಕೆದಾರ ಮೋಡ್","முதலீடாளர்"],
+  builder:["BUILDER MODE","ಬಿಲ್ಡರ್ ಮೋಡ್","கட்டுநர் முறை"],
+  feasibility:["Development Feasibility","ಅಭಿವೃದ್ಧಿ ಕಾರ್ಯಸಾಧ್ಯತೆ","வளர்ச்சி சாத்தியம்"],
+  planning:["Government / Urban Planning","ನಗರ ಯೆಾಜನೆ","நகர திட்டமிடல்"],
+  compare:["Compare Cities","ನಗರ ಹೋಲಿಕೆ","நகர ஒப்பீடு"],
+  report:["360 Property Intelligence Report","ವರದಿ","அறிக்கை"],
+  sources:["Data Sources","ದತ್ತಾಂಶ ಮೂಲಗಳು","தரவு ஆதாரங்கள்"]
+};
+
+function renderTab(){
+  const t = TAB_TITLES[activeTab];
+  document.getElementById("panelTitle").textContent = t[0];
+  document.getElementById("panelTitleKn").textContent = t[CITY_LANG[currentCity].idx] || "";
+
+  // Sources and feasibility need no location — feasibility is a stateless
+  // calculator, so gating it behind a map click was simply a bug.
+  // These need no map selection.
+  if (activeTab === "report") return renderReport();
+  if (activeTab === "sources") return renderSources();
+  if (activeTab === "feasibility") return renderFeasibility();
+  if (activeTab === "mlperf") return renderMLPerformance();
+  if (activeTab === "models") return renderModels();
+  if (activeTab === "future") return renderFuturePrice();
+  if (activeTab === "registry") return renderRegistry();
+  if (activeTab === "negotiation") return renderNegotiation();
+  if (activeTab === "documents") return renderDocuments();
+  if (activeTab === "extra") return renderExtra();
+  if (activeTab === "glossary") return renderGlossary();
+  if (activeTab === "planning") return renderPlanning();
+  if (activeTab === "compare") return renderCompare();
+  if (activeTab === "builder") return renderBuilder();
+  if (activeTab === "buyer") return renderBuyer();
+  if (activeTab === "investor") return renderInvestor();
+
+  if (!currentData) return setPanel(`<div class="hint">
+    <b>No location selected.</b><br><br>
+    Select a point on the map, or use <b>Search ward or locality</b> at the top
+    right — the search works even if the map does not load.</div>`);
+
+  if (activeTab === "jurisdiction") return renderJurisdiction();
+  if (activeTab === "nearby") return renderNearby();
+  if (activeTab === "market") return renderMarket();
+  if (activeTab === "insights") return renderInsights();
+}
+
+const inr = n => "₹" + Math.round(Number(n)).toLocaleString("en-IN");
+const num = (n, d=4) => (n === null || n === undefined) ? "—" : Number(n).toFixed(d);
+
+/* ---------------- ML Performance (the graded core) ---------------- */
+async function renderMLPerformance(){
+  setPanel(`<div class="hint">Loading model artifacts…</div>`);
+  let s, e, x;
+  try{
+    const [r1,r2,r3] = await Promise.all([
+      fetch(`${API}/ml/summary?city=${currentCity}`),
+      fetch(`${API}/ml/eda?city=${currentCity}`),
+      fetch(`${API}/ml/explain?city=${currentCity}`)
+    ]);
+    s = await r1.json();
+    if (r1.status !== 200) throw new Error(s.detail || s.title);
+    e = await r2.json(); x = await r3.json();
+  }catch(err){
+    return setPanel(`<div class="section"><h2>ML Performance</h2>
+      <p class="notice red">${escapeHtml(String(err.message||err))}</p></div>`);
+  }
+
+  const d = s.dataset || {}, t = s.final_test_metrics || {}, cf = s.conformal || {};
+  const leak = s.leakage_finding;
+  const plot = n => `${API}/ml/plot/${currentCity}/${n}`;
+
+  const cmpRows = s.model_comparison.map(m=>`
+    <tr${m.selected ? ' style="background:var(--gold-soft)"' : ''}>
+      <th style="width:auto">${escapeHtml(m.algorithm)}${m.selected ? ' ★' : ''}</th>
+      <td style="text-align:right">${num(m.spatial_cv_r2)}</td>
+      <td style="text-align:right;color:var(--muted)">${num(m.random_cv_r2)}</td>
+      <td style="text-align:right;color:var(--danger)">+${num(m.leakage_gap_r2)}</td>
+      <td style="text-align:right">${Math.round(m.mae).toLocaleString("en-IN")}</td>
+    </tr>`).join("");
+
+  const tuneRows = Object.entries(s.tuning||{}).map(([k,v])=>`
+    <tr><th style="width:auto">${escapeHtml(k)}</th><td>
+      tuned CV R² <b>${num(v.best_cv_r2)}</b>
+      <div class="why">${escapeHtml(JSON.stringify(v.best_params))}</div></td></tr>`).join("");
+
+  const impRows = (x.shap_importance||[]).slice(0,10).map(i=>`
+    <tr><th style="width:auto">${escapeHtml(i.feature)}</th>
+      <td style="text-align:right">${Number(i.mean_abs_shap).toLocaleString("en-IN")}</td></tr>`).join("");
+
+  const corrRows = Object.entries(e.correlation_with_target||{}).slice(0,8).map(([k,v])=>`
+    <tr><th style="width:auto">${escapeHtml(k)}</th>
+      <td style="text-align:right">${num(v,3)}</td></tr>`).join("");
+
+  setPanel(`
+    <div class="section"><h2>Dataset &amp; split</h2>
+      <table class="data">
+        <tr><th>Records (clean)</th><td>${(d.rows_clean||0).toLocaleString("en-IN")}</td></tr>
+        <tr><th>Train / Cal / Test</th><td>${(d.train||0).toLocaleString("en-IN")} /
+          ${(d.calibration||0).toLocaleString("en-IN")} / ${(d.test||0).toLocaleString("en-IN")}</td></tr>
+        <tr><th>Features</th><td>${d.n_features} <span class="why">of which
+          ${d.n_gis_features} are GIS-derived</span></td></tr>
+        <tr><th>Spatial blocks</th><td>${(d.spatial_blocks||0).toLocaleString("en-IN")}</td></tr>
+        <tr><th>Target</th><td>${escapeHtml(s.target.label||"")}
+          <div class="why">${escapeHtml(s.target.note||"")}</div></td></tr>
+      </table>
+    </div>
+
+    <div class="section"><h2>Model comparison</h2>
+      <table class="data">
+        <tr><th style="width:auto">Algorithm</th>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">spatial R²</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">random R²</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">leak</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">MAE</td></tr>
+        ${cmpRows}
+      </table>
+      ${leak ? `<p class="notice" style="margin-top:10px">
+        <b>Leakage finding.</b> ${escapeHtml(leak.algorithm)} scores
+        <b>${num(leak.random_cv_r2)}</b> under random k-fold but
+        <b>${num(leak.spatial_cv_r2)}</b> under spatial-block CV — a gap of
+        <b>${num(leak.gap)}</b>. ${escapeHtml(leak.explanation)}</p>` : ""}
+      <img src="${plot('model_comparison.png')}" alt="Model comparison"
+           style="width:100%;margin-top:10px;border:1px solid var(--line);border-radius:4px">
+    </div>
+
+    ${tuneRows ? `<div class="section"><h2>Hyperparameter tuning</h2>
+      <table class="data">${tuneRows}</table>
+      <p class="why">RandomizedSearchCV, 12 candidates, GroupKFold by spatial block.</p>
+    </div>` : ""}
+
+    <div class="section"><h2>Final model — held-out test</h2>
+      <table class="data">
+        <tr><th>Algorithm</th><td><b>${escapeHtml(s.selected_model||"")}</b></td></tr>
+        <tr><th>MAE</th><td>${inr(t.mae||0)} / sq.ft</td></tr>
+        <tr><th>RMSE</th><td>${inr(t.rmse||0)}</td></tr>
+        <tr><th>R²</th><td><b>${num(t.r2)}</b></td></tr>
+        <tr><th>MAPE</th><td>${t.mape_pct}%</td></tr>
+        <tr><th>90% interval</th><td>± ${inr(cf.half_width||0)}
+          <div class="why">measured coverage ${((cf.empirical_coverage||0)*100).toFixed(1)}%
+          (conformal, distribution-free)</div></td></tr>
+      </table>
+      ${s.test_split_warning ? `<p class="notice red" style="margin-top:10px">
+        <b>Do not quote the test R² as accuracy.</b> ${escapeHtml(s.test_split_warning)}</p>` : ""}
+      <img src="${plot('actual_vs_predicted.png')}" alt="Actual vs predicted"
+           style="width:100%;margin-top:10px;border:1px solid var(--line);border-radius:4px">
+      <img src="${plot('residuals.png')}" alt="Residuals"
+           style="width:100%;margin-top:8px;border:1px solid var(--line);border-radius:4px">
+    </div>
+
+    <div class="section"><h2>Explainable AI — SHAP</h2>
+      <table class="data">${impRows || '<tr><td class="na">SHAP unavailable</td></tr>'}</table>
+      <img src="${plot('shap_importance.png')}" alt="SHAP importance"
+           style="width:100%;margin-top:10px;border:1px solid var(--line);border-radius:4px">
+      <p class="why">${escapeHtml(x.method_note||"")}</p>
+    </div>
+
+    <div class="section"><h2>EDA</h2>
+      <table class="data">
+        <tr><th>Rows × cols</th><td>${(e.rows||0).toLocaleString("en-IN")} × ${e.columns}</td></tr>
+        <tr><th>Duplicate rows</th><td>${e.duplicate_rows}</td></tr>
+        <tr><th>Target skew</th><td>${num(e.target?.skew,3)}</td></tr>
+        <tr><th>IQR outliers</th><td>${e.target_outliers_iqr}</td></tr>
+        <tr><th>Median / mean</th><td>${inr(e.target?.median||0)} / ${inr(e.target?.mean||0)}</td></tr>
+      </table>
+      <p class="why" style="margin-top:8px"><b>Top correlations with target</b></p>
+      <table class="data">${corrRows}</table>
+      <img src="${plot('eda/target_distribution.png')}" alt="Target distribution"
+           style="width:100%;margin-top:10px;border:1px solid var(--line);border-radius:4px">
+      <img src="${plot('eda/correlation_heatmap.png')}" alt="Correlation heatmap"
+           style="width:100%;margin-top:8px;border:1px solid var(--line);border-radius:4px">
+      <img src="${plot('eda/price_by_locality.png')}" alt="Price by locality"
+           style="width:100%;margin-top:8px;border:1px solid var(--line);border-radius:4px">
+    </div>
+
+    <div class="section"><h2>Cleaning log</h2>
+      <ul class="why" style="margin:0;padding-left:16px">
+        ${(s.cleaning_log||[]).map(l=>`<li>${escapeHtml(l)}</li>`).join("")}
+      </ul>
+      <p class="why" style="margin-top:8px"><b>GIS feature engineering:</b>
+        locality match ${((s.gis?.locality_match_rate||0)*100).toFixed(1)}%,
+        ward match ${((s.gis?.ward_match_rate||0)*100).toFixed(1)}%,
+        ${(s.gis?.amenity_features||0).toLocaleString("en-IN")} OSM features used.</p>
+    </div>`);
+}
+
+/* ---------------- ML Models: single / dual / multi ---------------- */
+let predMode = "single";
+
+async function renderModels(){
+  setPanel(`<div class="hint">Loading trained models…</div>`);
+  let cat;
+  try{
+    cat = await (await fetch(`${API}/predict/models?city=${currentCity}`)).json();
+  }catch(e){
+    return setPanel(`<div class="section"><p class="notice red">${escapeHtml(String(e))}</p></div>`);
+  }
+  if (!cat.available){
+    return setPanel(`<div class="section"><h2>ML Models</h2>
+      <p class="notice">${escapeHtml(cat.reason)}</p></div>`);
+  }
+
+  const modeBtn = (id, m) => `
+    <button class="modebtn${predMode===id?' on':''}" onclick="setMode('${id}')">
+      <b>${escapeHtml(m.label)}</b>
+      <span>${id==='single'?'1 model':id==='dual'?'2 models':cat.count+' models'}</span>
+    </button>`;
+
+  setPanel(`
+    <div class="section"><h2>Prediction strategy</h2>
+      <div class="modes">
+        ${modeBtn('single', cat.modes.single)}
+        ${modeBtn('dual',   cat.modes.dual)}
+        ${modeBtn('multi',  cat.modes.multi)}
+      </div>
+      <p class="why" id="modeDesc" style="margin-top:8px">
+        <b>${escapeHtml(cat.modes[predMode].label)}.</b>
+        ${escapeHtml(cat.modes[predMode].description)}
+        <br><i>${escapeHtml(cat.modes[predMode].why)}</i></p>
+    </div>
+
+    <div class="section"><h2>Predict a property</h2>
+      <div class="form">
+        <div class="field"><label for="pSqft">Area sq.ft</label>
+          <input id="pSqft" type="number" value="1200" min="200" step="50"></div>
+        <div class="field"><label for="pRooms">Bedrooms</label>
+          <input id="pRooms" type="number" value="2" min="1" max="10"></div>
+        <div class="field"><label for="pBath">Bathrooms</label>
+          <input id="pBath" type="number" value="2" min="1" max="10"></div>
+        <button class="btn" onclick="runPredict()">Predict</button>
+      </div>
+      <div id="pOut" class="why">Predicting…</div>
+    </div>
+
+    <div class="section"><h2>Models trained for ${escapeHtml(cat.city.name)}</h2>
+      <p class="why" style="margin-bottom:8px">${escapeHtml(cat.ranking_basis)}</p>
+      <table class="data">
+        <tr><th style="width:auto">Algorithm</th>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">spatial R²</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">test R²</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">used in</td></tr>
+        ${cat.models.map(m=>`
+        <tr><th style="width:auto">${m.rank}. ${escapeHtml(m.algorithm)}
+          ${m.rank===1?' <span style="color:var(--accent)">★</span>':''}</th>
+          <td style="text-align:right">${num(m.spatial_cv_r2)}</td>
+          <td style="text-align:right">${num(m.test_r2)}</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">
+            ${m.used_in.join(', ')}</td></tr>`).join("")}
+      </table>
+      <p class="why" style="margin-top:8px">Target: ${escapeHtml(cat.target_label||"")}</p>
+    </div>`);
+  runPredict();
+}
+
+function setMode(m){ predMode = m; renderModels(); }
+
+async function runPredict(){
+  const out = document.getElementById("pOut");
+  if (!out) return;
+  out.textContent = "Predicting…";
+  const body = {
+    city: currentCity, mode: predMode,
+    sqft: Number(document.getElementById("pSqft").value),
+    rooms: Number(document.getElementById("pRooms").value),
+    bath: Number(document.getElementById("pBath").value),
+    corporation: currentCorp, compare_modes: true
+  };
+  let d;
+  try{
+    const r = await fetch(`${API}/predict`, {method:"POST",
+      headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)});
+    d = await r.json();
+    if (r.status !== 200) throw new Error(d.detail || d.title);
+  }catch(e){
+    out.innerHTML = `<p class="notice red">${escapeHtml(String(e.message||e))}</p>`; return;
+  }
+
+  const res = d.result;
+  if (!res.available){
+    out.innerHTML = `<p class="notice">${escapeHtml(res.reason)}</p>`; return;
+  }
+
+  const cmp = d.all_modes ? d.all_modes.modes : null;
+  out.innerHTML = `
+    <div style="text-align:center;padding:10px 0 4px">
+      <div style="font-size:1.9rem;font-weight:700;color:var(--navy);line-height:1.1">
+        ${inr(res.prediction)}</div>
+      <div class="why" style="margin-top:2px">per sq.ft ·
+        90% interval ${inr(res.range_low)} – ${inr(res.range_high)}</div>
+      <div class="why">Estimated total ${inr(res.estimated_total_value)}
+        for ${Number(document.getElementById("pSqft").value).toLocaleString("en-IN")} sq.ft</div>
+    </div>
+
+    <p class="why" style="margin-top:6px"><b>Models consulted (${res.model_count})</b></p>
+    <table class="data">${res.members.map(m=>`
+      <tr><th style="width:auto">${escapeHtml(m.algorithm)}</th>
+        <td style="text-align:right">${inr(m.prediction)}
+          <div class="why">± ${inr(m.interval_half_width)} · spatial R² ${num(m.spatial_cv_r2)}</div>
+        </td></tr>`).join("")}</table>
+
+    ${res.model_count>1 ? `<p class="notice" style="margin-top:9px">
+      <b>Model disagreement: ${inr(res.disagreement.spread)} /sq.ft
+      (${res.disagreement.spread_pct}%).</b> ${escapeHtml(res.disagreement.note)}</p>`
+      : `<p class="why" style="margin-top:8px">${escapeHtml(res.disagreement.note)}</p>`}
+
+    ${cmp ? `<p class="why" style="margin-top:11px"><b>All three strategies on this input</b></p>
+    <table class="data">
+      <tr><th style="width:auto">Strategy</th>
+        <td style="text-align:right;font-size:.7rem;color:var(--muted)">prediction</td>
+        <td style="text-align:right;font-size:.7rem;color:var(--muted)">interval ±</td>
+        <td style="text-align:right;font-size:.7rem;color:var(--muted)">models</td></tr>
+      ${["single","dual","multi"].map(k=>cmp[k] && cmp[k].available ? `
+        <tr${k===predMode?' style="background:var(--gold-soft)"':''}>
+          <th style="width:auto">${escapeHtml(cmp[k].mode_label)}</th>
+          <td style="text-align:right">${inr(cmp[k].prediction)}</td>
+          <td style="text-align:right">${inr(cmp[k].interval_half_width)}</td>
+          <td style="text-align:right">${cmp[k].model_count}</td></tr>` : "").join("")}
+    </table>
+    <p class="why" style="margin-top:7px">${escapeHtml(d.all_modes.note)}</p>` : ""}
+
+    <p class="why" style="margin-top:8px">Aggregation: ${escapeHtml(res.aggregation)}.</p>`;
+}
+
+
+
+
+
+
+
+
+
+/* ---------------- Trained model registry --------------------------------
+   Every model on disk, with a verdict that can be negative. The point of the
+   tab is the negatives: a registry showing only successes would misrepresent
+   the project, and knowing which model NOT to trust is the useful part. ----*/
+const VERDICT_STYLE = {
+  "WORKS":                  { badge:"GREEN", cls:"" },
+  "WORKS WITH LIMITS":      { badge:"AMBER", cls:"" },
+  "TRAINED BUT NOT USABLE": { badge:"RED",   cls:"red" },
+  "NOT TRAINED":            { badge:"GREY",  cls:"" }
+};
+
+async function renderRegistry(){
+  setPanel(`<div class="hint">Reading trained models from disk&hellip;</div>`);
+  let d;
+  try{
+    const r = await fetch(`${API}/ml/registry?city=${currentCity}`);
+    d = await r.json();
+    if (r.status !== 200) throw new Error(d.detail || d.title);
+  }catch(e){
+    return setPanel(`<div class="section"><h2>Trained models</h2>
+      <p class="notice red">${escapeHtml(String(e.message||e))}</p></div>`);
+  }
+
+  const v = d.verdicts || {};
+  const order = ["WORKS","WORKS WITH LIMITS","TRAINED BUT NOT USABLE","NOT TRAINED"];
+  const byFamily = {};
+  d.models.forEach(m => { (byFamily[m.family] = byFamily[m.family] || []).push(m); });
+
+  const metricRow = (m) => Object.entries(m.metrics||{})
+    .filter(([,val]) => val !== null && val !== undefined
+                        && !(Array.isArray(val) && !val.length))
+    .map(([k,val]) => `<span class="why">${escapeHtml(k)}
+        <b>${escapeHtml(Array.isArray(val) ? val.join(", ") : String(val))}</b></span>`)
+    .join(" &nbsp;&middot;&nbsp; ");
+
+  setPanel(`
+    <div class="section"><h2>What has actually been trained</h2>
+      <table class="data">
+        <tr><th style="width:190px">Models on disk</th>
+          <td style="text-align:right"><b>${d.trained_count}</b> of ${d.count}</td></tr>
+        <tr><th>Families</th>
+          <td style="text-align:right">${(d.families||[]).map(escapeHtml).join(" &middot; ")}</td></tr>
+        <tr><th>Artefact size</th>
+          <td style="text-align:right">${(d.total_artefact_kb/1024).toFixed(1)} MB</td></tr>
+      </table>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:11px">
+        ${order.filter(k=>v[k]).map(k=>`
+          <span class="mlbadge RULE" style="display:inline-flex;align-items:center;gap:5px">
+            <span class="badge ${VERDICT_STYLE[k].badge}"></span>
+            ${escapeHtml(k)} &mdash; <b>${v[k]}</b></span>`).join("")}
+      </div>
+      <p class="why" style="margin-top:10px">${escapeHtml(d.how_to_read||"")}</p>
+      <p class="notice red" style="margin-top:8px">
+        ${escapeHtml(d.why_negatives_are_shown||"")}</p>
+    </div>
+
+    ${Object.entries(byFamily).map(([fam, models])=>`
+      <div class="section"><h2>${escapeHtml(fam)}
+        <span class="mlbadge ML">${models.length}</span></h2>
+        ${models.map(m=>{
+          const st = VERDICT_STYLE[m.verdict] || VERDICT_STYLE["NOT TRAINED"];
+          return `
+          <div style="border-top:1px solid var(--line);padding:10px 0">
+            <div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+              <span class="badge ${st.badge}"></span>
+              <b>${escapeHtml(m.name)}</b>
+              <span class="mlbadge RULE">${escapeHtml(m.verdict)}</span>
+            </div>
+            <div class="why" style="margin-top:4px">${escapeHtml(m.task)}</div>
+            <div class="why"><b>Algorithm</b> ${escapeHtml(m.algorithm||"—")}</div>
+            <p class="notice ${st.cls}" style="margin-top:7px">
+              ${escapeHtml(m.headline||"")}</p>
+            ${metricRow(m) ? `<div style="margin-top:6px">${metricRow(m)}</div>` : ""}
+            <div class="why" style="margin-top:5px"><b>Validation</b>
+              ${escapeHtml(m.validation||"—")}</div>
+            ${m.artefact && m.artefact.size_kb ? `<div class="why">
+              <b>File</b> <code>${escapeHtml(m.artefact.file)}</code>
+              &middot; ${m.artefact.size_kb.toLocaleString("en-IN")} KB
+              &middot; trained ${escapeHtml((m.artefact.trained_at||"").slice(0,10))}</div>` : ""}
+            ${m.caveat ? `<p class="why" style="margin-top:6px">
+              <b>Caveat</b> ${escapeHtml(m.caveat)}</p>` : ""}
+          </div>`;
+        }).join("")}
+      </div>`).join("")}`);
+}
+
+/* ---------------- Negotiation band (quantile regression + CQR) ----------
+   Three parties, three readings of the same model. The band's own calibration
+   is shown first, because an uncalibrated band quoted as an "80% band" is the
+   most misleading thing this project could publish. -----------------------*/
+let negRole = "buyer";
+
+async function renderNegotiation(){
+  setPanel(`<div class="hint">Loading advisory models&hellip;</div>`);
+  let d, per;
+  try{
+    const [r1, r2] = await Promise.all([
+      fetch(`${API}/advisory-ml?city=${currentCity}`),
+      fetch(`${API}/advisory-ml/persona?role=${negRole}&city=${currentCity}`)
+    ]);
+    d = await r1.json();
+    if (r1.status !== 200) throw new Error(d.detail || d.title);
+    per = await r2.json();
+  }catch(e){
+    return setPanel(`<div class="section"><h2>Negotiation band</h2>
+      <p class="notice red">${escapeHtml(String(e.message||e))}</p>
+      <p class="why">Run <code>python ml/pipelines/train_advisory_models.py
+        ${escapeHtml(currentCity)}</code> to train them.</p></div>`);
+  }
+
+  const b = d.negotiation_band, cf = b.conformalized, h = d.band_health;
+  const ex = cf.exchangeability_check || {};
+  const pct = v => (v*100).toFixed(1) + "%";
+  const roleBtn = r => `<button class="srcbtn" style="${negRole===r
+      ? 'background:var(--navy);color:#fff':''}"
+      onclick="negRole='${r}';renderNegotiation()">${r[0].toUpperCase()+r.slice(1)}</button>`;
+
+  setPanel(`
+    <div class="section"><h2>Is this band trustworthy?</h2>
+      <p class="notice ${h.usable_as_stated ? "" : "red"}">
+        <b>${escapeHtml(h.verdict)}</b></p>
+      <table class="data">
+        <tr><th style="width:190px">Target coverage</th>
+          <td style="text-align:right">${pct(cf.target_coverage)}</td></tr>
+        <tr><th>Measured coverage</th>
+          <td style="text-align:right"><b>${pct(cf.measured_coverage)}</b>
+            <div class="why">${escapeHtml(cf.direction)}</div></td></tr>
+        <tr><th>Same method, random split</th>
+          <td style="text-align:right">${ex.random_split_coverage!=null
+            ? pct(ex.random_split_coverage) : "&mdash;"}
+            <div class="why">exchangeability holds there</div></td></tr>
+        <tr><th>Spatial blocks</th>
+          <td style="text-align:right">${d.spatial_blocks}</td></tr>
+      </table>
+      ${ex.finding ? `<p class="why" style="margin-top:9px">${escapeHtml(ex.finding)}</p>` : ""}
+      ${cf.few_blocks_warning ? `<p class="notice red" style="margin-top:8px">
+        ${escapeHtml(cf.few_blocks_warning)}</p>` : ""}
+    </div>
+
+    <div class="section"><h2>Read it as a&hellip;</h2>
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        ${roleBtn("buyer")}${roleBtn("seller")}${roleBtn("investor")}</div>
+      <p class="why"><b>${escapeHtml(per.reading||"")}</b></p>
+      <table class="data" style="margin-top:9px">
+        <tr><th style="width:120px">P10</th><td>${escapeHtml(per.quantiles.p10)}</td></tr>
+        <tr><th>P50</th><td>${escapeHtml(per.quantiles.p50)}</td></tr>
+        <tr><th>P90</th><td>${escapeHtml(per.quantiles.p90)}</td></tr>
+        <tr><th>Band width</th><td>${per.band_width_pct_of_price!=null
+          ? (per.band_width_pct_of_price*100).toFixed(0)+"% of median price" : "&mdash;"}</td></tr>
+      </table>
+      ${per.how_to_use ? `<p class="why" style="margin-top:9px">${escapeHtml(per.how_to_use)}</p>` : ""}
+      ${per.caution ? `<p class="notice" style="margin-top:8px">${escapeHtml(per.caution)}</p>` : ""}
+      ${(per.model_cannot_see||[]).length ? `
+        <p class="why" style="margin-top:9px"><b>The model cannot see</b><br>
+          ${per.model_cannot_see.map(escapeHtml).join(" &middot; ")}</p>` : ""}
+      ${(per.what_you_could_change||[]).length ? `
+        <p class="why" style="margin-top:10px"><b>Drivers stable enough to report</b></p>
+        <table class="data">
+          ${per.what_you_could_change.map(f=>`
+            <tr><th style="width:150px">${escapeHtml(f.feature)}</th>
+              <td style="text-align:right">${escapeHtml(f.direction)}
+                <div class="why">swing ${inr(f.swing)} /sq.ft
+                  (${(f.swing_pct_of_median*100).toFixed(0)}% of median)</div></td></tr>`).join("")}
+        </table>` : ""}
+      ${(per.excluded_as_noise||[]).length ? `
+        <p class="notice red" style="margin-top:9px"><b>Excluded as noise:</b>
+          ${per.excluded_as_noise.map(escapeHtml).join(", ")}<br>
+          ${escapeHtml(per.why_excluded||"")}</p>` : ""}
+    </div>
+
+    <div class="section"><h2>How the band is built</h2>
+      <table class="data">
+        <tr><th style="width:190px">Method</th>
+          <td class="why">${escapeHtml(b.method)}</td></tr>
+        <tr><th>Pinball loss</th>
+          <td style="text-align:right">P10 ${b.pinball_loss.p10} &middot;
+            P50 ${b.pinball_loss.p50} &middot; P90 ${b.pinball_loss.p90}</td></tr>
+        <tr><th>Quantile crossing</th>
+          <td style="text-align:right">${b.quantile_crossing.rows} rows
+            (${(b.quantile_crossing.rate*100).toFixed(2)}%)
+            <div class="why">${escapeHtml(b.quantile_crossing.handling)}</div></td></tr>
+        <tr><th>Conformal adjustment</th>
+          <td style="text-align:right">${inr(cf.qhat)} /sq.ft
+            <div class="why">from ${cf.calibration_rows.toLocaleString("en-IN")}
+              calibration rows</div></td></tr>
+        <tr><th>Split</th><td class="why">${escapeHtml(d.split)}</td></tr>
+      </table>
+      <p class="why" style="margin-top:8px">${escapeHtml(cf.why||"")}</p>
+      <p class="notice" style="margin-top:8px">${escapeHtml(b.caveat||"")}</p>
+    </div>
+
+    <div class="section"><h2>What moves the model's price</h2>
+      <p class="notice red">${escapeHtml(d.what_moves_price.not_causal)}</p>
+      <table class="data" style="margin-top:9px">
+        ${d.what_moves_price.features.map(f=>`
+          <tr><th style="width:150px">${escapeHtml(f.feature)}</th>
+            <td style="text-align:right">
+              <span class="badge ${f.stable_across_seeds?"GREEN":"RED"}"></span>
+              <b>${escapeHtml(f.direction)}</b>
+              <div class="why">swing ${inr(f.swing)}
+                (${(f.swing_pct_of_median*100).toFixed(0)}% of median)</div>
+              <div class="why">${escapeHtml(f.note)}</div></td></tr>`).join("")}
+      </table>
+      <p class="why" style="margin-top:8px">${escapeHtml(
+        (d.what_moves_price.stability||{}).note || "")}</p>
+      <img src="${API}/ml/plot/${currentCity}/partial_dependence.png"
+           alt="Partial dependence curves"
+           style="width:100%;margin-top:10px;border:1px solid var(--line);border-radius:4px">
+    </div>`);
+}
+
+/* ---------------- Module 27: document intelligence ----------------
+   The audit's design rule for property records: the platform cannot fetch
+   them, so the user supplies the document and the platform checks it against
+   what it independently knows. Nothing is stored; personal data is never
+   echoed back; a consistent document is never called a verified one. --------*/
+const SAMPLE_DOC = `KHATA CERTIFICATE
+Bruhat Bengaluru Mahanagara Palike
+Khata No: 123/456/78
+PID No: 15-25-123
+Ward No: 111
+Survey No: 36
+Taluk: Bangalore East
+Hobli: Varthur
+Village: Marathhalli
+Extent: 2400 sq ft`;
+
+async function renderDocuments(){
+  let cap;
+  try{ cap = await (await fetch(`${API}/documents/capabilities?city=${currentCity}`)).json(); }
+  catch(e){ return setPanel(`<div class="section"><p class="notice red">
+      ${escapeHtml(String(e.message||e))}</p></div>`); }
+
+  setPanel(`
+    <div class="section"><h2>Check a property document</h2>
+      <p class="why">This platform <b>cannot fetch</b> your Khata, tax record or
+        Encumbrance Certificate &mdash; no public API exists for any of them.
+        What it can do is check a document you already hold against the official
+        boundary data it does have.</p>
+      <p class="notice" style="margin-top:9px"><b>Nothing you paste is stored.</b>
+        It is parsed in memory and discarded with the response. Personal data is
+        detected and <b>never echoed back</b>.</p>
+      <div class="field" style="margin-top:10px">
+        <label for="docText">Paste the document text</label>
+        <textarea id="docText" rows="9" style="width:100%;font-family:ui-monospace,
+          monospace;font-size:.78rem;border:1px solid var(--line);border-radius:4px;
+          padding:8px"></textarea>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+        <button class="btn" onclick="runDocCheck()">Check document</button>
+        <button class="srcbtn" onclick="document.getElementById('docText').value=SAMPLE_DOC">
+          Load a sample</button>
+      </div>
+      <p class="why" style="margin-top:8px">Cross-checked against your selected
+        location: <b>${currentPoint ? currentPoint.lat.toFixed(4)+", "+currentPoint.lng.toFixed(4)
+          : "no location selected — select one on the map first"}</b></p>
+      <div id="docOut" style="margin-top:12px"></div>
+    </div>
+
+    <div class="section"><h2>What this can and cannot do</h2>
+      <table class="data">
+        <tr><th style="width:130px">Accepts</th>
+          <td>${(cap.accepts||[]).map(escapeHtml).join(", ")}</td></tr>
+        <tr><th>Reads from</th>
+          <td class="why">${(cap.extractable_fields||[]).map(escapeHtml).join(", ")}</td></tr>
+        <tr><th>Checks against</th>
+          <td class="why">${(cap.cross_checked_against||[]).map(escapeHtml).join("; ")}</td></tr>
+        <tr><th>Images / PDF</th>
+          <td><span class="na">Refused</span>
+            <div class="why">${escapeHtml((cap.refuses||{}).images_and_pdf||"")}</div></td></tr>
+      </table>
+      <p class="notice red" style="margin-top:10px"><b>Cannot do</b><br>
+        ${(cap.cannot_do||[]).map(escapeHtml).join("<br>")}</p>
+      <p class="why" style="margin-top:9px"><b>Where to actually verify</b></p>
+      ${(cap.official_sources||[]).map(o=>`
+        <p class="why" style="margin-top:5px">
+          <a class="srcbtn" href="${o.url}" target="_blank" rel="noopener">${escapeHtml(o.name)} &rarr;</a>
+          <br>${escapeHtml(o.for)}</p>`).join("")}
+    </div>`);
+}
+
+async function runDocCheck(){
+  const out = document.getElementById("docOut");
+  const text = document.getElementById("docText").value.trim();
+  if (text.length < 10){ out.innerHTML = `<p class="notice">Paste some document text first.</p>`; return; }
+  out.innerHTML = `<div class="hint">Checking&hellip;</div>`;
+
+  const payload = { text, city: currentCity };
+  if (currentPoint){ payload.lat = currentPoint.lat; payload.lng = currentPoint.lng; }
+
+  let d;
+  try{
+    const r = await fetch(`${API}/documents/analyze`,{method:"POST",
+      headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    d = await r.json();
+    if (r.status !== 200) throw new Error(d.detail || d.title);
+  }catch(e){
+    out.innerHTML = `<p class="notice red">${escapeHtml(String(e.message||e))}</p>`; return;
+  }
+
+  const VERDICT_CLS = {"CONSISTENT":"GREEN","INCONSISTENT":"RED",
+                       "NOT VERIFIABLE":"AMBER","NOT FOUND IN DOCUMENT":"GREY"};
+  const s = d.summary || {};
+
+  out.innerHTML = `
+    <p class="notice ${(s.counts||{})["INCONSISTENT"] ? "red" : ""}">
+      <b>${escapeHtml(s.headline||"")}</b></p>
+
+    <p class="why" style="margin-top:9px"><b>Document type</b> &mdash;
+      ${(d.document_type.detected||[]).map(escapeHtml).join(", ") || "not recognised"}
+      <span class="mlbadge RULE">${escapeHtml(d.document_type.method||"")}</span></p>
+
+    <p class="why" style="margin-top:9px"><b>Fields read from the document</b>
+      (${d.fields_found})</p>
+    <table class="data">
+      ${Object.entries(d.extracted_fields||{}).map(([k,v])=>`
+        <tr><th style="width:150px">${escapeHtml(k.replace(/_/g," "))}</th>
+          <td>${escapeHtml(v)}</td></tr>`).join("") ||
+        `<tr><td class="why">No known field was found in this text.</td></tr>`}
+    </table>
+
+    <p class="why" style="margin-top:11px"><b>Cross-check against official boundary data</b></p>
+    <table class="data">
+      ${(d.cross_check||[]).map(c=>`
+        <tr><th style="width:130px">${escapeHtml(c.field)}</th>
+          <td><span class="badge ${VERDICT_CLS[c.verdict]||"GREY"}"></span>
+            <b>${escapeHtml(c.verdict)}</b>
+            <div class="why">document: ${c.document===null?"&mdash;":escapeHtml(String(c.document))}
+              &middot; platform: ${c.platform===null?"&mdash;":escapeHtml(String(c.platform))}</div>
+            <div class="why">${escapeHtml(c.note||"")}</div></td></tr>`).join("")}
+    </table>
+
+    <p class="notice red" style="margin-top:11px">
+      <b>This is not verification.</b> ${escapeHtml(s.why_never_verified||"")}</p>
+
+    <table class="data" style="margin-top:10px">
+      <tr><th style="width:150px">Personal data</th>
+        <td><span class="badge ${d.personal_data.present?"AMBER":"GREY"}"></span>
+          ${d.personal_data.present
+            ? escapeHtml((d.personal_data.kinds_detected||[]).join(", "))+" detected"
+            : "none detected"}
+          <div class="why">${escapeHtml(d.personal_data.note||"")}</div></td></tr>
+      <tr><th>Stored</th>
+        <td><span class="badge GREEN"></span><b>No</b>
+          <div class="why">${escapeHtml((d.retention||{}).note||"")}</div></td></tr>
+    </table>`;
+}
+
+/* ---------------- More ML: classification, clustering, anomaly ---------------- */
+async function renderExtra(){
+  setPanel(`<div class="hint">Loading additional models&hellip;</div>`);
+  let d, gv, tx, rev;
+  try{
+    const [r1,r2,r3,r4] = await Promise.all([
+      fetch(`${API}/extra/models?city=${currentCity}`),
+      fetch(`${API}/extra/guidance-value?city=${currentCity}`),
+      fetch(`${API}/extra/transaction-price?city=${currentCity}`),
+      fetch(`${API}/extra/revenue-coverage?city=${currentCity}`)
+    ]);
+    d = await r1.json();
+    if (r1.status !== 200) throw new Error(d.detail || d.title);
+    gv = await r2.json(); tx = await r3.json(); rev = await r4.json();
+  }catch(e){
+    return setPanel(`<div class="section"><h2>More ML</h2>
+      <p class="notice red">${escapeHtml(String(e.message||e))}</p></div>`);
+  }
+
+  const cl = d.classification || {}, cu = d.clustering || {}, an = d.anomaly || {};
+  const cm = cl.confusion_matrix || {labels:[], matrix:[]};
+
+  setPanel(`
+    <div class="section"><h2>Model families in this project</h2>
+      <table class="data">
+        ${Object.entries(d.model_families).map(([k,v])=>`
+          <tr><th style="width:112px">${escapeHtml(k)}</th>
+            <td class="why">${escapeHtml(v)}</td></tr>`).join("")}
+      </table>
+    </div>
+
+    <div class="section"><h2>Price-band classification</h2>
+      ${cl.warning ? `<p class="notice red"><b>${escapeHtml(cl.warning)}</b></p>` : ""}
+      <table class="data">
+        <tr><th>Accuracy</th><td style="text-align:right"><b>${cl.accuracy}</b>
+          <div class="why">chance line ${cl.chance_accuracy} for 3 balanced classes</div></td></tr>
+        <tr><th>Macro F1</th><td style="text-align:right">${cl.macro_f1}</td></tr>
+        <tr><th>ROC-AUC (ovr)</th><td style="text-align:right">${cl.roc_auc_ovr_macro ?? "&mdash;"}</td></tr>
+        <tr><th>Bands</th><td style="text-align:right">&le; ${inr(cl.thresholds_per_sqft?.[0]||0)}
+          &middot; &le; ${inr(cl.thresholds_per_sqft?.[1]||0)} &middot; above</td></tr>
+        <tr><th>Split</th><td class="why">${escapeHtml(cl.split||"")}</td></tr>
+      </table>
+
+      <p class="why" style="margin-top:9px"><b>Per class</b></p>
+      <table class="data">
+        <tr><th style="width:auto">Class</th>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">precision</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">recall</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">F1</td></tr>
+        ${Object.entries(cl.per_class||{}).map(([k,v])=>`
+          <tr><th style="width:auto">${escapeHtml(k)}
+            ${(cl.classes_never_predicted||[]).includes(k)
+              ? ' <span style="color:var(--danger)">never predicted</span>' : ''}</th>
+            <td style="text-align:right">${v.precision ?? "&mdash;"}</td>
+            <td style="text-align:right">${v.recall ?? "&mdash;"}</td>
+            <td style="text-align:right">${v["f1-score"] ?? "&mdash;"}</td></tr>`).join("")}
+      </table>
+
+      <p class="why" style="margin-top:9px"><b>Confusion matrix</b>
+        (rows actual, columns predicted)</p>
+      <table class="data">
+        <tr><th style="width:auto"></th>
+          ${cm.labels.map(l=>`<td style="text-align:right;font-size:.68rem;color:var(--muted)">${escapeHtml(l)}</td>`).join("")}</tr>
+        ${cm.matrix.map((row,i)=>`
+          <tr><th style="width:auto">${escapeHtml(cm.labels[i]||"")}</th>
+            ${row.map((v,j)=>`<td style="text-align:right${i===j?';font-weight:700;color:var(--navy)':''}">${v}</td>`).join("")}
+          </tr>`).join("")}
+      </table>
+      <img src="${API}/ml/plot/${currentCity}/confusion_matrix.png"
+           alt="Confusion matrix"
+           style="width:100%;margin-top:10px;border:1px solid var(--line);border-radius:4px">
+      <p class="why" style="margin-top:7px">${escapeHtml(cl.label_note||"")}</p>
+    </div>
+
+    <div class="section"><h2>Locality clustering</h2>
+      ${cu.available ? `
+        <table class="data">
+          <tr><th>Method</th><td class="why">${escapeHtml(cu.method)}</td></tr>
+          <tr><th>Clusters (k)</th><td style="text-align:right"><b>${cu.k}</b>
+            <div class="why">${escapeHtml(cu.k_selection)}</div></td></tr>
+          <tr><th>Silhouette</th><td style="text-align:right">${cu.silhouette}</td></tr>
+          <tr><th>Localities</th><td style="text-align:right">${cu.localities_clustered}</td></tr>
+        </table>
+        <table class="data" style="margin-top:8px">
+          ${cu.clusters.map(c=>`
+            <tr><th style="width:auto">Cluster ${c.cluster}
+              <div class="why">${c.localities} localities</div></th>
+              <td style="text-align:right">${inr(c.median_psf)} /sq.ft
+                <div class="why">${c.examples.slice(0,3).map(escapeHtml).join(", ")}</div>
+              </td></tr>`).join("")}
+        </table>
+        <p class="why" style="margin-top:7px">${escapeHtml(cu.note||"")}</p>`
+      : `<p class="notice">${escapeHtml(cu.reason || "Not available.")}</p>`}
+    </div>
+
+    <div class="section"><h2>Anomaly detection</h2>
+      <table class="data">
+        <tr><th>Method</th><td class="why">${escapeHtml(an.method||"")}</td></tr>
+        <tr><th>Flagged</th><td style="text-align:right"><b>${(an.flagged||0).toLocaleString("en-IN")}</b>
+          of ${(an.total||0).toLocaleString("en-IN")}</td></tr>
+        <tr><th>Features</th><td style="text-align:right">${(an.features||[]).length}</td></tr>
+      </table>
+      <p class="why" style="margin-top:7px">${escapeHtml(an.note||"")}</p>
+      <p class="notice" style="margin-top:7px">${escapeHtml(an.caveat||"")}</p>
+    </div>
+
+    <div class="section"><h2>Guidance value</h2>
+      ${gv.available ? `
+        <table class="data">
+          <tr><th>Value</th><td style="text-align:right"><b>${inr(gv.value_per_sqft)}</b> /sq.ft</td></tr>
+          <tr><th>Locality</th><td style="text-align:right">${escapeHtml(gv.locality||"")}</td></tr>
+          <tr><th>Recorded by</th><td style="text-align:right">${escapeHtml(gv.recorded_by||"")}</td></tr>
+          <tr><th>Method</th><td style="text-align:right">
+            <span class="mlbadge RULE">${escapeHtml(gv.method)}</span></td></tr>
+        </table>
+        <p class="why" style="margin-top:7px">${escapeHtml(gv.caveat||"")}</p>`
+      : `<p class="notice"><b>Not recorded.</b> ${escapeHtml(gv.reason||"")}</p>
+         <p class="why" style="margin-top:7px"><b>How to obtain it:</b>
+           ${escapeHtml(gv.how_to_obtain||"")}</p>`}
+      <p class="why" style="margin-top:7px">
+        <a href="${gv.portal?.url||"#"}" target="_blank" rel="noopener"
+           class="srcbtn">${escapeHtml(gv.portal?.name||"Official portal")} &rarr;</a></p>
+      <p class="why">${escapeHtml(gv.why_not_fetched||"")}</p>
+    </div>
+
+    <div class="section"><h2>Transaction prices</h2>
+      ${tx.available ? `
+        <p class="why"><b>${escapeHtml(tx.basis)}</b> &mdash;
+          ${(tx.total_sales||0).toLocaleString("en-IN")} recorded sales</p>
+        <table class="data">
+          ${tx.localities.slice(0,8).map(l=>`
+            <tr><th style="width:auto">${escapeHtml(l.locality)}</th>
+              <td style="text-align:right">${inr(l.median_price_per_sqft)} /sq.ft
+                <div class="why">${l.recorded_sales} sales &middot; ${escapeHtml(l.period)}</div>
+              </td></tr>`).join("")}
+        </table>
+        <p class="notice" style="margin-top:9px">${escapeHtml(tx.caveat||"")}</p>
+        <p class="why" style="margin-top:7px">${escapeHtml(tx.note||"")}</p>`
+      : `<p class="notice red"><b>Not available.</b> ${escapeHtml(tx.reason||"")}</p>
+         <p class="why" style="margin-top:7px">${escapeHtml(tx.alternative||"")}</p>`}
+    </div>
+
+    <div class="section"><h2>Revenue layer coverage</h2>
+      ${rev.available === false
+        ? `<p class="notice">${escapeHtml(rev.reason||"")}</p>`
+        : `<table class="data">
+             <tr><th>District</th><td style="text-align:right">${escapeHtml(rev.district||"")}</td></tr>
+             <tr><th>Taluks</th><td style="text-align:right">${(rev.taluks||[]).map(escapeHtml).join(", ")}</td></tr>
+             <tr><th>Hoblis</th><td style="text-align:right">${(rev.hoblis||[]).map(escapeHtml).join(", ")}</td></tr>
+             <tr><th>Villages</th><td style="text-align:right">${rev.village_count}</td></tr>
+             <tr><th>Survey parcels</th><td style="text-align:right">${(rev.parcel_count||0).toLocaleString("en-IN")}</td></tr>
+           </table>
+           <p class="notice" style="margin-top:9px">${escapeHtml(rev.note||"")}</p>
+           <p class="why" style="margin-top:7px">${escapeHtml(rev.survey_number_caveat||"")}</p>`}
+    </div>`);
+}
+
+/* ---------------- 360 Report (Module 28) ---------------- */
+function reportBody(){
+  return {
+    city: currentCity,
+    lat: currentPoint?.lat, lng: currentPoint?.lng,
+    sqft: Number(document.getElementById("rpArea")?.value || 1200),
+    rooms: Number(document.getElementById("rpRooms")?.value || 2),
+    bath: 2,
+    asking_price_per_sqft: Number(document.getElementById("rpAsk")?.value || 6500),
+    plot_area_sqm: Number(document.getElementById("rpPlot")?.value || 929),
+    road_width_m: Number(document.getElementById("rpRoad")?.value || 12.2)
+  };
+}
+
+async function renderReport(){
+  setPanel(`
+    <div class="section"><h2>Report inputs</h2>
+      <div class="form">
+        <div class="field"><label for="rpArea">Area sq.ft</label>
+          <input id="rpArea" type="number" value="1200" step="50"></div>
+        <div class="field"><label for="rpRooms">Bedrooms</label>
+          <input id="rpRooms" type="number" value="2" min="1" max="10"></div>
+        <div class="field"><label for="rpAsk">Asking &#8377;/sq.ft</label>
+          <input id="rpAsk" type="number" value="6500" step="100"></div>
+        <div class="field"><label for="rpPlot">Plot sq.m</label>
+          <input id="rpPlot" type="number" value="929" step="10"></div>
+        <div class="field"><label for="rpRoad">Road width m</label>
+          <input id="rpRoad" type="number" value="12.2" step="0.5"></div>
+      </div>
+      <div class="form">
+        <button class="btn" onclick="previewReport()">Preview contents</button>
+        <button class="btn" style="background:var(--navy)" onclick="downloadReport()">
+          Download PDF</button>
+      </div>
+      <p class="why">Location comes from your map selection, if any. Sections with
+        no data are kept in the report and marked UNAVAILABLE rather than dropped.</p>
+      <div id="rpOut" class="why">Loading preview&hellip;</div>
+    </div>`);
+  previewReport();
+}
+
+async function previewReport(){
+  const out = document.getElementById("rpOut");
+  if (!out) return;
+  out.textContent = "Assembling…";
+  let d;
+  try{
+    const r = await fetch(`${API}/report/preview`, {method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify(reportBody())});
+    d = await r.json();
+    if (r.status !== 200) throw new Error(d.detail || d.title);
+  }catch(e){
+    out.innerHTML = `<p class="notice red">${escapeHtml(String(e.message||e))}</p>`; return;
+  }
+
+  const badge = m => `<span class="mlbadge ${
+    m === "UNAVAILABLE" ? "RULE" : m === "ML PREDICTION" ? "ML"
+    : m === "DATA-DRIVEN SCORE" ? "SCORE" : m === "GIS" ? "GIS"
+    : m === "COMPOSITE" ? "COMPOSITE" : "RULE"}">${escapeHtml(m)}</span>`;
+
+  const totalRows = d.sections.reduce((a,s)=>a+s.rows.length,0);
+  const totalMissing = d.sections.reduce((a,s)=>a+s.unavailable_count,0);
+
+  out.innerHTML = `
+    <p class="notice" style="margin-bottom:10px"><b>Executive summary</b><br>
+      ${d.summary}</p>
+
+    <p class="why"><b>${d.sections.length} sections &middot; ${totalRows} items &middot;
+      ${totalMissing} unavailable</b> &mdash; missing items are shown in the PDF with
+      their reason, not omitted.</p>
+
+    ${d.sections.map(s=>`
+      <p class="why" style="margin-top:10px"><b>${escapeHtml(s.title)}</b>
+        ${s.unavailable_count ? `<span style="color:var(--amber)">
+          (${s.unavailable_count} unavailable)</span>` : ""}</p>
+      <table class="data">${s.rows.slice(0,6).map(r=>`
+        <tr><th style="width:auto">${escapeHtml(r.item)}</th>
+          <td>${r.method === "UNAVAILABLE"
+                ? `<span class="na">${escapeHtml(r.value || "Data unavailable")}</span>`
+                : escapeHtml(r.value)}
+            <div class="why">${badge(r.method)}</div></td></tr>`).join("")}
+        ${s.rows.length > 6 ? `<tr><td colspan="2" class="why">
+          &hellip; and ${s.rows.length - 6} more in the PDF</td></tr>` : ""}
+      </table>`).join("")}
+
+    <p class="why" style="margin-top:11px"><b>Limitations carried into the report</b></p>
+    <ul class="why" style="margin:3px 0;padding-left:16px">
+      ${d.caveats.map(c=>`<li style="margin-bottom:4px">${escapeHtml(c)}</li>`).join("")}
+    </ul>
+
+    <p class="why" style="margin-top:9px"><b>Sources cited (${d.sources.length})</b><br>
+      ${d.sources.map(x=>`${escapeHtml(x.name)} <i>(${escapeHtml(x.tier)})</i>`).join("<br>")}
+    </p>`;
+}
+
+async function downloadReport(){
+  const out = document.getElementById("rpOut");
+  try{
+    const r = await fetch(`${API}/report/generate`, {method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify(reportBody())});
+    if (!r.ok) throw new Error("Report generation failed");
+    const blob = await r.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `property-report-${currentCity}.pdf`;
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  }catch(e){
+    if (out) out.innerHTML = `<p class="notice red">${escapeHtml(String(e.message||e))}</p>`;
+  }
+}
+
+/* ---------------- BUYER MODE (Module 19) ---------------- */
+async function renderBuyer(){
+  setPanel(`
+    <div class="section"><h2>Property under consideration</h2>
+      <div class="form">
+        <div class="field"><label for="byArea">Area sq.ft</label>
+          <input id="byArea" type="number" value="1200" min="200" step="50"></div>
+        <div class="field"><label for="byRooms">Bedrooms</label>
+          <input id="byRooms" type="number" value="2" min="1" max="10"></div>
+        <div class="field"><label for="byBath">Bathrooms</label>
+          <input id="byBath" type="number" value="2" min="1" max="10"></div>
+        <div class="field"><label for="byAsk">Asking &#8377;/sq.ft</label>
+          <input id="byAsk" type="number" value="6500" min="100" step="100"></div>
+        <button class="btn" onclick="runBuyer()">Assess</button>
+      </div>
+      <p class="why">Location is taken from your map selection, if any.</p>
+      <div id="byOut" class="why">Assessing&hellip;</div>
+    </div>`);
+  runBuyer();
+}
+
+async function runBuyer(){
+  const out = document.getElementById("byOut");
+  if (!out) return;
+  out.textContent = "Assessing…";
+  const body = {
+    label: "Selected property", city: currentCity,
+    lat: currentPoint?.lat, lng: currentPoint?.lng,
+    sqft: Number(document.getElementById("byArea").value),
+    rooms: Number(document.getElementById("byRooms").value),
+    bath: Number(document.getElementById("byBath").value),
+    asking_price_per_sqft: Number(document.getElementById("byAsk").value),
+    corporation: currentCorp
+  };
+  let d;
+  try{
+    const r = await fetch(`${API}/advisory/buyer`, {method:"POST",
+      headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)});
+    d = await r.json();
+    if (r.status !== 200) throw new Error(d.detail || d.title);
+  }catch(e){
+    out.innerHTML = `<p class="notice red">${escapeHtml(String(e.message||e))}</p>`; return;
+  }
+
+  const v = d.verdict, pr = d.price;
+  const tone = v.verdict === "GOOD VALUE" ? "GREEN"
+             : v.verdict === "FAIR VALUE" ? "GREEN"
+             : v.verdict === "HIGH RISK" ? "RED" : "AMBER";
+
+  out.innerHTML = `
+    <div style="text-align:center;padding:12px 0 6px">
+      <span class="badge ${tone}" style="width:11px;height:11px"></span>
+      <div style="font-size:1.28rem;font-weight:700;color:var(--navy);margin-top:5px">
+        ${escapeHtml(v.verdict)}</div>
+      <div class="why">${escapeHtml(v.method)}</div>
+    </div>
+
+    <table class="data">
+      <tr><th>Asking</th><td style="text-align:right">${inr(pr.asking_psf)} /sq.ft</td></tr>
+      <tr><th>Model estimate</th><td style="text-align:right">${inr(pr.model_estimate_psf)} /sq.ft
+        <div class="why">&plusmn; ${inr(pr.interval_half_width)} &middot;
+          ${escapeHtml(pr.target_label||"")}</div></td></tr>
+      <tr><th>Difference</th><td style="text-align:right">
+        <b style="color:${v.price_gap_pct>0?'var(--danger)':'var(--green)'}">
+          ${v.price_gap_pct>0?'+':''}${v.price_gap_pct}%</b></td></tr>
+      <tr><th>Demand</th><td style="text-align:right">${escapeHtml(d.demand.band)}
+        <div class="why">${d.demand.score}/100 &middot; DATA-DRIVEN SCORE</div></td></tr>
+      <tr><th>Risk</th><td style="text-align:right">${escapeHtml(d.risk.band)}
+        <div class="why">${d.risk.score}/100 &middot; DATA-DRIVEN SCORE</div></td></tr>
+    </table>
+
+    ${v.positives.length ? `<p class="why" style="margin-top:10px"><b>In its favour</b></p>
+      <ul class="why" style="margin:3px 0;padding-left:16px;color:var(--green)">
+        ${v.positives.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul>` : ""}
+
+    ${v.negatives.length ? `<p class="why" style="margin-top:7px"><b>Against it</b></p>
+      <ul class="why" style="margin:3px 0;padding-left:16px;color:var(--danger)">
+        ${v.negatives.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul>` : ""}
+
+    ${v.blocking.length ? `<p class="notice red" style="margin-top:10px">
+      <b>Must be verified before purchase</b><br>
+      ${v.blocking.map(escapeHtml).join("<br>")}</p>` : ""}
+
+    ${v.cap_note ? `<p class="why" style="margin-top:7px"><i>${escapeHtml(v.cap_note)}</i></p>` : ""}
+
+    <p class="notice" style="margin-top:9px">${escapeHtml(d.records.khata_note)}</p>
+    <p class="why" style="margin-top:7px">${escapeHtml(v.disclaimer)}</p>`;
+}
+
+/* ---------------- INVESTOR MODE (Module 20) ---------------- */
+async function renderInvestor(){
+  setPanel(`
+    <div class="section"><h2>Compare options</h2>
+      <p class="why" style="margin-bottom:9px">Enter two or three options.
+        They are scored on the same basis and ranked.</p>
+      <div id="invRows"></div>
+      <div class="form" style="margin-top:8px">
+        <button class="btn" onclick="runInvestor()">Compare &amp; rank</button>
+      </div>
+      <div id="invOut" class="why">Comparing&hellip;</div>
+    </div>`);
+
+  const defaults = [
+    {l:"Option A", a:1200, r:2, p:6500},
+    {l:"Option B", a:1500, r:3, p:5800},
+    {l:"Option C", a:900,  r:2, p:7200},
+  ];
+  document.getElementById("invRows").innerHTML = defaults.map((d,i)=>`
+    <div class="form" style="margin-bottom:5px">
+      <div class="field" style="flex:1"><label for="invL${i}">Label</label>
+        <input id="invL${i}" type="text" value="${d.l}" style="width:100%"></div>
+      <div class="field"><label for="invA${i}">sq.ft</label>
+        <input id="invA${i}" type="number" value="${d.a}" step="50"></div>
+      <div class="field"><label for="invR${i}">BHK</label>
+        <input id="invR${i}" type="number" value="${d.r}" min="1" max="10"></div>
+      <div class="field"><label for="invP${i}">&#8377;/sq.ft</label>
+        <input id="invP${i}" type="number" value="${d.p}" step="100"></div>
+    </div>`).join("");
+  runInvestor();
+}
+
+async function runInvestor(){
+  const out = document.getElementById("invOut");
+  if (!out) return;
+  out.textContent = "Comparing…";
+
+  const options = [0,1,2].map(i=>({
+    label: document.getElementById(`invL${i}`).value || `Option ${i+1}`,
+    city: currentCity,
+    lat: currentPoint?.lat, lng: currentPoint?.lng,
+    sqft: Number(document.getElementById(`invA${i}`).value),
+    rooms: Number(document.getElementById(`invR${i}`).value),
+    bath: 2,
+    asking_price_per_sqft: Number(document.getElementById(`invP${i}`).value),
+    corporation: currentCorp
+  }));
+
+  let d;
+  try{
+    const r = await fetch(`${API}/advisory/investor`, {method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({options})});
+    d = await r.json();
+    if (r.status !== 200) throw new Error(d.detail || d.title);
+  }catch(e){
+    out.innerHTML = `<p class="notice red">${escapeHtml(String(e.message||e))}</p>`; return;
+  }
+
+  const rk = d.ranking;
+  out.innerHTML = `
+    <table class="data">
+      <tr><th style="width:auto">Rank</th>
+        <td style="text-align:right;font-size:.7rem;color:var(--muted)">score</td>
+        <td style="text-align:right;font-size:.7rem;color:var(--muted)">band</td></tr>
+      ${rk.ranked.map(o=>`
+        <tr${o.rank===1?' style="background:var(--gold-soft)"':''}>
+          <th style="width:auto">${o.rank}. ${escapeHtml(o.label)}
+            <div class="why">${inr(o.observed_psf||0)} asking &middot;
+              model ${inr(o.predicted_psf||0)}</div></th>
+          <td style="text-align:right"><b>${o.score===null?"&mdash;":o.score}</b></td>
+          <td style="text-align:right">${escapeHtml(o.band||"&mdash;")}</td></tr>`).join("")}
+    </table>
+
+    <p class="why" style="margin-top:10px"><b>Score components</b> &mdash; weights
+      ${Object.entries(rk.weights).map(([k,v])=>`${escapeHtml(k.replace(/_/g,' '))} ${v}`).join(" &middot; ")}</p>
+    <table class="data">
+      ${rk.ranked.map(o=>`
+        <tr><th style="width:auto">${escapeHtml(o.label)}</th><td class="why">
+          ${Object.entries(o.components).map(([k,c])=>
+            `${escapeHtml(k.replace(/_/g,' '))}: <b>${c.score}</b>
+             <span style="opacity:.7">(${escapeHtml(c.method)})</span>`).join("<br>")
+           || "no components available"}
+          ${o.complete ? "" : `<div style="color:var(--amber)">partial &mdash;
+            only ${Math.round(o.weight_coverage*100)}% of the weighting available</div>`}
+        </td></tr>`).join("")}
+    </table>
+
+    ${rk.cross_city_warning ? `<p class="notice red" style="margin-top:10px">
+      ${escapeHtml(rk.cross_city_warning)}</p>` : ""}
+    <p class="notice" style="margin-top:9px">${escapeHtml(d.records_note)}</p>
+    <p class="why" style="margin-top:7px">${escapeHtml(rk.note)}</p>`;
+}
+
+/* ---------------- Government / Urban Planning (Module 21) ---------------- */
+let planningMetric = "infrastructure_score";
+
+async function renderPlanning(){
+  setPanel(`<div class="hint">Loading ward analytics&hellip;</div>`);
+  let d;
+  try{
+    const r = await fetch(`${API}/planning/summary?city=${currentCity}`);
+    d = await r.json();
+    if (r.status !== 200) throw new Error(d.detail || d.title);
+  }catch(e){
+    return setPanel(`<div class="section"><h2>Urban Planning</h2>
+      <p class="notice red">${escapeHtml(String(e.message||e))}</p></div>`);
+  }
+
+  const cov = d.coverage || {}, rk = d.rankings || {}, sm = d.summary || {};
+  const wardRow = (r, val) => `
+    <tr><th style="width:auto">${escapeHtml(String(r.ward_name||("Ward "+r.ward_no)))}
+      <div class="why">${escapeHtml(String(r.zone || r.corporation || ""))}</div></th>
+      <td style="text-align:right">${val(r)}</td></tr>`;
+
+  setPanel(`
+    ${cov.warning ? `<div class="section"><p class="notice red">
+      <b>Coverage warning &mdash; read before interpreting these scores.</b><br>
+      ${escapeHtml(cov.warning)}</p></div>` : ""}
+
+    <div class="section"><h2>City overview</h2>
+      <table class="data">
+        <tr><th>Wards analysed</th><td>${d.ward_count}</td></tr>
+        <tr><th>Avg infrastructure</th><td><b>${sm.average_infrastructure_score}</b> / 100</td></tr>
+        <tr><th>Facilities mapped</th><td>${(sm.total_facilities||0).toLocaleString("en-IN")}</td></tr>
+        <tr><th>Wards with market data</th><td>${sm.wards_with_market_data}
+          <div class="why">others report null, never zero</div></td></tr>
+        <tr><th>Facility categories</th><td>${cov.categories_present}/${cov.categories_expected}
+          <div class="why">${cov.scores_reliable ? "coverage adequate" : "coverage incomplete"}</div></td></tr>
+      </table>
+      <p class="why" style="margin-top:8px"><b>Method:</b> ${escapeHtml(d.method)} &mdash;
+        a weighted formula over observed counts and distances, not a trained model.</p>
+    </div>
+
+    <div class="section"><h2>Map shading</h2>
+      <div class="form">
+        <select id="planMetric" onchange="applyChoropleth(this.value)"
+          style="flex:1;padding:6px 8px;border:1px solid var(--line);border-radius:4px;
+                 font-family:inherit;font-size:.8rem;background:#fff;color:var(--ink)">
+          ${Object.entries(d.available_metrics).map(([k,v])=>
+            `<option value="${k}"${k===planningMetric?" selected":""}>${escapeHtml(v)}</option>`).join("")}
+        </select>
+        <button class="btn" onclick="clearChoropleth()">Reset</button>
+      </div>
+      <div id="choroLegend" class="why">Choose a metric to shade the map by ward.</div>
+    </div>
+
+    <div class="section"><h2>Least-served wards</h2>
+      <p class="why" style="margin-bottom:7px">Lowest infrastructure access.
+        A low score may reflect under-mapping rather than under-provision.</p>
+      <table class="data">${(rk.least_served||[]).slice(0,10).map(r=>
+        wardRow(r, x=>`<b>${x.infrastructure_score}</b>/100
+          <div class="why">${x.facilities_total} facilities</div>`)).join("")}</table>
+    </div>
+
+    <div class="section"><h2>Highest development pressure</h2>
+      <p class="why" style="margin-bottom:7px">Market activity relative to
+        infrastructure &mdash; where demand is running ahead of provision.</p>
+      <table class="data">${(rk.highest_development_pressure||[]).slice(0,10).map(r=>
+        wardRow(r, x=>`<b>${x.development_pressure}</b>
+          <div class="why">${x.listings} listings &middot; infra ${x.infrastructure_score}</div>`)).join("")
+        || '<tr><td class="na">No wards have both market and infrastructure data.</td></tr>'}</table>
+    </div>
+
+    <div class="section"><h2>Best-served wards</h2>
+      <table class="data">${(rk.best_served||[]).slice(0,8).map(r=>
+        wardRow(r, x=>`<b>${x.infrastructure_score}</b>/100
+          <div class="why">${x.facilities_total} facilities</div>`)).join("")}</table>
+    </div>
+
+    <div class="section"><h2>Limits of this analysis</h2>
+      <ul class="why" style="margin:0;padding-left:16px">
+        ${(d.caveats||[]).map(c=>`<li style="margin-bottom:5px">${escapeHtml(c)}</li>`).join("")}
+      </ul>
+    </div>`);
+}
+
+async function applyChoropleth(metric){
+  planningMetric = metric;
+  const leg = document.getElementById("choroLegend");
+  if (!layersReady || !map.getLayer("ward-fill")){
+    if (leg) leg.textContent = "Map not available - the rankings below still work.";
+    return;
+  }
+  let d;
+  try{
+    d = await (await fetch(
+      `${API}/planning/choropleth?city=${currentCity}&metric=${metric}`)).json();
+  }catch(e){ if (leg) leg.textContent = "Could not load values."; return; }
+
+  if (!d.count){ if (leg) leg.textContent = "No ward has a value for this metric."; return; }
+
+  // Five-step ramp across the observed range.
+  const ramp = ["#E8EEF4","#B9CDE2","#7FA4C8","#4A7AAB","#1B365D"];
+  const stops = [];
+  for (const [key, v] of Object.entries(d.values)){
+    const t = d.max === d.min ? 0.5 : (v - d.min) / (d.max - d.min);
+    stops.push(key, ramp[Math.min(4, Math.floor(t * 5))]);
+  }
+  // Match on "corporation|ward_no" — ward numbers repeat across corporations.
+  const keyExpr = ["concat", ["to-string", ["get", "corporation"]], "|",
+                   ["to-string", ["get", "ward_no"]]];
+  try{
+    map.setPaintProperty("ward-fill", "fill-color",
+      ["match", keyExpr, ...stops, "#EDEFF2"]);
+    map.setPaintProperty("ward-fill", "fill-opacity", 0.78);
+  }catch(e){ /* styling only */ }
+
+  if (leg) leg.innerHTML = `<b>${escapeHtml(d.metric_label)}</b> &mdash;
+    ${d.count} wards shaded${d.missing ? `, ${d.missing} without data (left pale)` : ""}.
+    <div style="display:flex;align-items:center;gap:4px;margin-top:6px">
+      <span>${Math.round(d.min).toLocaleString("en-IN")}</span>
+      ${ramp.map(c=>`<span style="flex:1;height:9px;background:${c};display:block"></span>`).join("")}
+      <span>${Math.round(d.max).toLocaleString("en-IN")}</span></div>`;
+}
+
+function clearChoropleth(){
+  if (!layersReady || !map.getLayer("ward-fill")) return;
+  const g = CITY_GROUPING[currentCity];
+  const values = Object.keys(groupColours);
+  try{
+    map.setPaintProperty("ward-fill", "fill-color",
+      ["match", ["get", g.key], ...values.flatMap(v=>[v, groupColours[v]]), "#8A94A3"]);
+    map.setPaintProperty("ward-fill", "fill-opacity",
+      ["case", ["boolean", ["feature-state","hover"], false], 0.80, 0.42]);
+  }catch(e){}
+  const leg = document.getElementById("choroLegend");
+  if (leg) leg.textContent = "Map reset to administrative colouring.";
+}
+
+/* ---------------- Future price (Module 15) ---------------- */
+async function renderFuturePrice(){
+  setPanel(`<div class="hint">Loading temporal analysis…</div>`);
+  let d;
+  try{
+    const r = await fetch(`${API}/ml/future-price?city=${currentCity}`);
+    d = await r.json();
+    if (r.status !== 200) throw new Error(d.detail || d.title);
+  }catch(e){
+    return setPanel(`<div class="section"><h2>Future price</h2>
+      <p class="notice red">${escapeHtml(String(e.message||e))}</p></div>`);
+  }
+
+  const plot = `${API}/ml/plot/${currentCity}/future_price.png`;
+
+  // --- city where a forecast is NOT supported -------------------------
+  if (!d.available){
+    const sa = d.supported_analysis || {};
+    return setPanel(`
+      <div class="section"><h2>Forecast not supported</h2>
+        <p class="notice red"><b>${escapeHtml(d.reason)}</b><br><br>
+          ${escapeHtml(d.why_this_matters||"")}</p>
+        <p class="why" style="margin-top:9px"><b>What would be needed:</b><br>
+          ${(d.what_would_be_needed||[]).map(escapeHtml).join("<br>")}</p>
+      </div>
+
+      ${sa.name ? `<div class="section"><h2>${escapeHtml(sa.name)} — what the data DOES support</h2>
+        <table class="data">
+          <tr><th>Ready to move</th><td style="text-align:right">
+            ${inr(sa.ready_to_move_median_psf)} /sq.ft
+            <div class="why">${(sa.ready_to_move_rows||0).toLocaleString("en-IN")} listings</div></td></tr>
+          <tr><th>Under construction</th><td style="text-align:right">
+            ${inr(sa.under_construction_median_psf)} /sq.ft
+            <div class="why">${(sa.under_construction_rows||0).toLocaleString("en-IN")} listings</div></td></tr>
+          <tr><th>Ready premium</th><td style="text-align:right">
+            <b>${sa.ready_premium_pct > 0 ? "+" : ""}${sa.ready_premium_pct}%</b></td></tr>
+        </table>
+        <p class="why" style="margin-top:8px"><b>By possession year</b></p>
+        <table class="data">${(sa.by_possession_year||[]).map(r=>`
+          <tr><th style="width:auto">${r.year}</th><td style="text-align:right">
+            ${inr(r.median_psf)} <span class="why">${r.listings} listings</span></td></tr>`).join("")}
+        </table>
+        <img src="${plot}" alt="Possession year analysis"
+             style="width:100%;margin-top:10px;border:1px solid var(--line);border-radius:4px">
+        <p class="notice" style="margin-top:9px">${escapeHtml(sa.interpretation||"")}</p>
+      </div>` : ""}`);
+  }
+
+  // --- city where a forecast IS supported -----------------------------
+  const v = d.validation || {}, r = d.results || {};
+  const modelRows = Object.entries(r).map(([k,m])=>`
+    <tr${k===d.selected_model?' style="background:var(--gold-soft)"':''}>
+      <th style="width:auto">${escapeHtml(k.replace(/_/g,' '))}</th>
+      <td style="text-align:right">${inr(m.mae)}</td>
+      <td style="text-align:right">${m.mape_pct}%</td>
+      <td style="text-align:right;font-size:.7rem;color:${m.beats_naive===false?'var(--danger)':'var(--muted)'}">
+        ${k==='naive_carry_forward'?'baseline':(m.beats_naive?'beats naive':'does NOT beat')}</td></tr>`).join("");
+
+  setPanel(`
+    <div class="section"><h2>Historical price index</h2>
+      <table class="data">
+        <tr><th>Years covered</th><td>${d.panel.year_min}–${d.panel.year_max}</td></tr>
+        <tr><th>Panel points</th><td>${d.panel.rows} across ${d.panel.localities} localities</td></tr>
+        <tr><th>CAGR</th><td><b>${d.cagr_pct}%</b> per year</td></tr>
+        <tr><th>Trend slope</th><td>${inr(d.trend_slope_per_year)} /sq.ft per year</td></tr>
+      </table>
+      <img src="${plot}" alt="Price index and projection"
+           style="width:100%;margin-top:10px;border:1px solid var(--line);border-radius:4px">
+    </div>
+
+    <div class="section"><h2>Time-based validation</h2>
+      <p class="why" style="margin-bottom:8px">${escapeHtml(v.scheme||"")} ·
+        train ${escapeHtml(v.train_years||"")} (${v.train_rows} rows),
+        validate ${escapeHtml(v.validation_years||"")} (${v.validation_rows} rows)</p>
+      <table class="data">
+        <tr><th style="width:auto">Model</th>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">MAE</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">MAPE</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">vs baseline</td></tr>
+        ${modelRows}
+      </table>
+      <p class="notice${d.beats_naive_baseline?'':' red'}" style="margin-top:10px">
+        <b>${d.beats_naive_baseline ? "The selected model beats the naive baseline."
+          : "No model beats the naive baseline."}</b><br>
+        ${escapeHtml(d.baseline_note||"")}</p>
+      <p class="why" style="margin-top:7px">${escapeHtml(v.note||"")}</p>
+    </div>
+
+    <div class="section"><h2>Projections</h2>
+      <table class="data">
+        <tr><th style="width:auto">Horizon</th>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">year</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">linear</td>
+          <td style="text-align:right;font-size:.7rem;color:var(--muted)">CAGR</td></tr>
+        ${(d.forecasts||[]).map(f=>`
+          <tr><th style="width:auto">${f.horizon_years} year${f.horizon_years>1?'s':''}</th>
+            <td style="text-align:right">${f.target_year}</td>
+            <td style="text-align:right">${inr(f.linear_trend)}</td>
+            <td style="text-align:right">${inr(f.cagr_projection)}</td></tr>`).join("")}
+      </table>
+      <p class="notice red" style="margin-top:10px"><b>Read this before quoting any
+        figure above.</b><br>${escapeHtml(d.critical_caveat||"")}</p>
+    </div>`);
+}
+
+/* ---------------- Glossary + where ML works ---------------- */
+async function renderGlossary(){
+  setPanel(`<div class="hint">Loading glossary…</div>`);
+  let g;
+  try{ g = await (await fetch(`${API}/predict/glossary`)).json(); }
+  catch(e){ return setPanel(`<div class="section"><p class="notice red">${escapeHtml(String(e))}</p></div>`); }
+
+  const badge = m => `<span class="mlbadge ${m}">${m}</span>`;
+
+  setPanel(`
+    <div class="section"><h2>Where machine learning actually works</h2>
+      <p class="why" style="margin-bottom:9px">
+        ${g.ml_feature_count} of the ${g.ml_map.length} listed features use a trained
+        model. The rest are geometry, formulas or rules — labelled honestly rather
+        than described as “AI”.</p>
+      <div class="legend-row">
+        ${Object.entries(g.method_legend).map(([k,v])=>
+          `<div>${badge(k)} <span class="why">${escapeHtml(v)}</span></div>`).join("")}
+      </div>
+      <table class="data" style="margin-top:9px">
+        ${g.ml_map.map(m=>`
+          <tr><th style="width:auto">${badge(m.method)} ${escapeHtml(m.feature)}
+            <div class="why">${escapeHtml(m.tab)}</div></th>
+            <td class="why">${escapeHtml(m.detail)}</td></tr>`).join("")}
+      </table>
+    </div>
+
+    ${Object.entries(g.terms).map(([grp, items])=>`
+      <div class="section"><h2>${escapeHtml(grp)}</h2>
+        <table class="data">${items.map(t=>`
+          <tr><th style="width:132px"><b>${escapeHtml(t.term)}</b>
+            <div class="why">${escapeHtml(t.full)}</div></th>
+            <td>${escapeHtml(t.meaning)}
+              <div class="why"><b>Reading it:</b> ${escapeHtml(t.reading)}</div>
+              <div class="why" style="color:var(--accent)"><b>Caution:</b> ${escapeHtml(t.caution)}</div>
+            </td></tr>`).join("")}</table>
+      </div>`).join("")}`);
+}
+
+/* ---------------- Investment Score / insights ---------------- */
+async function renderInsights(){
+  setPanel(`
+    <div class="section"><h2>Property inputs</h2>
+      <div class="form">
+        <div class="field"><label for="iSqft">Area sq.ft</label>
+          <input id="iSqft" type="number" value="1200" min="200" step="50"></div>
+        <div class="field"><label for="iRooms">Bedrooms</label>
+          <input id="iRooms" type="number" value="2" min="1" max="10"></div>
+        <div class="field"><label for="iBath">Bathrooms</label>
+          <input id="iBath" type="number" value="2" min="1" max="10"></div>
+        <div class="field"><label for="iAsk">Asking ₹/sq.ft</label>
+          <input id="iAsk" type="number" value="7000" min="100" step="100"></div>
+        <button class="btn" onclick="runInsights()">Analyse</button>
+      </div>
+      <div id="iOut" class="why">Analysing…</div>
+    </div>`);
+  runInsights();
+}
+
+async function runInsights(){
+  const out = document.getElementById("iOut");
+  out.textContent = "Analysing…";
+  const body = {
+    city: currentCity,
+    lat: currentPoint?.lat, lng: currentPoint?.lng,
+    sqft: Number(document.getElementById("iSqft").value),
+    rooms: Number(document.getElementById("iRooms").value),
+    bath: Number(document.getElementById("iBath").value),
+    observed_price_per_sqft: Number(document.getElementById("iAsk").value),
+    corporation: currentCorp
+  };
+  let d;
+  try{
+    const r = await fetch(`${API}/insights/analyze`, {method:"POST",
+      headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)});
+    d = await r.json();
+    if (r.status !== 200) throw new Error(d.detail || d.title);
+  }catch(e){
+    out.innerHTML = `<p class="notice red">${escapeHtml(String(e.message||e))}</p>`; return;
+  }
+
+  const p = d.price_prediction, a = d.overpricing, dem = d.demand,
+        rk = d.risk, inv = d.investment_score, rec = d.recommendations;
+  const band = b => b === "HIGH" || b === "STRONG" ? "GREEN"
+                  : b === "MEDIUM" || b === "MODERATE" ? "AMBER" : "RED";
+
+  out.innerHTML = `
+    <table class="data">
+      <tr><th>Predicted</th><td><span class="badge AMBER"></span>
+        <b>${p.price_per_sqft ? inr(p.price_per_sqft) : "—"}</b> /sq.ft
+        <div class="why">${p.range_low ? inr(p.range_low)+" – "+inr(p.range_high) : ""}
+          · <b>${escapeHtml(p.method)}</b></div></td></tr>
+      <tr><th>Overpricing</th><td>
+        <span class="badge ${a.verdict==='FAIRLY PRICED'?'GREEN':a.verdict==='UNAVAILABLE'?'GREY':'RED'}"></span>
+        <b>${escapeHtml(a.verdict)}</b>
+        <div class="why">${escapeHtml(a.note || a.reason || "")}
+          ${a.difference_pct!==undefined ? ` (${a.difference_pct>0?'+':''}${a.difference_pct}%)` : ""}
+          <br><b>${escapeHtml(a.method)}</b></div></td></tr>
+      <tr><th>Demand</th><td><span class="badge ${band(dem.band)}"></span>
+        <b>${dem.band}</b> — ${dem.score}/100
+        <div class="why"><b>${escapeHtml(dem.method)}</b> — ${escapeHtml(dem.note)}</div></td></tr>
+      <tr><th>Risk</th><td><span class="badge ${rk.band==='LOW'?'GREEN':rk.band==='MEDIUM'?'AMBER':'RED'}"></span>
+        <b>${rk.band}</b> — ${rk.score}/100
+        <div class="why"><b>${escapeHtml(rk.method)}</b> — ${escapeHtml(rk.note)}</div></td></tr>
+      <tr><th>Investment Score</th><td>
+        <span class="badge ${inv.score===null?'GREY':band(inv.band)}"></span>
+        <b>${inv.score===null?"—":inv.score+"/100 · "+inv.band}</b>
+        <div class="why"><b>${escapeHtml(inv.method)}</b><br>${escapeHtml(inv.note||inv.reason||"")}</div></td></tr>
+    </table>
+
+    ${inv.components ? `<p class="why" style="margin-top:9px"><b>Score components</b></p>
+    <table class="data">${Object.entries(inv.components).map(([k,v])=>`
+      <tr><th style="width:auto">${escapeHtml(k.replace(/_/g,' '))}</th>
+        <td style="text-align:right">${v.score} <span class="why">w=${v.weight} ·
+        ${escapeHtml(v.method)}</span></td></tr>`).join("")}</table>` : ""}
+
+    <p class="notice" style="margin-top:10px"><b>Risk excludes:</b>
+      ${(rk.excluded||[]).map(escapeHtml).join("<br>")}</p>
+
+    ${rec && rec.available ? `<p class="why" style="margin-top:11px"><b>Similar properties</b>
+      — ${escapeHtml(rec.method)}</p>
+      <table class="data">${rec.results.map(r=>`
+        <tr><th style="width:auto">${escapeHtml(r.locality)}</th><td style="text-align:right">
+          ${inr(r.price_per_sqft)}/sq.ft
+          <div class="why">${r.sqft} sq.ft · ${r.rooms} rooms · similarity ${r.similarity}</div>
+        </td></tr>`).join("")}</table>
+      <p class="why">${escapeHtml(rec.caveat)}</p>` : ""}`;
+}
+
+/* ---------------- BUILDER MODE ---------------- */
+async function renderBuilder(){
+  setPanel(`
+    <div class="section"><h2>Project inputs</h2>
+      <div class="form">
+        <div class="field"><label for="bLand">Land sq.ft</label>
+          <input id="bLand" type="number" value="10000" step="500"></div>
+        <div class="field"><label for="bLandCost">Land cost ₹</label>
+          <input id="bLandCost" type="number" value="18000000" step="1000000" style="width:120px"></div>
+        <div class="field"><label for="bCon">Constr ₹/sq.ft</label>
+          <input id="bCon" type="number" value="2200" step="100"></div>
+        <div class="field"><label for="bBuilt">Built-up sq.ft</label>
+          <input id="bBuilt" type="number" value="18000" step="500"></div>
+        <div class="field"><label for="bUnits">Units</label>
+          <input id="bUnits" type="number" value="16" min="1"></div>
+        <div class="field"><label for="bUnitSize">Unit sq.ft</label>
+          <input id="bUnitSize" type="number" value="1150" step="50"></div>
+        <button class="btn" onclick="runBuilder()">Analyse ROI</button>
+      </div>
+      <p class="why">Selling price is taken from the trained ML model for
+        ${escapeHtml(cityMeta[currentCity]?.name || currentCity)} unless you override it.</p>
+      <div id="bOut" class="why">Analysing…</div>
+    </div>`);
+  runBuilder();
+}
+
+async function runBuilder(){
+  const out = document.getElementById("bOut");
+  out.textContent = "Analysing…";
+  const body = {
+    city: currentCity,
+    land_area_sqft: Number(document.getElementById("bLand").value),
+    land_cost_total: Number(document.getElementById("bLandCost").value),
+    construction_cost_per_sqft: Number(document.getElementById("bCon").value),
+    expected_builtup_sqft: Number(document.getElementById("bBuilt").value),
+    num_units: Number(document.getElementById("bUnits").value),
+    avg_unit_size_sqft: Number(document.getElementById("bUnitSize").value),
+    corporation: currentCorp
+  };
+  let d;
+  try{
+    const r = await fetch(`${API}/builder/analyze`, {method:"POST",
+      headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)});
+    d = await r.json();
+    if (r.status !== 200 || d.error) throw new Error(d.detail || d.error || d.title);
+  }catch(e){
+    out.innerHTML = `<p class="notice red">${escapeHtml(String(e.message||e))}</p>`; return;
+  }
+
+  const c = d.costs, rt = d.returns, be = d.breakeven, dg = d.diagnosis || {};
+  out.innerHTML = `
+    ${dg.headline ? `<p class="notice${dg.viable ? "" : " red"}" style="margin-bottom:10px">
+      <b>${escapeHtml(dg.headline)}</b>
+      ${(dg.reasons||[]).length ? "<br>" + dg.reasons.map(escapeHtml).join("<br>") : ""}
+      ${(dg.to_break_even||[]).length ? "<br><br><b>To reach break-even:</b><br>"
+        + dg.to_break_even.map(escapeHtml).join("<br>") : ""}
+      <br><br><i>${escapeHtml(dg.note||"")}</i></p>` : ""}
+    <table class="data">
+      <tr><th>Selling price</th><td>${inr(d.inputs.expected_selling_price_psf)} /sq.ft
+        <div class="why">${escapeHtml(d.inputs.expected_selling_price_source)}</div></td></tr>
+      <tr><th>Land</th><td style="text-align:right">${inr(c.land)}</td></tr>
+      <tr><th>Construction</th><td style="text-align:right">${inr(c.construction)}</td></tr>
+      <tr><th>Other costs</th><td style="text-align:right">${inr(c.other_costs)}</td></tr>
+      <tr><th>Marketing</th><td style="text-align:right">${inr(c.marketing)}</td></tr>
+      <tr><th>Finance</th><td style="text-align:right">${inr(c.finance)}</td></tr>
+      <tr><th><b>Total cost</b></th><td style="text-align:right"><b>${inr(c.total)}</b></td></tr>
+      <tr><th>Revenue</th><td style="text-align:right">${inr(rt.revenue)}</td></tr>
+      <tr><th><b>Net profit</b></th><td style="text-align:right">
+        <b style="color:${rt.net_profit>=0?'var(--green)':'var(--danger)'}">${inr(rt.net_profit)}</b></td></tr>
+      <tr><th>ROI</th><td style="text-align:right"><b>${rt.roi_pct}%</b>
+        <div class="why">margin ${rt.margin_pct}%</div></td></tr>
+      <tr><th>Break-even</th><td style="text-align:right">${inr(be.price_per_sqft)}/sq.ft
+        <div class="why">${be.units_to_sell} units to sell</div></td></tr>
+    </table>
+
+    <p class="why" style="margin-top:10px"><b>Scenarios</b></p>
+    <table class="data">${d.scenarios.map(s=>`
+      <tr><th style="width:auto">${escapeHtml(s.scenario)}</th><td style="text-align:right">
+        ${inr(s.net_profit)} <div class="why">ROI ${s.roi_pct}% · ${escapeHtml(s.assumption)}</div>
+      </td></tr>`).join("")}</table>
+
+    <p class="notice" style="margin-top:10px">${escapeHtml(d.regulatory_note)}</p>
+    <p class="why"><b>Assumptions:</b><br>${d.assumptions.map(escapeHtml).join("<br>")}</p>
+    <p class="why">${escapeHtml(d.disclaimer)}</p>`;
+}
+
+/* ---------------- Compare Cities ---------------- */
+async function renderCompare(){
+  setPanel(`<div class="hint">Loading city comparison…</div>`);
+  let d;
+  try{ d = await (await fetch(`${API}/ml/compare`)).json(); }
+  catch(e){ return setPanel(`<div class="section"><p class="notice red">
+    ${escapeHtml(String(e))}</p></div>`); }
+
+  setPanel(`
+    <div class="section"><h2>City-level comparison</h2>
+      <table class="data">
+        ${d.data.map(c=>`
+          <tr><th style="width:auto"><b>${escapeHtml(c.city)}</b></th><td>
+            ${c.available ? `
+              <div class="why">${escapeHtml(c.authority)} · ${c.wards} wards</div>
+              <table class="data" style="margin-top:5px">
+                <tr><th>Median ₹/sq.ft</th><td style="text-align:right">
+                  ${c.median_price_per_sqft ? inr(c.median_price_per_sqft) : "—"}</td></tr>
+                <tr><th>Records</th><td style="text-align:right">
+                  ${(c.rows||0).toLocaleString("en-IN")}</td></tr>
+                <tr><th>Model</th><td style="text-align:right">${escapeHtml(c.algorithm||"—")}</td></tr>
+                <tr><th>Spatial R²</th><td style="text-align:right">${num(c.spatial_cv_r2)}</td></tr>
+                <tr><th>Test MAE</th><td style="text-align:right">
+                  ${c.test_mae ? inr(c.test_mae) : "—"}</td></tr>
+                <tr><th>Target</th><td style="text-align:right">${escapeHtml(c.target_label||"")}</td></tr>
+              </table>
+              <p class="why">${escapeHtml(c.target_note||"")}</p>`
+            : `<span class="na">${escapeHtml(c.reason)}</span>`}
+          </td></tr>`).join("")}
+      </table>
+      <p class="notice red" style="margin-top:11px">${escapeHtml(d.caveat)}</p>
+    </div>`);
+}
+
+function label(key){
+  const l = LABELS[key];
+  if (!l) return key;
+  if (lang === "local") return l[CITY_LANG[currentCity].idx] || l[0];
+  return l[0];
+}
+
+// A section whose rows() produced nothing renders as a bare heading, which
+// reads as broken. hasRows() lets a caller drop the whole section instead.
+function hasRows(keys, data){ return keys.some(k => data[k]); }
+
+// Wraps a titled section and emits nothing at all when it has no rows.
+function section(title, keys, data, extraHtml){
+  if (!hasRows(keys, data)) return "";
+  return `<div class="section"><h2>${title}</h2>${rows(keys, data)}${extraHtml||""}</div>`;
+}
+
+function rows(keys, data){
+  return `<table class="data">` + keys.filter(k=>data[k]).map(k=>{
+    const f = data[k];
+    const v = (f.value === null || f.value === undefined)
+      ? `<span class="na">Data unavailable</span>`
+      : escapeHtml(String(f.value)) + (f.unit ? " " + escapeHtml(f.unit) : "");
+    const knCls = k.endsWith("_kn") ? ' class="kn"' : '';
+    return `<tr><th>${escapeHtml(label(k))}</th><td>
+      <span class="badge ${f.colour}"></span><span${knCls}>${v}</span>
+      ${f.reason ? `<div class="why">${escapeHtml(f.reason)}</div>` : ""}
+      ${(f.caveats||[]).map(c=>`<div class="why">${escapeHtml(c)}</div>`).join("")}
+      ${f.source ? `<button class="srcbtn" onclick="showSource('${k}')">View source</button>` : ""}
+      </td></tr>`;
+  }).join("") + `</table>`;
+}
+
+function renderJurisdiction(){
+  const d = currentData.data;
+  const pct = Math.round(currentData.confidence.overall * 100);
+  setPanel(`
+    <div class="section"><h2>Jurisdiction</h2>${rows(CORE, d)}</div>
+    <div class="section"><h2>Planning &amp; permission authority</h2>
+      ${rows(AUTHORITY, d)}
+      <p class="why" style="margin-top:9px">Inside a city corporation this is
+        fixed by statute, not inferred from geography &mdash; so it is answered
+        with a citation. <b>Outside</b> corporation limits it is still
+        unavailable: which of the regional authorities applies (BDA, BMRDA,
+        BIAAPA, Anekal and others) needs a boundary layer that nobody
+        publishes &mdash; only PDF jurisdiction maps exist.</p>
+      <p class="notice" style="margin-top:7px">Naming the authority is not a
+        permission and not an indication of what will be permitted.</p>
+    </div>
+    <div class="section"><h2>Revenue &amp; administrative jurisdiction</h2>
+      ${rows(REVENUE, d)}
+      <p class="why" style="margin-top:9px"><b>Two layers answer different questions.</b>
+        <b>District</b> and <b>taluk</b> come from an administrative boundary
+        layer and resolve <b>everywhere</b> in both cities &mdash; shown AMBER
+        because it is republished from LGD / Survey of India rather than fetched
+        from them, and carries no per-boundary vintage.
+        <b>Hobli</b>, <b>village</b> and <b>survey number</b> are cadastral: they
+        come from published revenue sheets, which cover part of Bengaluru and
+        none of Chennai. Where a sheet covers the point it also supplies a
+        higher-confidence taluk, shown GREEN.</p>
+      <p class="notice" style="margin-top:8px">A boundary polygon cannot produce
+        a survey number. Widening taluk coverage to the whole city did not widen
+        what the platform claims to know about a parcel.</p>
+    </div>
+    <div class="section"><h2>Road access <span class="mlbadge RULE">MODULE 8</span></h2>
+      ${rows(ROAD, d)}
+      <p class="notice" style="margin-top:9px"><b>Two widths, and only one of them
+        is usable.</b> The source publishes an existing width and a proposed
+        width; across all 23,324 segments the proposed figure is larger, and the
+        median is roughly double. Road width governs FAR, height and setback —
+        so the proposed figure is shown for information and is
+        <b>excluded from every feasibility calculation</b>.</p>
+      <p class="why" style="margin-top:7px">Distance is to the nearest mapped
+        centreline. It does not establish that this road abuts the property —
+        that is settled by the property's boundary, which this platform does not
+        hold. The layer is a width map for the roads BBMP tracks, not the
+        complete street network, so most residential lanes have no segment near
+        them.</p>
+    </div>
+    ${section("Environmental — reported flooding", ENVIRONMENT, d,
+      `<p class="notice" style="margin-top:9px"><b>This is proximity, not a risk
+        score.</b> BBMP publishes 391 reported flooding locations with no return
+        period, depth, drainage or terrain data. That supports &ldquo;flooding
+        has been reported N metres away&rdquo;; it cannot support a risk
+        percentage, and none is produced. The environmental risk score still
+        lists flood as <b>excluded</b>.</p>
+       <p class="why" style="margin-top:7px">No reported point nearby is
+        <b>not</b> evidence that a property does not flood &mdash; the dataset is
+        a report, not a survey.</p>`)}
+    ${section("Requested — no data source", GAPS, d)}
+    <div class="section"><h2>Data confidence</h2>
+      <div class="gauge"><span class="pct">${pct}%</span>
+        <div class="bar"><i style="width:${pct}%"></i></div></div>
+      <p class="why" style="margin-top:8px">${escapeHtml(currentData.confidence.note)}</p>
+      <p class="notice" style="margin-top:9px">Ward identity is verified at 85% — the
+        ceiling for official data republished through a portal. The overall figure is
+        held down by the fields above for which no public dataset exists.</p>
+    </div>`);
+}
+
+function renderMarket(){
+  setPanel(`
+    <div class="section"><h2>Estimate asking price</h2>
+      <p class="why" style="margin-bottom:9px">Corporation taken from the selected ward:
+        <b>${escapeHtml(currentCorp)}</b></p>
+      <div class="form">
+        <div class="field"><label for="mSqft">Area sq.ft</label>
+          <input id="mSqft" type="number" value="1200" min="200" step="50"></div>
+        <div class="field"><label for="mRooms">Bedrooms</label>
+          <input id="mRooms" type="number" value="2" min="1" max="10"></div>
+        <div class="field"><label for="mBath">Bathrooms</label>
+          <input id="mBath" type="number" value="2" min="1" max="10"></div>
+        <div class="field"><label for="mLocality">Locality
+            <span class="why">(guidance value &amp; transaction price are keyed
+              by locality — left blank, the selected location is used)</span></label>
+          <input id="mLocality" type="text" placeholder="auto from your selection"></div>
+        <button class="btn" onclick="estimatePrice()">Estimate</button>
+      </div>
+      <div id="mOut" class="why">Estimating…</div>
+    </div>`);
+  estimatePrice();          // show results immediately, not an empty form
+}
+
+async function renderNearby(){
+  setPanel(`<div class="hint">Finding nearby facilities…</div>`);
+  let body;
+  try{
+    const r = await fetch(`${API}/nearby?lat=${currentPoint.lat}&lng=${currentPoint.lng}&city=${currentCity}`);
+    body = await r.json();
+    if (r.status !== 200) throw new Error(body.detail || body.title);
+  }catch(e){
+    return setPanel(`<div class="section"><p class="notice red">
+      ${escapeHtml(String(e.message||e))}</p></div>`);
+  }
+
+  if (!body.available){
+    return setPanel(`<div class="section"><h2>Nearby facilities</h2>
+      <p class="notice">${escapeHtml(body.scores.connectivity_score.reason)}</p></div>`);
+  }
+
+  const GROUP_TITLES = {
+    transport:"Transport", government:"Government offices",
+    healthcare:"Healthcare", education:"Education", daily_life:"Daily life" };
+  const dist = m => m >= 1000 ? (m/1000).toFixed(1)+" km" : m+" m";
+
+  const scoreRows = Object.entries(body.scores).map(([k,f])=>{
+    const nm = k.replace("_score","").replace("_"," ");
+    const v = f.value ?? 0;
+    return `<tr><th>${nm.charAt(0).toUpperCase()+nm.slice(1)}</th><td>
+      <span class="badge ${f.colour}"></span><b>${v}</b> / 100
+      <div class="bar" style="margin-top:4px"><i style="width:${v}%"></i></div></td></tr>`;
+  }).join("");
+
+  const groupHtml = Object.entries(body.groups).map(([g,items])=>{
+    if (!items.length) return `<div class="section"><h2>${GROUP_TITLES[g]}</h2>
+      <p class="why"><span class="badge GREY"></span>None found within 5 km.
+      ${escapeHtml(body.caveats.coverage)}</p></div>`;
+    return `<div class="section"><h2>${GROUP_TITLES[g]}</h2>
+      ${g === "government" ? `<p class="notice" style="margin-bottom:9px">
+        ${escapeHtml(body.caveats.government)}</p>` : ""}
+      <table class="data">${items.slice(0,8).map(i=>`
+        <tr><th style="width:auto">${escapeHtml(i.name || i.category)}</th>
+          <td style="text-align:right;white-space:nowrap">${dist(i.distance_m)}
+            <div class="why">${escapeHtml(i.category.replace(/_/g," "))}</div></td></tr>`
+      ).join("")}</table></div>`;
+  }).join("");
+
+  setPanel(`
+    <div class="section"><h2>Accessibility scores</h2>
+      <table class="data">${scoreRows}</table>
+      <p class="why" style="margin-top:8px">${escapeHtml(body.confidence.note)}</p>
+    </div>
+    ${groupHtml}
+    <div class="section"><p class="why">${escapeHtml(body.attribution)}</p></div>`);
+}
+
+function renderFeasibility(){
+  setPanel(`
+    <div class="section"><h2>What can be built here</h2>
+      <div class="form">
+        <div class="field"><label for="fArea">Plot sq.m</label>
+          <input id="fArea" type="number" value="929" min="30" step="10"></div>
+        <div class="field"><label for="fRoad">Road width m</label>
+          <input id="fRoad" type="number" value="12.2" min="1" step="0.5"></div>
+        <button class="btn" onclick="runFeasibility()">Evaluate</button>
+      </div>
+      <div id="fOut" class="why">Evaluating…</div>
+    </div>`);
+  runFeasibility();         // show results immediately, not an empty form
+}
+
+async function renderSources(){
+  setPanel(`<div class="hint">Loading source registry…</div>`);
+  const cat = await (await fetch(`${API}/map/layers`)).json();
+  setPanel(`<div class="section"><h2>Map layers</h2>
+    <table class="data">${cat.data.map(l=>`
+      <tr><th>${escapeHtml(l.title)}</th><td>
+        <span class="badge ${l.tier==="T2"?"GREEN":"AMBER"}"></span>
+        Tier ${l.tier} · ${escapeHtml(l.rendering)}
+        <div class="why">${escapeHtml(l.source)}<br>Licence: ${escapeHtml(l.licence||"—")}
+        ${l.valid_as_of ? "<br>Valid as of: "+l.valid_as_of : ""}</div>
+        ${l.source_url ? `<a class="srcbtn" href="${l.source_url}" target="_blank" rel="noopener">Open source</a>` : ""}
+      </td></tr>`).join("")}</table>
+    <p class="notice" style="margin-top:10px">Derived layers are drawn with a dashed
+      outline so they can never be mistaken for a notified boundary.</p>
+    </div>
+    <div class="section" id="srcReg"><div class="hint">Loading dataset registry&hellip;</div></div>`);
+
+  // Full provenance registry — every dataset actually downloaded, with its link.
+  let reg;
+  try{ reg = await (await fetch(`${API}/sources`)).json(); }
+  catch(e){
+    document.getElementById("srcReg").innerHTML =
+      `<h2>Dataset registry</h2><p class="notice red">Could not load: ${escapeHtml(String(e))}</p>`;
+    return;
+  }
+
+  const TIER_WHY = {
+    T1:"Official government source",
+    T2:"Government data via a recognised portal",
+    T3:"Community-maintained open data",
+    T4:"Public dataset, not a government register",
+    T5:"Derived by this platform"
+  };
+
+  document.getElementById("srcReg").innerHTML = `
+    <h2>Dataset registry &mdash; ${reg.count} sources</h2>
+    <p class="why">${escapeHtml(reg.note||"")}</p>
+    ${reg.data.map(s=>`
+      <div style="border-top:1px solid var(--line);padding:9px 0">
+        <div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+          <span class="badge ${s.tier==="T1"||s.tier==="T2"?"GREEN":s.tier==="T5"?"GREY":"AMBER"}"></span>
+          <b>${escapeHtml(s.name)}</b>
+          <span class="mlbadge RULE">${escapeHtml(s.tier)}</span>
+          <span class="mlbadge RULE">${escapeHtml(s.availability)}</span>
+        </div>
+        <div class="why" style="margin-top:4px">
+          ${escapeHtml(s.organisation||"&mdash;")} &middot;
+          ${escapeHtml(TIER_WHY[s.tier]||"")}
+          ${s.retrieved_at ? " &middot; retrieved "+escapeHtml(s.retrieved_at.slice(0,10)) : ""}
+          ${s.source_updated ? " &middot; source updated "+escapeHtml(s.source_updated) : ""}
+        </div>
+        <div class="why">Licence: ${escapeHtml(s.licence||"not stated")}
+          ${s.attribution ? "<br>Attribution: "+escapeHtml(s.attribution) : ""}
+          ${s.access_notes ? "<br>"+escapeHtml(s.access_notes) : ""}
+          ${s.transformation ? "<br>Transformation: "+escapeHtml(s.transformation) : ""}</div>
+        ${(s.caveats||[]).map(c=>`<p class="notice" style="margin-top:6px">${escapeHtml(c)}</p>`).join("")}
+        ${s.source_url ? `<a class="srcbtn" href="${s.source_url}" target="_blank"
+           rel="noopener" style="margin-top:6px">Open source page &rarr;</a>` : ""}
+        ${s.download_url && s.download_url !== s.source_url
+           ? `<a class="srcbtn" href="${s.download_url}" target="_blank" rel="noopener"
+                style="margin-top:6px">Direct download &rarr;</a>` : ""}
+      </div>`).join("")}
+    <p class="notice" style="margin-top:10px">Tier is about the <b>source</b>, not
+      the quality of the file. A T4 property dataset is public data, not a
+      government register &mdash; nothing in it is a property record.</p>`;
+}
+
+
+/* A fact row that shows the value when there is one, and the reason when there
+   is not — instead of hard-coding "Data unavailable" and hoping. */
+/* What the user typed, else the locality the selected point resolves to.
+   Guidance value and transaction price are keyed by locality, so without this
+   the lookup silently never matches and the row looks broken. */
+function localityForLookup(){
+  const typed = (document.getElementById("mLocality")||{}).value;
+  if (typed && typed.trim()) return typed.trim();
+  const d = (currentData && currentData.data) || {};
+  const pick = k => d[k] && d[k].value ? String(d[k].value) : null;
+  // village is the closest thing to a locality; ward name is the fallback.
+  return pick("village") || (pick("ward_name")||"").replace(/^\d+\s*-\s*/, "") || null;
+}
+
+/* An unavailable fact is not one thing. "Nobody has recorded it yet" is an
+   invitation; "no public source exists" is a finding. Rendering both as a grey
+   "Data unavailable" makes a working feature look broken. */
+function factRow(label, f, fmt, suffix){
+  if (!f) return "";
+  if (f.value === null || f.value === undefined){
+    const reason = f.reason || "";
+    const recordable = /has been recorded|Record it in the Market tab/i.test(reason);
+    const state = recordable ? "NOT YET RECORDED" : "NOT PUBLISHED";
+    const badge = recordable ? "AMBER" : "GREY";
+    const next  = recordable
+      ? "You can add it below — the platform is not permitted to fetch it."
+      : "No public source exists. This is a finding, not a missing feature.";
+    return `<tr><th>${escapeHtml(label)}</th><td><span class="badge ${badge}"></span>
+      <b class="na">${state}</b>
+      <div class="why">${escapeHtml(reason)}</div>
+      <div class="why"><b>${escapeHtml(next)}</b></div></td></tr>`;
+  }
+  const caveats = (f.caveats||[]).filter(Boolean)
+    .map(c=>`<div class="why">${escapeHtml(c)}</div>`).join("");
+  return `<tr><th>${escapeHtml(label)}</th><td>
+    <span class="badge ${f.colour||"AMBER"}"></span>
+    <b>${fmt ? fmt(f.value) : escapeHtml(String(f.value))}</b> ${escapeHtml(suffix||"")}
+    <div class="why">Status ${escapeHtml(f.status||"")} &middot; confidence
+      ${Math.round((f.confidence||0)*100)}%</div>
+    ${caveats}</td></tr>`;
+}
+
+/* Guidance value is portal-only with no public API, so the platform never
+   fetches it. This is the sanctioned path: a person looks it up and records
+   it, attributed to them, stored as MANUAL ENTRY and never VERIFIED. */
+function guidanceForm(f){
+  if (f && f.value !== null && f.value !== undefined) return "";
+  return `
+    <div style="border-top:1px solid var(--line);margin-top:11px;padding-top:9px">
+      <p class="why"><b>Record a guidance value you looked up yourself</b><br>
+        The platform does not fetch this &mdash; the official portal has no
+        public API and its terms do not permit automated retrieval. Enter what
+        you read there and it is stored as <b>MANUAL ENTRY</b>, attributed to
+        you, and never labelled VERIFIED.</p>
+      <div class="form" style="margin-top:7px">
+        <div class="field"><label for="gvLocality">Locality</label>
+          <input id="gvLocality" type="text" placeholder="e.g. Chrompet"
+            value="${escapeHtml(localityForLookup()||"")}"></div>
+        <div class="field"><label for="gvValue">Guidance value ₹/sq.ft</label>
+          <input id="gvValue" type="number" min="1" step="50"></div>
+        <div class="field"><label for="gvBy">Recorded by</label>
+          <input id="gvBy" type="text" placeholder="your name"></div>
+        <button class="btn" onclick="recordGuidance()">Record</button>
+      </div>
+      <div id="gvOut" class="why" style="margin-top:7px"></div>
+    </div>`;
+}
+
+async function recordGuidance(){
+  const out = document.getElementById("gvOut");
+  const locality = document.getElementById("gvLocality").value.trim();
+  const value = Number(document.getElementById("gvValue").value);
+  const by = document.getElementById("gvBy").value.trim();
+  if (!locality || !value || !by){
+    out.innerHTML = `<span class="notice">Locality, value and your name are all required —
+      an unattributed entry would have no provenance.</span>`;
+    return;
+  }
+  out.textContent = "Recording…";
+  try{
+    const r = await fetch(`${API}/extra/guidance-value`,{method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({city:currentCity, locality, value_per_sqft:value, recorded_by:by})});
+    const d = await r.json();
+    if (r.status !== 200) throw new Error(d.detail || d.title);
+    out.innerHTML = `<span class="notice"><b>Stored as ${escapeHtml(d.method)}.</b>
+      ${escapeHtml(d.note)}</span>`;
+    const ml = document.getElementById("mLocality");
+    if (ml) ml.value = locality;
+    setTimeout(estimatePrice, 700);      // re-estimate so the row fills in
+  }catch(e){
+    out.innerHTML = `<span class="notice red">${escapeHtml(String(e.message||e))}</span>`;
+  }
+}
+
+/* ---------------- actions ---------------- */
+async function estimatePrice(){
+  const out = document.getElementById("mOut");
+  if (!currentCorp){ out.textContent = "Select a location on the map first."; return; }
+  out.textContent = "Estimating…";
+  const payload = {
+    sqft:Number(document.getElementById("mSqft").value),
+    rooms:Number(document.getElementById("mRooms").value),
+    bath:Number(document.getElementById("mBath").value),
+    balcony:1, corporation:currentCorp, ready_to_move:true, city:currentCity,
+    locality:localityForLookup() };
+
+  let body;
+  try{
+    const res = await fetch(`${API}/valuation/estimate`,{method:"POST",
+      headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    body = await res.json();
+    if (res.status !== 200) throw new Error(body.detail || body.title);
+  }catch(e){
+    out.innerHTML = `<p class="notice red">Estimate unavailable: ${escapeHtml(String(e.message||e))}</p>`;
+    return;
+  }
+
+  const d = body.data, m = body.model;
+  const inr = n => "₹" + Math.round(n).toLocaleString("en-IN");
+  out.innerHTML = `
+    <table class="data">
+      <tr><th>Asking rate</th><td><span class="badge AMBER"></span>
+        <b>${inr(d.price_per_sqft.value)}</b> / sq.ft
+        <div class="why">90% interval ${inr(d.price_range_low.value)} –
+          ${inr(d.price_range_high.value)} · measured coverage
+          ${((m.interval?.empirical_coverage||0)*100).toFixed(1)}%</div></td></tr>
+      <tr><th>Indicative value</th><td><span class="badge AMBER"></span>
+        ${inr(d.estimated_value.value)}
+        <div class="why">${escapeHtml(d.estimated_value.assumptions[0])}</div></td></tr>
+      ${factRow("Guidance value", d.guidance_value, inr, "/sq.ft")}
+      ${factRow("Transaction price", d.transaction_price, inr, "/sq.ft")}
+    </table>
+    ${guidanceForm(d.guidance_value)}
+    <p class="notice" style="margin-top:10px"><b>Spatial-block CV R² ${m.spatial_cv_r2}</b>
+      — random k-fold on the same data reports ${m.random_cv_r2}. The
+      ${m.leakage_gap_r2} difference is neighbouring properties leaking across folds.
+      The shipped model was selected on the lower, honest score.</p>
+    <p class="why" style="margin-top:7px">${escapeHtml(d.price_per_sqft.caveats[0])}</p>
+    <p class="why">Model confidence ${(body.confidence.overall*100).toFixed(0)}% —
+      ${escapeHtml(body.confidence.note)}</p>`;
+}
+
+async function runFeasibility(){
+  const out = document.getElementById("fOut");
+  out.textContent = "Evaluating…";
+  const payload = {
+    plot_area_sqm:Number(document.getElementById("fArea").value),
+    road_width_m:Number(document.getElementById("fRoad").value),
+    road_width_source:"estimated", land_use:"residential" };
+
+  let body;
+  try{
+    const res = await fetch(`${API}/feasibility/evaluate`,{method:"POST",
+      headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    body = await res.json();
+    if (res.status !== 200) throw new Error(body.detail || body.title);
+  }catch(e){
+    out.innerHTML = `<p class="notice red">${escapeHtml(String(e.message||e))}</p>`;
+    return;
+  }
+
+  const keys = ["far","max_height","max_built_up","potential_floors","setbacks",
+                "ground_coverage","parking_spaces","potential_units"];
+  const nice = {far:"FAR / FSI",max_height:"Max height",max_built_up:"Max built-up",
+    potential_floors:"Potential floors",setbacks:"Setbacks",
+    ground_coverage:"Ground coverage",parking_spaces:"Parking",potential_units:"Dwelling units"};
+
+  out.innerHTML = `
+    <table class="data">${keys.map(k=>{
+      const f = body.data[k]; if(!f) return "";
+      const v = f.value === null ? `<span class="na">Data unavailable</span>`
+                                 : escapeHtml(String(f.value));
+      return `<tr><th>${nice[k]}</th><td><span class="badge ${f.colour}"></span>${v}
+        ${f.reason ? `<div class="why">${escapeHtml(f.reason)}</div>`:""}</td></tr>`;
+    }).join("")}</table>
+    <p class="notice red" style="margin-top:10px"><b>Blocking unknowns</b><br>
+      ${body.blocking_unknowns.slice(0,4).map(escapeHtml).join("<br>")}</p>
+    <p class="why" style="margin-top:8px"><b>${body.pending_verification.length} rules
+      pending verification.</b> Rules not verified against the source document do
+      not fire, so no FAR or height figure is published.</p>
+    ${govBlock(body.ruleset)}`;
+}
+
+/* -------- governing instruments (audit R2/R3/R4, closed 2026-08-12) --------
+   These documents were located by the Phase 0.5 research pass. They are cited
+   here and deliberately not applied: naming a source makes an answer look
+   authoritative, and nothing in them has been transcribed. -------------------*/
+function govBlock(rs){
+  const gi = rs && rs.governing_instruments;
+  if (!gi) return "";
+  const za = gi.zoning_amendment || {}, bl = gi.corporation_byelaws || {},
+        nu = gi.not_used || {};
+  return `
+    <div style="border-top:1px solid var(--line);margin-top:12px;padding-top:10px">
+      <p class="why"><b>What governs this plot</b>
+        <span class="mlbadge RULE">${escapeHtml(gi.transcription_status||"")}</span></p>
+      <table class="data">
+        <tr><th style="width:150px">Operative plan</th>
+          <td>${escapeHtml(gi.operative_plan||"")}</td></tr>
+        <tr><th>Zoning amendment</th>
+          <td>${escapeHtml(za.title||"")}
+            <div class="why">${escapeHtml(za.reference||"")} &middot; notified
+              ${escapeHtml(za.notified_on||"")} &middot; ${escapeHtml(za.issuing_authority||"")}</div>
+            ${za.source_url?`<a class="srcbtn" href="${za.source_url}" target="_blank"
+               rel="noopener">Open notification &rarr;</a>`:""}</td></tr>
+        <tr><th>Building bye-laws</th>
+          <td>${escapeHtml(bl.title||"")}
+            <div class="why"><b>${bl.instrument_count} separate instruments</b>, one per
+              corporation &middot; effective ${escapeHtml(bl.effective_from||"")}</div>
+            ${bl.source_url?`<a class="srcbtn" href="${bl.source_url}" target="_blank"
+               rel="noopener">Open bye-laws &rarr;</a>`:""}</td></tr>
+        <tr><th>Not used</th>
+          <td><span class="na">${escapeHtml(nu.title||"")}</span>
+            <div class="why">${escapeHtml(nu.why_not_used||"")}</div></td></tr>
+      </table>
+      <p class="notice" style="margin-top:9px">
+        ${escapeHtml(gi.why_values_are_still_unavailable||"")}</p>
+      <p class="why" style="margin-top:7px">${escapeHtml(gi.corporation_note||"")}</p>
+    </div>`;
+}
+
+function showSource(key){
+  const s = sources[key]; if (!s) return;
+  const d = document.getElementById("srcDialog");
+  d.innerHTML = `
+    <div class="dlg-head">Source — ${escapeHtml(label(key))}</div>
+    <div class="dlg-body"><dl>
+      <dt>Dataset</dt><dd>${escapeHtml(s.name)}</dd>
+      <dt>Publisher</dt><dd>${escapeHtml(s.organisation||"—")}</dd>
+      <dt>Provenance tier</dt><dd>${s.tier} — official data republished via a portal (ceiling 0.85)</dd>
+      <dt>Licence</dt><dd>${escapeHtml(s.licence||"—")}</dd>
+      <dt>Source updated</dt><dd>${s.source_updated||"—"}</dd>
+      <dt>Retrieved</dt><dd>${s.retrieved_at ? s.retrieved_at.slice(0,19).replace("T"," ")+" UTC" : "—"}</dd>
+      <dt>Source URL</dt><dd>${s.url ? `<a href="${s.url}" target="_blank" rel="noopener">${escapeHtml(s.url)}</a>` : "No public URL"}</dd>
+    </dl></div>
+    <div class="dlg-foot"><button class="btn" onclick="this.closest('dialog').close()">Close</button></div>`;
+  d.showModal();
+}
+
+function setPanel(html){ document.getElementById("content").innerHTML = html; }
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>
+  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+</script>
+</body>
+</html>

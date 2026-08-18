@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+
+    services:
+      db:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_USER: gba
+          POSTGRES_PASSWORD: gba
+          POSTGRES_DB: gba_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U gba"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: pip install -e ".[dev]"
+
+      - name: Lint
+        run: ruff check . && ruff format --check .
+
+      - name: Type check
+        run: mypy app
+
+      - name: Test
+        env:
+          GBA_DATABASE_URL: postgresql+psycopg://gba:gba@localhost:5432/gba_test
+        run: pytest --cov=app --cov-report=term-missing
+
+      # The invariant this whole project rests on. If provenance can be
+      # bypassed, nothing else in the confidence system means anything.
+      - name: Assert no bare fallback values
+        run: |
+          if grep -rn --include=*.py -E "Fact\.(observed|derive)\(.*confidence=1\.0" app; then
+            echo "::error::hardcoded full confidence found"; exit 1
+          fi

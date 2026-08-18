@@ -1,0 +1,62 @@
+{
+  "name": "District and taluk boundaries \u2014 bengaluru",
+  "organisation": "Local Government Directory (LGD) and Survey of India, via the india-geodata community compilation",
+  "source_url": "https://github.com/yashveeeeeeer/india-geodata",
+  "download_url": "https://github.com/yashveeeeeeer/india-geodata/releases/download/admin/subdistricts/LGD_Subdistricts.geojsonl.7z",
+  "tier": "T3",
+  "availability": "DOWNLOAD",
+  "licence": "CC0-1.0 (public domain dedication, as released)",
+  "attribution": "Boundaries from LGD / Survey of India via india-geodata (CC0)",
+  "retrieved_at": "2026-08-12T11:32:52.147500+00:00",
+  "source_updated": null,
+  "method": "http_download",
+  "transformation": "National sub-district file streamed and filtered to each city's bounding box; coordinates rounded to 5 dp; ALL-CAPS names title-cased for consistent rendering (casing only \u2014 no name was corrected or remapped)",
+  "access_notes": "24 polygons, 24 taluks, sha16=03b7e0bf34dbfd89",
+  "max_confidence": 0.7,
+  "verification_status": "UNVERIFIED",
+  "caveats": [
+    "REPUBLISHED, NOT OFFICIAL. LGD and Survey of India are the upstream authorities; this project retrieved a community compilation of them, so it is T3 and reported as INDICATIVE.",
+    "VINTAGE IS NOT STATED per feature. Karnataka and Tamil Nadu have both reorganised taluks in recent years, so a name here may predate a reorganisation.",
+    "THIS LAYER CANNOT PRODUCE A SURVEY NUMBER. It answers which taluk a point falls in. Survey number remains sourced from the revenue sheets and stays UNAVAILABLE outside their footprint.",
+    "Hobli is not an LGD level and is not present in this layer. It remains available only where a revenue sheet covers the point."
+  ],
+  "coverage": {
+    "city": "bengaluru",
+    "polygons": 24,
+    "districts": [
+      "Bengaluru Rural",
+      "Bengaluru Urban",
+      "Chikkaballapura",
+      "Kolar",
+      "Krishnagiri",
+      "Ramanagara",
+      "Tumakuru"
+    ],
+    "taluks": [
+      "Anekal",
+      "Bengaluru East",
+      "Bengaluru North",
+      "Bengaluru South",
+      "Channapatna",
+      "Chikkaballapura",
+      "Chintamani",
+      "Denkanikottai",
+      "Devanahalli",
+      "Dodda Ballapur",
+      "Hosakote",
+      "Hosur",
+      "Kanakapura",
+      "Kolar",
+      "Koratagere",
+      "Krishnagiri",
+      "Magadi",
+      "Malur",
+      "Nelamangala",
+      "Ramanagara",
+      "Shoolagiri",
+      "Sidlaghatta",
+      "Tumakuru",
+      "Yelahanka"
+    ]
+  }
+}

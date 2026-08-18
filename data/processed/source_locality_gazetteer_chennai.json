@@ -1,0 +1,19 @@
+{
+  "name": "OpenStreetMap locality gazetteer \u2014 chennai (overpass)",
+  "organisation": "OpenStreetMap contributors",
+  "source_url": "https://www.openstreetmap.org/",
+  "tier": "T3",
+  "availability": "API",
+  "licence": "Open Database License (ODbL) 1.0",
+  "attribution": "\u00a9 OpenStreetMap contributors",
+  "retrieved_at": "2026-08-10T15:36:59.575885+00:00",
+  "method": "http_download",
+  "transformation": "Overpass place nodes/ways (suburb, neighbourhood, quarter, village, town, city_district, locality, hamlet) within the city bbox, deduplicated by name preferring the more specific place type",
+  "access_notes": "781 unique locality names via overpass",
+  "max_confidence": 0.7,
+  "verification_status": "COMMUNITY_SOURCED",
+  "caveats": [
+    "Locality-level resolution only \u2014 a locality centroid is not the property's location",
+    "Matching a dataset locality string to a place name is derived evidence, not proof of location"
+  ]
+}

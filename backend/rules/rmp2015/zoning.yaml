@@ -1,0 +1,97 @@
+# Zoning / development-control rules for Bengaluru.
+#
+# STATUS: SKELETON. Almost every rule here is UNVERIFIED and therefore does NOT
+# fire. That is the intended behaviour, not an unfinished feature.
+#
+# The operative instrument is the Zoning Regulations of the Revised Master Plan
+# 2015, as amended. RMP-2031 is draft/withdrawn and must not be used.
+#
+# A rule may only move to status: VERIFIED when someone has read the clause in
+# the source document, recorded the clause reference, and cited it below. The
+# loader refuses to start if a VERIFIED rule has no clause reference.
+
+ruleset:
+  id: rmp2015-zoning
+  version: 0.1.0
+  authority: "BDA / Greater Bengaluru city corporations"
+  source_document: "Zoning Regulations, Revised Master Plan 2015 (Bengaluru)"
+  source_url: "https://www.indiacode.nic.in/ViewFileUploaded?path=AC_KA_71_402_00001_11_1552283484255%2Frulesindividualfile%2F&file=zoning_regulations_rmp2015f.pdf"
+  effective_from: "2007-06-25"
+
+  amendments:
+    - id: premium-far-2025
+      description: "Premium FAR chapter reported added after Chapter 10"
+      status: UNVERIFIED
+      blocking_task: R2
+      note: >
+        Reported February 2025 via secondary commentary. The Karnataka Gazette
+        notification has not been obtained. Not encoded.
+
+    - id: setback-parking-2026
+      description: "Setback and parking provision amendments"
+      status: UNVERIFIED
+      blocking_task: R2
+      note: >
+        Reported February 2026 via a law-firm commentary only. Not encoded.
+
+    - id: gba-byelaws
+      description: "Whether GBA has issued bye-laws superseding the BBMP position"
+      status: UNKNOWN
+      blocking_task: R3
+
+  rules:
+    - id: height-cap-narrow-road
+      description: "Building height cap where the abutting road is under 9 m"
+      clause: null                      # ← must be filled before it can fire
+      status: UNVERIFIED
+      blocking_task: R2
+      when:
+        road_width_m: { lt: 9.0 }
+      then:
+        max_height_m: 15.0
+        includes_stilt: true
+        overrides: [far_derived_height]
+      note: >
+        Reported to apply regardless of the otherwise-applicable FAR. Encoded
+        here so the shape of the rule is reviewable, but it does not fire.
+
+    - id: far-by-road-width-residential
+      description: "Residential FAR as a function of road width and plot area"
+      clause: null
+      status: UNVERIFIED
+      blocking_task: R2
+      when:
+        land_use: residential
+      then:
+        far: null
+      note: >
+        The FAR table is the core of the feasibility calculation and must be
+        transcribed from the source document clause by clause. Until then the
+        engine returns UNAVAILABLE for FAR and for everything downstream of it.
+
+    - id: setbacks-residential
+      description: "Front / rear / side setbacks by plot dimension and height"
+      clause: null
+      status: UNVERIFIED
+      blocking_task: R2
+      when:
+        land_use: residential
+      then:
+        setbacks_m: null
+
+# Rules that are pure arithmetic, not regulation, and so can be trusted once
+# their inputs are known. These DO fire.
+derived:
+  - id: max-built-up-from-far
+    description: "Maximum permissible built-up area = plot area x FAR"
+    formula: "plot_area_sqm * far"
+    requires: [plot_area_sqm, far]
+    method: RULE_EVALUATION
+
+  - id: floors-from-height
+    description: "Indicative floor count = max height / assumed floor-to-floor"
+    formula: "floor(max_height_m / floor_to_floor_m)"
+    requires: [max_height_m, floor_to_floor_m]
+    method: RULE_EVALUATION
+    assumptions:
+      - "Floor-to-floor height assumed at 3.0 m; actual depends on the design"

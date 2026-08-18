@@ -1,0 +1,127 @@
+{
+  "city": "chennai",
+  "available": true,
+  "method": "Time-aware regression on a locality-year panel",
+  "panel": {
+    "rows": 55,
+    "localities": 7,
+    "year_min": 2004,
+    "year_max": 2015,
+    "min_sales_per_point": 5
+  },
+  "validation": {
+    "scheme": "time-based \u2014 train on earlier years, validate on the last 3",
+    "train_years": "2004-2012",
+    "validation_years": "2013-2015",
+    "train_rows": 39,
+    "validation_rows": 9,
+    "note": "Random splitting is not used: it would leak future values into the training set."
+  },
+  "results": {
+    "naive_carry_forward": {
+      "mae": 270.9,
+      "mape_pct": 3.16
+    },
+    "linear_regression": {
+      "mae": 335.6,
+      "mape_pct": 3.93,
+      "beats_naive": false
+    },
+    "random_forest": {
+      "mae": 347.6,
+      "mape_pct": 4.01,
+      "beats_naive": false
+    },
+    "gradient_boosting": {
+      "mae": 444.3,
+      "mape_pct": 5.12,
+      "beats_naive": false
+    }
+  },
+  "selected_model": "linear_regression",
+  "beats_naive_baseline": false,
+  "baseline_note": "The naive baseline carries the previous year's value forward. No model beats it \u2014 on a series this short, that is the honest result and is reported rather than hidden.",
+  "city_index": [
+    {
+      "year": 2004,
+      "psf": 5988
+    },
+    {
+      "year": 2005,
+      "psf": 5958
+    },
+    {
+      "year": 2006,
+      "psf": 7360
+    },
+    {
+      "year": 2007,
+      "psf": 8437
+    },
+    {
+      "year": 2008,
+      "psf": 7984
+    },
+    {
+      "year": 2009,
+      "psf": 7700
+    },
+    {
+      "year": 2010,
+      "psf": 7452
+    },
+    {
+      "year": 2011,
+      "psf": 7416
+    },
+    {
+      "year": 2012,
+      "psf": 8083
+    },
+    {
+      "year": 2013,
+      "psf": 8999
+    },
+    {
+      "year": 2014,
+      "psf": 8906
+    },
+    {
+      "year": 2015,
+      "psf": 8675
+    }
+  ],
+  "cagr_pct": 3.43,
+  "trend_slope_per_year": 223.2,
+  "forecast_from_year": 2015,
+  "forecast_from_value": 8675,
+  "forecasts": [
+    {
+      "horizon_years": 1,
+      "target_year": 2016,
+      "linear_trend": 9197,
+      "cagr_projection": 8972,
+      "range_low": 8972,
+      "range_high": 9197
+    },
+    {
+      "horizon_years": 3,
+      "target_year": 2018,
+      "linear_trend": 9644,
+      "cagr_projection": 9598,
+      "range_low": 9598,
+      "range_high": 9644
+    },
+    {
+      "horizon_years": 5,
+      "target_year": 2020,
+      "linear_trend": 10090,
+      "cagr_projection": 10267,
+      "range_low": 10090,
+      "range_high": 10267
+    }
+  ],
+  "critical_caveat": "Projections run forward from 2015, the last year in the data \u2014 NOT from the present day. The series ends in 2015, so these are not forecasts of today's market and must not be read as current or future prices.",
+  "plot": "future_price.png",
+  "trained_at": "2026-08-10T20:25:37.901114+00:00"
+}

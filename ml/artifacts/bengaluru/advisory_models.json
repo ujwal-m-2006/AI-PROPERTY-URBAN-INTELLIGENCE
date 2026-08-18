@@ -1,0 +1,284 @@
+{
+  "city": "bengaluru",
+  "display": "Greater Bengaluru",
+  "generated_at": "2026-08-14T15:45:11.276621+00:00",
+  "target": "price_per_sqft",
+  "target_label": "asking price per sq.ft (INR)",
+  "split": "GroupShuffleSplit by locality/ward \u2014 no locality spans the split",
+  "spatial_blocks": 858,
+  "negotiation_band": {
+    "method": "Gradient boosting under pinball (quantile) loss \u2014 supervised ML",
+    "quantiles": [
+      0.1,
+      0.5,
+      0.9
+    ],
+    "pinball_loss": {
+      "p10": 297.37,
+      "p50": 807.64,
+      "p90": 466.07
+    },
+    "nominal_coverage": 0.8,
+    "measured_coverage": 0.671,
+    "calibrated": false,
+    "calibration_note": "A P10-P90 band should contain 80% of held-out actuals. It contains 67.1%. That is more than 5 points away, so the band is MISCALIBRATED \u2014 treat its width as indicative only.",
+    "quantile_crossing": {
+      "rows": 0,
+      "rate": 0.0,
+      "handling": "Independently fitted quantiles can produce P10 > P90. Every band is sorted per row before use, so a crossed prediction cannot reach a user."
+    },
+    "median_band_width": 3272,
+    "median_band_width_pct_of_price": 0.629,
+    "conformalized": {
+      "method": "Conformalized Quantile Regression (CQR) \u2014 the raw band is widened by a constant learned on a held-out calibration fold, giving distribution-free coverage",
+      "qhat": 194.3,
+      "calibration_rows": 1474,
+      "target_coverage": 0.8,
+      "measured_coverage": 0.7426,
+      "calibrated": false,
+      "direction": "UNDER-COVERS",
+      "reliable": false,
+      "few_blocks_warning": null,
+      "median_width": 3661,
+      "median_width_pct_of_price": 0.704,
+      "why": "Raw quantile regression covered 67.1% against a nominal 80% \u2014 it under-covers on localities the model never saw. CQR widens the band to reach 74.3% (UNDER-COVERS). Where that lands on target the wider band is the honest one; where it overshoots, the band is too wide to be useful and says so.",
+      "use_this_one": true,
+      "exchangeability_check": {
+        "spatial_split_coverage": 0.7426,
+        "random_split_coverage": 0.8075,
+        "finding": "The same conformal procedure reaches 80.8% under a random split but only 74.3% under the spatial split. Conformal prediction guarantees coverage only when calibration and test rows are exchangeable, and holding out whole localities breaks that on purpose. The shortfall is the honest cost of spatial validation, not a defect in the method \u2014 and the spatial number is the one reported."
+      }
+    },
+    "interpretation": {
+      "buyer": "P10 is a defensible opening offer \u2014 10% of comparable properties transact at or below it. Below P10 you are arguing against the market.",
+      "seller": "P90 is an ambitious but evidenced ask \u2014 10% achieve it. P50 is the realistic midpoint.",
+      "investor": "Band width is the market's disagreement about this property type in this area. A wide band means comparable homes vary a lot, so entry price matters more than the headline estimate."
+    },
+    "caveat": "These are quantiles of ASKING price where the city's dataset is listings, and of RECORDED SALE price where it is transactions. They are not a valuation and not a negotiating position endorsed by anyone."
+  },
+  "what_moves_price": {
+    "method": "Partial dependence on a gradient-boosting model \u2014 ML-derived",
+    "features": [
+      {
+        "feature": "sqft",
+        "grid": [
+          740.0,
+          945.45,
+          1150.91,
+          1356.36,
+          1561.82,
+          1767.27,
+          1972.73,
+          2178.18,
+          2383.64,
+          2589.09,
+          2794.55,
+          3000.0
+        ],
+        "predicted": [
+          6064.0,
+          6047.6,
+          6029.8,
+          5971.6,
+          6059.1,
+          6525.3,
+          6515.6,
+          6779.8,
+          7082.0,
+          7015.6,
+          7021.1,
+          7022.9
+        ],
+        "swing": 1110.4,
+        "swing_pct_of_median": 0.214,
+        "direction": "rises",
+        "stable_across_seeds": true,
+        "seed_directions": [
+          "rises",
+          "rises",
+          "rises"
+        ],
+        "seed_swing_range": [
+          1310.6,
+          1567.5
+        ],
+        "note": "Direction is consistent across 3 independent spatial splits."
+      },
+      {
+        "feature": "area_per_room",
+        "grid": [
+          389.19,
+          431.59,
+          473.99,
+          516.39,
+          558.79,
+          601.19,
+          643.59,
+          685.99,
+          728.38,
+          770.78,
+          813.18,
+          855.58
+        ],
+        "predicted": [
+          6069.7,
+          5817.4,
+          5817.4,
+          5819.1,
+          5806.5,
+          6099.1,
+          6248.2,
+          6368.7,
+          6736.8,
+          6736.8,
+          6694.5,
+          6674.6
+        ],
+        "swing": 930.4,
+        "swing_pct_of_median": 0.179,
+        "direction": "rises",
+        "stable_across_seeds": true,
+        "seed_directions": [
+          "rises",
+          "rises",
+          "rises"
+        ],
+        "seed_swing_range": [
+          819.7,
+          903.4
+        ],
+        "note": "Direction is consistent across 3 independent spatial splits."
+      },
+      {
+        "feature": "bath",
+        "grid": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          NaN
+        ],
+        "predicted": [
+          5844.3,
+          5845.6,
+          6311.6,
+          7356.7,
+          8860.4,
+          8843.8,
+          8752.4,
+          7114.0,
+          7114.0,
+          7114.0,
+          5845.6
+        ],
+        "swing": 3016.0,
+        "swing_pct_of_median": 0.58,
+        "direction": "UNSTABLE",
+        "stable_across_seeds": false,
+        "seed_directions": [
+          "falls",
+          "rises",
+          "flat"
+        ],
+        "seed_swing_range": [
+          1771.0,
+          7654.8
+        ],
+        "note": "Direction FLIPS between seeds, so it carries no information. Reported as unstable rather than given a direction."
+      },
+      {
+        "feature": "rooms",
+        "grid": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          11.0
+        ],
+        "predicted": [
+          6077.8,
+          6097.4,
+          6097.4,
+          6117.2,
+          6070.8,
+          4462.4,
+          4462.4,
+          4462.4,
+          4274.9,
+          4274.9
+        ],
+        "swing": 1842.3,
+        "swing_pct_of_median": 0.354,
+        "direction": "UNSTABLE",
+        "stable_across_seeds": false,
+        "seed_directions": [
+          "rises",
+          "falls",
+          "rises"
+        ],
+        "seed_swing_range": [
+          921.5,
+          2771.5
+        ],
+        "note": "Direction FLIPS between seeds, so it carries no information. Reported as unstable rather than given a direction."
+      },
+      {
+        "feature": "balcony",
+        "grid": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          NaN
+        ],
+        "predicted": [
+          6117.1,
+          6151.2,
+          6093.8,
+          6071.1,
+          6093.8
+        ],
+        "swing": 80.1,
+        "swing_pct_of_median": 0.015,
+        "direction": "UNSTABLE",
+        "stable_across_seeds": false,
+        "seed_directions": [
+          "rises",
+          "falls",
+          "rises"
+        ],
+        "seed_swing_range": [
+          75.0,
+          242.4
+        ],
+        "note": "Direction FLIPS between seeds, so it carries no information. Reported as unstable rather than given a direction."
+      }
+    ],
+    "stability": {
+      "seeds_tested": [
+        42,
+        7,
+        2024
+      ],
+      "unstable_features": [
+        "bath",
+        "rooms",
+        "balcony"
+      ],
+      "note": "Partial dependence on correlated features can flip direction with the training fold. Each curve was refit on 3 independent spatial-block splits; any feature whose direction disagreed across them is labelled UNSTABLE and must not be read as advice. Varying only the estimator seed would not have caught this \u2014 the flip that prompted the check came from a fold change."
+    },
+    "not_causal": "THIS IS NOT A CAUSAL ESTIMATE. Partial dependence shows what the MODEL learned from observed data, not what would happen if you changed the property. Homes with more bathrooms differ in many other ways too, and the model cannot separate those. Read it as 'how the model responds', never as 'what adding one would earn'.",
+    "note": "Only features a seller or builder could plausibly change are shown. Location features move price far more, but nobody can act on them \u2014 they are in the SHAP importance chart instead."
+  }
+}

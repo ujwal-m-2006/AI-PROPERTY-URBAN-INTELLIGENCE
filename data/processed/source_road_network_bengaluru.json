@@ -1,0 +1,62 @@
+{
+  "name": "Bengaluru road width map \u2014 road centrelines with existing and proposed width",
+  "organisation": "Bruhat Bengaluru Mahanagara Palike (BBMP)",
+  "source_url": "https://data.opencity.in/dataset/bengaluru-road-width-map",
+  "dataset_name": "bengaluru-road-width-map",
+  "tier": "T2",
+  "availability": "DOWNLOAD",
+  "licence": "Other (Public Domain) as stated by the OpenCity portal",
+  "attribution": "BBMP road width map, via OpenCity Urban Data Portal",
+  "retrieved_at": "2026-08-12T04:47:04.230446+00:00",
+  "source_updated": "2025-11-27",
+  "method": "http_download",
+  "transformation": "KML LineStrings to GeoJSON; both published width fields retained under their source names; segment length recomputed from coordinates because the two published length fields disagree",
+  "access_notes": "23,324 segments, 2,240 km, sha16=13daf1e57911eb6a",
+  "max_confidence": 0.8,
+  "verification_status": "PARTIAL_COVERAGE",
+  "assumptions": [
+    "RR_width_B is read as the EXISTING carriageway width and RR_WIDTH_P as a PROPOSED/planned width. The portal publishes no data dictionary; this reading rests on the field naming and on the fact that 100% of segments have RR_WIDTH_P greater than RR_width_B, with no segment below 12 m in RR_WIDTH_P."
+  ],
+  "caveats": [
+    "NEITHER FIELD IS A SURVEYED ROAD WIDTH. Statutory FAR, height and setback depend on the width of the road abutting a specific plot, measured on the ground or taken from a sanctioned plan.",
+    "RR_WIDTH_P MUST NOT BE USED FOR FEASIBILITY. If it is a proposed width, using it would report floor area that is not permissible today \u2014 median proposed width is roughly double median existing.",
+    "COVERAGE IS BBMP-ERA \u2014 the former ~198-ward BBMP area, not all 369 Greater Bengaluru wards. Points outside it return UNAVAILABLE.",
+    "NO ROAD NAMES are published in this dataset, so a segment cannot be identified by name.",
+    "THIS IS NOT THE COMPLETE STREET NETWORK. It is a width map for the roads BBMP tracks \u2014 arterial and collector roads. Most residential lanes have no segment here. See coverage.measured below.",
+    "The road-hierarchy codes (MA, MI, PU, OR, IR, CR, PR) are published without a data dictionary. Expansions shown anywhere in this project are labelled unverified."
+  ],
+  "coverage": {
+    "city": "bengaluru",
+    "segments": 23324,
+    "network_length_km": 2239.5,
+    "hierarchy_codes": {
+      "MI": 8915,
+      "PU": 2679,
+      "MA": 10602,
+      "IR": 387,
+      "OR": 492,
+      "PR": 4,
+      "CR": 245
+    },
+    "measured": {
+      "measured": true,
+      "basis": "distance from each gazetteer locality to the nearest road vertex",
+      "localities_tested": 1885,
+      "within_m": {
+        "50": 210,
+        "100": 457,
+        "150": 701,
+        "300": 1030,
+        "500": 1136
+      },
+      "within_pct": {
+        "50": 11.1,
+        "100": 24.2,
+        "150": 37.2,
+        "300": 54.6,
+        "500": 60.3
+      },
+      "note": "This is a width map for the roads BBMP tracks, not the complete street network. A residential lane will usually have no mapped segment near it, and that is the dataset, not a failure of lookup."
+    }
+  }
+}

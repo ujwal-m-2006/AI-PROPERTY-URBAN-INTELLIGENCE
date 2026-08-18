@@ -1,0 +1,19 @@
+{
+  "name": "GBA Final Wards Delimitation 2025 (369 wards, with population)",
+  "organisation": "Greater Bengaluru Authority",
+  "source_url": "https://data.opencity.in/dataset/gba-wards-delimitation-2025",
+  "download_url": "https://data.opencity.in/dataset/863209cb-4ced-4f51-b5c5-156939c50922/resource/9013d656-8051-4e2d-9648-46efd0d86d3d/download/gba-369-wards-december-2025.kml",
+  "dataset_name": "gba-wards-delimitation-2025",
+  "tier": "T2",
+  "availability": "DOWNLOAD",
+  "licence": "Other (Public Domain) as stated by the OpenCity portal",
+  "attribution": "Greater Bengaluru Authority, via OpenCity Urban Data Portal",
+  "retrieved_at": "2026-08-09T15:49:15.978216+00:00",
+  "source_updated": "2025-12-01",
+  "method": "http_download",
+  "transformation": "KML parsed to GeoJSON; field names normalised; ward/corporation counts and ring closure validated; corporations derived by grouping ward polygons",
+  "access_notes": "sha256=b61575248b0492a65d7fb06773c11a21b0e46539f4dff46f1b3021894c146c28; 369 features parsed",
+  "max_confidence": 0.85,
+  "verification_status": "VERIFIED_COUNTS",
+  "notes": "Final delimitation notified 19 Nov 2025. Boundaries are temporal \u2014 re-check quarterly. Corporation layer is derived (is_derived=true)."
+}

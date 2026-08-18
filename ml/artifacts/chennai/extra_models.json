@@ -1,0 +1,111 @@
+{
+  "city": "chennai",
+  "display": "Chennai",
+  "generated_at": "2026-08-12T04:01:25.795013+00:00",
+  "classification": {
+    "task": "Price-band classification (3 classes)",
+    "labels": [
+      "Budget",
+      "Mid-market",
+      "Premium"
+    ],
+    "thresholds_per_sqft": [
+      6994,
+      8889
+    ],
+    "label_note": "Bands are the dataset's own terciles of price per sq.ft. Because the label is derived from the target, this is a discretised view of the regression problem, not independent information.",
+    "split": "GroupShuffleSplit by locality/ward \u2014 no locality spans the split",
+    "train_rows": 5820,
+    "test_rows": 1289,
+    "accuracy": 0.3662,
+    "macro_f1": 0.3787,
+    "weighted_f1": 0.3186,
+    "roc_auc_ovr_macro": 0.7474,
+    "per_class": {
+      "Budget": {
+        "precision": 0.26,
+        "recall": 1.0,
+        "f1-score": 0.4126,
+        "support": 222.0
+      },
+      "Mid-market": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 626.0
+      },
+      "Premium": {
+        "precision": 1.0,
+        "recall": 0.5669,
+        "f1-score": 0.7236,
+        "support": 441.0
+      }
+    },
+    "confusion_matrix": {
+      "labels": [
+        "Budget",
+        "Mid-market",
+        "Premium"
+      ],
+      "matrix": [
+        [
+          222,
+          0,
+          0
+        ],
+        [
+          626,
+          0,
+          0
+        ],
+        [
+          6,
+          185,
+          250
+        ]
+      ]
+    },
+    "chance_accuracy": 0.3333,
+    "degenerate": true,
+    "usable": false,
+    "warning": "DEGENERATE MODEL \u2014 the classifier never predicts Mid-market. It has collapsed toward a single class, so its accuracy of 0.366 is not evidence that it works. With only 7 spatial group(s), holding out whole localities leaves the model no basis for placing an area it has never seen. This result should be reported as a failure to generalise, not as a model.",
+    "classes_never_predicted": [
+      "Mid-market"
+    ]
+  },
+  "clustering": {
+    "available": false,
+    "reason": "Only 7 localities have 5+ records \u2014 too few to cluster meaningfully."
+  },
+  "anomaly": {
+    "method": "Isolation Forest (unsupervised ML)",
+    "features": [
+      "INT_SQFT",
+      "N_BEDROOM",
+      "N_BATHROOM",
+      "N_ROOM",
+      "DIST_MAINROAD",
+      "QS_OVERALL",
+      "property_age_years",
+      "sale_year",
+      "area_per_room",
+      "bath_per_bedroom",
+      "metro_distance_m",
+      "railway_distance_m",
+      "bus_distance_m",
+      "hospital_distance_m",
+      "school_distance_m",
+      "college_distance_m",
+      "govt_office_distance_m",
+      "bank_distance_m",
+      "supermarket_distance_m",
+      "amenity_count_1km",
+      "has_gis"
+    ],
+    "contamination": 0.05,
+    "flagged": 356,
+    "total": 7109,
+    "note": "Flags records that are unusual across their whole feature vector, which is a different question from the price-interval check: that asks whether a price is far from the model, this asks whether the record itself is atypical.",
+    "caveat": "An anomaly is not evidence of anything wrong. Contamination is set at 5% by assumption, so roughly 5% of records will be flagged whatever the data looks like."
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "raw": {
+    "rows": 13320,
+    "cols": 9,
+    "duplicates": 529,
+    "missing": {
+      "location": 1,
+      "size": 16,
+      "society": 5502,
+      "bath": 73,
+      "balcony": 609
+    },
+    "columns": [
+      "area_type",
+      "availability",
+      "location",
+      "size",
+      "society",
+      "total_sqft",
+      "bath",
+      "balcony",
+      "price"
+    ]
+  },
+  "clean_log": [
+    "loaded 13,320 raw listing rows",
+    "dropped 17 rows missing sqft / rooms / price / location",
+    "dropped 748 rows under 300 sq.ft per room",
+    "dropped 48 rows outside Rs 1,500-40,000/sq.ft",
+    "dropped 469 rows beyond 2 SD of their locality mean",
+    "final: 12,038 rows"
+  ],
+  "clean": {
+    "rows": 12038,
+    "localities": 1203
+  },
+  "descriptive": [
+    {
+      "variable": "Area (sq.ft)",
+      "count": 12038,
+      "mean": 1551.43,
+      "median": 1298.0,
+      "std": 972.29,
+      "min": 300.0,
+      "q1": 1112.0,
+      "q3": 1685.0,
+      "max": 30400.0,
+      "skew": 8.429
+    },
+    {
+      "variable": "Price (INR)",
+      "count": 12038,
+      "mean": 10290047.39,
+      "median": 6800000.0,
+      "std": 12646493.96,
+      "min": 900000.0,
+      "q1": 4850000.0,
+      "q3": 11000000.0,
+      "max": 291200000.0,
+      "skew": 7.858
+    },
+    {
+      "variable": "BHK / Rooms",
+      "count": 12038,
+      "mean": 2.62,
+      "median": 3.0,
+      "std": 0.95,
+      "min": 1.0,
+      "q1": 2.0,
+      "q3": 3.0,
+      "max": 16.0,
+      "skew": 2.044
+    },
+    {
+      "variable": "Bathrooms",
+      "count": 11981,
+      "mean": 2.53,
+      "median": 2.0,
+      "std": 1.04,
+      "min": 1.0,
+      "q1": 2.0,
+      "q3": 3.0,
+      "max": 16.0,
+      "skew": 2.282
+    },
+    {
+      "variable": "Balcony",
+      "count": 11578,
+      "mean": 1.59,
+      "median": 2.0,
+      "std": 0.8,
+      "min": 0.0,
+      "q1": 1.0,
+      "q3": 2.0,
+      "max": 3.0,
+      "skew": 0.014
+    },
+    {
+      "variable": "Price per sq.ft (INR)",
+      "count": 12038,
+      "mean": 6014.6,
+      "median": 5225.61,
+      "std": 3169.67,
+      "min": 1578.95,
+      "q1": 4197.94,
+      "q3": 6705.13,
+      "max": 37500.0,
+      "skew": 3.086
+    }
+  ],
+  "correlation_matrix": {
+    "sqft": {
+      "sqft": 1.0,
+      "rooms": 0.639,
+      "bath": 0.663,
+      "balcony": 0.198,
+      "price_per_sqft": 0.311
+    },
+    "rooms": {
+      "sqft": 0.639,
+      "rooms": 1.0,
+      "bath": 0.867,
+      "balcony": 0.243,
+      "price_per_sqft": 0.3
+    },
+    "bath": {
+      "sqft": 0.663,
+      "rooms": 0.867,
+      "bath": 1.0,
+      "balcony": 0.236,
+      "price_per_sqft": 0.353
+    },
+    "balcony": {
+      "sqft": 0.198,
+      "rooms": 0.243,
+      "bath": 0.236,
+      "balcony": 1.0,
+      "price_per_sqft": 0.03
+    },
+    "price_per_sqft": {
+      "sqft": 0.311,
+      "rooms": 0.3,
+      "bath": 0.353,
+      "balcony": 0.03,
+      "price_per_sqft": 1.0
+    }
+  },
+  "corr_with_target": {
+    "bath": 0.353,
+    "sqft": 0.311,
+    "rooms": 0.3,
+    "balcony": 0.03
+  },
+  "outliers_price_psf_iqr": 855,
+  "outliers_area_iqr": 1026,
+  "top_localities": [
+    {
+      "locality": "Whitefield",
+      "count": 511,
+      "median_psf": 5534
+    },
+    {
+      "locality": "Sarjapur  Road",
+      "count": 375,
+      "median_psf": 5589
+    },
+    {
+      "locality": "Electronic City",
+      "count": 290,
+      "median_psf": 4497
+    },
+    {
+      "locality": "Kanakpura Road",
+      "count": 252,
+      "median_psf": 5000
+    },
+    {
+      "locality": "Thanisandra",
+      "count": 232,
+      "median_psf": 5595
+    },
+    {
+      "locality": "Yelahanka",
+      "count": 198,
+      "median_psf": 5013
+    },
+    {
+      "locality": "Uttarahalli",
+      "count": 175,
+      "median_psf": 4000
+    },
+    {
+      "locality": "Hebbal",
+      "count": 171,
+      "median_psf": 7112
+    },
+    {
+      "locality": "Raja Rajeshwari Nagar",
+      "count": 165,
+      "median_psf": 4203
+    },
+    {
+      "locality": "Marathahalli",
+      "count": 162,
+      "median_psf": 5434
+    },
+    {
+      "locality": "Hennur Road",
+      "count": 147,
+      "median_psf": 5854
+    },
+    {
+      "locality": "Bannerghatta Road",
+      "count": 143,
+      "median_psf": 5283
+    }
+  ],
+  "bhk_price": [
+    {
+      "bhk": 1,
+      "count": 615,
+      "median_price": 3300000
+    },
+    {
+      "bhk": 2,
+      "count": 5401,
+      "median_price": 5350000
+    },
+    {
+      "bhk": 3,
+      "count": 4631,
+      "median_price": 8800000
+    },
+    {
+      "bhk": 4,
+      "count": 1064,
+      "median_price": 21100000
+    },
+    {
+      "bhk": 5,
+      "count": 165,
+      "median_price": 24000000
+    }
+  ],
+  "area_type_counts": {
+    "Super built-up  Area": 8597,
+    "Built-up  Area": 2268,
+    "Plot  Area": 1092,
+    "Carpet  Area": 81
+  }
+}
