@@ -286,8 +286,35 @@ def evaluate(inp: FeasibilityInput) -> FeasibilityResult:
         )
         result.blocking_unknowns.append("verified FAR clause for this zone")
 
+    small_plot_rule = next(
+        (r for r in rules if r["id"] == "height-cap-small-plot"), None)
+    # `area` is bound further down; read the fact directly so this rule can sit
+    # with the other height logic rather than being moved away from it.
+    _plot = result.facts.get("plot_area")
+    if (small_plot_rule and _can_fire(small_plot_rule)
+            and _plot is not None and _plot.is_known
+            and float(_plot.value) <= 250.0):
+        result.facts["max_height"] = Fact.derive(
+            float(small_plot_rule["then"]["max_height_m"]),
+            inputs=[_plot],
+            method=Method.RULE_EVALUATION,
+            assumptions=[
+                f"{small_plot_rule['clause']}, read from page "
+                f"{small_plot_rule.get('source_page')} of the notification",
+                f"Applies because the plot is {float(_plot.value):,.0f} sq.m, "
+                "not exceeding 250 sq.m",
+                "Height excludes the stilt floor",
+            ],
+            unit="m",
+            rule_ids=[small_plot_rule["id"]],
+        )
+
     height_rule = next((r for r in rules if r["id"] == "height-cap-narrow-road"), None)
     if (
+        "max_height" in result.facts and result.facts["max_height"].is_known
+    ):
+        pass                      # a stricter statutory cap already applied
+    elif (
         height_rule
         and _can_fire(height_rule)
         and inp.road_width_m is not None
@@ -370,12 +397,68 @@ def evaluate(inp: FeasibilityInput) -> FeasibilityResult:
         )
 
     # --- setbacks and ground coverage -------------------------------------
+    # Table 8 fires when it is VERIFIED and the plot area is known. It is the
+    # first statutory clause this engine has ever been able to apply: read from
+    # page 2 of UDD 235 MNJ 2025 and cited below.
+    sb_rule = next((r for r in rules if r["id"] == "setbacks-table-8"), None)
+    statutory_setbacks = None
+    if sb_rule and _can_fire(sb_rule) and area.is_known:
+        a = float(area.value)
+        if a > 4000.0:
+            above = sb_rule.get("above_4000", {})
+            statutory_setbacks = {
+                "front_m": above.get("all_sides_m"),
+                "rear_m": above.get("all_sides_m"),
+                "side_m": above.get("all_sides_m"),
+                "basis": above.get("clause_note", ""),
+            }
+        else:
+            for band in sb_rule.get("bands", []):
+                if a <= float(band["site_area_max"]):
+                    if band.get("front_pct_of_depth") is not None:
+                        # Percentage bands need plot depth and width, which this
+                        # engine does not have. Reporting the percentages is
+                        # honest; inventing a depth to resolve them would not be.
+                        statutory_setbacks = {
+                            "front_percent_of_depth": band["front_pct_of_depth"],
+                            "rear_percent_of_depth": band["rear_pct_of_depth"],
+                            "side_percent_of_width": band["side_pct_of_width"],
+                            "basis": band.get("note", ""),
+                            "needs": "plot depth and width to resolve to metres",
+                        }
+                    else:
+                        statutory_setbacks = {
+                            "front_m": band.get("front_m"),
+                            "rear_m": band.get("rear_m"),
+                            "side_m": band.get("side_m"),
+                            "basis": band.get("side_note", ""),
+                        }
+                    break
+
     declared_setbacks = {
         "front_m": inp.setback_front_m,
         "rear_m": inp.setback_rear_m,
         "side_m": inp.setback_side_m,
     }
-    if any(v is not None and v >= 0 for v in declared_setbacks.values()):
+    if statutory_setbacks is not None:
+        result.facts["setbacks"] = Fact.derive(
+            statutory_setbacks,
+            inputs=[area],
+            method=Method.RULE_EVALUATION,
+            assumptions=[
+                f"{sb_rule['clause']}, read from page "
+                f"{sb_rule.get('source_page')} of the notification",
+                "Table 8 applies to buildings up to 12.0 m excluding the stilt "
+                "floor (and to plots not over 250 sq.m up to 15 m including "
+                "stilt). Taller buildings fall under Table 9, which is NOT "
+                "encoded — confirm which table applies to your design.",
+                "The band is selected by plot area, so the setback is only as "
+                "reliable as that figure",
+            ],
+            unit="m",
+            rule_ids=[sb_rule["id"]],
+        )
+    elif any(v is not None and v >= 0 for v in declared_setbacks.values()):
         supplied = {k: round(float(v), 2)
                     for k, v in declared_setbacks.items() if v is not None}
         result.facts["setbacks"] = Fact.derive(

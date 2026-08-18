@@ -405,10 +405,26 @@ The audit previously said: *"the Feb 2026 amendment was found only via a
 law-firm commentary, not the Karnataka Gazette. The rules engine must not encode
 it until the gazette notification is obtained."* The document is now obtained.
 
-**This does not by itself unblock the rules engine.** It is a T2 republication,
-and the numbers inside it still have to be read, encoded and tested clause by
-clause. What changes is that Module 6 can now *cite and link* its governing
-instrument instead of reporting that none was available.
+**Update 2026-08-19 — four clauses are now encoded.** The notification is a
+7-page scan with no text layer, so it was rendered at ~300 dpi and OCR'd
+(`etl/flows/ocr_zoning_notification.py`, RapidOCR via ONNX — no system binary).
+Each encoded clause was then **read off the page image** and cross-checked
+against the OCR, because the OCR rendered "12.0m" as "12.Om" and "1000" as
+"1oo0" on these very pages.
+
+Now firing, each citing its regulation and page:
+
+| Rule | Clause | Page |
+|---|---|---|
+| Setbacks, Table 8 (4 area bands + above 4000 sq.m) | Table 8 as substituted, reg. 3.1 | 2 |
+| Height cap, plots ≤ 250 sq.m → 12.0 m excl. stilt | Note 1 after Table 9 | 2 |
+| Height cap, road < 9.0 m → 15.0 m incl. stilt | Reg. 4.1, Notes to Table-10 (b) | 5 |
+| Ramps by parking count | Reg. 3.10, clause (iv) | 5 |
+
+**FAR is still not encoded, and this notification does not contain it.** Its own
+height cap applies *"irrespective of the FAR permissible"* — the FAR table is
+Table 10 of the base RMP-2015 Zoning Regulations, a separate document not yet
+read. FAR therefore remains user-declared with a source flag.
 
 ### R3 — GBA building bye-laws: CLOSED, and the answer changes a design
 

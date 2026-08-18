@@ -100,7 +100,7 @@ not comparable at row level. Enforced by tests in `backend/tests/test_cities.py`
 
 ## Status
 
-**242 tests passing.** `cd backend && pytest`
+**268 tests passing.** `cd backend && pytest`
 
 **128/128 end-to-end checks passing**, every endpoint in both cities:
 ```bash
@@ -132,7 +132,7 @@ verdict from a live probe, so it cannot drift from the code.
 | 3 — jurisdiction service + map | done |
 | 4 — ward/locality search | done (works without the map) |
 | 5 — proximity intelligence (Modules 9, 10, 11) | done; OSM via Overpass |
-| 7 — rules engine | skeleton; rules **UNVERIFIED**, so they do not fire |
+| 7 — rules engine | **4 clauses encoded** from the notification, each citing its page; FAR still not encoded |
 | 9 — price model | done, both cities; 6 algorithms, tuning, SHAP |
 | 10–11 — Chennai tab + ML | done |
 | 15 — future price (temporal) | done, both cities |

@@ -49,13 +49,26 @@ def evaluate(body: dict) -> dict:
 # --- declaring nothing must still refuse --------------------------------
 
 
-def test_nothing_declared_still_refuses_everything() -> None:
-    """The platform must not acquire a statutory FAR by this change."""
+def test_nothing_declared_still_refuses_the_far_chain() -> None:
+    """The platform must not acquire a statutory FAR by this change.
+
+    Setbacks and some height caps DO now fire without a declaration — they were
+    read from the notification pages and carry clause citations. Everything
+    downstream of FAR still refuses, which is the property that matters.
+    """
     d = evaluate(PLOT)
-    for key in REGULATORY:
+    for key in ("far", "max_built_up", "potential_units", "parking_spaces"):
         assert d["data"][key]["value"] is None, f"{key} appeared from nowhere"
         assert d["data"][key]["reason"]
     assert d["computed_from_declared"] is False
+
+
+def test_statutory_setbacks_fire_without_any_declaration() -> None:
+    """Table 8 is encoded from the notification, so this needs no user input."""
+    sb = evaluate(PLOT)["data"]["setbacks"]
+    assert sb["value"] is not None
+    joined = " ".join(sb.get("assumptions", []))
+    assert "UDD 235 MNJ 2025" in joined
 
 
 def test_the_refusal_names_the_way_forward() -> None:

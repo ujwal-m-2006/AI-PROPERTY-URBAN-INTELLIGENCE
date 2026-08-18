@@ -1,0 +1,1694 @@
+{
+  "instrument": "Zonal Regulations to RMP-2015",
+  "reference": "UDD 235 MNJ 2025",
+  "notified_on": "2026-01-05",
+  "source_url": "https://data.opencity.in/dataset/greater-bengaluru-amendment-regulations-2025",
+  "download_url": "https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/36f1c5e6-5f5d-4356-bfba-00c5fe1020e2/download/udd-235-mnj-2025e-05.01.2026.pdf",
+  "extracted_at": "2026-08-18T18:24:52.860543+00:00",
+  "method": "pypdfium2 render at scale 3 + RapidOCR (ONNX)",
+  "status": "OCR CANDIDATE TEXT \u2014 NOT VERIFIED, NOT ENCODED",
+  "pages": [
+    {
+      "page": 1,
+      "image": "data/raw/regulations/pages/page_01.png",
+      "lines": [
+        {
+          "text": "GOVERNMENT OF KARNATAKA",
+          "confidence": 0.884
+        },
+        {
+          "text": "No. UDD 235 MNJ 2025(E)",
+          "confidence": 0.895
+        },
+        {
+          "text": "Karnataka Government Secretariat,",
+          "confidence": 0.886
+        },
+        {
+          "text": "Vikasa Soudha,",
+          "confidence": 0.922
+        },
+        {
+          "text": "Dr. Ambedkar Veedhi,",
+          "confidence": 0.895
+        },
+        {
+          "text": "Bengaluru, date: 05.01.2026",
+          "confidence": 0.903
+        },
+        {
+          "text": "NOTIFICATION",
+          "confidence": 0.877
+        },
+        {
+          "text": "Whereas the draft to amend the zonal regulations of Revised Master",
+          "confidence": 0.925
+        },
+        {
+          "text": "Plan-2015 of the local planning area of Bengaluru and Greater Bengaluru, in",
+          "confidence": 0.94
+        },
+        {
+          "text": "exercise of the powers conferred under Section 13-E of Karnataka Town and",
+          "confidence": 0.919
+        },
+        {
+          "text": "Country Planning Act, 1961, which the Government of Karnataka proposes",
+          "confidence": 0.934
+        },
+        {
+          "text": "to make was published in Notification No. UDD 235 MNJ 2025 (E), dated:",
+          "confidence": 0.906
+        },
+        {
+          "text": "11.11.2025 in part-IVA of the Karnataka special Gazette dated: 11.11.2025",
+          "confidence": 0.928
+        },
+        {
+          "text": "inviting objections and suggestions from all persons likely to be affected",
+          "confidence": 0.915
+        },
+        {
+          "text": "thereby within thirty days from the date of its publication in the official",
+          "confidence": 0.919
+        },
+        {
+          "text": "Gazette.",
+          "confidence": 0.785
+        },
+        {
+          "text": "And whereas the said Gazette was available to the public on lth",
+          "confidence": 0.882
+        },
+        {
+          "text": "November, 2025 and whereas the objections received have been considered",
+          "confidence": 0.922
+        },
+        {
+          "text": "by the State Government.",
+          "confidence": 0.913
+        },
+        {
+          "text": "Now therefore, in exercise of powers conferred by the section 13-E of",
+          "confidence": 0.892
+        },
+        {
+          "text": "the Karnataka Town and Country Planning Act, 1961, (Karnataka Act 11 of",
+          "confidence": 0.922
+        },
+        {
+          "text": "1963), the Government of Karnataka hereby makes the following regulations,",
+          "confidence": 0.924
+        },
+        {
+          "text": "namely:-",
+          "confidence": 0.836
+        },
+        {
+          "text": "REGULATIONS",
+          "confidence": 0.901
+        },
+        {
+          "text": "(1)",
+          "confidence": 0.738
+        },
+        {
+          "text": "Title and commencement. - (l) These may be called the Zonal",
+          "confidence": 0.911
+        },
+        {
+          "text": "Regulations of the Revised Master Plan-2015 of Bengaluru and Greater",
+          "confidence": 0.939
+        },
+        {
+          "text": "Bengaluru (Amendment) Regulations 2025.",
+          "confidence": 0.872
+        },
+        {
+          "text": "modification and all new constructions including ongoing constructions for",
+          "confidence": 0.922
+        },
+        {
+          "text": "which plan approvals and modified plan approvals are to be granted.",
+          "confidence": 0.901
+        },
+        {
+          "text": "in the official Gazette.",
+          "confidence": 0.901
+        },
+        {
+          "text": "(2) Amendment of \"Chapter 3.0\"-",
+          "confidence": 0.923
+        },
+        {
+          "text": "In Chapter 3.O: REGULATIONS APPLICABLE TO ALL ZONES-,",
+          "confidence": 0.89
+        },
+        {
+          "text": "a) Clause (ii) & (ii)",
+          "confidence": 0.857
+        },
+        {
+          "text": "under regulation 3.1 SETBACKS shall be",
+          "confidence": 0.892
+        },
+        {
+          "text": "substituted as below:",
+          "confidence": 0.925
+        }
+      ],
+      "line_count": 36,
+      "low_confidence_lines": 0,
+      "mean_confidence": 0.897
+    },
+    {
+      "page": 2,
+      "image": "data/raw/regulations/pages/page_02.png",
+      "lines": [
+        {
+          "text": "i. For all types of building with total height up to 12.Om, excluding the",
+          "confidence": 0.91
+        },
+        {
+          "text": "stilt floor, the setbacks shall be calculated as per Table 8.",
+          "confidence": 0.957
+        },
+        {
+          "text": "i. Table 9 shall be referred to buildings which are more than 12.0 m in",
+          "confidence": 0.93
+        },
+        {
+          "text": "area and with a height up to 15 m (including the stilt floor), the",
+          "confidence": 0.908
+        },
+        {
+          "text": "setbacks shall be determined as per Table 8.",
+          "confidence": 0.899
+        },
+        {
+          "text": "b)",
+          "confidence": 0.642
+        },
+        {
+          "text": "Table 8 and the entries thereunder shall be substituted as below:",
+          "confidence": 0.932
+        },
+        {
+          "text": "Table 8: Setbacks for buildings with total height upto 12.0 m",
+          "confidence": 0.908
+        },
+        {
+          "text": "(excluding stilt floor)",
+          "confidence": 0.86
+        },
+        {
+          "text": "(i)For plot area up to 4000.0 sq.m",
+          "confidence": 0.906
+        },
+        {
+          "text": "Setbacks (in m)",
+          "confidence": 0.893
+        },
+        {
+          "text": "$I.",
+          "confidence": 0.52
+        },
+        {
+          "text": "Site Area",
+          "confidence": 0.77
+        },
+        {
+          "text": "Left",
+          "confidence": 0.797
+        },
+        {
+          "text": "(in Sq.m)",
+          "confidence": 0.859
+        },
+        {
+          "text": "Front Side",
+          "confidence": 0.833
+        },
+        {
+          "text": "no.",
+          "confidence": 0.699
+        },
+        {
+          "text": "Rear Side",
+          "confidence": 0.808
+        },
+        {
+          "text": "Right Side",
+          "confidence": 0.831
+        },
+        {
+          "text": "Side",
+          "confidence": 0.76
+        },
+        {
+          "text": "0.60 m on any one",
+          "confidence": 0.835
+        },
+        {
+          "text": "Up to 60",
+          "confidence": 0.84
+        },
+        {
+          "text": "0.75",
+          "confidence": 0.665
+        },
+        {
+          "text": "side",
+          "confidence": 0.743
+        },
+        {
+          "text": "Above 60 upto",
+          "confidence": 0.914
+        },
+        {
+          "text": "0.70 m on any one",
+          "confidence": 0.855
+        },
+        {
+          "text": "0.90",
+          "confidence": 0.775
+        },
+        {
+          "text": "0.70",
+          "confidence": 0.702
+        },
+        {
+          "text": "150",
+          "confidence": 0.629
+        },
+        {
+          "text": "side",
+          "confidence": 0.777
+        },
+        {
+          "text": "Above 150 upto",
+          "confidence": 0.899
+        },
+        {
+          "text": "1.0",
+          "confidence": 0.653
+        },
+        {
+          "text": "0.80",
+          "confidence": 0.754
+        },
+        {
+          "text": "0.80",
+          "confidence": 0.796
+        },
+        {
+          "text": "0.80",
+          "confidence": 0.794
+        },
+        {
+          "text": "250",
+          "confidence": 0.698
+        },
+        {
+          "text": "Above 250 upto",
+          "confidence": 0.874
+        },
+        {
+          "text": "12% of the",
+          "confidence": 0.873
+        },
+        {
+          "text": "8%",
+          "confidence": 0.598
+        },
+        {
+          "text": "\u00e4of",
+          "confidence": 0.594
+        },
+        {
+          "text": "the",
+          "confidence": 0.75
+        },
+        {
+          "text": "8% of the",
+          "confidence": 0.868
+        },
+        {
+          "text": "8% of the",
+          "confidence": 0.832
+        },
+        {
+          "text": "4000",
+          "confidence": 0.769
+        },
+        {
+          "text": "depth",
+          "confidence": 0.757
+        },
+        {
+          "text": "depth",
+          "confidence": 0.824
+        },
+        {
+          "text": "of",
+          "confidence": 0.666
+        },
+        {
+          "text": "width",
+          "confidence": 0.771
+        },
+        {
+          "text": "width",
+          "confidence": 0.833
+        },
+        {
+          "text": "of",
+          "confidence": 0.66
+        },
+        {
+          "text": "of",
+          "confidence": 0.663
+        },
+        {
+          "text": "of",
+          "confidence": 0.664
+        },
+        {
+          "text": "site",
+          "confidence": 0.696
+        },
+        {
+          "text": "site",
+          "confidence": 0.791
+        },
+        {
+          "text": "site",
+          "confidence": 0.71
+        },
+        {
+          "text": "site",
+          "confidence": 0.798
+        },
+        {
+          "text": "(ii) For plot area above 4000 sq.m: minimum setback of 5.Om",
+          "confidence": 0.876
+        },
+        {
+          "text": "on all sides shall be insisted.",
+          "confidence": 0.927
+        },
+        {
+          "text": "c) In Sl.no.1(il(a) of Table 9 the following shall be substituted:",
+          "confidence": 0.883
+        },
+        {
+          "text": "\"For all types of buildings in plot area above 250 sq.m and up to 4000",
+          "confidence": 0.908
+        },
+        {
+          "text": "sq.m\"",
+          "confidence": 0.811
+        },
+        {
+          "text": "d) After Table 9 the following shall be inserted as Note:",
+          "confidence": 0.886
+        },
+        {
+          "text": "Note: -",
+          "confidence": 0.822
+        },
+        {
+          "text": "1)",
+          "confidence": 0.545
+        },
+        {
+          "text": "For plots upto 250sq.m in area, the maximum permissible",
+          "confidence": 0.924
+        },
+        {
+          "text": "building height shall bel2.Om excluding the stilt floor.",
+          "confidence": 0.908
+        },
+        {
+          "text": "2)",
+          "confidence": 0.537
+        },
+        {
+          "text": "The dwelling units and habitable rooms shall comply with the",
+          "confidence": 0.933
+        },
+        {
+          "text": "lighting and ventilation requirements specified in the building",
+          "confidence": 0.928
+        },
+        {
+          "text": "bye-laws and areas where not specified in the building bye-laws,",
+          "confidence": 0.931
+        },
+        {
+          "text": "clause 2O of the Part 3-Development Control Rules and General",
+          "confidence": 0.892
+        },
+        {
+          "text": "Building Requirements of National Building Code, 2016 shall be",
+          "confidence": 0.93
+        },
+        {
+          "text": "complied with.",
+          "confidence": 0.898
+        },
+        {
+          "text": "3) Open staircase can be allowed in setback area in plot size up to",
+          "confidence": 0.916
+        },
+        {
+          "text": "750 sq.m.",
+          "confidence": 0.854
+        }
+      ],
+      "line_count": 75,
+      "low_confidence_lines": 5,
+      "mean_confidence": 0.803
+    },
+    {
+      "page": 3,
+      "image": "data/raw/regulations/pages/page_03.png",
+      "lines": [
+        {
+          "text": "Regulations for main land use zones shall not be considered.",
+          "confidence": 0.933
+        },
+        {
+          "text": "5) Development Rights(DR)/Transfer of Development Rights(TDR) and",
+          "confidence": 0.924
+        },
+        {
+          "text": "provided, they abut road of width 9.0 m and above.",
+          "confidence": 0.895
+        },
+        {
+          "text": "6) For buildings with a height of 15.0 meters and above, up to a",
+          "confidence": 0.916
+        },
+        {
+          "text": "maximum height of 21.0 meters (including stilt), the provisions",
+          "confidence": 0.912
+        },
+        {
+          "text": "of the National Building Code pertaining to Fire and Life Safety",
+          "confidence": 0.927
+        },
+        {
+          "text": "shall be strictly adhered to.",
+          "confidence": 0.897
+        },
+        {
+          "text": "7) The setback area shall not be paved or covered by any hard",
+          "confidence": 0.921
+        },
+        {
+          "text": "surface which prevents percolation of rainwater, as far as",
+          "confidence": 0.945
+        },
+        {
+          "text": "possible.",
+          "confidence": 0.897
+        },
+        {
+          "text": "e) In regulation 3.9) Basement clause (ii) for the sentence \u201cIf the",
+          "confidence": 0.868
+        },
+        {
+          "text": "extended on all sides except the side abutting the road, provided the",
+          "confidence": 0.902
+        },
+        {
+          "text": "minimum setback between the basement and property boundary is",
+          "confidence": 0.905
+        },
+        {
+          "text": "minimum 2.0 m\" following shall be substituted. -",
+          "confidence": 0.912
+        },
+        {
+          "text": "\"i. The minimum setback for the basement in plots of area up to",
+          "confidence": 0.92
+        },
+        {
+          "text": "4000 sg.m shall be either the minimum setback required for the",
+          "confidence": 0.905
+        },
+        {
+          "text": "building as per Table 8/Table 9 or 2.Om whichever is less.",
+          "confidence": 0.899
+        },
+        {
+          "text": "Safety of the neighbouring property while construction of basement",
+          "confidence": 0.926
+        },
+        {
+          "text": "made to the neighbouring property the owner shall be liable to set",
+          "confidence": 0.921
+        },
+        {
+          "text": "right the damage and to bring such neighbouring property to its",
+          "confidence": 0.914
+        },
+        {
+          "text": "original condition.",
+          "confidence": 0.907
+        },
+        {
+          "text": "The property owner shall ensure the safety and structural integrity",
+          "confidence": 0.945
+        },
+        {
+          "text": "of adjoining properties during the construction of the basement. In",
+          "confidence": 0.924
+        },
+        {
+          "text": "resulting from the basement construction, the owner shall be solely",
+          "confidence": 0.937
+        },
+        {
+          "text": "responsible for repairing the damage and restoring the affected",
+          "confidence": 0.928
+        },
+        {
+          "text": "property to its original condition\".",
+          "confidence": 0.903
+        },
+        {
+          "text": "f) In regulation 3.9) Basement after clause (ix) the following shall be",
+          "confidence": 0.904
+        },
+        {
+          "text": "inserted as clause (x).-",
+          "confidence": 0.924
+        },
+        {
+          "text": "including",
+          "confidence": 0.866
+        },
+        {
+          "text": "byusing lift/",
+          "confidence": 0.878
+        },
+        {
+          "text": "terrace",
+          "confidence": 0.803
+        },
+        {
+          "text": "area",
+          "confidence": 0.797
+        },
+        {
+          "text": "computerized/",
+          "confidence": 0.804
+        },
+        {
+          "text": "mechanized/ hydraulic equipment, for vehicular entry & exit,",
+          "confidence": 0.9
+        },
+        {
+          "text": "may be permitted, wherever it is opted by the owner voluntarily",
+          "confidence": 0.907
+        },
+        {
+          "text": "without providing for ramp in plots of extent up to 6000 sq.m.",
+          "confidence": 0.926
+        },
+        {
+          "text": "In case plot size above 6000 sq.m minimum one ramp of 6.0 m",
+          "confidence": 0.924
+        },
+        {
+          "text": "clear width shall be provided in addition to car lift.",
+          "confidence": 0.912
+        }
+      ],
+      "line_count": 38,
+      "low_confidence_lines": 0,
+      "mean_confidence": 0.903
+    },
+    {
+      "page": 4,
+      "image": "data/raw/regulations/pages/page_04.png",
+      "lines": [
+        {
+          "text": "a) The mechanical equipment/ hydraulic equipment that",
+          "confidence": 0.917
+        },
+        {
+          "text": "control the activity shall be placed on the basement floor",
+          "confidence": 0.924
+        },
+        {
+          "text": "only.",
+          "confidence": 0.829
+        },
+        {
+          "text": "b) The basement floor shall be provided with an exclusive",
+          "confidence": 0.922
+        },
+        {
+          "text": "staircase access compulsorily.",
+          "confidence": 0.913
+        },
+        {
+          "text": "ascension & descension of vehicles along with the space",
+          "confidence": 0.914
+        },
+        {
+          "text": "earmarked for accommodating the equipment to operate",
+          "confidence": 0.913
+        },
+        {
+          "text": "the mechanism in the basement floor and exclusive",
+          "confidence": 0.903
+        },
+        {
+          "text": "staircase access shall be shown in the basement floor",
+          "confidence": 0.931
+        },
+        {
+          "text": "pian.",
+          "confidence": 0.724
+        },
+        {
+          "text": "d) The applicant shall ensure natural light & ventilation and",
+          "confidence": 0.92
+        },
+        {
+          "text": "proper draining facilities in such basement floor as per",
+          "confidence": 0.924
+        },
+        {
+          "text": "requirements of National Building Code and such",
+          "confidence": 0.875
+        },
+        {
+          "text": "basement floor permitted under clause 3.9 (ii), shall not",
+          "confidence": 0.9
+        },
+        {
+          "text": "be utilized for any other purposes other than vehicle",
+          "confidence": 0.938
+        },
+        {
+          "text": "parking.",
+          "confidence": 0.881
+        },
+        {
+          "text": "e) The",
+          "confidence": 0.779
+        },
+        {
+          "text": "applicant",
+          "confidence": 0.818
+        },
+        {
+          "text": "shall",
+          "confidence": 0.821
+        },
+        {
+          "text": "ensure",
+          "confidence": 0.818
+        },
+        {
+          "text": "mechanized/hydraulic",
+          "confidence": 0.914
+        },
+        {
+          "text": "equipment and the functioning intact at all the time",
+          "confidence": 0.922
+        },
+        {
+          "text": "without fail. However, provision for manual operation &",
+          "confidence": 0.916
+        },
+        {
+          "text": "such other mechanism for the same shall also have to be",
+          "confidence": 0.904
+        },
+        {
+          "text": "made in order to tackle emergency situation during power",
+          "confidence": 0.875
+        },
+        {
+          "text": "failures.",
+          "confidence": 0.849
+        },
+        {
+          "text": "Ensuring operational safety shall be the sole responsibility",
+          "confidence": 0.892
+        },
+        {
+          "text": "of the owners only.",
+          "confidence": 0.921
+        },
+        {
+          "text": "g)",
+          "confidence": 0.629
+        },
+        {
+          "text": "Wherever parking space is provided in stilt or ground",
+          "confidence": 0.929
+        },
+        {
+          "text": "floor, parking pits up to a depth of 3.Om, each of size",
+          "confidence": 0.941
+        },
+        {
+          "text": "3x5.5m may be permitted to allow parking of vehicle using",
+          "confidence": 0.917
+        },
+        {
+          "text": "mechanized or hydraulic equipment.",
+          "confidence": 0.898
+        },
+        {
+          "text": "h) Arrangement for operation of the mechanical & hydraulic",
+          "confidence": 0.917
+        },
+        {
+          "text": "equipment shall be made by the owner. Ensuring",
+          "confidence": 0.896
+        },
+        {
+          "text": "operational safety shall be the responsibility of the owner",
+          "confidence": 0.931
+        },
+        {
+          "text": "only.",
+          "confidence": 0.785
+        },
+        {
+          "text": "i)",
+          "confidence": 0.502
+        },
+        {
+          "text": "Fire safety measures shall be ensured by the owner as per",
+          "confidence": 0.922
+        },
+        {
+          "text": "National Building Code.",
+          "confidence": 0.921
+        },
+        {
+          "text": "j)",
+          "confidence": 0.511
+        },
+        {
+          "text": "The structural designs shall be made as per the IS Code",
+          "confidence": 0.901
+        },
+        {
+          "text": "requirements and the same shall be certified by the",
+          "confidence": 0.928
+        },
+        {
+          "text": "registered structural engineer.",
+          "confidence": 0.925
+        },
+        {
+          "text": "k)",
+          "confidence": 0.646
+        },
+        {
+          "text": "Wherever mechanical parking is provided the driveway",
+          "confidence": 0.917
+        },
+        {
+          "text": "shall be a minimum of 5.0 m. and for normal parking the",
+          "confidence": 0.907
+        },
+        {
+          "text": "driveway shall be minimum of 3.Om.",
+          "confidence": 0.845
+        },
+        {
+          "text": "1)",
+          "confidence": 0.65
+        },
+        {
+          "text": "Basements shall not be permitted in the flood prone",
+          "confidence": 0.925
+        },
+        {
+          "text": "areas/low lying",
+          "confidence": 0.856
+        },
+        {
+          "text": "areas",
+          "confidence": 0.745
+        },
+        {
+          "text": "as notified by the competent",
+          "confidence": 0.88
+        },
+        {
+          "text": "authority.",
+          "confidence": 0.841
+        }
+      ],
+      "line_count": 54,
+      "low_confidence_lines": 2,
+      "mean_confidence": 0.86
+    },
+    {
+      "page": 5,
+      "image": "data/raw/regulations/pages/page_05.png",
+      "lines": [
+        {
+          "text": "g) In regulation 3.10 Ramps",
+          "confidence": 0.905
+        },
+        {
+          "text": "a) In clause (i) for the numerical and letter \u201c2.0 m\" following shall be",
+          "confidence": 0.894
+        },
+        {
+          "text": "substituted. -",
+          "confidence": 0.835
+        },
+        {
+          "text": "\"2.0 m or setback whichever is less\"",
+          "confidence": 0.9
+        },
+        {
+          "text": "b) After clause (ii) the following shall be inserted. -",
+          "confidence": 0.903
+        },
+        {
+          "text": "(ii) in case of plot area upto 1oo0 sq.m the ramp may be allowed upto",
+          "confidence": 0.872
+        },
+        {
+          "text": "the common property line.",
+          "confidence": 0.897
+        },
+        {
+          "text": "h) In regulation 3.1o Ramps the following shall be inserted after clause (ii)",
+          "confidence": 0.935
+        },
+        {
+          "text": "ii)(",
+          "confidence": 0.643
+        },
+        {
+          "text": "(a) In case basement is permitted as mentioned under clause 3.9",
+          "confidence": 0.921
+        },
+        {
+          "text": "(x) without providing ramps for entry and exit of vehicles,",
+          "confidence": 0.926
+        },
+        {
+          "text": "mechanized and hydraulic equipment",
+          "confidence": 0.898
+        },
+        {
+          "text": "for ascension",
+          "confidence": 0.873
+        },
+        {
+          "text": "descension of vehicles shall be provided at owner's risk for",
+          "confidence": 0.89
+        },
+        {
+          "text": "vehicular parking in the parking floor/basement floor.",
+          "confidence": 0.925
+        },
+        {
+          "text": "(b) The platform that carries vehicles for ascension & descension",
+          "confidence": 0.951
+        },
+        {
+          "text": "for parking in such basement floor shall be of a minimum size",
+          "confidence": 0.942
+        },
+        {
+          "text": "3.0m x 5.5m.",
+          "confidence": 0.916
+        },
+        {
+          "text": "iv)",
+          "confidence": 0.619
+        },
+        {
+          "text": "The number of ramps required for access to and from parking",
+          "confidence": 0.913
+        },
+        {
+          "text": "floors or basements shall be provided as specified below, except",
+          "confidence": 0.933
+        },
+        {
+          "text": "in cases where a car lift or elevator is installed in accordance",
+          "confidence": 0.932
+        },
+        {
+          "text": "with Regulation 3.9 (x).",
+          "confidence": 0.843
+        },
+        {
+          "text": "$1.",
+          "confidence": 0.65
+        },
+        {
+          "text": "Number of parking",
+          "confidence": 0.851
+        },
+        {
+          "text": "Minimum clear width & No.",
+          "confidence": 0.867
+        },
+        {
+          "text": "no.",
+          "confidence": 0.694
+        },
+        {
+          "text": "of Entry & Exit Ramps",
+          "confidence": 0.856
+        },
+        {
+          "text": "Up to 25",
+          "confidence": 0.879
+        },
+        {
+          "text": "3.5 m wide, 0lramp",
+          "confidence": 0.859
+        },
+        {
+          "text": "Up to 200",
+          "confidence": 0.862
+        },
+        {
+          "text": "3.5 m wide, 02 ramps or",
+          "confidence": 0.904
+        },
+        {
+          "text": "6 m wide, 01 ramp",
+          "confidence": 0.9
+        },
+        {
+          "text": "Up to 400",
+          "confidence": 0.827
+        },
+        {
+          "text": "3.5 m wide, 04ramps or",
+          "confidence": 0.867
+        },
+        {
+          "text": "6 m wide, 02 ramps",
+          "confidence": 0.887
+        },
+        {
+          "text": "Up to 800",
+          "confidence": 0.865
+        },
+        {
+          "text": "3.5 m wide, 06 ramps or",
+          "confidence": 0.865
+        },
+        {
+          "text": "6 m wide, 03 ramps",
+          "confidence": 0.904
+        },
+        {
+          "text": "Above 800",
+          "confidence": 0.864
+        },
+        {
+          "text": "3.5 m wide, 08 ramps or",
+          "confidence": 0.914
+        },
+        {
+          "text": "6 m wide, 04 ramps",
+          "confidence": 0.857
+        },
+        {
+          "text": "(3) Amendment of Chapter 4:",
+          "confidence": 0.898
+        },
+        {
+          "text": "In chapter 4-REGULATIONS FOR MAIN LAND USE ZONES:",
+          "confidence": 0.912
+        },
+        {
+          "text": "a) In regulation 4.1 RESIDENTIAL (MAIN), under 4.1.2 after Table-10",
+          "confidence": 0.908
+        },
+        {
+          "text": "ii) Notes: for clause (b) the following shall be substituted.-",
+          "confidence": 0.896
+        },
+        {
+          "text": "\" (b) if the road width is less than 9.0 m., then the maximum height",
+          "confidence": 0.912
+        },
+        {
+          "text": "is restricted to 15.Om (including stilt floor) irrespective of the FAR",
+          "confidence": 0.928
+        },
+        {
+          "text": "permissible\".",
+          "confidence": 0.87
+        },
+        {
+          "text": "b) In regulation 4.1 RESIDENTIAL (MAIN), under 4.1.2 after Table-10",
+          "confidence": 0.939
+        },
+        {
+          "text": "ii) Notes: for clause (c) the following shall be substituted.-",
+          "confidence": 0.918
+        }
+      ],
+      "line_count": 51,
+      "low_confidence_lines": 0,
+      "mean_confidence": 0.875
+    },
+    {
+      "page": 6,
+      "image": "data/raw/regulations/pages/page_06.png",
+      "lines": [
+        {
+          "text": "\"(c) In Ring III: on plot size above 360 sq.m and upto 750 sq.m",
+          "confidence": 0.908
+        },
+        {
+          "text": "apartment consisting of maximum of 8 dwelling units may be",
+          "confidence": 0.94
+        },
+        {
+          "text": "permitted and in plot area above 750 sq.m apartment may be",
+          "confidence": 0.909
+        },
+        {
+          "text": "permitted.",
+          "confidence": 0.83
+        },
+        {
+          "text": "In Ring I, II & III: on plot size above 200 sq.m and below 360 sq.m",
+          "confidence": 0.917
+        },
+        {
+          "text": "apartment consisting of maximum 6 dwelling units may be",
+          "confidence": 0.912
+        },
+        {
+          "text": "perrmitted.",
+          "confidence": 0.851
+        },
+        {
+          "text": "Provided, in Ring I & II on plots of size 360 sq.m and above,",
+          "confidence": 0.912
+        },
+        {
+          "text": "apartment may be permitted.",
+          "confidence": 0.854
+        },
+        {
+          "text": "In all the above cases minimum road width shall be 9.0 m.",
+          "confidence": 0.902
+        },
+        {
+          "text": "c) In regulation 4.5 MUTATION CORRIDORS, in table 15, plot size for",
+          "confidence": 0.932
+        },
+        {
+          "text": "sl.no.1 & 2, \"12000 sq.m\" shall be substituted as \"10000 sq.m\".",
+          "confidence": 0.882
+        },
+        {
+          "text": "d) In regulation 4.7 INDUSTRIAL I (GENERAL), table 16 shall be",
+          "confidence": 0.902
+        },
+        {
+          "text": "substituted as below:",
+          "confidence": 0.881
+        },
+        {
+          "text": "Table 16",
+          "confidence": 0.859
+        },
+        {
+          "text": "Setback",
+          "confidence": 0.874
+        },
+        {
+          "text": "is",
+          "confidence": 0.594
+        },
+        {
+          "text": "Size of the",
+          "confidence": 0.902
+        },
+        {
+          "text": "Ground",
+          "confidence": 0.808
+        },
+        {
+          "text": "FAR",
+          "confidence": 0.693
+        },
+        {
+          "text": "Setback",
+          "confidence": 0.783
+        },
+        {
+          "text": "plot (sq.m)",
+          "confidence": 0.889
+        },
+        {
+          "text": "cover",
+          "confidence": 0.77
+        },
+        {
+          "text": "no",
+          "confidence": 0.59
+        },
+        {
+          "text": "Rear and sides",
+          "confidence": 0.846
+        },
+        {
+          "text": "Front",
+          "confidence": 0.756
+        },
+        {
+          "text": "of",
+          "confidence": 0.501
+        },
+        {
+          "text": "8%",
+          "confidence": 0.666
+        },
+        {
+          "text": "of",
+          "confidence": 0.666
+        },
+        {
+          "text": "1.50",
+          "confidence": 0.799
+        },
+        {
+          "text": "12%",
+          "confidence": 0.66
+        },
+        {
+          "text": "75%",
+          "confidence": 0.637
+        },
+        {
+          "text": "Upto 500",
+          "confidence": 0.862
+        },
+        {
+          "text": "the",
+          "confidence": 0.744
+        },
+        {
+          "text": "depth",
+          "confidence": 0.692
+        },
+        {
+          "text": "depth/width",
+          "confidence": 0.874
+        },
+        {
+          "text": "of",
+          "confidence": 0.665
+        },
+        {
+          "text": "of",
+          "confidence": 0.645
+        },
+        {
+          "text": "site",
+          "confidence": 0.779
+        },
+        {
+          "text": "site\"",
+          "confidence": 0.822
+        },
+        {
+          "text": "60%",
+          "confidence": 0.569
+        },
+        {
+          "text": "1.25",
+          "confidence": 0.724
+        },
+        {
+          "text": "4.50",
+          "confidence": 0.795
+        },
+        {
+          "text": "500",
+          "confidence": 0.75
+        },
+        {
+          "text": "Above",
+          "confidence": 0.828
+        },
+        {
+          "text": "4.50",
+          "confidence": 0.767
+        },
+        {
+          "text": "upto 1000",
+          "confidence": 0.779
+        },
+        {
+          "text": "1.00",
+          "confidence": 0.765
+        },
+        {
+          "text": "50%",
+          "confidence": 0.72
+        },
+        {
+          "text": "6.00",
+          "confidence": 0.726
+        },
+        {
+          "text": "Above 1000",
+          "confidence": 0.874
+        },
+        {
+          "text": "6.00",
+          "confidence": 0.787
+        },
+        {
+          "text": "upto 3000",
+          "confidence": 0.807
+        },
+        {
+          "text": "45%",
+          "confidence": 0.742
+        },
+        {
+          "text": "1.00",
+          "confidence": 0.645
+        },
+        {
+          "text": "10.00",
+          "confidence": 0.832
+        },
+        {
+          "text": "Above 3000",
+          "confidence": 0.838
+        },
+        {
+          "text": "8.00",
+          "confidence": 0.793
+        },
+        {
+          "text": "By Order and in the name of the",
+          "confidence": 0.886
+        },
+        {
+          "text": "Governor of Karnataka",
+          "confidence": 0.876
+        },
+        {
+          "text": "(RAJESH S. SULIKERI)",
+          "confidence": 0.868
+        },
+        {
+          "text": "Under Secretary to Government",
+          "confidence": 0.937
+        },
+        {
+          "text": "Urban Development Department.",
+          "confidence": 0.887
+        },
+        {
+          "text": "To",
+          "confidence": 0.664
+        },
+        {
+          "text": "The Compiler, Karnataka Gazette, Bengaluru, with a request to publish the",
+          "confidence": 0.933
+        },
+        {
+          "text": "Notification in the Extra-ordinary Gazette.",
+          "confidence": 0.908
+        },
+        {
+          "text": "Copy to:",
+          "confidence": 0.877
+        },
+        {
+          "text": "1.",
+          "confidence": 0.666
+        },
+        {
+          "text": "The Chief Commissioner, Greater Bengaluru Authority, Bengaluru.",
+          "confidence": 0.908
+        },
+        {
+          "text": "2.",
+          "confidence": 0.523
+        },
+        {
+          "text": "The Commissioner, Bengaluru Development Authority, Bengaluru.",
+          "confidence": 0.899
+        },
+        {
+          "text": "3.",
+          "confidence": 0.663
+        },
+        {
+          "text": "The Metropolitan Commissioner, Bengaluru Metropolitan Region",
+          "confidence": 0.916
+        },
+        {
+          "text": "Development Authority, Bengaluru.",
+          "confidence": 0.884
+        }
+      ],
+      "line_count": 74,
+      "low_confidence_lines": 5,
+      "mean_confidence": 0.797
+    },
+    {
+      "page": 7,
+      "image": "data/raw/regulations/pages/page_07.png",
+      "lines": [
+        {
+          "text": "4. Commissioners of all city corporations within Greater Bengaluru",
+          "confidence": 0.922
+        },
+        {
+          "text": "Authority jurisdiction.",
+          "confidence": 0.887
+        },
+        {
+          "text": "5.",
+          "confidence": 0.666
+        },
+        {
+          "text": "Director of Town & Country Planning, M.S. Building, Bengaluru.",
+          "confidence": 0.938
+        },
+        {
+          "text": "TownPlanner",
+          "confidence": 0.859
+        },
+        {
+          "text": "Member, Bengaluru",
+          "confidence": 0.869
+        },
+        {
+          "text": "6.",
+          "confidence": 0.665
+        },
+        {
+          "text": "Development Authority,",
+          "confidence": 0.854
+        },
+        {
+          "text": "Bengaluru.",
+          "confidence": 0.898
+        },
+        {
+          "text": "7.",
+          "confidence": 0.666
+        },
+        {
+          "text": "Chief Town Planner, Greater Bengaluru Authority, Bengaluru.",
+          "confidence": 0.922
+        },
+        {
+          "text": "8.",
+          "confidence": 0.667
+        },
+        {
+          "text": "Metropolitan Planner, Bengaluru Metropolitan Region Development",
+          "confidence": 0.908
+        },
+        {
+          "text": "Authority, Bengaluru.",
+          "confidence": 0.857
+        },
+        {
+          "text": "9.1",
+          "confidence": 0.559
+        },
+        {
+          "text": "Director General of Fire and Emergency Services, Bengaluru.",
+          "confidence": 0.924
+        },
+        {
+          "text": "10. Section Guard File/ Extra copies.",
+          "confidence": 0.958
+        }
+      ],
+      "line_count": 17,
+      "low_confidence_lines": 1,
+      "mean_confidence": 0.825
+    }
+  ],
+  "candidate_clauses": [
+    {
+      "page": 1,
+      "line_index": 34,
+      "text": "under regulation 3.1 SETBACKS shall be",
+      "confidence": 0.892,
+      "reliable": true
+    },
+    {
+      "page": 2,
+      "line_index": 0,
+      "text": "i. For all types of building with total height up to 12.Om, excluding the",
+      "confidence": 0.91,
+      "reliable": true
+    },
+    {
+      "page": 2,
+      "line_index": 1,
+      "text": "stilt floor, the setbacks shall be calculated as per Table 8.",
+      "confidence": 0.957,
+      "reliable": true
+    },
+    {
+      "page": 2,
+      "line_index": 3,
+      "text": "area and with a height up to 15 m (including the stilt floor), the",
+      "confidence": 0.908,
+      "reliable": true
+    },
+    {
+      "page": 2,
+      "line_index": 4,
+      "text": "setbacks shall be determined as per Table 8.",
+      "confidence": 0.899,
+      "reliable": true
+    },
+    {
+      "page": 2,
+      "line_index": 7,
+      "text": "Table 8: Setbacks for buildings with total height upto 12.0 m",
+      "confidence": 0.908,
+      "reliable": true
+    },
+    {
+      "page": 2,
+      "line_index": 9,
+      "text": "(i)For plot area up to 4000.0 sq.m",
+      "confidence": 0.906,
+      "reliable": true
+    },
+    {
+      "page": 2,
+      "line_index": 56,
+      "text": "(ii) For plot area above 4000 sq.m: minimum setback of 5.Om",
+      "confidence": 0.876,
+      "reliable": true
+    },
+    {
+      "page": 2,
+      "line_index": 59,
+      "text": "\"For all types of buildings in plot area above 250 sq.m and up to 4000",
+      "confidence": 0.908,
+      "reliable": true
+    },
+    {
+      "page": 2,
+      "line_index": 64,
+      "text": "For plots upto 250sq.m in area, the maximum permissible",
+      "confidence": 0.924,
+      "reliable": true
+    },
+    {
+      "page": 2,
+      "line_index": 65,
+      "text": "building height shall bel2.Om excluding the stilt floor.",
+      "confidence": 0.908,
+      "reliable": true
+    },
+    {
+      "page": 2,
+      "line_index": 73,
+      "text": "3) Open staircase can be allowed in setback area in plot size up to",
+      "confidence": 0.916,
+      "reliable": true
+    },
+    {
+      "page": 3,
+      "line_index": 3,
+      "text": "6) For buildings with a height of 15.0 meters and above, up to a",
+      "confidence": 0.916,
+      "reliable": true
+    },
+    {
+      "page": 3,
+      "line_index": 4,
+      "text": "maximum height of 21.0 meters (including stilt), the provisions",
+      "confidence": 0.912,
+      "reliable": true
+    },
+    {
+      "page": 3,
+      "line_index": 7,
+      "text": "7) The setback area shall not be paved or covered by any hard",
+      "confidence": 0.921,
+      "reliable": true
+    },
+    {
+      "page": 3,
+      "line_index": 15,
+      "text": "4000 sg.m shall be either the minimum setback required for the",
+      "confidence": 0.905,
+      "reliable": true
+    },
+    {
+      "page": 3,
+      "line_index": 35,
+      "text": "without providing for ramp in plots of extent up to 6000 sq.m.",
+      "confidence": 0.926,
+      "reliable": true
+    },
+    {
+      "page": 3,
+      "line_index": 36,
+      "text": "In case plot size above 6000 sq.m minimum one ramp of 6.0 m",
+      "confidence": 0.924,
+      "reliable": true
+    },
+    {
+      "page": 4,
+      "line_index": 30,
+      "text": "floor, parking pits up to a depth of 3.Om, each of size",
+      "confidence": 0.941,
+      "reliable": true
+    },
+    {
+      "page": 4,
+      "line_index": 31,
+      "text": "3x5.5m may be permitted to allow parking of vehicle using",
+      "confidence": 0.917,
+      "reliable": true
+    },
+    {
+      "page": 4,
+      "line_index": 46,
+      "text": "shall be a minimum of 5.0 m. and for normal parking the",
+      "confidence": 0.907,
+      "reliable": true
+    },
+    {
+      "page": 5,
+      "line_index": 3,
+      "text": "\"2.0 m or setback whichever is less\"",
+      "confidence": 0.9,
+      "reliable": true
+    },
+    {
+      "page": 5,
+      "line_index": 5,
+      "text": "(ii) in case of plot area upto 1oo0 sq.m the ramp may be allowed upto",
+      "confidence": 0.872,
+      "reliable": true
+    },
+    {
+      "page": 5,
+      "line_index": 46,
+      "text": "\" (b) if the road width is less than 9.0 m., then the maximum height",
+      "confidence": 0.912,
+      "reliable": true
+    },
+    {
+      "page": 5,
+      "line_index": 47,
+      "text": "is restricted to 15.Om (including stilt floor) irrespective of the FAR",
+      "confidence": 0.928,
+      "reliable": true
+    },
+    {
+      "page": 6,
+      "line_index": 0,
+      "text": "\"(c) In Ring III: on plot size above 360 sq.m and upto 750 sq.m",
+      "confidence": 0.908,
+      "reliable": true
+    },
+    {
+      "page": 6,
+      "line_index": 1,
+      "text": "apartment consisting of maximum of 8 dwelling units may be",
+      "confidence": 0.94,
+      "reliable": true
+    },
+    {
+      "page": 6,
+      "line_index": 2,
+      "text": "permitted and in plot area above 750 sq.m apartment may be",
+      "confidence": 0.909,
+      "reliable": true
+    },
+    {
+      "page": 6,
+      "line_index": 4,
+      "text": "In Ring I, II & III: on plot size above 200 sq.m and below 360 sq.m",
+      "confidence": 0.917,
+      "reliable": true
+    },
+    {
+      "page": 6,
+      "line_index": 5,
+      "text": "apartment consisting of maximum 6 dwelling units may be",
+      "confidence": 0.912,
+      "reliable": true
+    },
+    {
+      "page": 6,
+      "line_index": 7,
+      "text": "Provided, in Ring I & II on plots of size 360 sq.m and above,",
+      "confidence": 0.912,
+      "reliable": true
+    },
+    {
+      "page": 6,
+      "line_index": 9,
+      "text": "In all the above cases minimum road width shall be 9.0 m.",
+      "confidence": 0.902,
+      "reliable": true
+    },
+    {
+      "page": 6,
+      "line_index": 10,
+      "text": "c) In regulation 4.5 MUTATION CORRIDORS, in table 15, plot size for",
+      "confidence": 0.932,
+      "reliable": true
+    }
+  ],
+  "caveats": [
+    "OCR ON A SCANNED GAZETTE MISREADS DIGITS. 1/7, 5/6 and decimal points are routine failures, and table cell boundaries are lost. A FAR of 1.75 misread as 1.25 would be worse than no FAR, because it would look right.",
+    "NOTHING HERE IS ENCODED INTO THE RULES ENGINE. These are candidate lines for a human to confirm against the page images in data/raw/regulations/pages/.",
+    "A confidence score is the OCR engine's own, and a confidently misread digit still scores high. It filters noise, not error.",
+    "Only clauses a person has confirmed against the image may become rules, and each must cite its page."
+  ]
+}

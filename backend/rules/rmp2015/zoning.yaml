@@ -1,7 +1,12 @@
 # Zoning / development-control rules for Bengaluru.
 #
-# STATUS: SKELETON. Almost every rule here is UNVERIFIED and therefore does NOT
-# fire. That is the intended behaviour, not an unfinished feature.
+# STATUS: PARTLY VERIFIED. Four rules now fire, each read from a page image of
+# notification UDD 235 MNJ 2025 (05.01.2026) and citing its regulation number
+# and page. FAR is deliberately NOT among them — see far-by-road-width-residential.
+#
+# OCR alone was not trusted for any of these. On these same pages it rendered
+# "12.0m" as "12.Om" and "1000" as "1oo0", so every encoded digit was confirmed
+# against the rendered image.
 #
 # The operative instrument is the Zoning Regulations of the Revised Master Plan
 # 2015, as amended. RMP-2031 is draft/withdrawn and must not be used.
@@ -12,7 +17,7 @@
 
 ruleset:
   id: rmp2015-zoning
-  version: 0.1.0
+  version: 0.2.0
   authority: "BDA / Greater Bengaluru city corporations"
   source_document: "Zoning Regulations, Revised Master Plan 2015 (Bengaluru)"
   source_url: "https://www.indiacode.nic.in/ViewFileUploaded?path=AC_KA_71_402_00001_11_1552283484255%2Frulesindividualfile%2F&file=zoning_regulations_rmp2015f.pdf"
@@ -27,12 +32,17 @@ ruleset:
         Reported February 2025 via secondary commentary. The Karnataka Gazette
         notification has not been obtained. Not encoded.
 
-    - id: setback-parking-2026
-      description: "Setback and parking provision amendments"
-      status: UNVERIFIED
-      blocking_task: R2
+    - id: udd-235-mnj-2025
+      description: "Zonal Regulations to RMP-2015 — setbacks, height, ramps, dwelling units"
+      reference: "UDD 235 MNJ 2025"
+      notified_on: "2026-01-05"
+      status: VERIFIED
+      source_url: "https://data.opencity.in/dataset/greater-bengaluru-amendment-regulations-2025"
+      obtained: "7-page scan, no text layer; OCR'd then each encoded clause read from the page image"
       note: >
-        Reported February 2026 via a law-firm commentary only. Not encoded.
+        Found via audit task R2. Supersedes the earlier "reported February 2026
+        via law-firm commentary" entry — the notification itself is now held and
+        four of its clauses are encoded with page citations.
 
     - id: gba-byelaws
       description: "Whether GBA has issued bye-laws superseding the BBMP position"
@@ -42,18 +52,38 @@ ruleset:
   rules:
     - id: height-cap-narrow-road
       description: "Building height cap where the abutting road is under 9 m"
-      clause: null                      # ← must be filled before it can fire
-      status: UNVERIFIED
-      blocking_task: R2
+      clause: "Regulation 4.1 RESIDENTIAL (MAIN), 4.1.2, Notes to Table-10, clause (b), as substituted by UDD 235 MNJ 2025 dated 05.01.2026"
+      source_page: 5
+      source_image: "data/raw/regulations/pages/page_05.png"
+      status: VERIFIED
+      verified_on: "2026-08-15"
+      verified_by: "read from the rendered page image and cross-checked against OCR text"
       when:
         road_width_m: { lt: 9.0 }
       then:
         max_height_m: 15.0
         includes_stilt: true
         overrides: [far_derived_height]
-      note: >
-        Reported to apply regardless of the otherwise-applicable FAR. Encoded
-        here so the shape of the rule is reviewable, but it does not fire.
+      quote: >
+        "if the road width is less than 9.0 m., then the maximum height is
+        restricted to 15.0m (including stilt floor) irrespective of the FAR
+        permissible"
+
+    - id: height-cap-small-plot
+      description: "Height cap for plots not exceeding 250 sq.m"
+      clause: "Note 1 inserted after Table 9 by UDD 235 MNJ 2025 dated 05.01.2026"
+      source_page: 2
+      source_image: "data/raw/regulations/pages/page_02.png"
+      status: VERIFIED
+      verified_on: "2026-08-15"
+      when:
+        plot_area_sqm: { lte: 250.0 }
+      then:
+        max_height_m: 12.0
+        includes_stilt: false
+      quote: >
+        "For plots upto 250sq.m in area, the maximum permissible building height
+        shall be 12.0m excluding the stilt floor."
 
     - id: far-by-road-width-residential
       description: "Residential FAR as a function of road width and plot area"
@@ -65,19 +95,82 @@ ruleset:
       then:
         far: null
       note: >
-        The FAR table is the core of the feasibility calculation and must be
-        transcribed from the source document clause by clause. Until then the
-        engine returns UNAVAILABLE for FAR and for everything downstream of it.
+        STILL NOT ENCODED, and the January 2026 notification does not contain it.
+        That notification amends setbacks, height and dwelling units, and its
+        height cap applies "irrespective of the FAR permissible" — FAR itself
+        lives in Table 10 of the base RMP-2015 Zoning Regulations, a separate
+        document which has not been read. FAR therefore remains user-declared
+        with a source flag, and everything derived from it is bounded by that
+        flag.
 
-    - id: setbacks-residential
-      description: "Front / rear / side setbacks by plot dimension and height"
-      clause: null
-      status: UNVERIFIED
-      blocking_task: R2
+    - id: setbacks-table-8
+      description: "Table 8 setbacks, buildings up to 12.0 m excluding stilt floor"
+      clause: "Table 8 as substituted by UDD 235 MNJ 2025 dated 05.01.2026, regulation 3.1 SETBACKS"
+      source_page: 2
+      source_image: "data/raw/regulations/pages/page_02.png"
+      status: VERIFIED
+      verified_on: "2026-08-15"
+      applies_when: >
+        Total height up to 12.0 m excluding the stilt floor. Table 8 also applies
+        to plots not exceeding 250 sq.m with height up to 15 m including stilt.
+        Buildings over 12.0 m otherwise fall under Table 9, which is NOT encoded.
+      bands:
+        # site_area_max is the upper bound of the band, in sq.m.
+        - site_area_max: 60.0
+          front_m: 0.75
+          rear_m: null           # the table shows "-" for this band
+          side_m: 0.60
+          side_note: "0.60 m on any one side"
+        - site_area_max: 150.0
+          front_m: 0.90
+          rear_m: 0.70
+          side_m: 0.70
+          side_note: "0.70 m on any one side"
+        - site_area_max: 250.0
+          front_m: 1.00
+          rear_m: 0.80
+          side_m: 0.80
+        - site_area_max: 4000.0
+          front_pct_of_depth: 12.0
+          rear_pct_of_depth: 8.0
+          side_pct_of_width: 8.0
+          note: "Percentages of site depth/width, so plot dimensions are required"
+      above_4000:
+        all_sides_m: 5.0
+        clause_note: "(ii) For plot area above 4000 sq.m: minimum setback of 5.0m on all sides shall be insisted"
+
+    - id: open-staircase-in-setback
+      description: "Open staircase permitted within the setback area"
+      clause: "Note 3 inserted after Table 9 by UDD 235 MNJ 2025 dated 05.01.2026"
+      source_page: 2
+      status: VERIFIED
+      verified_on: "2026-08-15"
       when:
-        land_use: residential
+        plot_area_sqm: { lte: 750.0 }
       then:
-        setbacks_m: null
+        open_staircase_in_setback: true
+
+    - id: parking-ramps
+      description: "Entry/exit ramps required by number of parking spaces"
+      clause: "Regulation 3.10 Ramps, clause (iv), inserted by UDD 235 MNJ 2025 dated 05.01.2026"
+      source_page: 5
+      source_image: "data/raw/regulations/pages/page_05.png"
+      status: VERIFIED
+      verified_on: "2026-08-15"
+      bands:
+        - parking_max: 25
+          options: ["3.5 m wide, 01 ramp"]
+        - parking_max: 200
+          options: ["3.5 m wide, 02 ramps", "6 m wide, 01 ramp"]
+        - parking_max: 400
+          options: ["3.5 m wide, 04 ramps", "6 m wide, 02 ramps"]
+        - parking_max: 800
+          options: ["3.5 m wide, 06 ramps", "6 m wide, 03 ramps"]
+        - parking_max: null            # above 800
+          options: ["3.5 m wide, 08 ramps", "6 m wide, 04 ramps"]
+      note: >
+        Except where a car lift or elevator is installed in accordance with
+        Regulation 3.9 (x).
 
 # Rules that are pure arithmetic, not regulation, and so can be trusted once
 # their inputs are known. These DO fire.

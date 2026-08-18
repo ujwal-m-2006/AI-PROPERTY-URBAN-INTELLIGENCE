@@ -57,6 +57,9 @@ INGEST: list[tuple[str, str, Path, bool]] = [
      PROCESSED / "road_network_bengaluru.geojson", True),
     ("Reported flooding locations", "etl/flows/ingest_flood_locations.py",
      PROCESSED / "flood_locations_bengaluru.geojson", True),
+    ("Zoning notification OCR (scanned gazette)",
+     "etl/flows/ocr_zoning_notification.py",
+     PROCESSED / "zoning_notification_ocr.json", True),
 ]
 
 TRAIN: list[tuple[str, str, Path]] = [
