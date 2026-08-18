@@ -102,8 +102,8 @@ deserve a decision rather than a default:
 
 ## ⚠ The git warning
 
-**The parent folder `C:\Users\UJWAL M` is itself a git repository**, with a
-remote pointing at `github.com/ujwal-m-2006/portfolio.git`.
+**The home folder above this project is itself a git repository**, with a remote
+pointing at an unrelated repo.
 
 Running `git add -A && git push` from that directory would attempt to commit and
 push your **entire home folder** — including `.ssh/` (private keys), `.aws/`
@@ -124,5 +124,5 @@ Or remove the repository entirely if it was created by accident:
 cd ~ && rm -rf .git
 ```
 
-Check what it is first — it has one commit (`ff32bdf first commit`) and one
-tracked file, so it is unlikely to be holding anything you need.
+Check what it is first — it has a single commit and one tracked file, so it is
+unlikely to be holding anything you need.
