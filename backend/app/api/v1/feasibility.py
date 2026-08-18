@@ -29,11 +29,34 @@ class FeasibilityRequest(BaseModel):
     plot_frontage_m: float | None = Field(None, gt=0, le=10_000)
     corner_plot: bool = False
 
+    # Declared regulatory parameters. The platform cannot establish these; a
+    # user who holds them may supply them and everything downstream computes.
+    far: float | None = Field(None, gt=0, le=10,
+                             description="Floor Area Ratio, if you hold it")
+    far_source: str = Field(
+        "estimated",
+        description="official_document | measured | dataset | estimated")
+    max_height_m: float | None = Field(None, gt=0, le=300)
+    max_height_source: str = "estimated"
+    ground_coverage_pct: float | None = Field(None, gt=0, le=100)
+    setback_front_m: float | None = Field(None, ge=0, le=100)
+    setback_rear_m: float | None = Field(None, ge=0, le=100)
+    setback_side_m: float | None = Field(None, ge=0, le=100)
+    parking_per_unit: float | None = Field(None, gt=0, le=10)
+    avg_unit_size_sqm: float | None = Field(None, gt=10, le=2000)
+
 
 class FeasibilityResponse(BaseModel):
     data: dict[str, FactOut]
     blocking_unknowns: list[str]
     pending_verification: list[dict[str, str]]
+    # Figures the caller supplied rather than the engine establishing them.
+    # Distinct from pending_verification: "this rule is unverified" and "you told
+    # me this number" are different admissions and must not be conflated.
+    user_declared: list[str] = []
+    # True when any output rests on a declared figure. The UI must say so — a
+    # computed number that reads as statutory is the failure mode here.
+    computed_from_declared: bool = False
     ruleset: dict[str, Any]
     confidence: dict[str, Any]
     disclaimers: list[str]
@@ -55,6 +78,16 @@ async def evaluate(req: FeasibilityRequest) -> FeasibilityResponse:
             building_type=req.building_type,
             plot_frontage_m=req.plot_frontage_m,
             corner_plot=req.corner_plot,
+            far=req.far,
+            far_source=req.far_source,
+            max_height_m=req.max_height_m,
+            max_height_source=req.max_height_source,
+            ground_coverage_pct=req.ground_coverage_pct,
+            setback_front_m=req.setback_front_m,
+            setback_rear_m=req.setback_rear_m,
+            setback_side_m=req.setback_side_m,
+            parking_per_unit=req.parking_per_unit,
+            avg_unit_size_sqm=req.avg_unit_size_sqm,
         )
     )
     report = engine.confidence_report(result)
@@ -63,6 +96,10 @@ async def evaluate(req: FeasibilityRequest) -> FeasibilityResponse:
         data={k: FactOut.of(v) for k, v in result.facts.items()},
         blocking_unknowns=report.blocking_unknowns,
         pending_verification=result.pending_verification,
+        user_declared=result.user_declared,
+        # True when any output rests on a figure the caller supplied. The UI must
+        # say so — a computed number that looks statutory is the failure mode.
+        computed_from_declared=bool(result.user_declared),
         ruleset={
             "id": "rmp2015-zoning",
             "version": result.ruleset_version,

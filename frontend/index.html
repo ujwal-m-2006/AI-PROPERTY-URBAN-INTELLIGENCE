@@ -2786,9 +2786,64 @@ function renderFeasibility(){
           <input id="fArea" type="number" value="929" min="30" step="10"></div>
         <div class="field"><label for="fRoad">Road width m</label>
           <input id="fRoad" type="number" value="12.2" min="1" step="0.5"></div>
+        <div class="field"><label for="fRoadSrc">Road width established by</label>
+          <select id="fRoadSrc">
+            <option value="official_document">Sanctioned plan / official document</option>
+            <option value="measured">Measured on site</option>
+            <option value="dataset">Published dataset</option>
+            <option value="estimated" selected>Estimated</option>
+          </select></div>
         <button class="btn" onclick="runFeasibility()">Evaluate</button>
       </div>
-      <div id="fOut" class="why">Evaluating…</div>
+      <div id="fOut" class="why">Evaluating&hellip;</div>
+    </div>
+
+    <div class="section"><h2>Supply the regulatory limits yourself</h2>
+      <p class="notice red"><b>This platform does not know your FAR.</b> The
+        governing instrument &mdash; the Zonal Regulations to RMP-2015 notified as
+        UDD 235 MNJ 2025 on 05.01.2026 &mdash; is published as a <b>scanned
+        document with no machine-readable text</b>, so no clause has been
+        transcribed. Nothing below is read off this system.</p>
+      <p class="why" style="margin-top:8px">If you hold the applicable figures
+        &mdash; from a sanctioned plan, the planning authority, or the published
+        regulations &mdash; enter them and every dependent value is computed with
+        its assumptions shown. Confidence is bounded by how you obtained them, so
+        an <i>estimated</i> FAR produces a visibly weaker answer than one from an
+        official document.</p>
+
+      <div class="form" style="margin-top:11px">
+        <div class="field"><label for="fFar">FAR / FSI</label>
+          <input id="fFar" type="number" step="0.05" min="0.1" max="10"
+            placeholder="e.g. 1.75"></div>
+        <div class="field"><label for="fFarSrc">FAR established by</label>
+          <select id="fFarSrc">
+            <option value="official_document">Sanctioned plan / official document</option>
+            <option value="measured">Confirmed with the authority</option>
+            <option value="dataset">Published regulations</option>
+            <option value="estimated" selected>Estimated</option>
+          </select></div>
+        <div class="field"><label for="fHeight">Max height m</label>
+          <input id="fHeight" type="number" step="0.5" min="1"
+            placeholder="e.g. 15"></div>
+        <div class="field"><label for="fCover">Ground coverage %</label>
+          <input id="fCover" type="number" step="1" min="1" max="100"
+            placeholder="e.g. 50"></div>
+        <div class="field"><label for="fSbF">Setback front m</label>
+          <input id="fSbF" type="number" step="0.5" min="0" placeholder="e.g. 3"></div>
+        <div class="field"><label for="fSbR">Setback rear m</label>
+          <input id="fSbR" type="number" step="0.5" min="0" placeholder="e.g. 2"></div>
+        <div class="field"><label for="fSbS">Setback side m</label>
+          <input id="fSbS" type="number" step="0.5" min="0" placeholder="e.g. 1.5"></div>
+        <div class="field"><label for="fUnitSize">Avg unit size sq.m</label>
+          <input id="fUnitSize" type="number" step="5" min="10"
+            placeholder="e.g. 95"></div>
+        <div class="field"><label for="fPark">Parking per unit</label>
+          <input id="fPark" type="number" step="0.5" min="0.5"
+            placeholder="e.g. 1.5"></div>
+        <button class="btn" onclick="runFeasibility()">Recompute</button>
+      </div>
+      <p class="why" style="margin-top:8px">Leave any field blank and the values
+        that depend on it stay unavailable, with the reason shown.</p>
     </div>`);
   runFeasibility();         // show results immediately, not an empty form
 }
@@ -3007,10 +3062,26 @@ async function estimatePrice(){
 async function runFeasibility(){
   const out = document.getElementById("fOut");
   out.textContent = "Evaluating…";
+  // A blank field must stay null, not become 0 — a declared FAR of 0 would be
+  // a claim, whereas absent means "the platform still does not know".
+  const num = id => {
+    const el = document.getElementById(id);
+    if (!el || el.value === "") return null;
+    const v = Number(el.value);
+    return Number.isFinite(v) ? v : null;
+  };
+  const sel = (id, dflt) => (document.getElementById(id)||{}).value || dflt;
   const payload = {
     plot_area_sqm:Number(document.getElementById("fArea").value),
     road_width_m:Number(document.getElementById("fRoad").value),
-    road_width_source:"estimated", land_use:"residential" };
+    road_width_source:sel("fRoadSrc","estimated"),
+    land_use:"residential",
+    far:num("fFar"), far_source:sel("fFarSrc","estimated"),
+    max_height_m:num("fHeight"), max_height_source:sel("fFarSrc","estimated"),
+    ground_coverage_pct:num("fCover"),
+    setback_front_m:num("fSbF"), setback_rear_m:num("fSbR"),
+    setback_side_m:num("fSbS"),
+    avg_unit_size_sqm:num("fUnitSize"), parking_per_unit:num("fPark") };
 
   let body;
   try{
@@ -3032,16 +3103,38 @@ async function runFeasibility(){
   out.innerHTML = `
     <table class="data">${keys.map(k=>{
       const f = body.data[k]; if(!f) return "";
-      const v = f.value === null ? `<span class="na">Data unavailable</span>`
-                                 : escapeHtml(String(f.value));
+      // Objects (setbacks, ground coverage) need spelling out, not [object Object].
+      const fmt = val => {
+        if (val === null || val === undefined) return null;
+        if (typeof val === "object")
+          return Object.entries(val)
+            .filter(([,x]) => x !== null && x !== undefined)
+            .map(([kk,vv]) => `${escapeHtml(kk.replace(/_/g," "))} <b>${vv}</b>`)
+            .join(" &middot; ");
+        return `<b>${escapeHtml(String(val))}</b>`;
+      };
+      const shown = fmt(f.value);
+      const v = shown === null ? `<span class="na">Data unavailable</span>` : shown;
       return `<tr><th>${nice[k]}</th><td><span class="badge ${f.colour}"></span>${v}
-        ${f.reason ? `<div class="why">${escapeHtml(f.reason)}</div>`:""}</td></tr>`;
+        ${f.unit && typeof f.value !== "object" ? " "+escapeHtml(f.unit) : ""}
+        ${f.value !== null ? `<div class="why">${escapeHtml(f.status||"")}
+           &middot; confidence ${Math.round((f.confidence||0)*100)}%</div>`:""}
+        ${f.reason ? `<div class="why">${escapeHtml(f.reason)}</div>`:""}
+        ${(f.assumptions||[]).map(a=>`<div class="why">${escapeHtml(a)}</div>`).join("")}
+        </td></tr>`;
     }).join("")}</table>
     <p class="notice red" style="margin-top:10px"><b>Blocking unknowns</b><br>
       ${body.blocking_unknowns.slice(0,4).map(escapeHtml).join("<br>")}</p>
+    ${body.computed_from_declared ? `
+      <p class="notice red" style="margin-top:10px">
+        <b>These are your figures, computed &mdash; not the statutory limits.</b>
+        ${(body.user_declared||[]).map(escapeHtml).join("; ")}. Every value below
+        inherits that uncertainty, which is why confidence falls as the chain
+        lengthens. Confirm with the planning authority before relying on any of
+        it &mdash; this is decision support, not a sanction.</p>` : ""}
     <p class="why" style="margin-top:8px"><b>${body.pending_verification.length} rules
       pending verification.</b> Rules not verified against the source document do
-      not fire, so no FAR or height figure is published.</p>
+      not fire, so the platform publishes no statutory FAR or height of its own.</p>
     ${govBlock(body.ruleset)}`;
 }
 

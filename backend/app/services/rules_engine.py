@@ -54,12 +54,36 @@ class FeasibilityInput:
     plot_frontage_m: float | None = None
     corner_plot: bool = False
 
+    # --- declared regulatory parameters -------------------------------------
+    # The platform cannot establish these: the governing notification is a scan
+    # and no clause has been transcribed. A user who HAS them (sanctioned plan,
+    # authority confirmation, the published regulations) may supply them, and
+    # everything downstream then computes with its assumptions on show.
+    #
+    # Every one carries a source flag, and the confidence of anything derived
+    # from it is bounded by that flag. A figure declared as `estimated` produces
+    # a visibly weaker answer than one from an `official_document`.
+    far: float | None = None
+    far_source: str = "estimated"
+    max_height_m: float | None = None
+    max_height_source: str = "estimated"
+    ground_coverage_pct: float | None = None
+    setback_front_m: float | None = None
+    setback_rear_m: float | None = None
+    setback_side_m: float | None = None
+    parking_per_unit: float | None = None
+    avg_unit_size_sqm: float | None = None
+
 
 @dataclass(slots=True)
 class FeasibilityResult:
     facts: dict[str, Fact[Any]] = field(default_factory=dict)
     blocking_unknowns: list[str] = field(default_factory=list)
     pending_verification: list[dict[str, str]] = field(default_factory=list)
+    # Values the CALLER supplied rather than the engine establishing them. A
+    # distinct list from pending_verification: "this rule is unverified" and
+    # "you told me this number" are different admissions.
+    user_declared: list[str] = field(default_factory=list)
     ruleset_version: str = "unknown"
 
 
@@ -220,8 +244,31 @@ def evaluate(inp: FeasibilityInput) -> FeasibilityResult:
     far_rule = next(
         (r for r in rules if r["id"] == "far-by-road-width-residential"), None
     )
-    if far_rule and _can_fire(far_rule):
-        # Populated once the FAR table is transcribed and cited.
+    if inp.far is not None and inp.far > 0:
+        # Declared, not established. Status stays ESTIMATED and the source flag
+        # caps the confidence, so nothing downstream can look authoritative.
+        conf = min(ROAD_WIDTH_CONFIDENCE.get(inp.far_source, 0.35), 0.70)
+        result.facts["far"] = Fact.observed(
+            round(float(inp.far), 3),
+            source=SourceRef(
+                source_id=_rule_source().source_id,
+                name=f"FAR declared by user ({inp.far_source.replace('_', ' ')})",
+                tier=Tier.T4 if inp.far_source == "estimated" else Tier.T3,
+                source_url=None,
+            ),
+            confidence=conf,
+            status=Status.ESTIMATED,
+            caveats=[
+                f"FAR DECLARED BY YOU, established by: {inp.far_source}. This "
+                "platform has not verified it against the zoning regulations — "
+                "the governing notification (UDD 235 MNJ 2025) is a scanned "
+                "document and no clause has been transcribed.",
+                "Everything computed from this figure inherits its uncertainty. "
+                "Confirm with the planning authority before relying on any of it.",
+            ],
+        )
+        result.user_declared.append("FAR is user-declared and unverified against the gazette")
+    elif far_rule and _can_fire(far_rule):
         result.facts["far"] = Fact.unavailable("FAR table not yet transcribed")
     else:
         result.facts["far"] = Fact.unavailable(
@@ -232,7 +279,10 @@ def evaluate(inp: FeasibilityInput) -> FeasibilityResult:
             "closed) — but their FAR clauses have not been transcribed into this "
             "engine. Publishing a FAR figure from a document located but not "
             "read would be a guess wearing a citation, with financial "
-            "consequences."
+            "consequences. If you hold the applicable FAR — from a sanctioned "
+            "plan, the planning authority, or the published regulations — supply "
+            "it as `far` with a `far_source`, and every dependent value will be "
+            "computed with its assumptions shown."
         )
         result.blocking_unknowns.append("verified FAR clause for this zone")
 
@@ -255,10 +305,33 @@ def evaluate(inp: FeasibilityInput) -> FeasibilityResult:
             unit="m",
             rule_ids=[height_rule["id"]],
         )
+    elif inp.max_height_m is not None and inp.max_height_m > 0:
+        conf = min(ROAD_WIDTH_CONFIDENCE.get(inp.max_height_source, 0.35), 0.70)
+        result.facts["max_height"] = Fact.observed(
+            round(float(inp.max_height_m), 2),
+            source=SourceRef(
+                source_id=_rule_source().source_id,
+                name=f"Height declared by user "
+                     f"({inp.max_height_source.replace('_', ' ')})",
+                tier=Tier.T4 if inp.max_height_source == "estimated" else Tier.T3,
+                source_url=None,
+            ),
+            confidence=conf,
+            unit="m",
+            status=Status.ESTIMATED,
+            caveats=[
+                f"HEIGHT DECLARED BY YOU, established by: "
+                f"{inp.max_height_source}. Not verified against the building "
+                "bye-laws, which are issued per city corporation and are not "
+                "transcribed here.",
+            ],
+        )
+        result.user_declared.append("Maximum height is user-declared and unverified")
     else:
         result.facts["max_height"] = Fact.unavailable(
             "Maximum permissible height is not established. The applicable height "
-            "rules are unverified against the source document (audit R2)."
+            "rules are unverified against the source document (audit R2). Supply "
+            "`max_height_m` with a source if you hold it."
         )
         result.blocking_unknowns.append("verified height rule")
 
@@ -296,10 +369,94 @@ def evaluate(inp: FeasibilityInput) -> FeasibilityResult:
             "Depends on maximum permissible height, which is unavailable"
         )
 
-    for key in ("setbacks", "ground_coverage", "parking_spaces", "potential_units"):
-        result.facts[key] = Fact.unavailable(
-            "Not computed: the governing rule is unverified against the source "
-            "document (audit R2)"
+    # --- setbacks and ground coverage -------------------------------------
+    declared_setbacks = {
+        "front_m": inp.setback_front_m,
+        "rear_m": inp.setback_rear_m,
+        "side_m": inp.setback_side_m,
+    }
+    if any(v is not None and v >= 0 for v in declared_setbacks.values()):
+        supplied = {k: round(float(v), 2)
+                    for k, v in declared_setbacks.items() if v is not None}
+        result.facts["setbacks"] = Fact.derive(
+            supplied,
+            inputs=[area] if area.is_known else [],
+            method=Method.RULE_EVALUATION,
+            assumptions=[
+                "Setbacks as declared by you, not read from the zoning "
+                "regulations",
+                "A setback schedule depends on plot dimensions, abutting road "
+                "width and building category; confirm the applicable one",
+            ],
+            unit="m",
+        )
+        result.user_declared.append("Setbacks are user-declared")
+    else:
+        result.facts["setbacks"] = Fact.unavailable(
+            "Not computed: the setback schedule is unverified against the source "
+            "document (audit R2). Supply setback_front_m / _rear_m / _side_m to "
+            "compute the buildable footprint from your own figures."
+        )
+
+    if inp.ground_coverage_pct is not None and 0 < inp.ground_coverage_pct <= 100:
+        pct = float(inp.ground_coverage_pct)
+        footprint = (round(float(area.value) * pct / 100.0, 2)
+                     if area.is_known else None)
+        result.facts["ground_coverage"] = Fact.derive(
+            {"percent": round(pct, 2), "footprint_sqm": footprint},
+            inputs=[area] if area.is_known else [],
+            method=Method.RULE_EVALUATION,
+            assumptions=[
+                "Ground coverage percentage as declared by you",
+                "Footprint = plot area x coverage percentage",
+            ],
+        )
+        result.user_declared.append("Ground coverage is user-declared")
+    else:
+        result.facts["ground_coverage"] = Fact.unavailable(
+            "Not computed: the permissible coverage is unverified (audit R2). "
+            "Supply ground_coverage_pct to compute the footprint."
+        )
+
+    # --- units, then parking, which depends on them -----------------------
+    built_up = result.facts["max_built_up"]
+    if built_up.is_known and inp.avg_unit_size_sqm and inp.avg_unit_size_sqm > 0:
+        units = int(float(built_up.value) // float(inp.avg_unit_size_sqm))
+        result.facts["potential_units"] = Fact.derive(
+            units,
+            inputs=[built_up],
+            method=Method.RULE_EVALUATION,
+            assumptions=[
+                f"Average unit size assumed at {inp.avg_unit_size_sqm} sq.m as "
+                "declared",
+                "Ignores common areas, circulation, stilts and services, so the "
+                "real figure will be lower",
+                "An indicative count, not an approved unit configuration",
+            ],
+        )
+    else:
+        result.facts["potential_units"] = Fact.unavailable(
+            "Depends on maximum built-up area and an average unit size. "
+            "Supply avg_unit_size_sqm once FAR is available."
+        )
+
+    units_fact = result.facts["potential_units"]
+    if units_fact.is_known and inp.parking_per_unit and inp.parking_per_unit > 0:
+        result.facts["parking_spaces"] = Fact.derive(
+            math.ceil(int(units_fact.value) * float(inp.parking_per_unit)),
+            inputs=[units_fact],
+            method=Method.RULE_EVALUATION,
+            assumptions=[
+                f"Parking ratio of {inp.parking_per_unit} space(s) per unit as "
+                "declared, not read from the bye-laws",
+                "Ignores visitor parking and any category-specific minimum",
+            ],
+        )
+        result.user_declared.append("Parking ratio is user-declared")
+    else:
+        result.facts["parking_spaces"] = Fact.unavailable(
+            "Depends on the unit count and a parking ratio. Supply "
+            "parking_per_unit, and avg_unit_size_sqm for the unit count."
         )
 
     return result
