@@ -426,7 +426,7 @@ Exercises all 39 endpoints (40 operations) in both cities — jurisdiction, map 
 valuation, all three prediction strategies, ML dashboard, future price,
 planning, buyer, investor, builder, feasibility, insights, PDF generation, the
 extra models, guidance value, transaction price and revenue coverage.
-Expect **97/97**. It needs no running server.
+Expect **128/128**. It needs no running server.
 
 It also asserts the behaviours that matter, not just HTTP 200:
 

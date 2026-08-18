@@ -263,6 +263,110 @@ def run_city(city: str) -> None:
               and "asking" in (d.get("reason") or "").lower(),
               "asking prices are not transactions — correctly refused")
 
+    # --- reported flooding (Module 12) ----------------------------------
+    code, d = get("/api/v1/flood", city=city, **pt)
+    if city == "bengaluru":
+        check(city, "flood proximity",
+              code == 200 and d.get("available") is True
+              and d.get("is_a_risk_score") is False,
+              f"nearest {d.get('nearest_m')} m, "
+              f"{d.get('count_within_radius')} within radius — proximity only")
+    else:
+        check(city, "flood layer unavailable",
+              code == 200 and d.get("available") is False and bool(d.get("reason")),
+              "no flooding layer for Chennai — stated, not implied")
+
+    code, d = get("/api/v1/flood/coverage", city=city)
+    if city == "bengaluru":
+        check(city, "flood coverage not a score",
+              code == 200 and d.get("is_a_risk_score") is False
+              and d.get("points", 0) > 100,
+              f"{d.get('points')} reported locations across "
+              f"{len(d.get('kinds', {}))} layers")
+    else:
+        check(city, "flood coverage refuses", code == 200
+              and d.get("available") is False, "correctly unavailable")
+
+    # --- ward-level planning list ----------------------------------------
+    code, d = get("/api/v1/planning/wards", city=city)
+    wards = d.get("wards", d.get("data", [])) if code == 200 else []
+    check(city, "planning ward list",
+          code == 200 and len(wards) == expected,
+          f"{len(wards)} wards (expected {expected})")
+
+    # --- planning ML: layer ablation (Module 21 / 33) -------------------
+    code, d = get("/api/v1/planning-ml/ablation", city=city)
+    steps = d.get("steps", []) if code == 200 else []
+    sm = d.get("summary", {}) if code == 200 else {}
+    check(city, "planning ML ablation",
+          code == 200 and len(steps) >= 2 and d.get("best_r2") is not None,
+          f"{len(steps)} feature sets, best R² {d.get('best_r2')}, "
+          f"{sm.get('helped')} helped / {sm.get('hurt')} hurt")
+
+    # Deltas must reconcile with the scores, or they are decoration.
+    consistent = all(
+        abs(cur["delta"] - round(cur["spatial_cv_r2"] - prev["spatial_cv_r2"], 4)) < 1e-6
+        for prev, cur in zip(steps, steps[1:], strict=False))
+    check(city, "ablation arithmetic adds up", consistent,
+          "each delta equals the difference of the published scores")
+
+    check(city, "proposed road width excluded",
+          "width_proposed_m" in (d.get("excluded_by_name") or {}),
+          "a planning intention is kept out of the price model")
+
+    code, d = get("/api/v1/planning-ml/typology", city=city)
+    if d.get("available"):
+        check(city, "ward typology honest about separation",
+              d.get("usable_for_classification") == d.get("well_separated"),
+              f"k={d.get('k')}, silhouette {d.get('silhouette')}, "
+              f"usable={d.get('usable_for_classification')}")
+    else:
+        check(city, "ward typology refuses", bool(d.get("reason")),
+              (d.get("reason") or "")[:52])
+
+    # --- advisory ML: negotiation band ---------------------------------
+    code, d = get("/api/v1/advisory-ml", city=city)
+    health = d.get("band_health", {}) if code == 200 else {}
+    check(city, "negotiation band reports coverage",
+          code == 200 and health.get("coverage_measured") is not None,
+          f"measured {health.get('coverage_measured')} vs target "
+          f"{health.get('coverage_target')} ({health.get('direction')})")
+
+    for role in ("buyer", "seller", "investor"):
+        code, d = get("/api/v1/advisory-ml/persona", role=role, city=city)
+        ok = code == 200 and d.get("reading")
+        if role == "seller" and ok:
+            advised = {f["feature"] for f in d.get("what_you_could_change", [])}
+            ok = not (advised & set(d.get("excluded_as_noise", [])))
+        check(city, f"advisory persona: {role}", bool(ok),
+              "unstable drivers excluded from advice" if role == "seller"
+              else "role-specific reading present")
+
+    # --- model registry -------------------------------------------------
+    code, d = get("/api/v1/ml/registry", city=city)
+    verdicts = d.get("verdicts", {}) if code == 200 else {}
+    check(city, "model registry", code == 200 and d.get("trained_count", 0) >= 5,
+          f"{d.get('trained_count')}/{d.get('count')} trained, "
+          f"{d.get('total_artefact_kb', 0) / 1024:.0f} MB")
+    check(city, "registry reports its failures",
+          verdicts.get("TRAINED BUT NOT USABLE", 0) >= 1,
+          f"{verdicts.get('TRAINED BUT NOT USABLE')} model(s) flagged unusable")
+
+    # --- jurisdiction coverage ------------------------------------------
+    code, d = get("/api/v1/jurisdiction/coverage", city=city)
+    check(city, "jurisdiction coverage split",
+          code == 200
+          and d.get("administrative_layer", {}).get("areal_coverage", "").startswith("COMPLETE"),
+          f"admin COMPLETE, cadastral "
+          f"{d.get('cadastral_layer', {}).get('areal_coverage')}")
+
+    # --- documents capabilities -----------------------------------------
+    code, d = get("/api/v1/documents/capabilities", city=city)
+    check(city, "document capabilities",
+          code == 200 and d.get("retention", {}).get("stored") is False
+          and bool(d.get("cannot_do")),
+          f"{len(d.get('cannot_do', []))} stated limits, nothing stored")
+
     # --- document intelligence (Module 27) -----------------------------
     sample = ("KHATA CERTIFICATE\nKhata No: 123/456/78\nOwner: Test Person\n"
               "Ward No: 111\nTaluk: Bangalore East\nHobli: Varthur\n"
@@ -419,6 +523,21 @@ def main() -> int:
 
     for city in ("bengaluru", "chennai"):
         run_city(city)
+
+    # --- coverage of the sweep itself -----------------------------------
+    # Endpoints were added faster than this script covered them, which is how a
+    # stale server serving a 404 went unnoticed. This makes the omission fail.
+    from pathlib import Path as _Path
+
+    source = _Path(__file__).read_text(encoding="utf-8")
+    declared = {p for p in app.openapi()["paths"]}
+    # Path-parameter routes are exercised via their concrete forms.
+    templated = {p for p in declared if "{" in p}
+    plain = declared - templated
+    unexercised = sorted(p for p in plain if p not in source)
+    check("-", "every endpoint exercised", not unexercised,
+          f"{len(plain) - len(unexercised)}/{len(plain)} plain endpoints covered"
+          + (f" — MISSING {unexercised}" if unexercised else ""))
 
     failed = [r for r in results if not r[2]]
     print(f"\n{'=' * 72}")

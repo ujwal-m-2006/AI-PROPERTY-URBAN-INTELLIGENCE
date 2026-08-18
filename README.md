@@ -102,7 +102,7 @@ not comparable at row level. Enforced by tests in `backend/tests/test_cities.py`
 
 **242 tests passing.** `cd backend && pytest`
 
-**97/97 end-to-end checks passing**, every endpoint in both cities:
+**128/128 end-to-end checks passing**, every endpoint in both cities:
 ```bash
 cd backend && PYTHONPATH=. python scripts/e2e_check.py
 ```

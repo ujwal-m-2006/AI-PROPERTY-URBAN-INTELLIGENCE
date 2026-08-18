@@ -1,0 +1,203 @@
+Local execution transcript — every code cell, in order.
+Produced by colab/verify_notebook.py against colab/data/.
+Colab output will match except for figures.
+
+### cell 1
+pandas 3.0.5 | numpy 2.4.6
+
+### cell 2
+  gba_wards                           369 rows x 24 cols
+  gba_corporations                      5 rows x 10 cols
+  chennai_wards                       200 rows x 24 cols
+  chennai_zones                        16 rows x  7 cols
+  admin_taluks_bengaluru               24 rows x  7 cols
+  admin_taluks_chennai                 30 rows x  7 cols
+  revenue_parcels                   4,151 rows x 11 cols
+  road_network_bengaluru           23,324 rows x 11 cols
+  flood_locations_bengaluru           391 rows x  7 cols
+  localities_bengaluru              1,885 rows x  5 cols
+  localities_chennai                  781 rows x  5 cols
+  amenities_bengaluru              13,921 rows x  8 cols
+  amenities_chennai                 3,987 rows x  8 cols
+  ward_analytics_bengaluru            369 rows x 27 cols
+  ward_analytics_chennai              200 rows x 27 cols
+  model_comparison                     12 rows x 11 cols
+  _sources                             13 rows x 15 cols
+
+49,678 rows loaded across 17 layers
+
+### cell 3
+── gba_wards
+   369 GBA wards. WARNING: _raw_tot_p is the source population field and sums to ~6x the real Greater Bengaluru total, with 125/369 rows failing male+female=total. Do NOT use it as population. Geometry reduced to a centroid. This row is NOT a boundary — joining on the centroid gives you a point inside 
+
+── road_network_bengaluru
+   23,324 BBMP road segments. TWO WIDTH COLUMNS: width_existing_m and width_proposed_m. The proposed figure is larger on 100% of segments (median 18 m vs 9 m) and MUST NOT be used for FAR, height or setback. Geometry reduced to a centroid. This row is NOT a boundary — joining on the centroid gives you 
+
+── revenue_parcels
+   4,151 survey parcels from digitised Bengaluru Urban revenue sheets. COVERAGE IS PARTIAL (3 taluks, 7 hoblis). A survey number here is INDICATIVE and settles nothing about boundary or title. Geometry reduced to a centroid. This row is NOT a boundary — joining on the centroid gives you a point inside 
+
+── flood_locations_bengaluru
+   391 reported flooding locations from 3 BBMP layers. NOT a hazard model: no return period, depth or drainage. Absence of a nearby point is not evidence a location does not flood.
+
+── chennai_wards
+   200 GCC wards. place_name and ward_name_local are DERIVED from OpenStreetMap localities, not official GCC ward names; 129/200 carry a Tamil name and the rest are deliberately blank. Geometry reduced to a centroid. This row is NOT a boundary — joining on the centroid gives you a point inside (or near
+
+
+### cell 4
+                           layer                                       organisation tier availability                                            licence verification_status
+0   admin_subdistricts_bengaluru  Local Government Directory (LGD) and Survey of...   T3     DOWNLOAD    CC0-1.0 (public domain dedication, as released)          UNVERIFIED
+1     admin_subdistricts_chennai  Local Government Directory (LGD) and Survey of...   T3     DOWNLOAD    CC0-1.0 (public domain dedication, as released)          UNVERIFIED
+2                  chennai_wards                        Greater Chennai Corporation   T2     DOWNLOAD     As published by the OpenCity urban data portal     VERIFIED_COUNTS
+3      flood_locations_bengaluru          Bruhat Bengaluru Mahanagara Palike (BBMP)   T2     DOWNLOAD  Other (Public Domain) as stated by the OpenCit...    PARTIAL_COVERAGE
+4                      gba_wards                        Greater Bengaluru Authority   T2     DOWNLOAD  Other (Public Domain) as stated by the OpenCit...     VERIFIED_COUNTS
+5   locality_gazetteer_bengaluru                         OpenStreetMap contributors   T3          API                   Open Database License (ODbL) 1.0   COMMUNITY_SOURCED
+6     locality_gazetteer_chennai                         OpenStreetMap contributors   T3          API                   Open Database License (ODbL) 1.0   COMMUNITY_SOURCED
+7                  osm_amenities                         OpenStreetMap contributors   T3          API                   Open Database License (ODbL) 1.0   COMMUNITY_SOURCED
+8          osm_amenities_chennai                         OpenStreetMap contributors   T3          API                   Open Database License (ODbL) 1.0   COMMUNITY_SOURCED
+9     property_dataset_bengaluru   Kaggle community dataset (uploader: amitabhajoy)   T4     DOWNLOAD                                                NaN          UNVERIFIED
+10      property_dataset_chennai   Kaggle community dataset (uploader: kunwarakash)   T4     DOWNLOAD                                                NaN          UNVERIFIED
+11               revenue_parcels    Karnataka Revenue Department (digitised sheets)   T2     DOWNLOAD     As published by the OpenCity urban data portal    PARTIAL_COVERAGE
+12        road_network_bengaluru          Bruhat Bengaluru Mahanagara Palike (BBMP)   T2     DOWNLOAD  Other (Public Domain) as stated by the OpenCit...    PARTIAL_COVERAGE
+
+Tier meaning: T1 official primary · T2 official republished · T3 community/open · T4 commercial dataset
+No layer here is T1 — every government layer reached this project through a portal or a community mirror, and is capped accordingly.
+
+### cell 5
+     width_existing_m  width_proposed_m
+min               6.0              12.0
+50%               9.0              18.0
+max              50.0             100.0
+proposed > existing on 100.0% of 23,324 segments
+A file titled 'road width map' contains a road-widening PROPOSAL.
+
+### cell 6
+sum of _raw_tot_p : 84,028,870
+real Greater Bengaluru population is roughly 14,000,000
+sum / 6           : 14,004,812
+
+             count           mean  mean_div_6  reported
+corporation                                            
+Central         63  231296.190476     38549.0     40000
+East            50  171089.000000     28515.0     26000
+North           72  249013.888889     41502.0     40000
+South           72  226083.750000     37681.0     40000
+West           112  238354.732143     39726.0     40000
+
+rows where male + female != total: 125 of 369
+A constant chosen because it makes a total look right is not provenance,
+and a third of the rows fail an internal check unrelated to scale.
+=> the platform publishes no ward population.
+
+### cell 7
+Bengaluru (13320, 9) | Chennai (7109, 22)
+              area_type   availability                  location       size  society total_sqft  bath  balcony   price
+0  Super built-up  Area         19-Dec  Electronic City Phase II      2 BHK  Coomee        1056   2.0      1.0   39.07
+1            Plot  Area  Ready To Move          Chikka Tirupathi  4 Bedroom  Theanmp       2600   5.0      3.0  120.00
+2        Built-up  Area  Ready To Move               Uttarahalli      3 BHK      NaN       1440   2.0      3.0   62.00
+   PRT_ID        AREA  INT_SQFT   DATE_SALE  DIST_MAINROAD  N_BEDROOM  N_BATHROOM  N_ROOM SALE_COND PARK_FACIL  DATE_BUILD   BUILDTYPE UTILITY_AVAIL  STREET MZZONE  QS_ROOMS  QS_BATHROOM  \
+0  P03210  Karapakkam      1004  04-05-2011            131        1.0         1.0       3  AbNormal        Yes  15-05-1967  Commercial        AllPub   Paved      A       4.0          3.9   
+1  P09411  Anna Nagar      1986  19-12-2006             26        2.0         1.0       5  AbNormal         No  22-12-1995  Commercial        AllPub  Gravel     RH       4.9          4.2   
+2  P01812       Adyar       909  04-02-2012             70        1.0         1.0       3  AbNormal        Yes  09-02-1992  Commercial           ELO  Gravel     RL       4.1          3.8   
+
+   QS_BEDROOM  QS_OVERALL  REG_FEE  COMMIS  SALES_PRICE  
+0         4.9       4.330   380000  144400      7600000  
+1         2.5       3.765   760122  304049     21717770  
+2         2.2       3.090   421094   92114     13159200  
+
+### cell 8
+Bengaluru after cleaning: 13,060 rows, 1267 localities
+  median asking: Rs 5,424/sq.ft
+
+### cell 9
+  linear_regression    random 0.3472   spatial 0.3375   gap +0.0097
+  random_forest        random 0.4153   spatial 0.3508   gap +0.0645
+  gradient_boosting    random 0.4551   spatial 0.4418   gap +0.0133
+           algorithm  random_cv_r2  spatial_cv_r2  leakage_gap
+0  linear_regression        0.3472         0.3375       0.0097
+1      random_forest        0.4153         0.3508       0.0645
+2  gradient_boosting        0.4551         0.4418       0.0133
+
+Every model scores higher under random CV. The gap is the part of the
+accuracy that was leakage. Model selection must use the lower number.
+
+### cell 10
+
+### cell 11
+distinct AREA values before normalising : 17
+                                  after : 7
+=> 10 were misspellings of a locality that
+   already existed. Left alone, each becomes its own spatial group and
+   the same locality spans the train/test split.
+
+Chennai after cleaning: 6,965 rows
+  localities (= spatial blocks): 7
+  {'Chrompet': np.int64(1657), 'Karapakkam': np.int64(1315), 'KK Nagar': np.int64(997), 'Velachery': np.int64(959), 'Anna Nagar': np.int64(788), 'Adyar': np.int64(748), 'T Nagar': np.int64(501)}
+
+  random_forest        random   0.1419   spatial  -0.7175   gap +0.8594
+  gradient_boosting    random   0.3418   spatial  -0.3999   gap +0.7418
+
+A negative spatial R² means the model does WORSE than predicting the
+mean. With 7 localities there is almost nothing to
+generalise from, and the platform refuses to quote the random-split
+figure as accuracy.
+
+Note how much larger the gap is here than in Bengaluru. Fewer, bigger
+blocks make the leakage worse, not better.
+
+### cell 12
+         city               algorithm  is_shipped_model  spatial_cv_r2  spatial_cv_mae  spatial_cv_rmse  spatial_cv_mape_pct  random_cv_r2  random_cv_mae  leakage_gap_r2  \
+3   bengaluru       gradient_boosting             False         0.4231         1566.84          2404.14               27.318        0.5116        1407.08          0.0885   
+4   bengaluru  hist_gradient_boosting              True         0.4132         1593.22          2424.70               27.868        0.5473        1285.16          0.1341   
+5   bengaluru                 xgboost             False         0.4121         1581.54          2426.72               27.700        0.5381        1283.28          0.1260   
+2   bengaluru           random_forest             False         0.4022         1589.48          2447.50               27.842        0.5346        1263.70          0.1324   
+1   bengaluru       linear_regression             False         0.2959         1743.46          2655.64               30.646        0.3406        1657.80          0.0447   
+0   bengaluru         baseline_median             False        -0.0653         1895.02          3266.08               28.770       -0.0623        1892.88          0.0030   
+7     chennai       linear_regression             False         0.7292          870.60          1004.82               11.400        0.9652         354.86          0.2360   
+10    chennai  hist_gradient_boosting              True         0.3809         1272.24          1459.22               17.334        0.9962         100.12          0.6153   
+11    chennai                 xgboost             False         0.2745         1378.96          1545.06               19.020        0.9956         104.46          0.7211   
+9     chennai       gradient_boosting             False         0.2293         1509.36          1685.32               19.880        0.9870         204.80          0.7577   
+8     chennai           random_forest             False        -0.2470         1758.52          1965.76               24.186        0.9715         286.60          1.2185   
+6     chennai         baseline_median             False        -0.7303         2072.08          2548.48               27.654       -0.0177        1954.80          0.7126   
+
+                                 target  
+3          asking price per sq.ft (INR)  
+4          asking price per sq.ft (INR)  
+5          asking price per sq.ft (INR)  
+2          asking price per sq.ft (INR)  
+1          asking price per sq.ft (INR)  
+0          asking price per sq.ft (INR)  
+7   recorded sale price per sq.ft (INR)  
+10  recorded sale price per sq.ft (INR)  
+11  recorded sale price per sq.ft (INR)  
+9   recorded sale price per sq.ft (INR)  
+8   recorded sale price per sq.ft (INR)  
+6   recorded sale price per sq.ft (INR)  
+Chennai's linear_regression scores ABOVE its tree models on spatial CV —
+with 7 blocks the trees overfit the blocks they saw. That inversion is
+why the shipped Chennai model is the simpler one.
+
+worst spatial R² in the project: baseline_median on chennai = -0.7303
+It is kept in the table rather than dropped, because a comparison that
+hides its failures is not a comparison.
+
+### cell 13
+── bengaluru: 369 wards
+       ward_no  infrastructure_score
+count    369.0                 369.0
+mean      40.3                  90.6
+std       26.4                   4.7
+min        1.0                  73.0
+25%       19.0                  88.0
+50%       37.0                  92.0
+75%       57.0                  94.0
+max      112.0                  98.0
+── chennai: 200 wards
+       ward_no  infrastructure_score
+count    200.0                 200.0
+mean     100.5                  81.5
+std       57.9                  14.2
+min        1.0                  21.0
+25%       50.8                  75.0
+50%      100.5                  86.0
+75%      150.2                  91.0
+max      200.0                  98.0
