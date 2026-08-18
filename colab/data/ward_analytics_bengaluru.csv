@@ -1,0 +1,371 @@
+# Per-ward service accessibility for bengaluru. Scores are weighted formulas, NOT machine learning, and a missing input is reported as UNAVAILABLE rather than scored zero.
+ward_no,ward_key,ward_name,corporation,zone,area_km2,facilities_total,facility_density_per_km2,counts_healthcare,counts_education,counts_transport,counts_government,counts_daily_life,nearest_m_healthcare,nearest_m_education,nearest_m_transport,nearest_m_government,nearest_m_daily_life,scores_healthcare,scores_education,scores_transport,scores_government,scores_daily_life,infrastructure_score,median_psf,listings,development_pressure
+25,West|25,25 - Vinayaka Layout,West,Rajarajeshwarinagar,2.59,52,20.1,10,9,24,0,9,336,472,303,1037,341,94,88,90,87,89,90,5254,52,1.0
+2,North|2,2 - Aerocity,North,Yelahanka,10.31,59,5.7,5,30,18,1,5,510,610,139,1470,690,92,85,95,82,77,86,,,
+3,North|3,3 - Chowdeshwari ward,North,Yelahanka,6.46,18,2.8,2,2,12,0,2,488,642,496,2278,410,92,84,83,72,86,83,5391,19,0.6
+15,East|15,15 - Ramamurthy Nagara,East,K.R. Pura,0.81,10,12.4,0,4,3,1,2,346,235,289,424,137,94,94,90,95,95,94,4714,59,0.7
+58,North|58,58 - Nagashettyhalli,North,Yelahanka,0.96,25,26.0,2,4,6,1,12,348,199,238,365,334,94,95,92,95,89,93,6022,4,0.1
+21,North|21,21 - Kogilu,North,Byatarayanapura,11.92,65,5.5,14,18,25,0,8,241,208,304,2837,1343,96,95,90,65,55,80,4444,34,1.3
+46,East|46,46 - Yamalur,East,Mahadevapura,7.09,20,2.8,1,7,3,1,8,1508,637,1321,964,218,75,84,56,88,93,79,5226,2,0.1
+24,Central|24,24 - Agaram,Central,C.V. Raman Nagar,11.1,55,5.0,6,11,28,4,6,937,769,385,1436,676,84,81,87,82,77,82,,,
+72,North|72,72 - Dasarahalli,North,Yelahanka,0.75,8,10.7,2,1,3,0,2,411,316,293,876,463,93,92,90,89,85,90,,,
+11,Central|11,11 - Old Baiyappanahalli,Central,C.V. Raman Nagar,0.55,8,14.5,2,0,6,0,0,692,893,119,450,823,88,78,96,94,73,86,,,
+16,East|16,16 - Kotthur,East,K.R. Pura,1.24,12,9.7,4,2,0,3,3,421,281,431,417,430,93,93,86,95,86,91,,,
+69,North|69,69 - Bagalagunte,North,Yelahanka,2.53,25,9.9,1,4,11,0,9,689,502,135,1973,331,89,87,96,75,89,87,6356,5,0.1
+34,North|34,34 - Subbayanapalya,North,Byatarayanapura,0.48,12,24.9,1,0,6,0,5,54,492,97,616,76,99,88,97,92,97,95,,,
+68,North|68,68 - Mallasandra,North,Yelahanka,1.2,11,9.2,1,2,3,1,4,571,442,429,662,52,90,89,86,92,98,91,,,
+70,North|70,70 - Manjunatha Nagar,North,Yelahanka,1.5,14,9.3,1,4,6,0,3,926,189,380,1901,389,85,95,87,76,87,86,,,
+2,South|2,2 - Kadirenahalli,South,Jayanagar,0.66,26,39.6,7,4,7,1,7,190,237,164,401,103,97,94,95,95,97,96,,,
+60,North|60,60 - Jalahalli,North,Yelahanka,1.99,16,8.0,0,4,7,1,4,958,455,148,1002,618,84,89,95,87,79,87,6635,46,1.2
+14,East|14,14 - K.R Pura,East,K.R. Pura,0.89,25,28.1,11,1,7,5,1,54,317,145,208,122,99,92,95,97,96,96,4266,79,0.6
+20,West|20,20 - Kengeri Kote ward,West,Rajarajeshwarinagar,15.31,56,3.7,3,13,34,0,6,1499,732,195,1915,1151,75,82,94,76,62,78,5089,2,0.1
+39,South|39,39 - Gottigere,South,Jayanagar,2.07,9,4.3,0,4,4,0,1,507,84,485,1160,896,92,98,84,86,70,86,,,
+36,South|36,36 - Beguru,South,Jayanagar,2.9,18,6.2,2,6,7,0,3,378,249,279,1406,518,94,94,91,82,83,89,,,
+41,Central|41,41 - V.V Puram,Central,Gandhinagara,1.08,51,47.1,11,9,13,1,17,168,176,253,617,244,97,96,92,92,92,94,9063,2,0.0
+35,North|35,35 - Kammanahalli,North,Byatarayanapura,0.52,1,1.9,0,0,1,0,0,503,606,444,1340,475,92,85,85,83,84,86,,,
+7,South|7,7 - Byrasandra,South,Jayanagar,1.15,75,65.3,15,10,15,4,31,300,208,310,281,130,95,95,90,96,96,94,,,
+8,South|8,8 - Tilak Nagara,South,Jayanagar,1.01,57,56.3,9,15,11,4,18,222,301,198,89,32,96,92,93,99,99,96,8818,16,0.1
+63,North|63,63 - J.P PARK,North,Yelahanka,0.84,7,8.4,1,1,2,1,2,256,529,170,141,216,96,87,94,98,93,94,,,
+51,Central|51,51 - Old Guddadahalli,Central,Gandhinagara,0.21,4,18.8,3,1,0,0,0,206,168,385,434,391,97,96,87,95,87,92,,,
+4,East|4,4 - Babusab Palya,East,K.R. Pura,1.84,38,20.6,10,5,10,1,12,263,437,399,324,255,96,89,87,96,92,92,3861,25,0.4
+4,South|4,4 - Banashankari Temple Ward,South,Jayanagar,0.4,7,17.6,2,0,4,1,0,75,367,199,214,340,99,91,93,97,89,94,,,
+71,North|71,71 - Nele Maheshwaramma Temple Ward,North,Yelahanka,0.59,6,10.1,2,0,4,0,0,123,546,408,1419,573,98,86,86,82,81,87,,,
+45,East|45,45 - Marathahalli,East,Mahadevapura,1.0,27,26.9,8,1,6,1,11,98,389,332,502,99,98,90,89,94,97,94,5434,162,1.9
+45,South|45,45 - Konanakunte,South,Jayanagar,1.65,40,24.2,8,3,17,3,9,20,354,24,97,18,100,91,99,99,99,98,,,
+13,South|13,13 - Marenahalli South,South,Jayanagar,0.76,24,31.5,3,4,7,1,9,235,322,262,501,284,96,92,91,94,91,93,,,
+44,South|44,44 - Harinagar,South,Jayanagar,1.78,28,15.7,1,8,11,0,8,796,211,97,792,254,87,95,97,90,92,92,7745,12,0.2
+2,East|2,2 - Horamavu,East,K.R. Pura,7.86,36,4.6,5,10,12,0,9,758,529,495,1291,1242,87,87,84,84,59,80,4781,71,2.8
+50,North|50,50 - Dinnur,North,Yelahanka,0.51,5,9.8,1,2,1,0,1,412,205,185,859,483,93,95,94,89,84,91,5621,32,0.6
+25,East|25,25 - L.B Shastri Nagar,East,K.R. Pura,0.42,0,0.0,0,0,0,0,0,656,552,643,881,278,89,86,79,89,91,87,5607,3,0.1
+66,North|66,66 - Kammagondanahalli,North,Yelahanka,1.4,11,7.9,0,2,5,1,3,1040,295,99,472,85,83,93,97,94,97,93,4000,21,0.3
+10,South|10,10 - Abdul Kalam Nagar,South,Jayanagar,0.41,5,12.2,0,1,2,0,2,563,165,295,362,332,91,96,90,95,89,92,,,
+45,North|45,45 - Kushal Nagar,North,Byatarayanapura,0.28,6,21.6,0,0,6,0,0,635,678,55,234,788,89,83,98,97,74,88,,,
+11,East|11,11 - Krishnanagar,East,K.R. Pura,1.24,8,6.5,2,4,1,0,1,271,475,348,1390,469,95,88,88,83,84,88,,,
+43,South|43,43 - Bheereshwara Nagar,South,Jayanagar,0.84,9,10.8,0,3,3,0,3,530,22,269,830,264,91,99,91,90,91,92,,,
+3,South|3,3 - Yarab nagar,South,Jayanagar,0.28,4,14.0,0,1,3,0,0,523,240,147,534,490,91,94,95,93,84,91,8750,1,0.0
+42,South|42,42 - RBI Layout,South,Jayanagar,2.03,76,37.5,18,13,4,2,39,251,28,59,119,33,96,99,98,99,99,98,,,
+1,East|1,1 - K Narayanapura,East,K.R. Pura,4.79,49,10.2,6,13,14,2,14,247,169,182,216,417,96,96,94,97,86,94,4871,84,1.0
+39,East|39,39 - Hagaduru,East,Mahadevapura,5.83,26,4.5,4,4,8,1,9,2005,1087,594,2132,821,67,73,80,73,73,73,4374,9,0.5
+13,Central|13,13 - Krishnaiahnapalya,Central,C.V. Raman Nagar,1.19,24,20.1,3,1,14,1,5,376,889,299,260,415,94,78,90,97,86,89,7407,3,0.1
+1,South|1,1 - Padmanabhanagara,South,Jayanagar,0.9,22,24.4,5,3,8,0,6,90,235,235,506,300,98,94,92,94,90,94,5557,26,0.3
+48,South|48,48 - Vasanthapura,South,Jayanagar,1.59,31,19.5,3,7,15,1,5,525,266,277,883,534,91,93,91,89,82,89,,,
+6,South|6,6 - Gowdanapalya,South,Jayanagar,0.91,16,17.5,2,1,5,0,8,389,226,422,958,297,94,94,86,88,90,90,,,
+63,Central|63,63 - Okalipuram,Central,Gandhinagara,0.43,7,16.4,0,0,5,1,1,281,473,106,430,363,95,88,96,95,88,92,12500,1,0.0
+5,South|5,5 - Kane Muneshwara Ward,South,Jayanagar,1.14,42,36.9,7,4,8,2,21,195,245,74,361,61,97,94,98,95,98,96,,,
+9,Central|9,9 - Hoysala Nagara Central,Central,C.V. Raman Nagar,1.98,93,46.9,17,15,18,3,40,193,380,169,304,170,97,90,94,96,94,94,4533,8,0.1
+52,South|52,52 - Talagattapura,South,Jayanagar,18.16,71,3.9,11,11,40,2,7,941,207,240,197,569,84,95,92,98,81,90,4947,50,1.0
+50,South|50,50 - Sarvabhouma Nagar,South,Jayanagar,1.02,12,11.7,0,1,4,0,7,425,396,243,1017,183,93,90,92,87,94,91,4350,31,0.5
+25,North|25,25 - Govindapura,North,Byatarayanapura,0.57,4,7.1,1,1,2,0,0,546,536,261,1312,496,91,87,91,84,83,87,,,
+53,Central|53,53 - Rayapuram,Central,Gandhinagara,0.21,2,9.5,1,0,0,0,1,90,449,246,281,272,98,89,92,96,91,93,,,
+40,South|40,40 - Anjanapura,South,Jayanagar,12.23,46,3.8,4,8,26,2,6,1080,1183,955,1058,842,82,70,68,87,72,76,3521,15,0.7
+59,South|59,59 - Vijaya Bank Layout,South,Bommanahalli,4.26,42,9.9,6,10,4,3,19,482,587,441,550,337,92,85,85,93,89,89,,,
+41,North|41,41 - Periyar Nagar,North,Byatarayanapura,0.25,1,4.0,0,0,0,1,0,919,1031,441,253,1044,85,74,85,97,65,81,,,
+52,Central|52,52 - Padarayanapura,Central,Gandhinagara,0.23,7,30.0,3,1,0,1,2,162,278,415,193,165,97,93,86,98,94,94,,,
+46,South|46,46 - Yelachenahalli,South,Jayanagar,0.93,15,16.2,2,1,8,0,4,369,260,344,881,404,94,94,89,89,87,91,5184,16,0.3
+59,North|59,59 - Geddalahalli,North,Yelahanka,1.46,32,21.8,1,2,12,3,14,342,394,302,323,275,94,90,90,96,91,92,5740,12,0.2
+51,South|51,51 - Subramanyapura,South,Jayanagar,7.74,59,7.6,4,9,27,1,18,1181,225,363,1137,971,80,94,88,86,68,83,5419,64,2.1
+35,West|35,35 - Goraguntepalya,West,Rajarajeshwarinagar,2.12,39,18.4,3,2,30,0,4,307,995,362,990,433,95,75,88,88,86,86,,,
+28,West|28,28 - Kottegepalya,West,Rajarajeshwarinagar,2.41,22,9.1,0,2,16,1,3,954,549,250,581,570,84,86,92,93,81,87,,,
+62,North|62,62 - Brundavana Nagara,North,Yelahanka,0.67,28,41.5,6,2,5,1,14,96,347,146,172,136,98,91,95,98,95,95,7547,7,0.1
+5,North|5,5 - Yelahanka Satellite Town,North,Yelahanka,2.92,127,43.5,21,23,13,3,67,226,127,317,201,71,96,97,89,97,98,95,4902,38,0.4
+22,West|22,22 - Bangarappa Nagara,West,Rajarajeshwarinagar,6.79,49,7.2,3,11,27,1,7,391,333,336,446,400,93,92,89,94,87,91,6173,1,0.0
+49,South|49,49 - Uttarahalli,South,Jayanagar,2.16,26,12.0,6,1,14,1,4,307,820,322,494,429,95,80,89,94,86,89,4000,191,4.1
+64,North|64,64 - Yeshwanthpura,North,Yelahanka,0.35,13,36.9,4,2,2,1,4,99,227,256,265,199,98,94,91,97,93,95,5520,77,0.7
+37,South|37,37 - Yelenahalli,South,Jayanagar,5.06,36,7.1,3,16,7,0,10,638,309,717,805,444,89,92,76,90,85,86,4321,105,2.9
+17,Central|17,17 - Kaggadasapura,Central,C.V. Raman Nagar,1.16,25,21.6,6,4,1,0,14,342,340,390,1010,308,94,92,87,87,90,90,4237,69,1.3
+38,South|38,38 - Doddakammanahalli,South,Jayanagar,4.91,28,5.7,3,8,15,2,0,958,35,642,856,737,84,99,79,89,75,85,4528,8,0.2
+28,East|28,28 - Byrathi,East,Mahadevapura,5.77,18,3.1,2,8,8,0,0,577,194,415,881,432,90,95,86,89,86,89,4648,11,0.2
+41,South|41,41 - Kothanur,South,Jayanagar,3.47,34,9.8,0,13,15,2,4,1257,407,337,558,317,79,90,89,93,89,88,8485,1,0.0
+19,East|19,19 - K.S. Nissar Ahmed Ward,East,K.R. Pura,0.84,11,13.1,0,0,7,0,4,338,614,12,783,290,94,85,100,90,90,92,,,
+57,North|57,57 - Bhoopasandra,North,Yelahanka,2.65,50,18.8,5,11,20,7,7,521,212,569,612,506,91,95,81,92,83,88,10620,4,0.1
+15,South|15,15 - Shakambarinagara,South,Jayanagar,1.73,69,39.8,20,2,18,4,25,122,138,271,556,114,98,97,91,93,96,95,5488,65,0.6
+56,North|56,56 - Hebbal,North,Yelahanka,1.1,19,17.3,1,1,7,3,7,245,318,313,386,252,96,92,90,95,92,93,7097,178,2.4
+52,North|52,52 - Vishwanatha Nagenahalli,North,Yelahanka,0.97,14,14.4,2,3,3,1,5,356,95,248,453,510,94,98,92,94,83,92,5812,18,0.3
+4,Central|4,4 - Sampangirama Nagar,Central,Gandhinagara,4.7,232,49.4,19,23,71,65,54,830,101,103,145,269,86,97,97,98,91,94,8883,4,0.0
+10,East|10,10 - Basavanapura,East,K.R. Pura,3.96,14,3.5,3,5,4,0,2,272,672,255,2229,1070,95,83,92,72,64,81,,,
+35,South|35,35 - Vishwapriya Nagara,South,Jayanagar,2.34,12,5.1,0,9,1,0,2,646,145,476,1818,468,89,96,84,77,84,86,,,
+8,Central|8,8 - Halasuru,Central,Gandhinagara,0.52,29,56.1,5,1,9,3,11,110,185,211,226,139,98,95,93,97,95,96,,,
+33,South|33,33 - Naganathapura,South,Jayanagar,3.37,12,3.6,3,6,2,0,1,1054,311,717,1305,1130,82,92,76,84,62,79,,,
+49,West|49,49 - Aramane Nagara,West,Malleshwaram,0.88,35,39.8,7,4,3,0,21,303,11,224,526,26,95,100,93,93,99,96,,,
+12,Central|12,12 - Kasturi Nagar,Central,C.V. Raman Nagar,3.52,44,12.5,8,7,11,2,16,831,223,317,949,839,86,94,89,88,72,86,5971,20,0.5
+79,West|79,79 - Nagarbhavi,West,Malleshwaram,2.19,29,13.2,5,6,11,3,4,630,54,92,187,456,90,99,97,98,85,94,,,
+41,East|41,41 - Munnenkolalu,East,Mahadevapura,2.5,45,18.0,14,6,6,0,19,220,277,227,1351,115,96,93,92,83,96,92,,,
+34,South|34,34 - Chikkathoguru,South,Jayanagar,5.81,21,3.6,1,12,4,2,2,736,213,669,324,734,88,95,78,96,76,87,,,
+6,North|6,6 - Doddabettahalli,North,Yelahanka,5.11,42,8.2,9,3,11,0,19,499,972,501,894,518,92,76,83,89,83,85,4513,4,0.1
+55,North|55,55 - Ganganagar,North,Yelahanka,0.75,32,42.8,8,2,10,0,12,128,64,122,254,160,98,98,96,97,95,97,6333,9,0.1
+17,East|17,17 - Vijinapura,East,K.R. Pura,0.33,1,3.0,0,1,0,0,0,782,158,433,463,492,87,96,86,94,84,89,,,
+49,Central|49,49 - Kasturbha Nagar,Central,Gandhinagara,0.37,1,2.7,0,0,1,0,0,394,957,377,749,407,93,76,87,91,86,87,,,
+1,North|1,1 - Raja Kempegowda ward,North,Yelahanka,1.81,42,23.2,18,4,12,3,5,179,69,215,140,196,97,98,93,98,93,96,5013,198,1.5
+11,South|11,11 - Jayanagar East,South,Jayanagar,0.46,18,39.1,1,3,4,0,10,393,383,282,499,446,93,90,91,94,85,91,5432,4,0.1
+33,Central|33,33 - Dharmaraya Swamy Temple Ward,Central,Gandhinagara,0.77,28,36.6,4,6,6,1,11,227,128,270,335,101,96,97,91,96,97,95,,,
+38,Central|38,38 - Kanakanapalya,Central,Gandhinagara,0.97,30,30.8,13,6,6,3,2,189,252,291,354,216,97,94,90,96,93,94,,,
+62,Central|62,62 - Swatantra Palya Ward,Central,Gandhinagara,0.36,8,22.2,1,2,5,0,0,385,317,76,411,482,94,92,97,95,84,92,,,
+54,North|54,54 - Gangenahalli,North,Yelahanka,1.08,20,18.5,1,0,12,1,6,468,501,205,471,156,92,87,93,94,95,92,,,
+14,South|14,14 - J.P Nagar,South,Jayanagar,1.28,60,47.0,8,8,12,0,32,93,165,176,154,122,98,96,94,98,96,96,,,
+9,South|9,9 - N.A.L Layout,South,Jayanagar,0.35,13,37.5,1,2,1,3,6,368,160,234,263,133,94,96,92,97,96,95,,,
+27,South|27,27 - Sri Lakshmi Devi Ward,South,Bommanahalli,0.73,61,83.8,13,4,10,1,33,126,88,186,502,176,98,98,94,94,94,96,8981,67,0.5
+4,North|4,4 - Nyayanga Badavane,North,Yelahanka,2.56,32,12.5,9,4,6,2,11,405,291,205,819,223,93,93,93,90,93,92,,,
+65,North|65,65 - Abbigere,North,Yelahanka,4.61,24,5.2,3,4,10,0,7,1141,1336,537,1303,699,81,67,82,84,77,78,,,
+18,South|18,18 - Viswamanava Kuvempu Ward,South,Bommanahalli,1.4,86,61.6,19,5,16,2,44,41,150,344,400,41,99,96,89,95,99,96,5556,3,0.0
+42,East|42,42 - Priyadarshini Ward,East,Mahadevapura,1.6,61,38.0,24,6,5,3,23,135,197,529,270,131,98,95,82,97,96,94,5754,48,0.6
+67,North|67,67 - Shettihalli,North,Yelahanka,3.72,13,3.5,2,0,7,0,4,641,637,868,362,617,89,84,71,95,79,84,,,
+21,South|21,21 - Chikka Adugodi,South,Bommanahalli,0.72,18,25.0,4,6,6,0,2,297,197,294,652,369,95,95,90,92,88,92,6250,1,0.0
+7,North|7,7 - Attur,North,Yelahanka,2.54,34,13.4,7,9,10,2,6,646,459,103,271,660,89,89,97,97,78,90,3750,7,0.1
+19,South|19,19 - New Tavarekere,South,Bommanahalli,0.55,27,49.0,2,8,5,3,9,312,77,115,285,225,95,98,96,96,92,95,,,
+70,South|70,70 - Iblur,South,Bommanahalli,2.81,70,24.9,17,8,13,9,23,541,651,538,526,543,91,84,82,93,82,86,,,
+61,North|61,61 - HMT Ward,North,Yelahanka,4.19,40,9.5,2,9,18,2,9,561,196,19,398,408,91,95,99,95,86,93,12986,2,0.0
+51,North|51,51 - Manorayanapalya,North,Yelahanka,0.53,10,18.7,4,1,1,0,4,117,305,329,1082,284,98,92,89,86,91,91,5000,11,0.2
+65,South|65,65 - Garvebavi Palya,South,Bommanahalli,1.28,23,18.0,5,10,5,0,3,268,163,395,1159,513,96,96,87,86,83,90,5282,2,0.0
+32,South|32,32 - Kudlu,South,Bommanahalli,3.37,17,5.0,4,3,4,1,5,633,521,886,814,201,89,87,70,90,93,86,4284,35,1.0
+25,South|25,25 - National Games Village,South,Bommanahalli,0.52,24,46.4,1,4,8,5,6,277,265,180,124,153,95,93,94,98,95,95,,,
+16,North|16,16 - Amruthahalli,North,Byatarayanapura,1.32,12,9.1,4,1,4,1,2,127,382,274,528,361,98,90,91,93,88,92,4768,22,0.3
+22,South|22,22 - S.G Palya,South,Bommanahalli,1.25,31,24.9,2,11,8,1,9,617,99,341,596,271,90,98,89,93,91,92,,,
+32,North|32,32 - Banaswadi,North,Byatarayanapura,2.03,62,30.6,14,5,19,2,22,252,365,177,813,134,96,91,94,90,96,93,5159,16,0.2
+36,Central|36,36 - Someshwara Nagara,Central,Gandhinagara,0.62,30,48.5,11,7,3,1,8,287,56,258,596,106,95,99,91,93,96,95,3689,1,0.0
+12,South|12,12 - Pattabhirama Nagara,South,Jayanagar,1.5,88,58.5,13,10,27,3,35,221,422,233,339,108,96,89,92,96,96,94,,,
+49,North|49,49 - Jaya Chamarajendra Nagara,North,Yelahanka,0.67,16,24.0,3,0,8,1,4,286,896,209,856,625,95,78,93,89,79,87,,,
+71,South|71,71 - Agara,South,Bommanahalli,1.87,69,37.0,13,7,14,2,33,287,119,195,490,117,95,97,94,94,96,95,,,
+23,South|23,23 - Lakkasandra,South,Bommanahalli,0.69,19,27.5,1,1,10,0,7,219,176,85,210,37,96,96,97,97,99,97,,,
+27,Central|27,27 - Ambedkarnagar,Central,C.V. Raman Nagar,0.39,19,48.3,4,8,5,1,1,27,20,214,295,367,100,100,93,96,88,95,6564,30,0.3
+13,North|13,13 - Kodigehalli,North,Byatarayanapura,1.35,16,11.8,1,1,8,0,6,536,474,412,1068,441,91,88,86,87,85,87,4561,4,0.1
+33,West|33,33 - Lakshmi Devi Nagar,West,Rajarajeshwarinagar,0.53,11,20.9,0,0,8,0,3,887,952,57,923,117,85,76,98,88,96,89,,,
+37,North|37,37 - Jeevanahalli,North,Byatarayanapura,1.53,13,8.5,2,1,4,0,6,495,658,534,947,470,92,84,82,88,84,86,2917,1,0.0
+31,South|31,31 - Kasavanahalli,South,Bommanahalli,7.72,66,8.5,22,8,7,1,28,594,416,808,1630,529,90,90,73,80,82,83,6152,202,6.7
+39,North|39,39 - Kaval Byrasandra,North,Byatarayanapura,0.73,5,6.8,2,0,2,0,1,250,682,231,1079,276,96,83,92,87,91,90,5129,20,0.4
+17,South|17,17 - N.S Palya,South,Bommanahalli,0.73,25,34.5,7,9,3,2,4,74,105,129,402,129,99,97,96,95,96,97,,,
+55,South|55,55 - Puttenahalli,South,Bommanahalli,1.04,22,21.1,3,4,4,0,11,230,275,336,877,124,96,93,89,89,96,93,13704,7,0.1
+56,South|56,56 - Doresanipalya,South,Bommanahalli,2.53,45,17.8,5,7,12,3,18,368,273,179,235,178,94,93,94,97,94,94,5106,16,0.2
+42,North|42,42 - Aruna Asif Ali Ward,North,Byatarayanapura,0.36,0,0.0,0,0,0,0,0,721,1115,545,564,919,88,72,82,93,69,81,,,
+53,North|53,53 - R.T Nagar,North,Yelahanka,0.63,18,28.5,6,4,2,2,4,158,244,307,432,213,97,94,90,95,93,94,7893,2,0.0
+47,North|47,47 - Pulakeshi Nagar,North,Byatarayanapura,1.3,87,66.8,13,17,19,4,34,119,310,29,201,54,98,92,99,97,98,97,9927,39,0.2
+15,North|15,15 - Byatarayanapura,North,Byatarayanapura,5.12,95,18.6,21,8,14,5,47,135,155,79,172,62,98,96,97,98,98,97,6374,20,0.1
+28,South|28,28 - Kormangala East,South,Bommanahalli,2.3,119,51.8,24,15,23,3,54,267,637,274,860,69,96,84,91,89,98,92,20741,1,0.0
+46,North|46,46 - Sagayapuram,North,Byatarayanapura,0.66,20,30.1,4,1,8,0,7,319,393,309,516,386,95,90,90,94,87,91,10625,7,0.1
+24,North|24,24 - HBR Layout,North,Byatarayanapura,1.79,37,20.6,7,6,7,1,16,87,64,109,647,64,99,98,96,92,98,97,4622,61,0.4
+48,North|48,48 - S.K Garden,North,Byatarayanapura,0.99,17,17.1,6,0,3,1,7,98,165,161,237,95,98,96,95,97,97,97,9459,1,0.0
+14,North|14,14 - Rajiv Gandhi Nagar,North,Byatarayanapura,2.9,24,8.3,6,3,7,0,8,805,534,745,1057,849,87,87,75,87,72,82,6051,34,1.2
+28,North|28,28 - Venkateshpuram,North,Byatarayanapura,0.37,1,2.7,0,0,1,0,0,634,356,249,635,871,89,91,92,92,71,87,,,
+36,North|36,36 - Maruthi Seva Nagara,North,Byatarayanapura,1.21,48,39.8,15,5,7,0,21,170,241,364,628,195,97,94,88,92,94,93,8984,31,0.4
+50,Central|50,50 - JJR Nagara,Central,Gandhinagara,0.54,13,24.3,2,1,5,0,5,319,281,125,445,263,95,93,96,94,91,94,,,
+64,South|64,64 - Hongasandra,South,Bommanahalli,0.5,9,18.0,1,4,3,0,1,167,243,112,1082,120,97,94,96,86,96,94,,,
+66,South|66,66 - Singasandra,South,Bommanahalli,1.87,31,16.6,13,2,5,0,11,453,238,263,660,66,92,94,91,92,98,93,,,
+67,South|67,67 - Bandepalya,South,Bommanahalli,1.77,15,8.5,2,4,5,0,4,211,328,263,715,454,96,92,91,91,85,91,4514,23,0.4
+38,North|38,38 - Shampura,North,Byatarayanapura,0.87,18,20.6,7,1,3,0,7,306,660,164,1066,178,95,84,95,87,94,91,4708,12,0.2
+22,North|22,22 - Nagavara,North,Byatarayanapura,0.97,12,12.4,0,2,7,0,3,694,213,373,1059,349,88,95,88,87,88,89,4686,8,0.2
+23,North|23,23 - Hennur,North,Byatarayanapura,1.94,22,11.3,5,7,8,0,2,775,679,712,1274,835,87,83,76,84,72,80,4696,15,0.6
+34,Central|34,34 - D.V Gundappa Ward,Central,Gandhinagara,0.72,14,19.6,3,3,6,0,2,183,390,371,361,89,97,90,88,95,97,93,,,
+26,South|26,26 - Ejipura,South,Bommanahalli,0.51,17,33.3,2,6,4,1,4,244,204,209,464,388,96,95,93,94,87,93,6198,7,0.1
+44,North|44,44 - Doddanna Nagar,North,Byatarayanapura,0.46,2,4.4,0,0,2,0,0,732,1020,510,562,780,88,74,83,93,74,82,,,
+8,North|8,8 - Singapura,North,Byatarayanapura,2.46,36,14.7,5,3,12,2,14,232,524,85,1403,333,96,87,97,82,89,90,4781,35,0.7
+10,Central|10,10 - Cox Town,Central,C.V. Raman Nagar,1.25,23,18.4,3,3,7,3,7,209,268,216,457,187,97,93,93,94,94,94,7600,11,0.1
+72,South|72,72 - HSR Layout,South,Bommanahalli,2.68,76,28.4,12,8,24,4,28,112,197,353,328,45,98,95,88,96,98,95,4480,3,0.0
+65,West|65,65 - Manjunath Nagara,West,Malleshwaram,0.29,14,48.9,0,2,3,0,9,186,115,132,395,119,97,97,96,95,96,96,,,
+10,North|10,10 - Vidyaranyapura,North,Byatarayanapura,1.76,35,19.9,3,5,8,1,18,417,453,338,350,288,93,89,89,96,90,91,,,
+61,South|61,61 - Kodi Chikkanahalli,South,Bommanahalli,1.13,11,9.7,3,2,4,0,2,580,153,753,1011,228,90,96,75,87,92,88,4476,70,1.6
+60,South|60,60 - Bilekahalli,South,Bommanahalli,2.49,30,12.0,7,9,3,0,11,382,198,401,449,290,94,95,87,94,90,92,5731,16,0.2
+29,North|29,29 - Lingarajpura,North,Byatarayanapura,0.93,7,7.5,0,1,6,0,0,592,409,229,830,842,90,90,92,90,72,87,,,
+33,North|33,33 - HRBR Layout,North,Byatarayanapura,0.75,11,14.8,6,1,3,0,1,78,322,161,814,153,99,92,95,90,95,94,6708,10,0.1
+30,North|30,30 - Kacharakanahalli,North,Byatarayanapura,1.42,54,37.9,7,10,18,1,18,226,75,330,515,341,96,98,89,94,89,93,4853,6,0.1
+30,Central|30,30 - Vinayakanagar,Central,C.V. Raman Nagar,1.28,16,12.5,0,7,9,0,0,344,461,194,858,400,94,88,94,89,87,90,4267,1,0.0
+66,West|66,66 - Sane Guruvana Halli,West,Malleshwaram,0.35,9,25.4,1,2,2,1,3,45,278,99,159,63,99,93,97,98,98,97,,,
+53,South|53,53 - Jaraganahalli,South,Bommanahalli,0.86,16,18.5,0,5,9,0,2,778,202,292,1075,356,87,95,90,87,88,89,,,
+24,South|24,24 - A Adugodi,South,Bommanahalli,1.75,67,38.4,11,14,11,2,29,496,203,361,553,443,92,95,88,93,85,91,5412,1,0.0
+77,West|77,77 - Maruthi Mandira Ward,West,Malleshwaram,0.55,21,37.9,4,0,3,2,12,195,446,143,208,208,97,89,95,97,93,94,6635,36,0.4
+71,West|71,71 - Thimmenahalli,West,Malleshwaram,0.7,24,34.5,11,1,4,2,6,168,136,199,202,261,97,97,93,97,91,95,5536,22,0.2
+31,Central|31,31 - Shanthinagar,Central,C.V. Raman Nagar,1.55,54,34.9,5,14,12,3,20,468,126,502,285,198,92,97,83,96,93,92,9916,14,0.2
+29,South|29,29 - Kormangala West,South,Bommanahalli,2.46,72,29.3,6,8,26,6,26,173,303,344,345,141,97,92,89,96,95,94,,,
+54,South|54,54 - Kengal Hanumanthaiah South,South,Bommanahalli,0.84,29,34.6,6,6,2,0,15,316,238,323,522,142,95,94,89,93,95,93,,,
+20,South|20,20 - Madiwala,South,Bommanahalli,0.69,50,72.2,9,12,12,1,16,364,116,127,486,122,94,97,96,94,96,95,4108,9,0.1
+48,West|48,48 - Mathikere,West,Malleshwaram,0.68,10,14.8,4,0,3,0,3,428,517,422,495,434,93,87,86,94,86,89,,,
+62,South|62,62 - Devarachikkanahalli,South,Bommanahalli,1.2,17,14.2,5,6,2,0,4,297,280,358,1350,106,95,93,88,83,96,91,,,
+34,West|34,34 - Peenya,West,Rajarajeshwarinagar,4.02,57,14.2,4,7,31,5,10,543,175,175,275,474,91,96,94,97,84,92,5546,8,0.1
+7,West|7,7 - Rajagopala Nagara,West,Rajarajeshwarinagar,1.01,6,6.0,1,1,4,0,0,832,226,580,1316,1296,86,94,81,84,57,80,,,
+18,North|18,18 - Kempapura,North,Byatarayanapura,5.34,58,10.9,5,9,20,2,22,779,544,309,656,297,87,86,90,92,90,89,,,
+93,West|93,93 - Avalahalli,West,Malleshwaram,0.45,3,6.6,1,0,2,0,0,192,385,162,424,329,97,90,95,95,89,93,4965,2,0.0
+87,West|87,87 - K.P Agrahara,West,Malleshwaram,0.34,10,29.5,1,2,5,0,2,198,301,171,365,293,97,92,94,95,90,94,,,
+43,North|43,43 - Varalakshmi Nagar,North,Byatarayanapura,1.69,14,8.3,3,2,4,0,5,490,340,278,963,346,92,92,91,88,88,90,,,
+88,West|88,88 - Sangolli Rayanna Ward,West,Malleshwaram,0.2,1,5.1,0,0,1,0,0,487,587,176,633,243,92,85,94,92,92,91,,,
+20,North|20,20 - Sampigehalli,North,Byatarayanapura,8.83,50,5.7,5,17,15,2,11,829,257,277,1204,348,86,94,91,85,88,89,4276,14,0.3
+57,South|57,57 - Hulimavu,South,Bommanahalli,1.34,27,20.2,1,9,4,6,7,749,60,106,162,60,88,98,96,98,98,96,5259,47,0.4
+12,North|12,12 - Thindlu,North,Byatarayanapura,7.44,32,4.3,1,7,9,2,13,1122,307,652,609,764,81,92,78,92,75,84,5812,5,0.2
+21,East|21,21 - Uday Nagar,East,K.R. Pura,0.78,7,9.0,4,0,2,0,1,96,880,366,969,148,98,78,88,88,95,89,5833,3,0.1
+9,West|9,9 - Srigandhanagar,West,Rajarajeshwarinagar,0.76,2,2.6,1,0,0,0,1,120,1270,173,1994,33,98,68,94,75,99,87,,,
+102,West|102,102 - Hanumanthanagar,West,Malleshwaram,0.69,21,30.6,6,0,8,0,7,110,579,113,432,329,98,86,96,95,89,93,5208,9,0.1
+19,North|19,19 - Thanisandra,North,Byatarayanapura,2.74,23,8.4,7,2,7,0,7,335,141,375,1559,386,94,96,88,81,87,89,5738,239,5.1
+17,North|17,17 - Jakkur,North,Byatarayanapura,7.85,44,5.6,2,8,15,2,17,895,334,262,403,454,85,92,91,95,85,90,5618,131,2.5
+54,West|54,54 - Subedarpalya,West,Malleshwaram,0.53,15,28.3,4,1,5,2,3,113,170,323,264,206,98,96,89,97,93,95,,,
+3,West|3,3 - Nelagadaranahalli,West,Rajarajeshwarinagar,2.18,5,2.3,1,0,3,0,1,185,389,345,789,477,97,90,88,90,84,90,,,
+9,North|9,9 - Kuvempunagara,North,Byatarayanapura,5.51,28,5.1,4,5,13,2,4,631,219,385,548,554,89,95,87,93,82,89,4080,4,0.1
+47,South|47,47 - Chandranagara,South,Jayanagar,0.62,9,14.6,2,3,2,0,2,423,278,141,422,263,93,93,95,95,91,93,4000,1,0.0
+5,East|5,5 - Hoysala Nagara East,East,K.R. Pura,1.62,16,9.9,2,2,5,1,6,579,477,302,1070,400,90,88,90,87,87,88,,,
+58,West|58,58 - Dayanand Nagara,West,Malleshwaram,0.27,9,33.0,1,2,2,4,0,77,68,115,69,523,99,98,96,99,83,95,,,
+11,North|11,11 - Doddabommasandra,North,Byatarayanapura,4.23,37,8.7,2,8,21,1,5,384,463,256,587,608,94,88,91,93,80,89,4560,4,0.1
+8,East|8,8 - Anandapura,East,K.R. Pura,2.22,11,4.9,3,2,4,0,2,582,706,430,1178,257,90,82,86,85,91,87,3958,22,0.6
+72,West|72,72 - Kaveripura,West,Malleshwaram,1.02,3,2.9,2,0,0,0,1,403,851,447,961,374,93,79,85,88,88,87,6594,6,0.2
+58,South|58,58 - Arakere,South,Bommanahalli,1.27,26,20.5,4,7,1,2,12,236,143,657,428,375,96,96,78,95,88,91,,,
+47,East|47,47 - Bellanduru,East,Mahadevapura,1.92,52,27.0,11,2,7,5,27,536,230,437,529,206,91,94,85,93,93,91,5296,93,1.6
+20,East|20,20 - A Narayanapura,East,K.R. Pura,1.31,29,22.2,2,5,15,2,5,324,268,342,356,275,95,93,89,96,91,93,4804,13,0.2
+27,East|27,27 - Vibhootipura,East,K.R. Pura,4.74,11,2.3,0,2,7,1,1,732,464,594,662,674,88,88,80,92,78,85,7500,3,0.1
+33,East|33,33 - S.M Krishna Ward,East,Mahadevapura,4.94,67,13.6,7,10,21,3,26,925,79,844,1049,786,85,98,72,87,74,83,5161,19,0.6
+29,West|29,29 - Chowdeshwari Nagar,West,Rajarajeshwarinagar,1.18,2,1.7,0,0,2,0,0,1235,869,217,982,730,79,78,93,88,76,83,4833,4,0.1
+49,East|49,49 - Shivanasamudra Ward,East,Mahadevapura,4.6,49,10.7,9,3,8,3,26,845,896,656,833,327,86,78,78,90,89,84,7439,8,0.2
+18,East|18,18 - Dooravaninagar,East,K.R. Pura,1.25,20,16.0,2,2,6,2,8,373,211,423,299,255,94,95,86,96,92,93,6952,4,0.1
+68,South|68,68 - Mangammana Palya,South,Bommanahalli,0.59,7,11.8,1,5,0,0,1,205,108,575,805,204,97,97,81,90,93,92,,,
+16,South|16,16 - Sarakki,South,Jayanagar,0.68,42,61.5,4,10,9,2,17,314,231,305,241,240,95,94,90,97,92,94,,,
+29,East|29,29 - Hoodi,East,Mahadevapura,4.21,32,7.6,4,4,8,1,15,451,242,659,797,410,92,94,78,90,86,88,7334,67,1.6
+19,Central|19,19 - Jeevan Bhimanagar,Central,C.V. Raman Nagar,1.41,39,27.6,8,8,8,3,12,92,118,243,479,438,98,97,92,94,85,93,6897,9,0.1
+38,West|38,38 - Nandini Layout,West,Rajarajeshwarinagar,0.37,7,18.8,0,0,5,0,2,737,760,54,437,190,88,81,98,95,94,91,,,
+69,South|69,69 - Hosapalya,South,Bommanahalli,1.32,14,10.6,0,4,2,1,7,903,329,326,583,209,85,92,89,93,93,90,4762,27,0.5
+57,West|57,57 - Kuvempu Ward,West,Malleshwaram,0.47,17,36.2,1,2,10,0,4,439,302,61,518,84,93,92,98,94,97,95,6875,3,0.0
+23,East|23,23 - Sangama Ward,East,K.R. Pura,2.0,19,9.5,3,2,5,1,8,304,314,391,993,411,95,92,87,88,86,90,4428,6,0.1
+32,East|32,32 - Channasandra,East,Mahadevapura,2.28,8,3.5,0,2,2,0,4,2123,406,444,1253,361,65,90,85,84,88,82,3990,5,0.2
+81,West|81,81 - Nayanda Halli,West,Malleshwaram,0.88,12,13.6,3,0,8,0,1,263,371,291,1295,357,96,91,90,84,88,90,,,
+73,West|73,73 - Dr. Vishnuvardhan Ward,West,Malleshwaram,0.9,84,93.4,26,8,11,5,34,20,131,325,318,115,100,97,89,96,96,96,14815,3,0.0
+107,West|107,107 - Dharmagiri Ward,West,Rajarajeshwarinagar,0.64,17,26.6,6,1,8,0,2,376,403,116,624,402,94,90,96,92,87,92,,,
+27,West|27,27 - Srigandada Kaval,West,Rajarajeshwarinagar,2.25,21,9.3,3,7,9,0,2,420,394,234,1478,640,93,90,92,82,79,87,14375,2,0.1
+58,Central|58,58 - Chickpete,Central,Gandhinagara,0.62,24,38.9,3,0,3,2,16,173,638,468,193,82,97,84,84,98,97,92,,,
+31,East|31,31 - Kadugodi,East,Mahadevapura,4.53,27,6.0,0,4,18,1,4,1269,639,1071,744,781,79,84,64,91,74,78,5001,38,1.6
+40,East|40,40 - Varthur,East,Mahadevapura,9.2,42,4.6,12,9,9,2,10,365,297,319,584,353,94,93,89,93,88,91,4299,66,1.2
+69,West|69,69 - Agrahara Dasarahalli,West,Malleshwaram,0.53,16,30.4,5,1,5,0,5,166,212,254,385,203,97,95,92,95,93,94,,,
+36,East|36,36 - Bharath Aikya Ward,East,Mahadevapura,3.95,65,16.4,13,7,24,5,16,207,478,167,592,479,97,88,94,93,84,91,6540,27,0.5
+35,East|35,35 - Garudachar Palya,East,Mahadevapura,1.32,21,15.9,4,1,7,1,8,381,179,419,355,110,94,96,86,96,96,94,4591,17,0.2
+26,Central|26,26 - Vannarpet,Central,C.V. Raman Nagar,0.52,15,28.7,2,8,5,0,0,111,127,82,494,92,98,97,97,94,97,97,7167,2,0.0
+86,West|86,86 - Vidyaranyanagara,West,Malleshwaram,0.31,1,3.3,1,0,0,0,0,350,586,359,585,499,94,85,88,93,83,89,,,
+37,East|37,37 - Kundalahalli,East,Mahadevapura,5.68,83,14.6,29,9,13,5,27,256,341,282,554,266,96,91,91,93,91,92,6667,73,1.1
+34,East|34,34 - Kaveri Nagara,East,Mahadevapura,2.9,48,16.6,8,10,14,2,14,359,468,244,197,64,94,88,92,98,98,94,5632,84,1.0
+28,Central|28,28 - Neelasandra,Central,C.V. Raman Nagar,0.27,4,15.0,1,2,1,0,0,10,185,290,327,767,100,95,90,96,74,91,,,
+22,East|22,22 - Mahadevapura,East,K.R. Pura,2.72,34,12.5,9,2,11,0,12,203,408,252,1119,162,97,90,92,86,95,92,4695,29,0.5
+55,Central|55,55 - Bhuvaneshwari Nagar,Central,Gandhinagara,0.24,1,4.2,0,0,0,0,1,417,451,339,817,220,93,89,89,90,93,91,,,
+38,East|38,38 - Whitefield,East,Mahadevapura,4.47,63,14.1,14,9,13,2,25,219,349,267,231,276,96,91,91,97,91,93,5530,515,7.0
+30,South|30,30 - Jakkasandra,South,Bommanahalli,0.8,42,52.7,10,9,5,0,18,194,91,418,632,98,97,98,86,92,97,94,6375,3,0.0
+50,East|50,50 - Gunjur,East,Mahadevapura,12.8,55,4.3,12,15,11,1,16,820,808,768,1779,1016,86,80,74,78,66,77,4230,39,1.7
+13,East|13,13 - Rajarajeshwari Temple ward,East,K.R. Pura,1.36,11,8.1,1,1,3,5,1,512,744,480,467,192,91,81,84,94,94,89,,,
+43,East|43,43 - Dodda Nekkundi,East,Mahadevapura,3.66,45,12.3,10,4,8,1,22,358,531,425,432,214,94,87,86,95,93,91,4878,39,0.7
+9,East|9,9 - Bhattarahalli,East,K.R. Pura,2.58,23,8.9,4,8,7,0,4,764,518,581,2239,531,87,87,81,72,82,82,5500,89,3.1
+4,West|4,4 - Parvathi Nagar,West,Rajarajeshwarinagar,1.47,13,8.8,0,0,10,1,2,906,1119,130,303,147,85,72,96,96,95,89,,,
+26,East|26,26 - Jagadish Nagar,East,K.R. Pura,1.42,22,15.5,3,4,6,2,7,528,68,76,696,215,91,98,97,91,93,94,3917,6,0.1
+20,Central|20,20 - Kodihalli,Central,C.V. Raman Nagar,1.3,67,51.5,15,9,9,7,27,202,62,356,104,143,97,98,88,99,95,95,10479,15,0.1
+12,East|12,12 - Devasandra,East,K.R. Pura,1.29,20,15.5,4,4,3,2,7,537,205,613,166,488,91,95,80,98,84,90,,,
+63,South|63,63 - Bommanahalli,South,Bommanahalli,0.89,32,36.0,8,10,2,0,12,349,173,367,796,116,94,96,88,90,96,93,4225,5,0.1
+3,East|3,3 - Chellakere,East,K.R. Pura,1.68,24,14.3,1,11,8,1,3,626,102,401,851,260,90,97,87,89,91,91,4500,5,0.1
+26,West|26,26 - Mallathahalli,West,Rajarajeshwarinagar,2.63,20,7.6,2,0,15,0,3,297,858,122,1666,551,95,79,96,79,82,86,,,
+44,East|44,44 - Ashwath Nagar,East,Mahadevapura,1.28,36,28.2,7,1,6,1,21,444,157,486,612,470,93,96,84,92,84,90,5806,29,0.6
+30,East|30,30 - Belathur,East,Mahadevapura,7.69,32,4.2,4,5,19,2,2,892,170,843,1343,927,85,96,72,83,69,81,3730,9,0.3
+48,East|48,48 - Panathur,East,Mahadevapura,8.7,60,6.9,9,9,10,6,26,346,727,417,204,200,94,82,86,97,93,90,5932,155,3.0
+41,West|41,41 - Nagapura,West,Rajarajeshwarinagar,0.97,42,43.2,12,5,10,4,11,51,233,132,315,83,99,94,96,96,97,96,10000,9,0.1
+6,East|6,6 - Kalkere,East,K.R. Pura,3.86,22,5.7,4,5,9,0,4,449,398,366,1640,572,93,90,88,80,81,86,5034,12,0.3
+29,Central|29,29 - Austin Town,Central,C.V. Raman Nagar,0.43,15,35.2,2,6,5,2,0,328,31,101,156,771,95,99,97,98,74,93,4800,7,0.1
+7,East|7,7 - K Chennasandra,East,K.R. Pura,2.13,15,7.0,2,2,7,0,4,916,1023,309,2152,991,85,74,90,73,67,78,5120,61,2.6
+1,Central|1,1 - Ramaswamy Palya,Central,Gandhinagara,0.7,5,7.1,1,1,1,1,1,547,127,342,554,510,91,97,89,93,83,91,,,
+24,East|24,24 - Vignananagara,East,K.R. Pura,1.33,23,17.2,4,3,5,0,11,238,480,447,817,195,96,88,85,90,94,91,,,
+46,Central|46,46 - Cheluvadi Palya,Central,Gandhinagara,0.22,7,32.2,1,1,5,0,0,212,107,58,325,597,96,97,98,96,80,93,10840,2,0.0
+43,Central|43,43 - Devaraj Urs Ward,Central,Gandhinagara,0.54,18,33.6,3,1,5,0,9,221,638,241,659,407,96,84,92,92,86,90,,,
+15,West|15,15 - Byadarahalli,West,Rajarajeshwarinagar,4.18,29,6.9,2,6,12,1,8,942,304,379,1147,346,84,92,87,86,88,87,11727,9,0.2
+5,Central|5,5 - Shivajinagar,Central,Gandhinagara,1.17,69,59.1,13,6,7,5,38,88,354,402,291,211,99,91,87,96,93,93,6756,12,0.2
+23,Central|23,23 - Jogpalya,Central,C.V. Raman Nagar,1.09,54,49.4,19,11,2,2,20,98,186,637,264,132,98,95,79,97,96,93,10977,43,0.6
+14,Central|14,14 - Nagavarapalya,Central,C.V. Raman Nagar,1.97,29,14.7,3,2,9,3,12,413,391,134,399,357,93,90,96,95,88,92,5206,60,0.9
+60,West|60,60 - Prakash Nagara,West,Malleshwaram,0.4,20,50.1,4,3,6,0,7,297,199,188,366,113,95,95,94,95,96,95,,,
+35,Central|35,35 - Hombegowda Nagara,Central,Gandhinagara,0.97,65,67.3,21,7,11,9,17,102,246,95,174,206,98,94,97,98,93,96,8018,12,0.1
+7,Central|7,7 - K Kamaraj Ward,Central,Gandhinagara,1.99,52,26.1,2,12,15,4,19,182,91,34,270,405,97,98,99,97,86,95,,,
+40,Central|40,40 - Ashoka Pillar,Central,Gandhinagara,1.55,37,23.8,3,7,16,2,9,92,83,148,495,406,98,98,95,94,86,94,,,
+37,Central|37,37 - BHEL Ward,Central,Gandhinagara,1.06,29,27.3,10,5,4,5,5,268,116,538,361,347,96,97,82,95,88,92,,,
+45,Central|45,45 - K.R Market,Central,Gandhinagara,0.74,26,35.2,3,3,15,2,3,284,354,188,342,368,95,91,94,96,88,93,,,
+23,West|23,23 - Rajarajeshwari Nagara,West,Rajarajeshwarinagar,4.15,55,13.3,6,6,19,5,19,412,542,195,460,413,93,86,94,94,86,91,4121,226,3.9
+6,Central|6,6 - Bharathi Nagar,Central,Gandhinagara,0.34,5,14.8,2,1,1,1,0,294,134,335,335,321,95,97,89,96,89,93,,,
+22,Central|22,22 - Domluru,Central,C.V. Raman Nagar,1.16,70,60.3,9,10,13,4,34,117,138,203,188,63,98,97,93,98,98,97,8462,29,0.2
+60,Central|60,60 - Seshadripuram,Central,Gandhinagara,0.39,14,36.3,3,1,2,0,8,297,145,170,298,163,95,96,94,96,95,95,12500,3,0.0
+39,Central|39,39 - Venkat Reddy Nagara,Central,Gandhinagara,0.2,7,34.4,1,3,2,0,1,248,300,246,644,327,96,92,92,92,89,92,,,
+25,Central|25,25 - Ashokanagar,Central,C.V. Raman Nagar,3.95,257,65.1,22,39,56,32,108,192,193,203,220,136,97,95,93,97,95,95,13982,7,0.1
+97,West|97,97 - Srinivasa Nagara,West,Malleshwaram,0.43,12,27.9,2,1,2,0,7,338,325,318,687,68,94,92,89,91,98,93,6206,6,0.1
+70,West|70,70 - Dr Rajkumar Ward,West,Malleshwaram,0.99,20,20.2,2,0,9,4,5,258,370,184,174,129,96,91,94,98,96,95,,,
+52,West|52,52 - Kodandarampura,West,Malleshwaram,0.5,28,55.6,11,5,2,2,8,32,125,266,259,155,99,97,91,97,95,96,6818,1,0.0
+14,West|14,14 - Herohalli,West,Rajarajeshwarinagar,1.5,13,8.6,1,0,11,0,1,727,1484,179,728,589,88,63,94,91,80,83,5139,4,0.1
+59,West|59,59 - Bandi Reddy Circle Ward,West,Malleshwaram,0.26,2,7.7,1,0,1,0,0,197,367,266,317,134,97,91,91,96,96,94,9419,2,0.0
+12,West|12,12 - Andrahalli,West,Rajarajeshwarinagar,5.61,25,4.5,8,2,12,0,3,642,1306,198,2583,930,89,67,93,68,69,77,10966,2,0.1
+82,West|82,82 - Attigupe,West,Malleshwaram,0.85,47,55.0,10,3,14,2,18,21,174,50,205,11,100,96,98,97,100,98,,,
+61,Central|61,61 - Dattatreya Ward,Central,Gandhinagara,0.5,47,93.8,14,1,11,4,17,164,214,161,243,31,97,95,95,97,99,97,,,
+89,West|89,89 - Bapuji Nagara,West,Malleshwaram,0.35,2,5.7,0,0,2,0,0,409,376,222,426,391,93,91,93,95,87,92,7939,2,0.0
+80,West|80,80 - Chandra Layout,West,Malleshwaram,0.68,15,22.1,3,1,7,0,4,335,299,263,485,296,94,93,91,94,90,92,,,
+95,West|95,95 - Swamy Vivekananda Ward,West,Malleshwaram,1.53,51,33.4,16,11,7,4,13,87,152,234,253,246,99,96,92,97,92,95,16667,10,0.1
+42,Central|42,42 - Sunkenahalli,Central,Gandhinagara,1.58,96,60.9,15,15,16,4,46,256,210,217,156,161,96,95,93,98,95,95,9721,33,0.3
+32,Central|32,32 - SilverJubilee Park Ward,Central,Gandhinagara,0.63,32,50.8,5,2,4,6,15,210,166,149,360,333,96,96,95,96,89,94,,,
+83,West|83,83 - Hampi Nagar,West,Malleshwaram,0.9,40,44.2,9,3,14,0,14,166,182,176,300,138,97,95,94,96,95,95,,,
+63,West|63,63 - Rajajinagara,West,Malleshwaram,0.88,92,104.1,28,9,23,7,25,19,99,83,159,58,100,98,97,98,98,98,13600,97,0.4
+21,West|21,21 - Kengeri,West,Rajarajeshwarinagar,6.13,47,7.7,2,9,26,2,8,1059,897,540,1115,1124,82,78,82,86,63,78,4118,5,0.2
+5,West|5,5 - Rajeshwarinagar,West,Rajarajeshwarinagar,0.47,1,2.1,0,0,1,0,0,671,469,82,813,752,89,88,97,90,75,88,,,
+68,West|68,68 - Kamakshipalya,West,Malleshwaram,0.67,18,26.8,3,1,10,1,3,249,391,372,378,252,96,90,88,95,92,92,4771,2,0.0
+44,Central|44,44 - Chamarajpet,Central,Gandhinagara,0.89,30,33.6,5,3,5,6,11,177,206,139,418,120,97,95,95,95,96,96,,,
+15,Central|15,15 - Indiranagar,Central,C.V. Raman Nagar,3.0,147,49.0,28,18,24,11,66,106,11,227,172,26,98,100,92,98,99,97,13543,7,0.0
+3,Central|3,3 - Vasanth Nagar,Central,Gandhinagara,1.96,108,55.2,12,13,28,16,39,147,150,212,129,63,98,96,93,98,98,97,21319,6,0.0
+19,West|19,19 - Shivanapalya,West,Rajarajeshwarinagar,1.69,36,21.3,6,8,16,0,6,254,270,198,1302,212,96,93,93,84,93,92,4146,98,1.5
+56,West|56,56 - Gayathri Nagara,West,Malleshwaram,0.44,16,36.3,3,1,7,0,5,219,197,113,559,146,96,95,96,93,95,95,10227,1,0.0
+92,West|92,92 - Muneshwara Block,West,Malleshwaram,0.64,5,7.8,1,0,4,0,0,589,1031,265,588,588,90,74,91,93,80,86,,,
+18,Central|18,18 - G.M Palya,Central,C.V. Raman Nagar,0.84,23,27.3,4,3,5,1,10,552,200,46,371,54,91,95,98,95,98,95,4418,33,0.3
+18,West|18,18 - Kengal Hanumanthaiah West,West,Rajarajeshwarinagar,2.34,20,8.6,2,4,8,0,6,498,400,529,1938,455,92,90,82,76,85,85,,,
+55,West|55,55 - Subramanyanagara,West,Malleshwaram,0.83,30,36.0,7,3,7,2,11,265,138,226,351,160,96,97,92,96,95,95,18929,2,0.0
+16,Central|16,16 - New Thippasandra,Central,C.V. Raman Nagar,1.99,45,22.6,9,7,9,1,19,339,356,310,564,314,94,91,90,93,90,92,6333,7,0.1
+13,West|13,13 - Nada prabhu Kempegowda Nagara,West,Rajarajeshwarinagar,4.23,15,3.5,1,1,11,0,2,926,774,472,1264,127,85,81,84,84,96,86,6464,24,0.7
+24,West|24,24 - Jnana Bharathi Ward,West,Rajarajeshwarinagar,6.65,53,8.0,6,6,33,1,7,886,475,245,1186,866,85,88,92,85,71,84,4634,4,0.1
+21,Central|21,21 - Konena Agrahara,Central,C.V. Raman Nagar,1.49,46,30.9,11,4,5,4,22,155,205,391,607,141,97,95,87,92,95,93,6048,28,0.4
+2,Central|2,2 - Jayamahal,Central,Gandhinagara,1.43,43,30.1,6,6,12,4,15,188,240,71,306,112,97,94,98,96,96,96,10938,23,0.2
+59,Central|59,59 - Nehru Nagar,Central,Gandhinagara,1.81,105,58.0,10,10,31,17,37,426,198,39,51,197,93,95,99,99,93,96,4937,10,0.1
+16,West|16,16 - Ullal,West,Rajarajeshwarinagar,5.61,25,4.5,2,4,12,1,6,785,735,308,548,545,87,82,90,93,82,87,4883,21,0.5
+64,West|64,64 - Shivanagara,West,Malleshwaram,0.3,9,30.5,1,2,3,0,3,283,152,211,338,285,95,96,93,96,90,94,,,
+90,West|90,90 - Krishnadevaraya ward,West,Malleshwaram,0.48,5,10.5,0,0,1,1,3,449,538,399,246,324,93,87,87,97,89,91,,,
+40,North|40,40 - Shakthi Nagar,North,Byatarayanapura,0.34,3,9.0,0,0,3,0,0,541,666,313,309,1004,91,83,90,96,67,85,,,
+10,West|10,10 - Sunkadakatte,West,Rajarajeshwarinagar,0.77,5,6.5,1,0,4,0,0,228,779,187,1403,780,96,81,94,82,74,85,,,
+27,North|27,27 - K.G.Halli,North,Byatarayanapura,0.4,2,5.0,0,0,0,2,0,440,831,251,167,856,93,79,92,98,71,87,4688,2,0.1
+51,West|51,51 - Rajamahal,West,Malleshwaram,2.45,37,15.1,6,2,20,2,7,591,360,384,712,203,90,91,87,91,93,90,,,
+2,West|2,2 - Chokkasandra,West,Rajarajeshwarinagar,1.1,10,9.1,3,1,4,0,2,316,627,320,825,116,95,84,89,90,96,91,,,
+31,West|31,31 - Freedom Fighter Ward,West,Rajarajeshwarinagar,0.5,4,8.0,1,0,3,0,0,272,313,156,1342,754,95,92,95,83,75,88,,,
+31,North|31,31 - Kalyan Nagar,North,Byatarayanapura,1.46,54,36.9,11,4,12,4,23,298,151,157,231,195,95,96,95,97,94,95,5366,17,0.2
+112,West|112,112 - Hosakerehalli,West,Rajarajeshwarinagar,0.65,11,16.9,1,0,6,0,4,420,244,181,681,424,93,94,94,91,86,92,8482,36,0.6
+11,West|11,11 - Dodda Bidarakallu,West,Rajarajeshwarinagar,4.26,16,3.8,0,1,15,0,0,868,712,343,1016,1226,86,82,89,87,59,81,6167,3,0.1
+32,West|32,32 - Laggere,West,Rajarajeshwarinagar,0.51,5,9.7,1,0,4,0,0,390,866,136,812,615,94,78,95,90,80,87,6996,10,0.3
+100,West|100,100 - Srinagar,West,Malleshwaram,0.29,1,3.4,0,0,1,0,0,568,956,189,879,866,91,76,94,89,71,84,,,
+74,West|74,74 - Pattegar Palya,West,Malleshwaram,0.43,6,14.1,3,0,2,0,1,92,698,219,601,445,98,83,93,92,85,90,10750,2,0.0
+26,North|26,26 - Samadhana Nagar,North,Byatarayanapura,0.58,8,13.9,4,1,3,0,0,262,136,362,546,752,96,97,88,93,75,90,,,
+96,West|96,96 - Kathriguppe,West,Malleshwaram,1.01,29,28.6,5,2,8,1,13,332,300,173,642,281,94,92,94,92,91,93,5500,146,2.0
+17,West|17,17 - Nagadevanahalli,West,Rajarajeshwarinagar,2.5,14,5.6,2,2,8,0,2,379,470,271,1752,908,94,88,91,78,70,84,5221,6,0.2
+99,West|99,99 - T.R Shamanna Nagar,West,Malleshwaram,0.35,2,5.7,0,0,1,1,0,479,489,233,647,383,92,88,92,92,87,90,,,
+103,West|103,103 - N.R Colony,West,Malleshwaram,1.06,30,28.3,10,4,8,2,6,90,141,106,74,95,98,96,96,99,97,97,,,
+104,West|104,104 - Thyagarajnagar,West,Malleshwaram,0.43,7,16.4,2,0,1,1,3,186,116,306,53,55,97,97,90,99,98,96,,,
+105,West|105,105 - Yediyuru,West,Rajarajeshwarinagar,1.04,43,41.2,9,6,11,1,16,81,157,170,533,112,99,96,94,93,96,96,,,
+101,West|101,101 - Kempambudhi Ward,West,Malleshwaram,0.61,6,9.9,0,0,3,0,3,464,929,229,687,167,92,77,92,91,94,89,,,
+111,West|111,111 - Ittamadu,West,Rajarajeshwarinagar,0.46,2,4.3,0,0,2,0,0,879,856,303,1230,540,85,79,90,85,82,84,,,
+75,West|75,75 - Marenahalli West,West,Malleshwaram,0.49,15,30.7,7,0,4,0,4,124,368,51,282,32,98,91,98,96,99,96,8218,2,0.0
+109,West|109,109 - Kamakya Layout,West,Rajarajeshwarinagar,0.95,25,26.3,8,2,7,2,6,318,900,64,438,317,95,78,98,95,89,91,5266,8,0.1
+110,West|110,110 - Chikkalasandra,West,Rajarajeshwarinagar,0.39,0,0.0,0,0,0,0,0,603,771,326,885,508,90,81,89,89,83,86,5181,6,0.2
+106,West|106,106 - Devagiri Temple Ward,West,Rajarajeshwarinagar,0.85,33,38.8,10,9,9,1,4,298,339,268,384,203,95,92,91,95,93,93,9508,8,0.1
+108,West|108,108 - Ganesh Mandira Ward,West,Rajarajeshwarinagar,1.44,37,25.7,6,4,7,4,16,435,127,131,433,141,93,97,96,95,95,95,,,
+76,West|76,76 - Moodalapalya,West,Malleshwaram,0.4,1,2.5,0,0,1,0,0,322,848,297,967,633,95,79,90,88,79,86,,,
+53,West|53,53 - Malleshwaram,West,Malleshwaram,2.15,144,67.0,20,22,26,14,62,94,81,83,265,58,98,98,97,97,98,98,12415,49,0.2
+91,West|91,91 - Gali Anjaneya Temple Ward,West,Malleshwaram,0.78,18,23.1,1,0,11,3,3,350,729,346,533,564,94,82,88,93,81,88,,,
+40,West|40,40 - Mahalakshmipuram,West,Rajarajeshwarinagar,0.52,13,24.8,2,0,8,1,2,72,256,223,576,249,99,94,93,93,92,94,,,
+30,West|30,30 - Kempegowda Layout,West,Rajarajeshwarinagar,0.64,4,6.3,0,1,3,0,0,777,247,92,1245,859,87,94,97,84,71,87,,,
+62,West|62,62 - Rama Mandira,West,Malleshwaram,0.66,34,51.1,12,4,5,2,11,172,76,120,445,262,97,98,96,94,91,95,,,
+43,West|43,43 - Kethamaranahalli,West,Rajarajeshwarinagar,1.44,127,87.9,34,11,33,7,42,92,129,260,367,218,98,97,91,95,93,95,7835,18,0.2
+1,West|1,1 - Nagasandra,West,Rajarajeshwarinagar,1.92,20,10.4,0,4,10,1,5,542,499,242,381,329,91,88,92,95,89,91,6042,9,0.2
+45,West|45,45 - Shakthi Ganapathi Nagara,West,Rajarajeshwarinagar,0.4,7,17.7,1,1,4,0,1,303,62,209,334,200,95,98,93,96,93,95,,,
+78,West|78,78 - Anubhava Nagara,West,Malleshwaram,0.62,5,8.0,2,0,3,0,0,190,844,247,674,387,97,79,92,92,87,89,,,
+94,West|94,94 - Deepanjali Nagara,West,Malleshwaram,1.78,30,16.8,3,1,21,0,5,670,643,133,1047,315,89,84,96,87,90,89,5418,8,0.2
+84,West|84,84 - Hosahalli,West,Malleshwaram,0.63,31,49.1,11,6,5,3,6,132,86,234,374,244,98,98,92,95,92,95,5091,1,0.0
+6,West|6,6 - Shivapura,West,Rajarajeshwarinagar,2.7,12,4.5,1,3,7,0,1,835,562,217,1630,611,86,86,93,80,80,85,,,
+42,West|42,42 - Raja Mayura Varma Ward,West,Rajarajeshwarinagar,0.48,5,10.4,1,0,3,0,1,689,572,323,906,457,89,86,89,89,85,88,,,
+44,West|44,44 - Shankar Mutt,West,Rajarajeshwarinagar,0.5,7,14.0,2,0,1,1,3,627,487,220,541,418,90,88,93,93,86,90,,,
+36,West|36,36 - Nalwadi Krishnaraja Wadiyar Ward,West,Rajarajeshwarinagar,1.8,38,21.2,4,1,16,3,14,358,691,372,385,357,94,83,88,95,88,90,,,
+37,West|37,37 - Dr. Puneeth Rajkumar Ward,West,Rajarajeshwarinagar,0.56,9,16.0,3,0,3,0,3,330,810,244,686,188,94,80,92,91,94,90,,,
+85,West|85,85 - Adi Chunchanagiri Ward,West,Malleshwaram,0.71,34,47.9,8,2,8,1,15,318,360,106,429,219,95,91,96,95,93,94,,,
+67,West|67,67 - Basaveshwara Nagara,West,Malleshwaram,0.87,49,56.1,7,12,8,2,20,96,131,109,580,73,98,97,96,93,98,96,,,
+39,West|39,39 - Jai Maruthi Nagar,West,Rajarajeshwarinagar,0.91,18,19.7,4,1,8,1,4,658,800,49,590,525,89,80,98,93,82,88,,,
+46,West|46,46 - Kamalanagara,West,Rajarajeshwarinagar,0.46,2,4.4,0,0,2,0,0,1038,722,197,839,367,83,82,93,90,88,87,7071,4,0.1
+47,West|47,47 - Vrishabhavathi Nagar,West,Rajarajeshwarinagar,0.59,2,3.4,0,0,1,0,1,539,989,544,818,433,91,75,82,90,86,85,4851,7,0.2
+98,West|98,98 - Ashoka Nagara,West,Malleshwaram,0.73,33,45.2,14,4,4,1,10,79,257,170,731,108,99,94,94,91,96,95,,,
+8,West|8,8 - Hegganahalli,West,Rajarajeshwarinagar,0.89,5,5.6,1,0,4,0,0,822,827,408,1508,897,86,79,86,81,70,80,4000,3,0.1
+50,West|50,50 - Sadashiva Nagara,West,Malleshwaram,4.99,154,30.8,12,46,37,17,42,485,252,538,788,515,92,94,82,90,83,88,17549,9,0.2
+48,Central|48,48 - Azad Nagar,Central,Gandhinagara,0.41,12,29.4,6,0,6,0,0,106,869,104,930,437,98,78,97,88,85,89,,,
+56,Central|56,56 - Gopalpura,Central,Gandhinagara,1.28,33,25.8,4,2,21,2,4,419,241,303,677,344,93,94,90,92,89,92,,,
+57,Central|57,57 - Cottonpete,Central,Gandhinagara,0.96,29,30.2,4,1,4,5,15,186,429,134,110,262,97,89,96,99,91,94,,,
+54,Central|54,54 - Binnypete,Central,Gandhinagara,0.48,3,6.3,0,0,2,0,1,420,793,210,537,320,93,80,93,93,89,90,,,
+47,Central|47,47 - IPD Salappa Ward,Central,Gandhinagara,0.5,6,12.1,1,0,2,2,1,191,655,29,322,75,97,84,99,96,98,95,,,
+61,West|61,61 - Da.Ra. Bendre Ward,West,Malleshwaram,0.53,18,34.0,3,7,3,0,5,150,93,147,325,121,98,98,95,96,96,97,,,

@@ -1,0 +1,18 @@
+# 15 GCC zones. Geometry reduced to a centroid. This row is NOT a boundary — joining on the centroid gives you a point inside (or near) the shape, not the shape.
+zone,zone_name,region,geometry_type,centroid_lng,centroid_lat,vertex_count
+II,MANALI,North,Polygon,80.248048,13.181568,546
+III,MADHAVARAM,North,Polygon,80.225455,13.141643,1304
+ZONE - IV,TONDIARPET,North,Polygon,80.266954,13.121646,1432
+IX,TEYNAMPET,Central,Polygon,80.247567,13.050746,1887
+V,ROYAPURAM,North,Polygon,80.271086,13.090233,1741
+VI,THIRU-VIKA-NAGAR,Central,Polygon,80.23938,13.107673,2550
+VII,AMBATTUR,Central,Polygon,80.185755,13.0979,1048
+VIII,ANNA NAGAR,Central,Polygon,80.222244,13.086237,1934
+X,KODAMBAKKAM,Central,Polygon,80.21709,13.046543,1939
+XI,VALASARVAKKAM,South,Polygon,80.171977,13.052986,1112
+XII,ALANDUR,South,Polygon,80.191241,12.998167,1270
+XIII,ADYAR,South,Polygon,80.235566,13.007806,1511
+XIV,PERUNKUDI,South,Polygon,80.222354,12.967187,749
+I,THIRUVOTTRIYUR,North,Polygon,80.296315,13.163839,175
+XV,SHOZHANGANALLUR,South,Polygon,80.241585,12.91412,175
+,,,Polygon,80.19701,13.002564,408

@@ -1,0 +1,394 @@
+# 391 reported flooding locations from 3 BBMP layers. NOT a hazard model: no return period, depth or drainage. Absence of a nearby point is not evidence a location does not flood.
+name,kind,source_layer,geometry_type,centroid_lng,centroid_lat,vertex_count
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.532435,12.867499,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.528083,12.871775,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.542694,12.877711,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.541273,12.877865,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.637418,12.878907,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.604051,12.879969,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.603987,12.880518,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.604415,12.880586,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.608253,12.881756,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.642075,12.885937,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.611508,12.89657,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.692907,12.897817,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.633121,12.900922,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.631443,12.90136,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.611262,12.901886,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.598853,12.903331,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.602807,12.904455,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.626758,12.904782,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.603036,12.904903,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.644933,12.909073,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.641585,12.909359,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.512709,12.911066,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.632402,12.911655,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.574917,12.914056,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.61675,12.91575,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.520507,12.915793,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.522556,12.916406,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.520883,12.916433,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.599889,12.916472,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.622722,12.917194,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.501991,12.918067,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.621889,12.918639,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.732498,12.92109,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.599944,12.921694,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.51148,12.922204,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.518522,12.922817,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.600444,12.923,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.538937,12.923239,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.505003,12.923415,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.539133,12.924696,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.521556,12.924817,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.609028,12.924944,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.678116,12.926464,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.520331,12.928569,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.717908,12.928796,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.601028,12.93025,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.512992,12.931592,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.593917,12.931917,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.535323,12.932023,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.516858,12.932791,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.588972,12.932944,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.630389,12.933806,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.630139,12.934722,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.705013,12.936355,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.626417,12.936889,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.746844,12.938078,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.62875,12.938639,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.723178,12.938932,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.482942,12.942045,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.581472,12.943583,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.525586,12.944653,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.53507,12.945302,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.528937,12.94548,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.589639,12.946306,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.563378,12.947235,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.563375,12.947328,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.619194,12.947861,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.487694,12.949595,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.700679,12.949943,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.625889,12.950389,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.538597,12.950568,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.605611,12.951,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.599,12.951167,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.605944,12.951944,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.596833,12.952972,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.541253,12.953035,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.574283,12.953748,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.690549,12.955021,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.649048,12.955624,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.720545,12.955652,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.597028,12.956139,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.741044,12.956182,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.54258,12.956317,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.735939,12.95694,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.562083,12.957039,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.568681,12.957242,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.514429,12.957687,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.744919,12.958488,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.511303,12.959262,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.708075,12.959824,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.643056,12.961111,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.582806,12.962111,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.49191,12.96241,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.583972,12.962417,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.579806,12.963,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.614639,12.963722,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.566525,12.965317,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.517394,12.965703,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.552619,12.965883,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.517489,12.96595,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.682778,12.966389,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.549697,12.968405,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.692178,12.969066,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.736686,12.9693,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.609667,12.970611,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.633611,12.970833,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.518656,12.971169,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.633333,12.971667,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.554109,12.972248,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.562883,12.972619,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.546651,12.97373,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.560417,12.975217,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.562704,12.975619,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.567347,12.976597,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.627222,12.978333,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.733753,12.978889,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.569772,12.98,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.565525,12.98345,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.546064,12.984117,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.604167,12.986389,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.610278,12.986389,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.489502,12.987014,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.559297,12.987564,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.690278,12.988889,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.668333,12.990278,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.54405,12.990872,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.521437,12.991243,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.570564,12.991328,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.718137,12.992015,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.557167,12.993483,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.658889,12.994722,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.692871,12.99492,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.573383,12.996014,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.488104,12.996413,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.578042,12.997414,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.573108,12.997669,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.51674,12.99822,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.527878,13.001,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.516454,13.001532,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.532553,13.001756,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.563611,13.003306,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.529047,13.003567,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.529492,13.004117,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.529317,13.004175,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.529094,13.004406,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.530042,13.005864,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.672222,13.006667,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.696389,13.006667,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.636944,13.008889,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.535528,13.009511,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.680278,13.010556,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.681389,13.010833,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.528064,13.010953,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.679167,13.011389,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.51178,13.01264,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.678889,13.012778,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.561389,13.012895,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.665556,13.018611,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.634722,13.018889,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.5825,13.024722,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.584636,13.029777,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.520142,13.033097,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.490582,13.033173,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.590278,13.033333,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.600278,13.033333,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.597222,13.035556,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.681111,13.036667,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.487117,13.036698,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.556706,13.036736,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.638056,13.039167,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.519926,13.039729,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.612222,13.041111,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.47808,13.04137,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.615556,13.0425,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.591389,13.0425,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.644722,13.042778,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.598889,13.043056,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.628056,13.043611,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.600278,13.043611,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.570833,13.046667,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.50074,13.04681,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.623611,13.047222,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.593333,13.047222,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.571667,13.055,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.614722,13.057778,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.51178,13.06068,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.50116,13.06087,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.53471,13.06407,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.51178,13.06634,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.50065,13.06724,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.562778,13.069167,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.593611,13.0925,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.601111,13.103056,1
+,Location vulnerable to flooding,Map_of_Locations_Vulnerable_to_Flooding_in_Bengaluru_Urban,Point,77.593333,13.110278,1
+Bhadrappa layout,Flood-prone location,Flood_Prone_Locations_Map,Point,77.57602,13.048408,1
+Sampangiram Nagar,Flood-prone location,Flood_Prone_Locations_Map,Point,77.57468,12.993629,1
+KEB Compound Maththikere,Flood-prone location,Flood_Prone_Locations_Map,Point,77.558617,13.036299,1
+Gubbanna Layout,Flood-prone location,Flood_Prone_Locations_Map,Point,77.555646,12.979209,1
+Minerva Mill,Flood-prone location,Flood_Prone_Locations_Map,Point,77.564464,12.979452,1
+Binny Mill Tank Area,Flood-prone location,Flood_Prone_Locations_Map,Point,77.568083,12.968746,1
+Binny Mill Tank Area,Flood-prone location,Flood_Prone_Locations_Map,Point,77.571703,12.97424,1
+Kamakshipalya Tank Slum Area,Flood-prone location,Flood_Prone_Locations_Map,Point,77.527091,12.988683,1
+Shivananda circle_Railway under pass,Flood-prone location,Flood_Prone_Locations_Map,Point,77.577829,12.987788,1
+Okalipuram Junction,Flood-prone location,Flood_Prone_Locations_Map,Point,77.56893,12.982687,1
+Mekhri circle,Flood-prone location,Flood_Prone_Locations_Map,Point,77.583793,13.016991,1
+Railway underbridge near Kino theatre,Flood-prone location,Flood_Prone_Locations_Map,Point,77.574868,12.984507,1
+Jagajeevan ram nagar,Flood-prone location,Flood_Prone_Locations_Map,Point,77.550679,12.965588,1
+Padarayan pura,Flood-prone location,Flood_Prone_Locations_Map,Point,77.549606,12.964563,1
+Cotton pete,Flood-prone location,Flood_Prone_Locations_Map,Point,77.565447,12.966685,1
+City Market Area,Flood-prone location,Flood_Prone_Locations_Map,Point,77.584138,12.965265,1
+Jayanagar 3rd Block LIC Colony,Flood-prone location,Flood_Prone_Locations_Map,Point,77.589531,12.929768,1
+Krishnappa Garden behind Byrasandra Tank D/s,Flood-prone location,Flood_Prone_Locations_Map,Point,77.598476,12.929943,1
+Wilson Garden Area up to Bannerghatta Road,Flood-prone location,Flood_Prone_Locations_Map,Point,77.597177,12.948034,1
+Arekempannahalli Area,Flood-prone location,Flood_Prone_Locations_Map,Point,77.593107,12.946265,1
+Marehahalli Tank,Flood-prone location,Flood_Prone_Locations_Map,Point,77.588436,12.915301,1
+Bismillanagar – Agencies,Flood-prone location,Flood_Prone_Locations_Map,Point,77.602199,12.925853,1
+Ejipura,Flood-prone location,Flood_Prone_Locations_Map,Point,77.63082,12.938392,1
+Koramangala Slum,Flood-prone location,Flood_Prone_Locations_Map,Point,77.627974,12.924817,1
+Cholurpalya,Flood-prone location,Flood_Prone_Locations_Map,Point,77.549051,12.97201,1
+Bapujinagar,Flood-prone location,Flood_Prone_Locations_Map,Point,77.539729,12.956771,1
+Sanjaya Gandhi Slum Area,Flood-prone location,Flood_Prone_Locations_Map,Point,77.592459,12.927233,1
+NGV to HSR Layout,Flood-prone location,Flood_Prone_Locations_Map,Point,77.620147,12.948554,1
+Shanthi Nagar,Flood-prone location,Flood_Prone_Locations_Map,Point,77.593239,12.954259,1
+Vidyapeeta circle,Flood-prone location,Flood_Prone_Locations_Map,Point,77.560866,12.933396,1
+Srinvas nagar,Flood-prone location,Flood_Prone_Locations_Map,Point,77.554778,12.935582,1
+KH Road,Flood-prone location,Flood_Prone_Locations_Map,Point,77.592032,12.955464,1
+Magadi Police station,Flood-prone location,Flood_Prone_Locations_Map,Point,77.55151,12.974491,1
+RPC layout,Flood-prone location,Flood_Prone_Locations_Map,Point,77.537898,12.962782,1
+Ghali Anjaneya temple road,Flood-prone location,Flood_Prone_Locations_Map,Point,77.541289,12.952727,1
+Brindavananagar below Matthikere Tank Market,Flood-prone location,Flood_Prone_Locations_Map,Point,77.555149,13.034809,1
+Shankarappa Garden Gopalapura,Flood-prone location,Flood_Prone_Locations_Map,Point,77.523011,12.921671,1
+Kamakshipalya Tank Slum Area,Flood-prone location,Flood_Prone_Locations_Map,Point,77.522042,12.992806,1
+Yeshwanthpur Railway station,Flood-prone location,Flood_Prone_Locations_Map,Point,77.550377,13.023777,1
+BEML Layout in RR Nagar,Flood-prone location,Flood_Prone_Locations_Map,Point,77.519661,12.907736,1
+Nayandahalli,Flood-prone location,Flood_Prone_Locations_Map,Point,77.524762,12.941093,1
+Kengeri Yellamma temple,Flood-prone location,Flood_Prone_Locations_Map,Point,77.482736,12.898912,1
+"Bhovi Colony, near Sane Guruvanahalli Tank",Flood-prone location,Flood_Prone_Locations_Map,Point,77.676207,13.012097,1
+HAL Airport Road,Flood-prone location,Flood_Prone_Locations_Map,Point,77.682264,12.954504,1
+Sulthan Palya Main Road,Flood-prone location,Flood_Prone_Locations_Map,Point,77.604783,13.029909,1
+Pillappa Garden – Agencies,Flood-prone location,Flood_Prone_Locations_Map,Point,77.591178,13.025907,1
+Anandanagara,Flood-prone location,Flood_Prone_Locations_Map,Point,77.591312,13.031328,1
+"Miller Tank,",Flood-prone location,Flood_Prone_Locations_Map,Point,77.598064,12.991994,1
+"Miller Tank,  Chinnappa Garden",Flood-prone location,Flood_Prone_Locations_Map,Point,77.602972,13.002206,1
+Saraswathipuram – Jogu Palya,Flood-prone location,Flood_Prone_Locations_Map,Point,77.63289,12.972383,1
+K R Garden,Flood-prone location,Flood_Prone_Locations_Map,Point,77.656156,12.954015,1
+Rudrappa Garden,Flood-prone location,Flood_Prone_Locations_Map,Point,77.617996,12.959964,1
+TV tower-Jaymahal extension,Flood-prone location,Flood_Prone_Locations_Map,Point,77.591904,13.008077,1
+hotel Chalukya Junction,Flood-prone location,Flood_Prone_Locations_Map,Point,77.588161,12.984499,1
+Dommlur,Flood-prone location,Flood_Prone_Locations_Map,Point,77.638739,12.960933,1
+Ulsoor,Flood-prone location,Flood_Prone_Locations_Map,Point,77.623968,12.981958,1
+DJ Halli,Flood-prone location,Flood_Prone_Locations_Map,Point,77.610288,13.009268,1
+KR circle Underpass,Flood-prone location,Flood_Prone_Locations_Map,Point,77.587323,12.975429,1
+"Ashok Nagar
+,museum road",Flood-prone location,Flood_Prone_Locations_Map,Point,77.604797,12.970776,1
+UB city  road,Flood-prone location,Flood_Prone_Locations_Map,Point,77.596618,12.971329,1
+New Thippasandra,Flood-prone location,Flood_Prone_Locations_Map,Point,77.654143,12.972032,1
+Cox town,Flood-prone location,Flood_Prone_Locations_Map,Point,77.623408,12.995442,1
+Thippasandra,Flood-prone location,Flood_Prone_Locations_Map,Point,77.646811,12.973707,1
+Indiranagar 80ft road,Flood-prone location,Flood_Prone_Locations_Map,Point,77.647744,12.968873,1
+Pulakeshinagara,Flood-prone location,Flood_Prone_Locations_Map,Point,77.609904,12.996841,1
+Banaswadi,Flood-prone location,Flood_Prone_Locations_Map,Point,77.647129,13.011904,1
+Sarjapur road,Flood-prone location,Flood_Prone_Locations_Map,Point,77.499379,13.006586,1
+NGV to HSR Layout,Flood-prone location,Flood_Prone_Locations_Map,Point,77.647668,12.90677,1
+Kallena Agrahara in Arekere,Flood-prone location,Flood_Prone_Locations_Map,Point,77.593502,12.87097,1
+RR Layout in Arekere & Hulimavu junction,Flood-prone location,Flood_Prone_Locations_Map,Point,77.596581,12.88424,1
+"Gurudarshan Layout,Near Doddabommasandra",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.559324,13.071537,1
+Devi Nagara,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.573025,13.052073,1
+JRD Tata Nagar,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.573364,13.055279,1
+"Bhadrappa Layout, Nagashettihalli",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.573961,13.048669,1
+Someshwara Nagar,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.579297,13.092327,1
+EWS working colony 3rd stage,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.582441,13.093543,1
+"Attur, Near Dairy Circle",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.568995,13.107285,1
+"Balaji Layout, Near Tata Nagar",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.576472,13.05401,1
+"Shankrappa Layout,MAruthi nagar",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.605114,13.103662,1
+Kempapura,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.60481,13.048485,1
+Mariyanna Palya,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.615372,13.051319,1
+"Telecom layout,Ashwathnagar",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.634656,13.055844,1
+Sanguruvanahalli,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.540867,12.990867,1
+"8TH CROSS 6TH BLOCK SANKARAPPA GARDEN ,RAJAJINAGAR",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.552533,12.981399,1
+BHAKSHI GARDEN,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.566055,12.96843,1
+SANJEEVAPPA GARDEN,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.558805,13.028223,1
+"NAGANNA NAGAR,NEAR BINNIY MILL ROAD",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.568751,12.967097,1
+KANTEERAVA NAGARA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.541546,13.019605,1
+KAMALANAGAR,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.557861,13.022687,1
+12th  cross gubbanalayout industrial area,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.555546,12.978705,1
+SARVABHOUMA NAGAR-WARD NO 131 NAYANDHALLI,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.526379,12.950779,1
+"14TH CROSS P&T COLONY,CHOLARPALYA",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.547741,12.991323,1
+"1ST MAIN 8TH CROSS N.R.GARDEN,CHOLARPALYA",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.543553,12.992941,1
+MUDALPALYA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.531387,13.014327,1
+"METRO LAYOUT-WARD NO 131,NEAR NAYANDHALLI",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.530224,12.965437,1
+bismillanagar,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.603111,12.926952,1
+rudrappa garden,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.547572,12.956324,1
+samrudhinagar,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.546893,12.952625,1
+silkboardjunction,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.559872,12.896674,1
+SOMESHWARA COLONY NEAR SILK BOARD JUNCTION,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.615996,12.915518,1
+"MARUTHI NAGAR, SANKRAPPA LAYOUT",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.628961,12.917843,1
+"VENKATAREDDY NAGAR,SIDDAPURA",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.596505,12.948752,1
+"VITTALA NAGAR , NEAR KEMPEGOWDANAGAR",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.542285,12.953108,1
+"MARUTHI NAGARA ,NEAR BAPUJI NAGARA",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.538396,12.955497,1
+"RANGANATHA LAYOUT,BHEL CIRCLE",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.535384,12.947511,1
+PWD QUARTERS NEAR WISLSON GARDEN,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.597968,12.948594,1
+ASHWINI LAYOUT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.62919,12.940539,1
+EJIPURA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.627296,12.943109,1
+LAKSHMAN RAO NAGARA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.614683,12.949079,1
+"Kengunta,Near Mallathalli",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.499259,12.959254,1
+Sri Hari layout,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.494171,12.957438,1
+Near Vidyanikethan School,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.488698,12.956032,1
+"Vinayaka Layout,Near Nagarabhavi",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.514889,12.964788,1
+Bandemata-Near Kengeri,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.488522,12.913138,1
+"Janapriya Apartments,Near Rajarajeshwari Temple",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.508905,12.927633,1
+Kenchenahalli,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.509445,12.930472,1
+"Shivanna Layout,Near Halagevaddarahalli",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.51902,12.920464,1
+BRINDAVAN NAGAR,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.55458,13.034625,1
+CHICKKABIDRIKAL,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.490517,13.044566,1
+"ANJANA NAGARA ,NEAR ANJANEYA TEMPLE (WARD NO 72)",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.481959,12.988674,1
+"BYRAVESHWARA NAGARA , HAGGANAHALLI",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.504201,12.989322,1
+"CHOWDESHWARINAGAR,RAJIV GANDHI CIRCLE ,LAGGERE",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.526952,13.009711,1
+KALIKA NAGARA MAIN ROAD (WARD NO 41),BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.491958,13.009936,1
+KOTTIGEPALYA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.512042,12.98597,1
+RUKMINI NAGARA NEAR MAGADI ROAD (WARD NO 73),BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.493881,13.041586,1
+SHIVANANDANAGARA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.495142,13.006781,1
+KALLAPA LAYOUT NEAR BASAVANAGARA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.6869,12.96784,1
+TALA KAVERI LAYOUT NEAR HAL AIRPORT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.686208,12.960494,1
+SJR DENTAL COLLEGE MAIN ROAD,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.703029,12.948996,1
+GANDHIPURAM NEAR WHITE FIELD,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.755935,12.971316,1
+UDAYANAGARA NEAR A NARAYANPURA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.675599,12.990081,1
+PAI LAYOUT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.668829,12.991415,1
+CHINAPPA LAYOUT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.685587,12.985366,1
+GARUDACHARPLAYA BASAVANAGARA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.719487,12.986618,1
+PASTTANDUR AGRAHARA NEAR ITPL,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.735077,12.974947,1
+SAI BABA ASHRAM KADUGODI,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.754159,13.001554,1
+PATTALAMMA LAYOUT NEAR KADUGODI,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.759073,12.998829,1
+SIDDHARTHA LAYOUT KADUGODI,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.763192,12.997007,1
+TRIVENI NAGAR NEAR KR PURAM,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.719902,13.023151,1
+"KRISHNANAGARA , NEAR CHIKKADEVSANDRA",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.706548,13.005344,1
+VINAYAKA LAYOUT NEAR BASAVANAPURA MAIN ROAD,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.706673,13.014299,1
+HOYSALANAGARA KR PURA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.665983,13.017243,1
+RR LAYOUT  NEAR VIJNANAPURA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.675809,13.011501,1
+DR AMBEDKAR NAGAR NEAR VIJNANAPURA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.686649,13.015196,1
+"ABBAREDDY LAYOUT ,VIJNANA NAGARA",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.680829,12.980353,1
+"Vaddara palya, Near Hennur Bande",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.644374,13.04011,1
+BHUVANESHWARI NAGARA WARD NO 15,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.507982,13.042979,1
+BAGALKUNTE( L NARSIMHAYA LAYOUT),BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.503017,13.064251,1
+KEMPEGOWDANAGAR,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.510646,13.045112,1
+NELEGADARANAHALLI,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.502142,13.033632,1
+SHIVAPURA KERE NEAR NTTF,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.505858,13.026011,1
+SHAMPURA SLUM,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.613497,13.022821,1
+BASAVANNA NAGARA NEAR KADUGODANAHALLI,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.619731,13.019739,1
+"THAMMANA LAYOUT NEAR LINGARAJAPURA,",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.628758,13.009947,1
+MUNIREDDY PALYA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.601026,13.007065,1
+CHINAPPA GARDEN,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.6026,13.002968,1
+AMBEDKAR NAGAR NEAR BYAPPANAHALLI,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.640502,12.988099,1
+"BANDAPPA COLONY , NEAR NEW BYAPPANAHALLI",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.640679,12.984318,1
+CAMBRIDGE LAYOUT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.62667,12.97329,1
+BHARATHI NAGARA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.611414,12.987921,1
+"RAJIV GANDHI COLONY ,NEAR QUEENS ROAD",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.601206,12.989232,1
+MURUGESHPALYA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.655992,12.956135,1
+SRINIVAGILU TANK BED LAYOUT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.636726,12.936238,1
+SHANTHI NAGARA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.599551,12.956486,1
+SAMPANGI RAMA NAGARA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.592226,12.972939,1
+SEETHAPPA LAYOUT NEAR RABINDRANATH TAGORE LAYOUT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.603767,13.033872,1
+BAMBOO BAZAR,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.603824,12.992651,1
+munireddypalya anekappa block,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.594439,13.013126,1
+SHANKAR NAGAR,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.571187,13.031118,1
+"Govindapura,Nesar Nagavara",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.615025,13.033684,1
+ILLIYAS NAGAR KUMARSWAMY LAYOUT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.569786,12.90583,1
+MUNISUBBAREDDY LAYOUT HONGASANDRA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.62847,12.898934,1
+AMBEDKAR COLONY NEAR HONGASANDRA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.628147,12.892687,1
+MICO LAYOUT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.626956,12.887503,1
+ROYQAL MERIDIAN LAYOUT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.624363,12.887586,1
+VISHWA PRIYA NAGARA NEAR BEGUR MAIN RAOD,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.629051,12.882051,1
+BEGUR KERE AREA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.624941,12.876405,1
+SUBASH NAGARA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.639541,12.869882,1
+GARVE BHAVI PALYA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.63798,12.894441,1
+PARAPPAN AGRAHARA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.661159,12.880294,1
+G K LAYOUT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.660327,12.873697,1
+KUDLU VILLAGE,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.657504,12.889427,1
+B.T.R GARDEN LAYOUT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.642364,12.888512,1
+RAGHAVENDRA SLUM NEAR LAKSHMI LAYOUT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.631708,12.890726,1
+MUNIREDDY LAYOUT NEAR MANGAMMNAPALYA,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.637142,12.905057,1
+VYSHYA BANK COLONY NEAR AREKERE,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.604285,12.88335,1
+KRISHNA LAYOUT NEAR HULIMAVU KERE,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.605805,12.877822,1
+BDA LAYOUT,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.591492,12.857844,1
+PUTTENHALLI,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.58492,12.901192,1
+"ASHTA LAKSHMI LAYOUT ,PUTTENHALLI",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.586612,12.901839,1
+GANAPATHPURA NEAR CHUNCHANGHATTA MAIN RAOD,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.57039,12.886308,1
+HARI NAGAR NEAR KONANKUNTTE,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.575201,12.883297,1
+"VITTAL NAGAR NEAR ISRO LAYOUT,UTTARAHALLI",BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.553865,12.902625,1
+sanjaynagar,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.545009,12.917834,1
+Yelechenahalli,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.571272,12.905651,1
+Kanakanagar-Near kumaraswamylayout,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.571761,12.90248,1
+Dorakere,BBMP low-lying area,BBMP_Low_Lying_Areas,Point,77.545712,12.903358,1

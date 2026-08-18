@@ -1,0 +1,32 @@
+# As above, for Chennai. Geometry reduced to a centroid. This row is NOT a boundary — joining on the centroid gives you a point inside (or near) the shape, not the shape.
+taluk,district,state,geometry_type,centroid_lng,centroid_lat,vertex_count
+Satyavedu,Tirupati,Andhra Pradesh,Polygon,79.946088,13.456648,672
+Ambattur,Chennai,Tamil Nadu,Polygon,80.188487,13.106855,317
+Aminjikarai,Chennai,Tamil Nadu,Polygon,80.200498,13.078874,388
+Ayanavaram,Chennai,Tamil Nadu,Polygon,80.217212,13.110538,254
+Chengalpattu,Chengalpattu,Tamil Nadu,Polygon,80.039051,12.784857,1437
+Chennai,Chennai,Tamil Nadu,Polygon,80.23917,13.065478,388
+Guindy,Chennai,Tamil Nadu,Polygon,80.234204,13.025079,374
+Mathavaram,Chennai,Tamil Nadu,Polygon,80.221416,13.152023,311
+Maduravoyal,Chennai,Tamil Nadu,Polygon,80.173475,13.050359,401
+Mambalam,Chennai,Tamil Nadu,Polygon,80.209037,13.036012,238
+Mylapore,Chennai,Tamil Nadu,Polygon,80.266568,13.045947,292
+Pallavaram,Chengalpattu,Tamil Nadu,Polygon,80.115804,12.993174,827
+Perambur,Chennai,Tamil Nadu,Polygon,80.252434,13.12748,238
+Purasawalkam,Chennai,Tamil Nadu,Polygon,80.282182,13.091648,466
+Tambaram,Chengalpattu,Tamil Nadu,Polygon,80.148059,12.906497,662
+Tiruporur,Chengalpattu,Tamil Nadu,Polygon,80.129617,12.728629,1187
+Tiruvottiyur,Chennai,Tamil Nadu,Polygon,80.286118,13.181738,425
+Tondiarpet,Chennai,Tamil Nadu,Polygon,80.295926,13.125416,443
+Velachery,Chennai,Tamil Nadu,Polygon,80.243045,12.993006,219
+Alandur,Kanchipuram,Tamil Nadu,Polygon,80.181813,13.004359,345
+Poonamallee,Kanchipuram,Tamil Nadu,Polygon,80.050546,13.025491,229
+Sholinganallur,Kanchipuram,Tamil Nadu,Polygon,80.219931,12.934091,394
+Sriperumbudur,Kanchipuram,Tamil Nadu,Polygon,79.922036,12.951644,2534
+Uthiramerur,Kanchipuram,Tamil Nadu,Polygon,79.763547,12.643958,1335
+Avadi,Thiruvallur,Tamil Nadu,Polygon,80.078868,13.1345,530
+Gummidipoondi,Thiruvallur,Tamil Nadu,Polygon,80.079362,13.417331,1313
+Ponneri,Thiruvallur,Tamil Nadu,Polygon,80.192237,13.331524,1467
+Poonamallee,Thiruvallur,Tamil Nadu,Polygon,80.07213,13.054985,866
+Thiruvallur,Thiruvallur,Tamil Nadu,Polygon,79.893516,13.119997,2834
+Uthukkottai,Thiruvallur,Tamil Nadu,MultiPolygon,79.952473,13.277442,1257

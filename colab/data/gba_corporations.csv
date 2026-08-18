@@ -1,0 +1,7 @@
+# 5 city corporations, derived by dissolving wards. Geometry reduced to a centroid. This row is NOT a boundary — joining on the centroid gives you a point inside (or near) the shape, not the shape.
+corporation,ward_count,population_total,population_status,is_derived,derivation,geometry_type,centroid_lng,centroid_lat,vertex_count
+Central,63,,UNVERIFIED,True,union of member ward polygons (edges not cleaned),MultiPolygon,77.59926,12.966931,15493
+East,50,,UNVERIFIED,True,union of member ward polygons (edges not cleaned),MultiPolygon,77.695034,12.993249,14240
+North,72,,UNVERIFIED,True,union of member ward polygons (edges not cleaned),MultiPolygon,77.59001,13.048227,17662
+South,72,,UNVERIFIED,True,union of member ward polygons (edges not cleaned),MultiPolygon,77.598541,12.899068,18765
+West,112,,UNVERIFIED,True,union of member ward polygons (edges not cleaned),MultiPolygon,77.528905,12.972717,33137

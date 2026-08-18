@@ -1,0 +1,783 @@
+# OpenStreetMap localities for chennai (T3, ODbL). name_local is the local-script name where OSM carries one.
+name,name_local,place_type,lat,lng
+Alwarpet,ஆழ்வார்பேட்டை,suburb,13.03386,80.254549
+Teynampet,தேனாம்பேட்டை,suburb,13.044324,80.249846
+Gopalapuram,கோபாலபுரம்,suburb,13.049732,80.258203
+Nandanam,நந்தனம்,suburb,13.028629,80.240256
+Raja Annamalai Puram,இராஜா அண்ணாமலைபுரம்,suburb,13.024478,80.253937
+Abhiramapuram,அபிராமபுரம்,suburb,13.031024,80.2583
+CIT Colony,சி ஐ டி காலனி,neighbourhood,13.04131,80.260472
+Poonamallee,ಪೂನಮಲ್ಲಿ,town,13.049203,80.101068
+Porur,போரூர்,suburb,13.032013,80.158304
+Mylapore,மயிலாப்பூர்,suburb,13.031647,80.270017
+Mandaveli,மந்தைவெளி,suburb,13.025844,80.262788
+Mahalingapuram,,neighbourhood,13.056783,80.236404
+Nungambakkam,நுங்கம்பாக்கம்,suburb,13.062063,80.240487
+Kodambakkam,கோடம்பாக்கம்,suburb,13.049207,80.224283
+Ashok Nagar,அஷோக் நகர்,suburb,13.040073,80.215925
+Saidapet,சைதாப்பேட்டை,suburb,13.020817,80.223954
+East Abhiramapuram,,neighbourhood,13.034268,80.261791
+Santhome,சாந்தோம்,suburb,13.029837,80.275738
+Royapettah,ராயப்பேட்டை,suburb,13.055472,80.263971
+Triplicane,திருவல்லிக்கேணி,suburb,13.060429,80.27507
+Thousand Lights,ஆயிரம் விளக்கு,suburb,13.058783,80.255711
+Pudupet,,neighbourhood,13.071202,80.26696
+Egmore,எழும்பூர்,suburb,13.072832,80.257691
+Island Grounds,தீவு மைதானம்,suburb,13.0742,80.279362
+Chepauk,சேப்பாக்கம்,suburb,13.064513,80.283118
+Chetpet,சேத்துப்பட்டு,suburb,13.071745,80.243797
+MRC Nagar,,suburb,13.019669,80.270652
+Saligramam,சாலிகிராமம்,suburb,13.058341,80.198533
+Aminjikarai,அமைந்தக்கரை,suburb,13.07214,80.220545
+Arumbakkam,அரும்பாக்கம்,suburb,13.074371,80.208131
+Anna Nagar,அண்ணா நகர்,suburb,13.0872,80.216442
+Padi,பாடி,suburb,13.103585,80.192042
+Villivakkam,வில்லிவாக்கம்,suburb,13.112588,80.208138
+ICF Colony,,suburb,13.099531,80.220238
+Perambur,பெரம்பூர்,suburb,13.112124,80.245022
+Sowcarpet,சௌகார்பேட்டை,neighbourhood,13.088497,80.278309
+Vallalar Nagar,வள்ளலார் நகர்,suburb,13.101926,80.278777
+Gandhinagar,காந்தி நகர்,neighbourhood,13.008993,80.253863
+Besant Nagar,பெசன்ட் நகர்,suburb,12.999691,80.268226
+Adyar,அடையாறு,suburb,13.00645,80.257779
+Little Mount,சின்னமலை,suburb,13.014186,80.226688
+Guindy,கிண்டி,suburb,13.00871,80.220365
+Thiruvanmiyur,திருவான்மியூர்,suburb,12.985895,80.264421
+Kotturpuram,கோட்டூர்புரம்,suburb,13.01937,80.243551
+Kannammapet,கண்ணம்மாபேட்டை,neighbourhood,13.032326,80.228078
+CIT Nagar,,neighbourhood,13.029384,80.234283
+Nagerkoyil Sudalaimuthu Krishnan Nagar,,neighbourhood,13.077751,80.216713
+Shenoy Nagar,ஷெனாய் நகர்,suburb,13.078667,80.227255
+Kilpauk,கீழ்ப்பாக்கம்,suburb,13.083215,80.237986
+George Town,முத்தியால்பேட்டை,suburb,13.092092,80.282243
+Park Town,பூங்கா நகர,suburb,13.086349,80.272732
+Royapuram,ராயபுரம்,suburb,13.114619,80.294028
+Vyasarpadi,வியாசர்பாடி,suburb,13.116973,80.257124
+Basin Bridge,பேசின் பிரிட்ஜ்,suburb,13.108047,80.269908
+Washermanpet,வண்ணாரப்பேட்டை,suburb,13.11363,80.281481
+Mannady,மண்ணடி,locality,13.095944,80.287101
+SIDCO Industrial Estate,சிட்கோ தொழிற்பேட்டை,suburb,13.01407,80.209121
+West Saidapet,மேற்கு சைதாப்பேட்டை,neighbourhood,13.025258,80.220424
+Todhunter Nagar,,neighbourhood,13.022615,80.230809
+Jothiammal Nagar,,neighbourhood,13.019511,80.228897
+East Tambaram,கிழக்கு தாம்பரம்,suburb,12.926515,80.131453
+Chromepet,குரோம்பேட்டை,suburb,12.949684,80.135642
+Pallavaram,பல்லாவரம்,suburb,12.965467,80.145118
+Selaiyur,சேலையூர்,suburb,12.918745,80.131117
+Chitlapakkam,சிட்லப்பாக்கம்,suburb,12.933098,80.141383
+Hasthinapuram,ஹஸ்தினாபுரம்,suburb,12.937282,80.151985
+Rajakilpakkam,ராஜகீழ்பாக்கம்,suburb,12.914585,80.157906
+Medavakkam,மேடவாக்கம்,suburb,12.922993,80.18829
+Perumbakkam,பெரும்பாக்கம்,suburb,12.90501,80.196863
+Sithalapakkam,சித்தாலப்பாக்கம்,suburb,12.891705,80.185113
+Sholinganallur,சோழிங்கநல்லூர்,suburb,12.893536,80.232063
+Madambakkam,மாதம்பாக்கம்,suburb,12.905719,80.154386
+Tiruneermalai,திருநீர்மலை,village,12.963094,80.113541
+Pammal,பம்மல்,suburb,12.973794,80.1408
+Adambakkam,ஆதம்பாக்கம்,suburb,12.982221,80.209121
+Irumbuliyur,இரும்புலியூர்,suburb,12.912203,80.108898
+Kasturibai Nagar,கஸ்தூரிபாய் நகர்,neighbourhood,13.004044,80.250938
+Indira Nagar,இந்திரா நகர்,locality,12.996315,80.25242
+Shastri Nagar,சாஸ்திரி நகர்,neighbourhood,12.998773,80.259912
+Kalakshetra Colony,,locality,12.993635,80.266422
+Thuraipakkam,துறைப்பாக்கம்,suburb,12.938553,80.237213
+Perungudi,பெருங்குடி,suburb,12.971024,80.241805
+Nehru Nagar Industrial Estate,நேரு நகர் தொழிற்பேட்டை,neighbourhood,12.974216,80.247542
+Venus Colony,வீனஸ் காலனி,neighbourhood,13.040107,80.25492
+Seethammal Colony,,neighbourhood,13.035959,80.253442
+Poes Garden,போயஸ் கார்டன்,neighbourhood,13.043707,80.253316
+Anna Nagar East,அண்ணா நகர் கிழக்கு,neighbourhood,13.085212,80.225889
+Anna Nagar West,அண்ணா நகர் மேற்கு,suburb,13.094079,80.192298
+Ayanavaram,அயனாவரம்,suburb,13.094616,80.23541
+Flower Bazaar,பூக்கடை,neighbourhood,13.089344,80.28197
+Kondithope,,locality,13.10004,80.279084
+Seven Wells,,locality,13.100569,80.282115
+Lock Nagar,,neighbourhood,13.066503,80.281598
+Ganapathy Colony,கணபதி காலனி,neighbourhood,13.050851,80.259732
+Ambattur,ಅಂಬತ್ತೂರು,suburb,13.119375,80.150765
+Mogappair East,முகப்பேர் கிழக்கு,suburb,13.083514,80.184078
+GingerBread,,locality,13.080216,80.173696
+Korattur,கொரட்டூர்,suburb,13.111548,80.184627
+Foreshore Estate,பட்டினம்பாக்கம்,suburb,13.024921,80.277687
+Srinagar Colony,ஸ்ரீநகர் காலனி,neighbourhood,13.013467,80.230278
+Nanganallur,நங்கநல்லூர்,suburb,12.980124,80.184902
+Madipakkam,மடிப்பாக்கம்,suburb,12.961135,80.200129
+Kannan Nagar,கண்ணன் நகர்,neighbourhood,12.969907,80.189316
+Balaji Nagar,பாலாஜி நகர்,neighbourhood,12.972164,80.190572
+Puzhuthivakkam,புழுதிவாக்கம்,suburb,12.969143,80.206263
+Ram Nagar,ராம் நகர்,neighbourhood,12.965356,80.211813
+Sadasiva Nagar,சதாசிவ நகர்,neighbourhood,12.965129,80.202854
+Ernavur,எர்ணாவூர்,suburb,13.189355,80.311138
+Tondiarpet,தண்டையார்பேட்டை,suburb,13.127767,80.289585
+Kodungaiyur,கொடுங்கையூர்,suburb,13.132753,80.244477
+Manali,மணலி,suburb,13.167227,80.259811
+Old Washermanpet,பழைய வண்ணாரப்பேட்டை,neighbourhood,13.112276,80.289381
+Tollgate,,neighbourhood,13.142953,80.295574
+Grace Garden,,neighbourhood,13.11809,80.291473
+Korukkupet,கோருக்குப்பெட்டை,suburb,13.121534,80.283791
+New Washermanpet,புதிய வண்ணாரப்பேட்டை,suburb,13.133866,80.290359
+Jeeva Nagar,ஜீவா நகர்,locality,13.139297,80.291589
+Cherian Nagar,,neighbourhood,13.138415,80.297156
+Kannadasan Nagar,கண்ணதாசன் நகர்,locality,13.129767,80.261954
+Muthamizh Nagar,முத்தமிழ் நகர்,locality,13.133472,80.249571
+Rajarathinam Colony,ராஜரத்தினம் காலனி,locality,13.128559,80.267649
+Chinna Kodungaiyur,சின்ன கொடுங்கையூர்,suburb,13.143822,80.250149
+MKB Nagar,,locality,13.122533,80.263137
+Pulianthope,புளியந்தோப்பு,suburb,13.100385,80.268312
+Vepery,வேப்பேரி,suburb,13.084295,80.262274
+Purasawalkam,புரசைவாக்கம்,suburb,13.089327,80.255033
+Sembiyam,,locality,13.122013,80.241216
+Agaram,அகரம்,locality,13.11586,80.230041
+GKM Colony,,locality,13.111915,80.220702
+SIDCO Nagar,சிட்கோ நகர்,locality,13.10756,80.200961
+Postal Colony,தபால் காலனி,neighbourhood,13.036329,80.219548
+United India Colony,யுனைடெட் இந்தியா காலனி,neighbourhood,13.051122,80.224758
+Maruthur Gopalan Ramachandran Nagar,மருதூர் கோபாலன் ராமச்சந்திரன் நகர்,locality,13.03412,80.19904
+Jafferkhanpet,ஜாஃபர்கான் பேட்டை,suburb,13.02994,80.205619
+Nesapakkam,நெசப்பாக்கம்,suburb,13.033619,80.187309
+Ramapuram,ராமாவரம்,suburb,13.029861,80.178033
+SBI Colony,எஸ்பிஐ காலனி,neighbourhood,13.053773,80.198937
+MMDA Colony,,locality,13.069389,80.21427
+Mehta Nagar,மேத்தா நகர்,neighbourhood,13.070378,80.226807
+NGO Colony,என்.ஜி.ஓ. காலனி,neighbourhood,13.064553,80.219964
+Moolakadai,மூலக்கடை,locality,13.129168,80.241699
+Poompuhar Nagar,பூம்புகார் நகர்,locality,13.093725,80.252797
+Periyar Nagar,பெரியார் நகர்,suburb,13.115167,80.223666
+Senthil Nagar,செந்தில் நகர்,neighbourhood,13.119687,80.135151
+Valasaravakkam,வளசரவாக்கம்,suburb,13.041016,80.172168
+Maduravoyal,மதுரவாயல்,suburb,13.060173,80.166599
+Nerkundram,நெற்குன்றம்,suburb,13.068839,80.183899
+Nandambakkam,நந்தம்பாக்கம்,suburb,13.016648,80.191188
+Manapakkam,மணப்பாக்கம்,suburb,13.014753,80.174493
+Mugalivakkam,முகலிவாக்கம்,village,13.02058,80.168516
+Madanandapuram,,locality,13.023516,80.153423
+Moulivakkam,மௌலிவாக்கம்,suburb,13.022269,80.141393
+Kolapakkam,கொளப்பாக்கம்,suburb,12.871914,80.104974
+Gerugambakkam,,suburb,13.015235,80.136854
+Tharapakkam,தாரபாக்கம்,village,12.994779,80.127102
+Rentakattalai,,locality,12.993857,80.116127
+Manancheri,,village,12.996802,80.108271
+Thandalam,தண்டலம்,village,13.00153,80.118201
+Kovur,கோவூர்,suburb,13.011362,80.120858
+Periyapanicheri,பெரியபனிசேரி,village,13.012402,80.133613
+Chinnapanicheri,சின்னபனிச்சேரி,village,13.019727,80.121863
+Paraniputhur,பரணிபுத்தூர்,village,13.022529,80.128496
+Thelliyaragaram,தேல்லியாகரம்,village,13.032247,80.142579
+Srinivasapuram,சீனிவாசபுரம்,village,13.032241,80.130739
+Ayappanthangal,ஐயப்பன்தாங்கல்,village,13.036543,80.1346
+Kattupakkam,காட்டுப்பாக்கம்,village,13.040055,80.124303
+Mangadu,மாங்காடு,suburb,13.031441,80.109658
+Chikkarayapuram,,village,13.016877,80.101038
+Aspiran Garden,,neighbourhood,13.08627,80.237039
+Kilpauk Garden,,neighbourhood,13.084541,80.231106
+Thiruverkadu,திருவேற்காடு,suburb,13.07277,80.120459
+Aziz Nagar,,neighbourhood,13.048697,80.228114
+Kamarajar Colony,காமராஜர் காலனி,neighbourhood,13.049974,80.220129
+Virugambakkam,விருகம்பாக்கம்,suburb,13.047543,80.192218
+Indira Colony,இந்திரா காலனி,locality,13.033131,80.210927
+Vannanthurai,,locality,12.996864,80.26161
+Lakshmi Hayagriva Nagar,,neighbourhood,12.985429,80.212138
+Karanodai,காரனோடை,village,13.248104,80.157848
+Tirusulam,திருசூலம்,suburb,12.973828,80.167078
+Bakhtavachalam Nagar,,neighbourhood,12.97786,80.179105
+Anakaputhur,அனகாபுத்தூர்,suburb,12.980616,80.129755
+Kamarajapuram,,locality,12.972442,80.121501
+Ottagapalayam,,locality,13.043309,80.213016
+Kumaran Colony,,locality,13.052779,80.207046
+Velayudam Colony,,neighbourhood,13.049755,80.202848
+Devaraj Nagar,தேவராஜ் நகர்,locality,13.05721,80.203358
+Ullagaram,உல்லகரம்,suburb,12.976587,80.19672
+Moovarasampettai,மூவரசம்பேட்டை,suburb,12.969366,80.183359
+Gemini,ஜெமினி,neighbourhood,13.052104,80.250007
+Ellaiamman Colony,,neighbourhood,13.046986,80.251936
+Evening Bazaar,,neighbourhood,13.084932,80.27872
+Sharma Nagar,,locality,13.122985,80.253303
+Raj Bhavan,ராஜ் பவன்,neighbourhood,13.00794,80.226399
+Kottivakkam,கொட்டிவாக்கம்,suburb,12.970505,80.261503
+Palavakkam,பாலவாக்கம்,suburb,12.95999,80.256027
+Neelankarai,நீலாங்கரை,suburb,12.945495,80.257469
+Vijaynagar,விஜயநகர்,neighbourhood,12.975743,80.220988
+Sunnambu Kulathur,,suburb,12.942737,80.196617
+Narayanapuram,,suburb,12.941797,80.208384
+Jalladampet,,suburb,12.919753,80.201692
+Karapakkam,காரப்பாக்கம்,suburb,12.911707,80.22772
+Injambakkam,ஈஞ்சம்பாக்கம்,suburb,12.918937,80.251295
+Uthandi,உத்தண்டி,suburb,12.868768,80.247209
+Vengaivasal Panchayat office,,locality,12.900024,80.171564
+Peerkankaranai,பீர்க்கன்கரணை,neighbourhood,12.908086,80.100982
+Navalur,நாவலூர்,suburb,12.84559,80.227222
+Agaram Then,அகரம் தென்,village,12.885731,80.153845
+Voltas Colony,வோல்டாஸ் காலனி,neighbourhood,12.974499,80.186368
+Union Carbide Colony,யூனியன் கார்பைட் காலனி,neighbourhood,12.97398,80.193148
+Kathivakkam,கத்திவாக்கம்,suburb,13.214181,80.31875
+Ennore,எண்ணூர்,suburb,13.225826,80.324355
+Thazhankuppam,தாழன்குப்பம்,village,13.227136,80.328155
+Keelkattalai,கீழ்க்கட்டள்ளை,suburb,12.954847,80.185269
+Santoshapuram,,suburb,12.915966,80.17399
+Gowriwakkam,கௌரிவாக்கம்,suburb,12.920759,80.161974
+Pazhavanthangal,பழவந்தாங்கல்,suburb,12.988352,80.189132
+Thillai Ganga Nagar,தில்லை கங்கா நகர்,neighbourhood,12.989843,80.193662
+Periamet,,neighbourhood,13.084414,80.269277
+Sriram Nagar,ஸ்ரீராம் நகர்,neighbourhood,13.003549,80.244317
+Valmiki Nagar,வால்மீகி நகர்,locality,12.98044,80.264558
+Sadanandapuram,,locality,12.897366,80.109712
+Nedumkundram,,locality,12.879344,80.109583
+Unamancherri,,locality,12.860232,80.107308
+Meenambakkam,மீனம்பாக்கம்,suburb,12.986601,80.172636
+Arunachalapuram,,neighbourhood,13.008735,80.260852
+Padmanabha Nagar,பத்மநாப நகர்,neighbourhood,13.004551,80.258729
+Karpagam Garden,கற்பகம் கார்டன்,neighbourhood,13.007178,80.261545
+Jeevarathinam Nagar,,neighbourhood,13.002057,80.260695
+Parameswari Nagar,பரமேஸ்வரி நகர்,neighbourhood,13.002787,80.258125
+Radhakrishnan Nagar,ராதாகிருஷ்ணன் நகர்,locality,12.994345,80.258691
+Trustpuram,டிரஸ்ட் புரம்,neighbourhood,13.055565,80.223336
+Chintadripet,சிந்தாதிரிப்பேட்டை,suburb,13.076126,80.270781
+Ezhil Nagar,,village,13.106084,80.122588
+Chinna Echankuzhi,,village,13.223057,80.272146
+Nappalayam,,village,13.220033,80.272378
+Mathur MMDA Colony,,locality,13.170512,80.248069
+Madhavaram Milk Colony,மாதவரம் பால் காலனி,suburb,13.155408,80.242525
+Madhavaram,மாதவரம்,suburb,13.142931,80.232517
+Kosappur,கொசப்பூர்,village,13.18183,80.235098
+Chettimedu,,hamlet,13.18339,80.22881
+Taramani,தரமணி,suburb,12.984907,80.240407
+Kadaperi,,locality,12.93431,80.121504
+Kannadapalayam,கன்னடபாளையம்,village,12.936402,80.101642
+Kumananchavadi,,locality,13.045625,80.115391
+Alapakkam,அலப்பாக்கம்,suburb,13.049901,80.165435
+Oriole,,locality,12.873639,80.132597
+Vengambakkam,,locality,12.867818,80.127327
+Rathinamangalam,இரத்தினமங்கலம்,village,12.858527,80.131642
+Kandigai,கண்டிகை,village,12.849503,80.140273
+Doveton,,neighbourhood,13.087322,80.258079
+Ganesh Nagar,கணேஷ் நகர்,locality,12.979411,80.258162
+Devendra Nagar,தேவேந்திர நகர்,neighbourhood,12.978757,80.25546
+PTC Colony,,neighbourhood,12.976383,80.256519
+AGS Colony,,neighbourhood,12.974592,80.256433
+Srinivasa Nagar,,neighbourhood,12.9503,80.246967
+Tiruvalluvar Nagar,திருவள்ளுவர் நகர்,neighbourhood,13.018147,80.245819
+Nava Bharath Colony,நவ பரத் காலனி,neighbourhood,12.990005,80.266667
+Teachers Colony,,locality,12.983369,80.266185
+Bakthavatchalam Nagar,,neighbourhood,13.003406,80.253094
+Venkateswara Nagar,வெங்கடேஸ்வரா நகர்,neighbourhood,13.00328,80.262057
+Damodarapuram,,neighbourhood,13.001807,80.262981
+Vinoba Nagar,,locality,12.913917,80.128336
+Kovilanchery,கோவிலஞ்சேரி,village,12.880995,80.168806
+Ponmar,பொன்மார்,village,12.857482,80.171938
+Bhuvaneshwari Nagar,,locality,12.9053,80.149451
+Noothanchery,நூதன்சேரி,village,12.896398,80.172985
+Ottiambakkam,ஒட்டியம்பாக்கம்,village,12.861072,80.191851
+Karanai,,hamlet,12.857327,80.200534
+Siruseri,சிறுசேரி,village,12.835026,80.203109
+Veerabadhra Nagar,,neighbourhood,12.906255,80.189014
+Thazhambur,,hamlet,12.849166,80.208983
+Gangai Nagar,கங்கை நகர்,neighbourhood,12.983525,80.215924
+Gangaiamman Nagar,,locality,13.074301,80.179458
+Dwaraka Nagar Phase I,,locality,13.194938,80.272449
+Dwaraka Nagar Phase II,,locality,13.194604,80.278758
+Saidayankuppam,சைதையாங்குப்பம்,suburb,13.185479,80.292431
+Mattankuppam,மட்டன்குப்பம்,neighbourhood,13.05672,80.279743
+Rail Nagar,ரயில் நகர்,locality,13.076594,80.190331
+Venkatraman Nagar,வெங்கட்ராமன் நகர்,locality,12.938144,80.148795
+Dhanalkshmi Colony,,locality,13.054927,80.205467
+Choolai,சூலை,suburb,13.090628,80.262142
+Jamalaya Nagar,,locality,13.106081,80.248707
+Kannigapuram,,locality,13.107125,80.263442
+Mettupalayam,மேட்டுப்பாளையம்,village,13.2299,80.21338
+Ekangipuram,,locality,13.104352,80.244348
+Kosapet,,locality,13.093935,80.254791
+Otteri,ஓட்டேரி,suburb,13.096958,80.248722
+Sholavaram,சோழவரம்,suburb,13.238777,80.162218
+Kamavarpalayam,,village,13.245685,80.169452
+Orakadu,,village,13.241105,80.185454
+Budur,,village,13.238233,80.200543
+Marampedu,,hamlet,13.23011,80.210097
+Arumandhai,,village,13.229358,80.222814
+Pudupakkam,,hamlet,13.242356,80.216452
+Mapushkanpet,,hamlet,13.247616,80.21662
+Sozhipalayam,,village,13.234842,80.173307
+Vichoor,,village,13.218467,80.245762
+Kodipallam,,hamlet,13.234884,80.22783
+Mullaioval,,hamlet,13.245682,80.235565
+Periya mullaivoyal,,hamlet,13.242158,80.239748
+Vellivoyal,,village,13.226212,80.256885
+Thirunillai,,hamlet,13.233632,80.236046
+Angadu,,hamlet,13.227222,80.186976
+Siruniam,சிருனியம்,village,13.223516,80.173403
+Kummanur,,village,13.220228,80.197402
+Perungavoor,,hamlet,13.216395,80.220227
+Red Hills,செங்குன்றம்,suburb,13.192279,80.183766
+Lakshmipuram,இலட்சுமிபுரம்,village,13.177055,80.156527
+Kollumedu,கொள்ளுமேடு,village,13.163424,80.115406
+Arikkambedu,ஆரிக்கம்பேடு,village,13.161004,80.129012
+Vellanur,வெள்ளனூர்,village,13.157876,80.101583
+Alamadhi,அலமாதி,village,13.209838,80.110122
+Upparipalayam,,village,13.203724,80.137438
+Kovilpadagai,,locality,13.137659,80.102028
+Pallipuram,,village,13.245742,80.26164
+Vellaiveyil Chavadi,,village,13.230193,80.273442
+Kandakarai,,village,13.236802,80.274738
+Gounderpalayam,கவுண்டர்பாளையம்,village,13.242909,80.272781
+Vellankulam,,village,13.206117,80.257306
+Sirungavoor,,hamlet,13.209201,80.216398
+Kannampalayam,கண்ணம்பாளையம்,village,13.201563,80.225411
+Darkas,,village,13.20132,80.212846
+Singilimedu,,hamlet,13.206501,80.21197
+Vilangadupakkam,,hamlet,13.197936,80.219103
+Alinjivakkam,அழிஞ்சிவாக்கம்,village,13.192621,80.198632
+Tharachand Nagar,,locality,13.054056,80.195338
+Mahaveer Colony,மஹாவீர் காலனி,neighbourhood,13.082917,80.261558
+Chinmaya Nagar,சின்மயா நகர்,locality,13.062214,80.199184
+Karianchavadi,,locality,13.047152,80.110794
+New Erumaivettipalayam,,village,13.241383,80.120562
+Urur Kuppam,,neighbourhood,13.004176,80.273289
+Kaveri Rangan Colony,காவேரி ரங்கன் காலனி,neighbourhood,13.053764,80.201233
+Seethammal Colony Extension,,neighbourhood,13.034499,80.247447
+Kalaimagal Nagar,,locality,13.02529,80.205427
+Defence Colony,,locality,13.022007,80.199503
+Sundar Nagar,சுந்தர் நகர்,locality,13.016778,80.198731
+Ekkattuthangal,ஈக்காட்டுத்தாங்கல்,suburb,13.024245,80.206551
+Ambal Nagar,அம்பாள் நகர்,locality,13.018353,80.20445
+Navaratna Gardens,,locality,13.023086,80.201086
+Burma Colony,பர்மா காலனி,locality,13.028268,80.196276
+Achutan Nagar,,locality,13.020278,80.201026
+Vasudevan Nagar,வாசுதேவன் நகர்,locality,13.028288,80.206826
+Saptagiri Colony,,locality,13.030053,80.202577
+Y Block,,locality,13.086877,80.211665
+W Block,,neighbourhood,13.08667,80.2165
+X Block,,locality,13.087511,80.214028
+Q Block,,locality,13.091406,80.216724
+R Block,,locality,13.091454,80.214196
+S Block,,locality,13.091534,80.211908
+V Block,,locality,13.089614,80.211924
+U Block,,locality,13.089518,80.21418
+T Block,,neighbourhood,13.089406,80.216516
+E Block,,neighbourhood,13.086926,80.219444
+F Block,,neighbourhood,13.08683,80.221636
+Labour Colony,,neighbourhood,13.015472,80.209408
+Bharathidasan Colony,பாரதிதாசன் காலனி,locality,13.033573,80.204406
+Nehru Nagar,நேரு நகர்,neighbourhood,13.215933,80.318729
+Kellys,,neighbourhood,13.082819,80.243328
+Lotus Colony,,neighbourhood,13.029642,80.240377
+Nandanam Extension,,neighbourhood,13.028186,80.243314
+Ganesapuram,கணேசபுரம்,neighbourhood,13.030853,80.245009
+Sector 10 Shanthiniketan Colony,,locality,13.04285,80.194905
+Sector 9 Santosh Colony,,locality,13.042816,80.195834
+Sector 4 Rajamannar Colony,,locality,13.041976,80.200522
+Sector 3,,locality,13.041527,80.203687
+Sector 2,,locality,13.039379,80.202989
+Sector 5 Goutham Colony,,locality,13.039717,80.200887
+Sector 8,,locality,13.040186,80.197688
+Sector 11,,locality,13.040635,80.194506
+Sector 1 Sowbaghya Colony,,locality,13.037499,80.202658
+Sector 6 Sangeetha Colony,,locality,13.037779,80.199858
+Sector 7 Kamadhenu Colony,,locality,13.038144,80.197329
+Sector 12,,locality,13.038575,80.194279
+Sector 13,,locality,13.041004,80.20756
+Sector 14,,locality,13.044083,80.206491
+Paari Nagar,பாரி நகர்,locality,13.027895,80.209076
+Tiruvottiyur,திருவொற்றியூர்,suburb,13.156387,80.300528
+Kannagi Nagar,கண்ணகி நகர்,neighbourhood,12.927645,80.239667
+Dr Ambedkar Nagar,டாக்டர் அம்பேத்கர் நகர்,neighbourhood,12.990055,80.207484
+Maduvankarai,,locality,13.002022,80.210656
+AGS Officers Colony,,neighbourhood,12.97897,80.209705
+Kannapalayam,,village,13.090793,80.100367
+Sundaram Shozhapuram,,village,13.08143,80.11452
+Kolladi,கோலடி,village,13.086408,80.140624
+Alwarthirunagar,ஆழ்வார்திருநகர்,locality,13.047486,80.183669
+Ayanambakkam,அயனம்பாக்கம்,village,13.074888,80.154992
+Athipet,ஆதிபேட்டை,village,13.092043,80.154451
+Baba Nagar,பாபா நகர்,locality,13.117217,80.203117
+Rajan Nagar,ராஜன் நகர்,locality,13.12265,80.207065
+Jayaram Nagar,ஜெயராம் நகர்,locality,13.121647,80.209752
+SRB Nagar,,locality,13.118638,80.201512
+North Jagannatha Nagar,,locality,13.11241,80.202242
+South Jagannatha Nagar,,locality,13.109819,80.202113
+Rajaji Nagar,இராஜாஜி நகர்,locality,13.111516,80.211606
+Kolathur,கொளத்தூர்,suburb,13.124113,80.204628
+Mahatma Gandhi Nagar,மகாத்மா காந்தி நகர்,locality,13.126971,80.211194
+Ayapakkam,அயப்பாக்கம்,suburb,13.103264,80.132508
+Venkatapuram,வெங்கடபுரம்,suburb,13.121015,80.150829
+Menambedu,,locality,13.123021,80.165609
+Pari Nagar,பாரி நகர்,locality,13.117404,80.16306
+Prithvipakkam,,locality,13.118699,80.158811
+Tirumullaivoyal,திருமுல்லைவாயல்,suburb,13.129869,80.132722
+Parvathi Nagar,பார்வதி நகர்,locality,13.145756,80.249642
+Chettinad Enclave,,locality,12.941661,80.201967
+Maxworth Nagar,,locality,12.943873,80.199635
+Nookampalayam,,hamlet,12.88426,80.20203
+Ariyalur,அரியலூர்,village,13.191872,80.250742
+Theyampakkam,,hamlet,13.195058,80.23226
+Kanniyampettai,,village,13.192708,80.2557
+Gandhi Nagar,காந்தி நகர்,neighbourhood,13.041268,80.187183
+KK Nagar,கே.கே.நகர்,locality,13.195393,80.161027
+Konniyamedu,,village,13.189,80.155482
+Pothur,,village,13.157644,80.155825
+Mupparapalayam,,village,13.157635,80.137998
+Pammadukulam,,village,13.168968,80.162846
+Old Erumaivettipalayam,,village,13.228124,80.128407
+Madanankuppam,,locality,13.136075,80.190008
+Jeth Nagar,,neighbourhood,13.027831,80.262238
+Kesavaperumalpuram,,neighbourhood,13.021125,80.254118
+Kottur Gardens,,neighbourhood,13.020631,80.244128
+Varadapuram,,neighbourhood,13.015421,80.245999
+PVS Nagar,,neighbourhood,12.947607,80.242015
+Shakti Nagar,,locality,12.944972,80.240633
+Secretariat Colony,,neighbourhood,13.08945,80.24282
+Metukuppam,,neighbourhood,12.93654,80.237423
+Pebble Beach,,locality,12.900092,80.254284
+Puzhal,புழல்,suburb,13.163649,80.203807
+Esplanade,,locality,13.089135,80.285188
+Lloyds Colony,,neighbourhood,13.049074,80.271599
+Sundarapuram,,locality,13.096959,80.266632
+VOC Nagar,,locality,13.105469,80.262158
+Venkatesapuram,,locality,13.10851,80.264024
+Narasimha Nagar,,neighbourhood,13.104776,80.266189
+Thiruvalluvar Nagar,,neighbourhood,12.96261,80.247467
+Officers Colony,,neighbourhood,13.070316,80.228295
+Avvai Thiru Nagar,அவ்வை திரு நகர்,locality,13.063872,80.191865
+IAS Officers Colony,,locality,13.013385,80.180194
+Kamraj nagar,,locality,12.98393,80.257283
+Ernavur Gate,,locality,13.184926,80.312643
+Pallikaranai,பள்ளிக்கரணை,suburb,12.930475,80.207769
+Nemilichery,நெமிலிச்சேரி,suburb,12.946043,80.163715
+Assisi Nagar,,locality,13.16461,80.233
+Mathur,மாத்தூர்,suburb,13.167864,80.243692
+Kuberan Nagar,,neighbourhood,12.957493,80.206235
+Vanagaram,வானகரம்,suburb,13.060441,80.153345
+Collector Nagar,,locality,13.088494,80.190971
+Dwaraka Nagar,,suburb,13.19413,80.274275
+Sheela Nagar,,neighbourhood,12.96505,80.202075
+Ramalinga Nagar,,neighbourhood,12.967594,80.205851
+Jayachandran Nagar,ஜெயச்சந்திரன் நகர்,suburb,12.921633,80.198788
+Isha Garden,,neighbourhood,12.913822,80.202028
+Avvai Nagar,,neighbourhood,12.977378,80.253883
+Elango Nagar,,locality,12.971554,80.252379
+Govindaswamy Nagar,,neighbourhood,12.96857,80.245916
+Sangam Colony,,neighbourhood,12.967386,80.25582
+Venkateshpuram,,neighbourhood,12.968983,80.252397
+Edayanchavadi,இடையன்சாவடி,suburb,13.21698,80.285017
+Kadapakkam,,suburb,13.198491,80.265252
+Karampakkam,காரம்பாக்கம்,suburb,13.039438,80.153562
+Kathirvedu,கதிர்வேடு,suburb,13.148721,80.203556
+Nolambur,நொளம்பூர்,suburb,13.074718,80.168221
+Puthagaram,புத்தகரம்,suburb,13.134623,80.197848
+Surapattu,சூரப்பட்டு,suburb,13.144693,80.185025
+Vadaperumbakkam,வடபெரும்பாக்கம்,village,13.175714,80.218773
+Payasumbakkam,,village,13.186675,80.217957
+Swaminathan Nagar,,neighbourhood,12.971352,80.254342
+Kandaswamy Nagar,,neighbourhood,12.966178,80.254818
+NATCO Colony,,neighbourhood,12.97073,80.257008
+Kannappa Nagar,,neighbourhood,12.975555,80.256908
+Karpagambal Nagar,,locality,12.973664,80.259637
+Natesan Colony,,neighbourhood,12.973094,80.256686
+Kaveri Nagar,காவேரி நகர்,locality,12.970304,80.263756
+Palkalai Nagar,,locality,12.965504,80.259273
+Venkateshwara Nagar,வெங்கடேஸ்வரா நகர்,locality,12.96737,80.260631
+Lakshmanaperumal Nagar,,locality,12.971698,80.261648
+DGI Layout,,locality,12.967891,80.259011
+New Colony,,neighbourhood,12.98271,80.232297
+Judge's Colony,,neighbourhood,12.97596,80.248175
+MGR Nagar,எம்.ஜி.ஆர் நகர்,neighbourhood,12.979583,80.249444
+Venkateshwara Nagar Colony,வெங்கடேஸ்வரா நகர் காலனி,neighbourhood,12.976997,80.244625
+Meenava Kuppam,,locality,12.967702,80.264945
+Tirumalai Nagar,திருமலை நகர்,neighbourhood,12.971804,80.245578
+Jayendra Colony,ஜெயேந்திர காலனி,neighbourhood,12.969828,80.248232
+Sri Krishna Enclave,ஸ்ரீ கிருஷ்ணா என்கிளேவ்,locality,12.972542,80.265066
+Vikram Sarabhai Industrial Estate,விக்ரம் சாராபாய் தொழிற்பேட்டை,neighbourhood,12.980955,80.250875
+Banu Nagar,பானு நகர்,locality,13.133675,80.159152
+Oragadam,ஒரகடம்,locality,13.130791,80.152914
+Madura Kali Nagar,,neighbourhood,12.958032,80.193832
+VGP Santhanammal Nagar,,locality,12.92128,80.168902
+Heritage Jayendra Nagar,,hamlet,12.934602,80.165126
+Vaniya Teynampet,,neighbourhood,13.038989,80.248111
+"Central Government Officers Quarters, General Pool Accomodation",,neighbourhood,13.002196,80.265283
+Karthikeyapuram,,neighbourhood,12.962594,80.194524
+Park Square colony,,neighbourhood,12.965665,80.193486
+Pozhichalur,பொழிச்சலூர்,suburb,12.99053,80.14405
+Senneerkuppam,செந்நீர்குப்பம்,village,13.050174,80.119318
+Thiruverkadu Co - Operative Nagar,,locality,13.057835,80.125675
+Poompozhil Nagar,,suburb,13.13905,80.112454
+HVF Estate,,neighbourhood,13.134223,80.108452
+Skylab Avenue,,neighbourhood,12.891965,80.184121
+Zam Bazaar,,neighbourhood,13.059296,80.271022
+Karpagam Avenue,,neighbourhood,13.021979,80.26783
+West Mambalam,மேற்கு மாம்பலம்,suburb,13.04283,80.227018
+Ganga Enclave,,locality,13.054207,80.221703
+Ramakrishna Nagar,ராமகிருஷ்ணா நகர்,neighbourhood,13.024366,80.261062
+SSM Nagar,,locality,12.891918,80.119397
+NCBS Colony,,neighbourhood,12.985463,80.189696
+Malar Colony,,neighbourhood,13.097796,80.198932
+Thiruvengada Nagar,திருவேங்கட நகர்,suburb,13.117394,80.14527
+AA Block,,neighbourhood,13.083498,80.216474
+AB Block,,neighbourhood,13.083593,80.214115
+AC Block,,neighbourhood,13.083715,80.211354
+Nanmangalam,நன்மங்கலம்,suburb,12.938216,80.178248
+Baby Nagar,பேபி நகர்,neighbourhood,12.980365,80.229195
+Dandhesswaram,,neighbourhood,12.982639,80.224188
+Seethapathy Nagar,,neighbourhood,12.981951,80.227033
+Seshadripuram,,neighbourhood,12.979839,80.230669
+Seva Nagar Velachery,,neighbourhood,12.986411,80.229321
+Sony Nagar,சோனி நகர்,neighbourhood,12.98651,80.227991
+Tansi Nagar,டான்சி நகர்,neighbourhood,12.977458,80.223447
+Udhayam Nagar,உதயம் நகர்,neighbourhood,12.979168,80.23217
+Bhuvaneswary Nagar,,neighbourhood,12.96991,80.221953
+VGP Selva Nagar,,neighbourhood,12.971222,80.221103
+JagannathaPuram,,neighbourhood,12.984682,80.221892
+Rajalakshmi Nagar,,neighbourhood,12.985288,80.218743
+Vaishnavi Nagar,வைஷ்ணவி நகர்,neighbourhood,13.125104,80.127916
+Anis Nagar,,neighbourhood,13.037274,80.188148
+Annai Sathya Nagar Nesapakkam,,neighbourhood,13.035716,80.188453
+Indra Nagar,,neighbourhood,13.03708,80.188721
+Kothari Nagar,கோத்தாரி நகர்,neighbourhood,13.035212,80.185102
+Moogambigai Nagar,,neighbourhood,13.037242,80.185137
+Om Sakthi Nagar,ஓம் சக்தி நகர்,neighbourhood,13.03802,80.186739
+Senthamizh Nagar,செந்தமிழ் நகர்,neighbourhood,13.034764,80.187437
+Sri Ragavendra Nagar,ஸ்ரீ ராகவேந்தரா நகர்,neighbourhood,13.03673,80.186351
+Chowdhary Nagar,,neighbourhood,13.038686,80.180934
+Janaki Nagar,ஜானகி நகர்,neighbourhood,13.04017,80.182073
+Majestic Colony,மெஜஸ்டிக் காலனி,neighbourhood,13.038548,80.179985
+Sri Laxmi Nagar,ஸ்ரீ லக்ஷ்மி நகர்,neighbourhood,13.036349,80.18065
+Suresh Nagar,சுரேஷ் நகர்,neighbourhood,13.037627,80.182819
+Thirumalai Nagar,திருமலை நகர்,neighbourhood,13.036704,80.182904
+Alwarthiru Nagar,,neighbourhood,13.040733,80.185966
+Veerappa Nagar,வீரப்பா நகர்,neighbourhood,13.042342,80.18525
+Mukti Enclave,,locality,13.017131,80.177263
+Uranus Apartments,,neighbourhood,13.028598,80.132749
+Sakthi Nagar,சக்தி நகர்,locality,13.124337,80.129487
+St. Thomas Mount Cantonment,,suburb,13.006022,80.196728
+Nesamani Nagar,,suburb,13.135509,80.116532
+TVS Green Hills,,locality,12.8907,80.112462
+Alappakam,,locality,12.892563,80.116699
+Reserve Bank Staff Quarters,,quarter,13.07855,80.239163
+Pudur,,locality,13.129821,80.159213
+Kaladipet,,neighbourhood,13.151597,80.298777
+Nanganallur Co-op Society Colony,,neighbourhood,12.98796,80.190591
+Thiru Vi Ka Nagar,,suburb,13.110337,80.263388
+Arul Nagar,,neighbourhood,12.907466,80.111262
+Bharathiyar Nagar,பாரதியார் நகர்,neighbourhood,13.185809,80.315551
+All India Radio Housing Board,,neighbourhood,13.187209,80.312303
+Old Pallavaram,பழைய பல்லாவரம்,suburb,12.963304,80.166539
+Moolakothalam,,neighbourhood,13.106734,80.276481
+GOCHS Colony,ஜிஓசிஹெச்எஸ் காலனி,neighbourhood,12.997872,80.269171
+Mambakkam,மாம்பாக்கம்,village,12.835619,80.169098
+Keezhakottaiyur,கீழக்கொட்டையூர்,village,12.842479,80.150937
+Melakottaiyur,மேலக்கோட்டையூர்,village,12.846409,80.148124
+Government Estate,,neighbourhood,13.067361,80.276799
+Stanley Nagar,,neighbourhood,13.109268,80.272188
+Serene Avenue,,neighbourhood,12.860759,80.171097
+Panaiyur,பனையூர்,suburb,12.887855,80.245198
+Bharathipuram,,neighbourhood,13.077665,80.222254
+Thiyagaraya Nagar,,suburb,13.034405,80.23016
+Sivakami Nagar,,neighbourhood,13.197653,80.317299
+Kamatchi Nagar,,neighbourhood,12.944583,80.215865
+Kamakoti Nagar,,neighbourhood,12.941036,80.213268
+TNHB Colony,டீஎன்ஹெச்பி காலனி,neighbourhood,12.99142,80.212059
+Sai Nagar,,neighbourhood,12.95163,80.234471
+VGN Grandeur,,neighbourhood,13.028382,80.135503
+K.K.Nagar,,suburb,13.040724,80.199211
+Kargil Nagar,,suburb,13.173019,80.292241
+Nazarethpuram,,suburb,13.012641,80.198992
+Thirumangalam,,quarter,13.083529,80.195681
+"Krishna Nagar, Periyar Road",,neighbourhood,13.015122,80.172141
+Rajeswari Nagar,,neighbourhood,12.923971,80.140923
+S and P Garden,,neighbourhood,13.066868,80.163494
+Velachery,வேளச்சேரி,suburb,12.980724,80.21891
+CMWSSB Division 200,,neighbourhood,12.865696,80.225729
+CMWSSB Division 199,,neighbourhood,12.8692,80.24288
+CMWSSB Division 198,,neighbourhood,12.891091,80.232528
+CMWSSB Division 197,,neighbourhood,12.90656,80.228426
+CMWSSB Division 196,,neighbourhood,12.922361,80.250423
+CMWSSB Division 195,,neighbourhood,12.926277,80.235774
+CMWSSB Division 194,,neighbourhood,12.935989,80.237422
+CMWSSB Division 193,,neighbourhood,12.944633,80.241141
+CMWSSB Division 192,,neighbourhood,12.948101,80.255081
+CMWSSB Division 191,,neighbourhood,12.918755,80.202424
+CMWSSB Division 190,,neighbourhood,12.925076,80.210134
+CMWSSB Division 189,,neighbourhood,12.947102,80.218538
+CMWSSB Division 188,,neighbourhood,12.953684,80.204077
+CMWSSB Division 187,,neighbourhood,12.962685,80.193012
+CMWSSB Division 186,,neighbourhood,12.958868,80.238772
+CMWSSB Division 185,,neighbourhood,12.962234,80.253907
+CMWSSB Division 184,,neighbourhood,12.969383,80.238324
+CMWSSB Division 183,,neighbourhood,12.973313,80.254583
+CMWSSB Division 182,,neighbourhood,12.980851,80.260959
+CMWSSB Division 181,,neighbourhood,12.989987,80.263797
+CMWSSB Division 180,,neighbourhood,12.987258,80.244506
+CMWSSB Division 179,,neighbourhood,12.977351,80.226118
+CMWSSB Division 178,,neighbourhood,12.978262,80.216255
+CMWSSB Division 177,,neighbourhood,12.987243,80.211105
+CMWSSB Division 176,,neighbourhood,13.003635,80.266171
+CMWSSB Division 175,,neighbourhood,13.002534,80.253218
+CMWSSB Division 174,,neighbourhood,12.99744,80.225452
+CMWSSB Division 173,,neighbourhood,13.018754,80.263153
+CMWSSB Division 172,,neighbourhood,13.010837,80.243893
+CMWSSB Division 171,,neighbourhood,13.018864,80.231213
+CMWSSB Division 170,,neighbourhood,13.017874,80.211822
+CMWSSB Division 169,,neighbourhood,12.971272,80.202539
+CMWSSB Division 168,,neighbourhood,12.977806,80.195568
+CMWSSB Division 167,,neighbourhood,12.977203,80.186315
+CMWSSB Division 166,,neighbourhood,12.978371,80.179145
+CMWSSB Division 165,,neighbourhood,12.982864,80.199788
+CMWSSB Division 164,,neighbourhood,12.987362,80.186973
+CMWSSB Division 163,,neighbourhood,12.99073,80.201476
+CMWSSB Division 162,,neighbourhood,12.991405,80.192036
+CMWSSB Division 161,,neighbourhood,12.996707,80.202156
+CMWSSB Division 160,,neighbourhood,13.00425,80.208089
+CMWSSB Division 159,,neighbourhood,12.992477,80.169601
+CMWSSB Division 158,,neighbourhood,13.016378,80.187452
+CMWSSB Division 157,,neighbourhood,13.012884,80.174381
+CMWSSB Division 156,,neighbourhood,13.019464,80.160972
+CMWSSB Division 155,,neighbourhood,13.030095,80.183374
+CMWSSB Division 154,,neighbourhood,13.029879,80.176934
+CMWSSB Division 153,,neighbourhood,13.028063,80.156331
+CMWSSB Division 152,,neighbourhood,13.040551,80.179113
+CMWSSB Division 151,,neighbourhood,13.03178,80.16507
+CMWSSB Division 150,,neighbourhood,13.037607,80.153492
+CMWSSB Division 149,,neighbourhood,13.047228,80.178593
+CMWSSB Division 148,,neighbourhood,13.056893,80.183901
+CMWSSB Division 147,,neighbourhood,13.051876,80.170891
+CMWSSB Division 146,,neighbourhood,13.052,80.164445
+CMWSSB Division 145,,neighbourhood,13.065872,80.185124
+CMWSSB Division 144,,neighbourhood,13.064553,80.174578
+CMWSSB Division 143,,neighbourhood,13.073673,80.168858
+CMWSSB Division 142,,neighbourhood,13.021627,80.220026
+CMWSSB Division 141,,neighbourhood,13.030819,80.232467
+CMWSSB Division 140,,neighbourhood,13.030299,80.221606
+CMWSSB Division 139,,neighbourhood,13.02693,80.214703
+CMWSSB Division 138,,neighbourhood,13.031365,80.203898
+CMWSSB Division 137,,neighbourhood,13.035965,80.195513
+CMWSSB Division 136,,neighbourhood,13.041099,80.2363
+CMWSSB Division 135,,neighbourhood,13.040058,80.224
+CMWSSB Division 134,,neighbourhood,13.049064,80.224694
+CMWSSB Division 133,,neighbourhood,13.041686,80.218712
+CMWSSB Division 132,,neighbourhood,13.038866,80.212816
+CMWSSB Division 131,,neighbourhood,13.041117,80.202769
+CMWSSB Division 130,,neighbourhood,13.053556,80.212985
+CMWSSB Division 129,,neighbourhood,13.052918,80.203323
+CMWSSB Division 128,,neighbourhood,13.045586,80.19179
+CMWSSB Division 127,,neighbourhood,13.067523,80.199977
+CMWSSB Division 126,,neighbourhood,13.025912,80.268814
+CMWSSB Division 125,,neighbourhood,13.03575,80.27574
+CMWSSB Division 124,,neighbourhood,13.035578,80.267549
+CMWSSB Division 123,,neighbourhood,13.031175,80.25699
+CMWSSB Division 122,,neighbourhood,13.02889,80.246745
+CMWSSB Division 121,,neighbourhood,13.043922,80.272067
+CMWSSB Division 120,,neighbourhood,13.049767,80.276006
+CMWSSB Division 119,,neighbourhood,13.046359,80.264312
+CMWSSB Division 118,,neighbourhood,13.046303,80.255492
+CMWSSB Division 117,,neighbourhood,13.043069,80.240245
+CMWSSB Division 116,,neighbourhood,13.054395,80.278025
+CMWSSB Division 114,,neighbourhood,13.062653,80.279578
+CMWSSB Division 113,,neighbourhood,13.055152,80.241118
+CMWSSB Division 112,,neighbourhood,13.058895,80.224757
+CMWSSB Division 110,,neighbourhood,13.061398,80.238091
+CMWSSB Division 109,,neighbourhood,13.063094,80.227249
+CMWSSB Division 108,,neighbourhood,13.063626,80.217349
+CMWSSB Division 107,,neighbourhood,13.072465,80.240134
+CMWSSB Division 106,,neighbourhood,13.07101,80.222843
+CMWSSB Division 105,,neighbourhood,13.068023,80.20967
+CMWSSB Division 104,,neighbourhood,13.082475,80.248563
+CMWSSB Division 103,,neighbourhood,13.082016,80.24033
+CMWSSB Division 102,,neighbourhood,13.08381,80.228186
+CMWSSB Division 101,,neighbourhood,13.085525,80.220518
+CMWSSB Division 100,,neighbourhood,13.088311,80.209729
+CMWSSB Division 99,,neighbourhood,13.086196,80.203107
+CMWSSB Division 98,,neighbourhood,13.091103,80.238072
+CMWSSB Division 97,,neighbourhood,13.093819,80.227497
+CMWSSB Division 96,,neighbourhood,13.10273,80.228035
+CMWSSB Division 95,,neighbourhood,13.101414,80.205832
+CMWSSB Division 94,,neighbourhood,13.110405,80.20261
+CMWSSB Division 93,,neighbourhood,13.079966,80.189684
+CMWSSB Division 92,,neighbourhood,13.080424,80.178748
+CMWSSB Division 91,,neighbourhood,13.081328,80.171346
+CMWSSB Division 90,,neighbourhood,13.086623,80.193566
+CMWSSB Division 89,,neighbourhood,13.091131,80.18498
+CMWSSB Division 88,,neighbourhood,13.096204,80.190301
+CMWSSB Division 87,,neighbourhood,13.09496,80.182935
+CMWSSB Division 86,,neighbourhood,13.091921,80.160931
+CMWSSB Division 85,,neighbourhood,13.106241,80.157224
+CMWSSB Division 84,,neighbourhood,13.106666,80.179608
+CMWSSB Division 83,,neighbourhood,13.123568,80.188463
+CMWSSB Division 82,,neighbourhood,13.12817,80.1689
+CMWSSB Division 81,,neighbourhood,13.119734,80.15151
+CMWSSB Division 80,,neighbourhood,13.131605,80.159166
+CMWSSB Division 79,,neighbourhood,13.132145,80.152232
+CMWSSB Division 78,,neighbourhood,13.090193,80.261647
+CMWSSB Division 77,,neighbourhood,13.09529,80.267481
+CMWSSB Division 76,,neighbourhood,13.0966,80.258319
+CMWSSB Division 75,,neighbourhood,13.09453,80.251858
+CMWSSB Division 74,,neighbourhood,13.092366,80.245863
+CMWSSB Division 73,,neighbourhood,13.101248,80.259596
+CMWSSB Division 71,,neighbourhood,13.102756,80.247373
+CMWSSB Division 72,,neighbourhood,13.103171,80.266742
+CMWSSB Division 70,,neighbourhood,13.108974,80.251497
+CMWSSB Division 69,,neighbourhood,13.112576,80.240853
+CMWSSB Division 68,,neighbourhood,13.1194,80.237162
+CMWSSB Division 67,,neighbourhood,13.11217,80.225808
+CMWSSB Division 66,,neighbourhood,13.11848,80.226157
+CMWSSB Division 65,,neighbourhood,13.12034,80.210752
+CMWSSB Division 64,,neighbourhood,13.123836,80.21592
+CMWSSB Division 61,,neighbourhood,13.070978,80.258298
+CMWSSB Division 60,,neighbourhood,13.084413,80.289149
+CMWSSB Division 59,,neighbourhood,13.077692,80.277857
+CMWSSB Division 58,,neighbourhood,13.084316,80.264554
+CMWSSB Division 57,,neighbourhood,13.092618,80.279703
+CMWSSB Division 56,,neighbourhood,13.100645,80.287211
+CMWSSB Division 55,,neighbourhood,13.099837,80.283119
+CMWSSB Division 54,,neighbourhood,13.099944,80.276872
+CMWSSB Division 53,,neighbourhood,13.106277,80.276023
+CMWSSB Division 52,,neighbourhood,13.107194,80.289159
+CMWSSB Division 51,,neighbourhood,13.112778,80.284868
+CMWSSB Division 50,,neighbourhood,13.112993,80.296612
+CMWSSB Division 49,,neighbourhood,13.11778,80.289256
+CMWSSB Division 48,,neighbourhood,13.11724,80.28223
+CMWSSB Division 47,,neighbourhood,13.115478,80.275302
+CMWSSB Division 46,,neighbourhood,13.11235,80.266762
+CMWSSB Division 45,,neighbourhood,13.113772,80.258548
+CMWSSB Division 44,,neighbourhood,13.117629,80.248306
+CMWSSB Division 42,,neighbourhood,13.129511,80.284604
+CMWSSB Division 41,,neighbourhood,13.124806,80.275714
+CMWSSB Division 40,,neighbourhood,13.136306,80.289567
+CMWSSB Division 39,,neighbourhood,13.13848,80.293676
+CMWSSB Division 38,,neighbourhood,13.133063,80.281689
+CMWSSB Division 37,,neighbourhood,13.131953,80.26831
+CMWSSB Division 36,,neighbourhood,13.124,80.253929
+CMWSSB Division 35,,neighbourhood,13.130208,80.250176
+CMWSSB Division 34,,neighbourhood,13.138856,80.249735
+CMWSSB Division 33,,neighbourhood,13.132131,80.231436
+CMWSSB Division 32,,neighbourhood,13.132385,80.207398
+CMWSSB Division 31,,neighbourhood,13.13815,80.233285
+CMWSSB Division 30,,neighbourhood,13.146736,80.235336
+CMWSSB Division 29,,neighbourhood,13.154647,80.261915
+CMWSSB Division 28,,neighbourhood,13.15628,80.248728
+CMWSSB Division 27,,neighbourhood,13.158328,80.234937
+CMWSSB Division 26,,neighbourhood,13.145318,80.2176
+CMWSSB Division 25,,neighbourhood,13.15015,80.20575
+CMWSSB Division 24,,neighbourhood,13.141554,80.190547
+CMWSSB Division 23,,neighbourhood,13.159081,80.208932
+CMWSSB Division 22,,neighbourhood,13.169425,80.208355
+CMWSSB Division 21,,neighbourhood,13.167235,80.270146
+CMWSSB Division 20,,neighbourhood,13.169092,80.254554
+CMWSSB Division 19,,neighbourhood,13.172994,80.239429
+CMWSSB Division 18,,neighbourhood,13.178878,80.267927
+CMWSSB Division 17,,neighbourhood,13.184068,80.23184
+CMWSSB Division 16,,neighbourhood,13.193332,80.277011
+CMWSSB Division 15,,neighbourhood,13.212664,80.289956
+CMWSSB Division 14,,neighbourhood,13.147262,80.301192
+CMWSSB Division 13,,neighbourhood,13.147802,80.293781
+CMWSSB Division 12,,neighbourhood,13.151359,80.296658
+CMWSSB Division 11,,neighbourhood,13.154839,80.302665
+CMWSSB Division 10,,neighbourhood,13.163186,80.299509
+CMWSSB Division 9,,neighbourhood,13.162877,80.306183
+CMWSSB Division 8,,neighbourhood,13.166382,80.306687
+CMWSSB Division 7,,neighbourhood,13.158295,80.28331
+CMWSSB Division 6,,neighbourhood,13.178326,80.294984
+CMWSSB Division 5,,neighbourhood,13.178441,80.309911
+CMWSSB Division 4,,neighbourhood,13.185538,80.304484
+CMWSSB Division 3,,neighbourhood,13.196969,80.313017
+CMWSSB Division 2,,neighbourhood,13.215643,80.317442
+CMWSSB Division 1,,neighbourhood,13.226537,80.323663
+CMWSSB Division 201,,neighbourhood,13.008275,80.189216
+Pushpa Nagar,,neighbourhood,13.059457,80.238997
+Sathya Garden,,neighbourhood,13.045547,80.198255

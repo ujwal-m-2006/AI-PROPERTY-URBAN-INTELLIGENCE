@@ -1,0 +1,26 @@
+# District/taluk boundaries republished from LGD and Survey of India (T3, INDICATIVE). No per-boundary vintage is published and both states have reorganised taluks recently. Geometry reduced to a centroid. This row is NOT a boundary — joining on the centroid gives you a point inside (or near) the shape, not the shape.
+taluk,district,state,geometry_type,centroid_lng,centroid_lat,vertex_count
+Denkanikottai,Krishnagiri,Tamil Nadu,Polygon,77.778163,12.460035,3952
+Hosur,Krishnagiri,Tamil Nadu,Polygon,77.863896,12.715212,2160
+Krishnagiri,Krishnagiri,Tamil Nadu,Polygon,78.171529,12.594181,3214
+Shoolagiri,Krishnagiri,Tamil Nadu,Polygon,78.012656,12.714672,2531
+Koratagere,Tumakuru,Karnataka,Polygon,77.26797,13.488486,965
+Tumakuru,Tumakuru,Karnataka,Polygon,77.111648,13.290669,1446
+Yelahanka,Bengaluru Urban,Karnataka,MultiPolygon,77.576,13.14576,784
+Bengaluru North,Bengaluru Urban,Karnataka,Polygon,77.505764,13.027842,1059
+Bengaluru South,Bengaluru Urban,Karnataka,Polygon,77.509846,12.879743,1127
+Bengaluru East,Bengaluru Urban,Karnataka,Polygon,77.708343,13.005924,816
+Anekal,Bengaluru Urban,Karnataka,Polygon,77.72175,12.807832,1271
+Kolar,Kolar,Karnataka,Polygon,78.108638,13.188376,1317
+Malur,Kolar,Karnataka,Polygon,78.008424,12.917105,1937
+Chikkaballapura,Chikkaballapura,Karnataka,Polygon,77.724892,13.512231,1858
+Sidlaghatta,Chikkaballapura,Karnataka,Polygon,77.899026,13.429076,1957
+Chintamani,Chikkaballapura,Karnataka,Polygon,78.03405,13.425188,1689
+Nelamangala,Bengaluru Rural,Karnataka,Polygon,77.311645,13.164531,1148
+Dodda Ballapur,Bengaluru Rural,Karnataka,Polygon,77.492386,13.342662,1337
+Devanahalli,Bengaluru Rural,Karnataka,Polygon,77.731536,13.237146,1293
+Hosakote,Bengaluru Rural,Karnataka,Polygon,77.834174,13.078711,1674
+Magadi,Ramanagara,Karnataka,Polygon,77.194734,13.023339,1239
+Ramanagara,Ramanagara,Karnataka,Polygon,77.327109,12.729301,1583
+Channapatna,Ramanagara,Karnataka,Polygon,77.193718,12.616872,1897
+Kanakapura,Ramanagara,Karnataka,Polygon,77.455433,12.52728,2799
