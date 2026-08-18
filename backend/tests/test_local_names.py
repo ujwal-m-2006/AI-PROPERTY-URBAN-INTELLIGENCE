@@ -154,3 +154,65 @@ def test_local_name_styling_is_not_kannada_specific() -> None:
         "the shared local-name class sets a font-family, which would render "
         "one city's script with the other's font"
     )
+
+
+# --- the dataset catalogue must not drift -------------------------------
+
+
+def test_catalogue_matches_the_live_source_registry() -> None:
+    """A hand-drifted dataset list is worse than none — it looks authoritative.
+
+    The catalogue is generated from the same sidecars the registry reads, so the
+    two counts must agree. If they diverge, someone added a layer without a
+    provenance sidecar or edited the catalogue by hand.
+    """
+    import json
+
+    cat = Path(__file__).resolve().parents[2] / "datasets" / "catalogue.json"
+    if not cat.exists():
+        pytest.skip("catalogue not generated")
+    datasets = json.loads(cat.read_text(encoding="utf-8"))["datasets"]
+
+    live = client.get("/api/v1/sources").json()
+    assert live["count"] == len(datasets), (
+        f"registry has {live['count']} datasets, catalogue has {len(datasets)} — "
+        "run python datasets/build_catalogue.py"
+    )
+
+
+def test_every_catalogued_dataset_has_a_link_and_a_stated_use() -> None:
+    import json
+
+    cat = Path(__file__).resolve().parents[2] / "datasets" / "catalogue.json"
+    if not cat.exists():
+        pytest.skip("catalogue not generated")
+    for r in json.loads(cat.read_text(encoding="utf-8"))["datasets"]:
+        assert r["source_url"] or r["download_url"], f"{r['layer']} has no link"
+        assert r["powers"], f"{r['layer']} does not say what it powers"
+        assert r["tier"], f"{r['layer']} has no provenance tier"
+
+
+def test_unobtainable_sources_are_documented_with_reasons() -> None:
+    """The catalogue's second half is the project's central finding."""
+    import json
+
+    cat = Path(__file__).resolve().parents[2] / "datasets" / "catalogue.json"
+    if not cat.exists():
+        pytest.skip("catalogue not generated")
+    na = json.loads(cat.read_text(encoding="utf-8"))["not_available"]
+    assert len(na) >= 8, "the unobtainable list has shrunk — check why"
+    for u in na:
+        assert u["why"], f"{u['feature']} listed without a reason"
+        assert u["classification"]
+
+
+def test_no_licence_is_asserted_without_being_read() -> None:
+    """Two Kaggle datasets have unverifiable licences. Guessing one would be
+    exactly the fabrication this project forbids everywhere else."""
+    live = client.get("/api/v1/sources").json()["data"]
+    for s in live:
+        if s.get("licence") is None:
+            assert s.get("licence_status"), (
+                f"{s['name']} has no licence and no licence_status — a null "
+                "licence must say whether it is unstated or unread"
+            )
