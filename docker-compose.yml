@@ -40,19 +40,24 @@ services:
 
   api:
     build:
-      context: ./backend
-      dockerfile: ../infra/docker/api.Dockerfile
+      # Root context: the app reads data/processed and ml/artifacts, which are
+      # siblings of backend/. See the note at the top of api.Dockerfile.
+      context: .
+      dockerfile: infra/docker/api.Dockerfile
     environment:
       GBA_DATABASE_URL: postgresql+psycopg://gba:gba@db:5432/gba
       GBA_REDIS_URL: redis://redis:6379/0
       GBA_ENVIRONMENT: development
     ports:
       - "8000:8000"
-    depends_on:
-      db:
-        condition: service_healthy
+    # No depends_on: the API reads versioned GeoJSON/JSON artefacts and does
+    # not need Postgres to answer. The db service stays in this file for the
+    # PostGIS migration path, but the API must start without it.
     volumes:
-      - ./backend:/app
+      - ./backend:/app/backend
+      - ./data/processed:/app/data/processed:ro
+      - ./ml/artifacts:/app/ml/artifacts:ro
+      - ./models:/app/models:ro
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
 
   # Vector tiles straight from PostGIS — no tile build step.

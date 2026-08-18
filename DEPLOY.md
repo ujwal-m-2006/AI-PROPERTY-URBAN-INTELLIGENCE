@@ -63,12 +63,40 @@ platforms work. What follows is honest about what has and has not been tested.
 ### What is NOT verified
 
 **The Docker build has never been run.** Docker is not installed on the machine
-this was developed on, so the Dockerfile is written but untested. Build it once
-locally before trusting it in a pipeline:
+this was developed on, so the image is written but untested.
+
+Reviewing it did surface a real defect, now fixed. The build context was
+`./backend`, which meant `data/processed/` and `ml/artifacts/` — siblings of
+`backend/` — never entered the image. Services locate them with
+`Path(__file__).parents[3]`, so inside that container the data directory
+resolved to `/data`, which did not exist. The container would have started
+cleanly, passed its healthcheck, and failed every jurisdiction lookup with no
+build error to explain it. The context is now the repository root and the
+layout inside the image mirrors the repo.
+
+Build and run from the repository root:
 
 ```bash
 docker build -f infra/docker/api.Dockerfile -t gba-api .
 ```
+
+```bash
+docker run -p 8000:8000 -v "$(pwd)/models:/app/models:ro" gba-api
+```
+
+Then confirm the data actually made it in — this is the check that would have
+caught the defect above:
+
+```bash
+curl -s "localhost:8000/api/v1/jurisdiction?lat=12.9591&lng=77.6974&city=bengaluru"
+```
+
+A `taluk` of `Bangalore East` means the layers are present. An UNAVAILABLE
+answer citing a missing file means they are not.
+
+Trained models are **not** in the image (~176 MB, untracked). Without the mount
+above the app still serves jurisdiction, GIS, proximity, documents and every
+published metric, and prediction endpoints return an honest "data unavailable".
 
 No cloud deployment has been performed. The steps below are the intended path,
 not a record of something that worked.
