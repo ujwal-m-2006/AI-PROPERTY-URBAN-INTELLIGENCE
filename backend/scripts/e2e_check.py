@@ -294,6 +294,30 @@ def run_city(city: str) -> None:
           code == 200 and len(wards) == expected,
           f"{len(wards)} wards (expected {expected})")
 
+    # --- what-if scenarios -----------------------------------------------
+    code, d = post("/api/v1/whatif", {"city": city, "sqft": 1200, "rooms": 2,
+                                      "bath": 2, "change_rooms": 3})
+    check(city, "what-if scenario",
+          code == 200 and d.get("available") and d.get("delta"),
+          f"2BHK -> 3BHK: {d.get('delta', {}).get('percent')}% "
+          f"{d.get('delta', {}).get('direction')}")
+
+    check(city, "what-if declares it is not causal",
+          "NOT A CAUSAL ESTIMATE" in (d.get("not_causal") or ""),
+          "a scenario, never a return on investment")
+
+    code, d = post("/api/v1/whatif", {"city": city, "sqft": 1200, "rooms": 2,
+                                      "change_sqft": 20000})
+    check(city, "what-if flags extrapolation",
+          code == 200 and bool(d.get("extrapolation_warnings"))
+          and d.get("reliable") is False,
+          "20,000 sq.ft is outside the trained range and says so")
+
+    code, d = get("/api/v1/whatif/sweep", field="sqft", city=city)
+    check(city, "what-if sweep returns a curve",
+          code == 200 and len(d.get("points", [])) >= 5,
+          f"{len(d.get('points', []))} points, swing {d.get('swing')}")
+
     # --- total price (Model 1) -------------------------------------------
     code, d = get("/api/v1/total-price", city=city)
     algos = d.get("algorithms", []) if code == 200 else []

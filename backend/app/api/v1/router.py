@@ -15,6 +15,7 @@ from app.api.v1 import builder as builder_routes
 from app.api.v1 import cities as city_routes
 from app.api.v1 import cross_city as cross_city_routes
 from app.api.v1 import total_price as total_price_routes
+from app.api.v1 import whatif as whatif_routes
 from app.api.v1 import documents as document_routes
 from app.api.v1 import extra as extra_routes
 from app.api.v1 import feasibility as feasibility_routes
@@ -65,3 +66,4 @@ api_router.include_router(advisory_ml_routes.router, prefix="/advisory-ml", tags
 api_router.include_router(planning_ml_routes.router, prefix="/planning-ml", tags=["planning-ml"])
 api_router.include_router(cross_city_routes.router, prefix="/cross-city", tags=["cross-city"])
 api_router.include_router(total_price_routes.router, prefix="/total-price", tags=["total-price"])
+api_router.include_router(whatif_routes.router, prefix="/whatif", tags=["what-if"])

@@ -273,6 +273,7 @@ body.contrast .maplegend{background:#000;color:#fff}
     <button role="tab" aria-selected="false" data-tab="models">ML Models</button>
     <button role="tab" aria-selected="false" data-tab="mlperf">ML Performance</button>
     <button role="tab" aria-selected="false" data-tab="future">Future Price</button>
+    <button role="tab" aria-selected="false" data-tab="whatif">What-If</button>
     <button role="tab" aria-selected="false" data-tab="insights">Investment Score</button>
     <button role="tab" aria-selected="false" data-tab="buyer">BUYER MODE</button>
     <button role="tab" aria-selected="false" data-tab="investor">INVESTOR MODE</button>
@@ -832,7 +833,7 @@ async function selectPoint(lat, lng){
 /* ---------------- tabs ---------------- */
 // Mark the tabs whose output comes from a trained model, so "where is the ML?"
 // is answerable at a glance.
-const ML_TABS = ["market", "models", "mlperf", "insights", "future", "buyer", "investor", "extra", "negotiation", "registry", "planningml", "crosscity"];
+const ML_TABS = ["market", "models", "mlperf", "insights", "future", "buyer", "investor", "extra", "negotiation", "registry", "planningml", "crosscity", "whatif"];
 document.querySelectorAll('nav button').forEach(btn=>{
   if (ML_TABS.includes(btn.dataset.tab)) {
     btn.insertAdjacentHTML("beforeend", '<span class="navdot" title="Uses a trained ML model"></span>');
@@ -852,6 +853,7 @@ const TAB_TITLES = {
   models:["ML Models & Prediction","ಎಂಎಲ್ ಮಾದರಿಗಳು","ML மாதிரிகள்"],
   mlperf:["ML Performance","ಎಂಎಲ್ ಕಾರ್ಯಕ್ಷಮತೆ","ML செயல்திறன்"],
   future:["Future Price Analysis","ಭವಿಷ್ಯದ ಬೆಲೆ","எதிர்கால விலை"],
+  whatif:["What-If Scenarios","ಪರ್ಯಾಯ ಸನ್ನಿವೇಶ ವಿಶ್ಲೇಷಣೆ","மாற்று சூழ்நிலை பகுப்பாய்வு"],
   crosscity:["Cross-City Transfer","ನಗರಗಳ ನಡುವೆ","நகரங்களுக்கிடையே"],
   planningml:["Planning ML","ಯೋಜನಾ ಎಂ.ಎಲ್.","திட்ட எம்.எல்."],
   registry:["Trained Models","ತರಬೇತಿ ಪಡೆದ ಮಾದರಿಗಳು","பயிற்சி பெற்ற மாதிரிகள்"],
@@ -884,6 +886,7 @@ function renderTab(){
   if (activeTab === "mlperf") return renderMLPerformance();
   if (activeTab === "models") return renderModels();
   if (activeTab === "future") return renderFuturePrice();
+  if (activeTab === "whatif") return renderWhatIf();
   if (activeTab === "crosscity") return renderCrossCity();
   if (activeTab === "planningml") return renderPlanningML();
   if (activeTab === "registry") return renderRegistry();
@@ -1193,6 +1196,150 @@ async function runPredict(){
 
 
 
+
+/* ---------------- what-if scenarios ---------------- */
+// Two guards decide what this tab is allowed to say. Extrapolation: a scenario
+// outside the model's trained range is answered AND flagged, never answered
+// quietly. Insensitivity: a change the model barely reacts to is reported as a
+// fact about the model, not about the market. Both come from the API — this
+// function renders them, it does not decide them.
+const WHATIF_LABELS = {sqft:"Built-up sq.ft", rooms:"Bedrooms",
+                       bath:"Bathrooms", balcony:"Balconies"};
+
+function renderWhatIf(){
+  setPanel(`
+    <div class="section"><h2>What if this property were different?</h2>
+      <p class="notice red"><b>A scenario, not a return on investment.</b>
+        Changing <i>bedrooms</i> from 2 to 3 shows what the model predicts for a
+        property it would describe as a 3BHK &mdash; not what building a room
+        onto this one would earn. Homes that differ in one listed attribute
+        differ in many unlisted ones, and no model here can separate them.</p>
+
+      <div class="form" style="margin-top:11px">
+        <div class="field"><label for="wSqft">Sq.ft</label>
+          <input id="wSqft" type="number" value="1200" min="200" step="50"></div>
+        <div class="field"><label for="wRooms">Bedrooms</label>
+          <input id="wRooms" type="number" value="2" min="1" max="10"></div>
+        <div class="field"><label for="wBath">Bathrooms</label>
+          <input id="wBath" type="number" value="2" min="1" max="10"></div>
+        <div class="field"><label for="wField">Change</label>
+          <select id="wField">
+            <option value="rooms">Bedrooms</option>
+            <option value="sqft">Built-up sq.ft</option>
+            <option value="bath">Bathrooms</option>
+            <option value="balcony">Balconies</option>
+          </select></div>
+        <div class="field"><label for="wValue">To</label>
+          <input id="wValue" type="number" value="3" min="0" step="1"></div>
+        <button class="btn" onclick="runWhatIf()">Run scenario</button>
+      </div>
+      <div id="wOut" class="why">Running&hellip;</div>
+    </div>
+
+    <div class="section"><h2>The whole curve, not one comparison</h2>
+      <p class="why">A single before/after gives one number, which reads as a
+        trend. Varying the field across its range shows the actual shape of the
+        model's response &mdash; which is often not a straight line, and
+        sometimes not even in one direction.</p>
+      <div id="wSweep" class="why" style="margin-top:9px">Loading&hellip;</div>
+    </div>`);
+  runWhatIf();
+}
+
+async function runWhatIf(){
+  const field = (document.getElementById("wField")||{}).value || "rooms";
+  const body = {
+    city: currentCity,
+    sqft: Number((document.getElementById("wSqft")||{}).value || 1200),
+    rooms: Number((document.getElementById("wRooms")||{}).value || 2),
+    bath: Number((document.getElementById("wBath")||{}).value || 2)
+  };
+  body["change_" + field] = Number((document.getElementById("wValue")||{}).value);
+
+  const out = document.getElementById("wOut");
+  if (out) out.innerHTML = "Running&hellip;";
+  let d;
+  try{
+    const r = await fetch(`${API}/whatif`, {method:"POST",
+      headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)});
+    d = await r.json();
+    if (r.status !== 200) throw new Error(d.detail || d.title || `HTTP ${r.status}`);
+  }catch(e){
+    if (out) out.innerHTML = `<p class="notice red">${escapeHtml(String(e.message||e))}</p>`;
+    return;
+  }
+
+  if (!d.available){
+    if (out) out.innerHTML = `<p class="notice red">${escapeHtml(d.reason||"Unavailable")}</p>`;
+    return;
+  }
+
+  const dl = d.delta || {};
+  const up = dl.price_per_sqft > 0;
+  const warn = (d.extrapolation_warnings||[]).map(w=>`
+    <p class="notice red" style="margin-top:8px"><b>Outside the trained range.</b>
+      ${escapeHtml(w.warning)}</p>`).join("");
+
+  if (out) out.innerHTML = `
+    <table class="data" style="margin-top:4px">
+      <tr><th>Before</th><td style="text-align:right">${inr(d.before.price_per_sqft)}/sq.ft</td></tr>
+      <tr><th>${escapeHtml(WHATIF_LABELS[Object.keys(d.changes_applied)[0]]||"After")}
+          &rarr; ${escapeHtml(String(Object.values(d.changes_applied)[0]))}</th>
+        <td style="text-align:right">${inr(d.after.price_per_sqft)}/sq.ft</td></tr>
+      <tr><th>Model's difference</th>
+        <td style="text-align:right"><b>${up?"+":""}${dl.percent}%</b>
+          <div class="why">${up?"+":"&minus;"}${inr(Math.abs(dl.price_per_sqft))}/sq.ft
+            &mdash; ${escapeHtml(dl.direction)}</div></td></tr>
+    </table>
+    <p class="why" style="margin-top:9px"><span class="badge ${d.reliable?"GREEN":"RED"}"></span>
+      ${escapeHtml(d.interpretation||"")}</p>
+    ${warn}
+    ${Object.keys(d.rejected_changes||{}).length ? `<p class="why" style="margin-top:8px">
+      ${Object.entries(d.rejected_changes).map(([k,v])=>
+        `<b>${escapeHtml(k)}</b> cannot be changed: ${escapeHtml(v)}`).join("<br>")}</p>` : ""}`;
+
+  loadWhatIfSweep(field, body);
+}
+
+async function loadWhatIfSweep(field, body){
+  const el = document.getElementById("wSweep");
+  if (!el) return;
+  let d;
+  try{
+    const q = new URLSearchParams({field, city: currentCity,
+      sqft: body.sqft, rooms: body.rooms, bath: body.bath});
+    const r = await fetch(`${API}/whatif/sweep?${q}`);
+    d = await r.json();
+    if (r.status !== 200) throw new Error(d.detail || d.title || `HTTP ${r.status}`);
+  }catch(e){
+    el.innerHTML = `<p class="notice red">${escapeHtml(String(e.message||e))}</p>`;
+    return;
+  }
+  if (!d.available){
+    el.innerHTML = `<p class="notice red">${escapeHtml(d.reason||"Unavailable")}</p>`;
+    return;
+  }
+
+  const ps = d.points.map(p=>p.price_per_sqft);
+  const lo = Math.min(...ps), hi = Math.max(...ps), span = (hi - lo) || 1;
+  const tr = d.trained_range;
+  el.innerHTML = `
+    <table class="data">
+      ${d.points.map(p=>`
+        <tr><th style="width:110px">${escapeHtml(String(p.value))}
+            ${p.extrapolated?'<span class="badge RED" title="outside the trained range"></span>':""}</th>
+          <td><div class="row" style="gap:7px;align-items:center">
+            <div class="bar"><i style="width:${(12 + 88*(p.price_per_sqft-lo)/span).toFixed(1)}%"></i></div>
+            <span style="min-width:74px;text-align:right">${inr(p.price_per_sqft)}</span>
+          </div></td></tr>`).join("")}
+    </table>
+    <p class="why" style="margin-top:9px">Varying <b>${escapeHtml(WHATIF_LABELS[d.field]||d.field)}</b>
+      swings the prediction by ${inr(d.swing)}/sq.ft (${d.swing_percent}%).
+      ${tr ? `The model was trained on ${tr[0]}&ndash;${tr[1]};` : ""}
+      ${d.extrapolated_points} of ${d.points.length} points fall outside that
+      range and are marked in red &mdash; the model still answers there, with
+      nothing behind the answer.</p>`;
+}
 
 /* ---------------- Cross-city transfer -----------------------------------
    Every headline number here is negative, each for a different reason. A

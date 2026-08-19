@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any, NamedTuple
 from uuid import uuid5, NAMESPACE_URL
 
+from app.core.problems import UnknownCity
 from app.facts import Category, ConfidenceReport, Fact, SourceRef, Status, Tier, build_report
 
 DATA = Path(__file__).resolve().parents[3] / "data" / "processed"
@@ -38,9 +39,26 @@ CITY_SOURCE_FILE = {
 }
 
 
+def _city_key(city: str | None) -> str:
+    """Resolve a city id, refusing one we do not cover.
+
+    Every lookup below is `DICT.get(city, <bengaluru default>)`, which turned an
+    unknown city into Bengaluru's wards returned under the requested city's
+    name — Bengaluru data labelled Mysuru. Refusing is the only honest answer.
+    """
+    key = (city or "bengaluru").strip().lower()
+    if key not in CITY_WARDS_FILE:
+        raise UnknownCity(
+            f"unknown city {city!r}; available: "
+            f"{', '.join(sorted(CITY_WARDS_FILE))}",
+            available=sorted(CITY_WARDS_FILE),
+        )
+    return key
+
+
 @lru_cache(maxsize=4)
 def _source(city: str = "bengaluru") -> SourceRef:
-    meta_path = DATA / CITY_SOURCE_FILE.get(city, "source_gba_wards.json")
+    meta_path = DATA / CITY_SOURCE_FILE[_city_key(city)]
     meta = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
     return SourceRef(
         source_id=uuid5(NAMESPACE_URL, meta.get("source_url", f"{city}-wards")),
@@ -77,7 +95,7 @@ def _wards(
     city: str = "bengaluru",
 ) -> list[tuple[tuple[float, float, float, float], dict[str, Any], Any]]:
     """Load a city's wards once, precomputing a bbox per ward for prefiltering."""
-    path = DATA / CITY_WARDS_FILE.get(city, "gba_wards.geojson")
+    path = DATA / CITY_WARDS_FILE[_city_key(city)]
     if not path.exists():
         raise FileNotFoundError(
             f"{path} not found — run the ward ingest flow for {city} first"
@@ -173,7 +191,7 @@ def list_wards(city: str = "bengaluru") -> list[dict[str, Any]]:
 
 
 def in_coverage(lon: float, lat: float, city: str = "bengaluru") -> bool:
-    minx, miny, maxx, maxy = CITY_BBOX.get(city, GBA_BBOX)
+    minx, miny, maxx, maxy = CITY_BBOX[_city_key(city)]
     return minx <= lon <= maxx and miny <= lat <= maxy
 
 

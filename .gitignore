@@ -53,3 +53,6 @@ data/processed/guidance_values.json
 Thumbs.db
 desktop.ini
 *.swp
+
+# --- Agent / editor session config --------------------------------------
+.claude/

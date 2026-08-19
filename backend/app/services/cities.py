@@ -15,6 +15,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Literal
 
+from app.core.problems import UnknownCity
+
 ROOT = Path(__file__).resolve().parents[3]
 DATA = ROOT / "data" / "processed"
 MODELS = ROOT / "models"
@@ -116,8 +118,9 @@ def get(city_id: str | None = None) -> City:
     """Resolve a city, defaulting to Bengaluru (the primary city)."""
     key = (city_id or DEFAULT_CITY).strip().lower()
     if key not in REGISTRY:
-        raise KeyError(
-            f"unknown city {city_id!r}; available: {', '.join(sorted(REGISTRY))}"
+        raise UnknownCity(
+            f"unknown city {city_id!r}; available: {', '.join(sorted(REGISTRY))}",
+            available=sorted(REGISTRY),
         )
     return REGISTRY[key]
 

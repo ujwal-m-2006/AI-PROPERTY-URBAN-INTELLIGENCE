@@ -61,6 +61,22 @@ class OutsideCoverage(ProblemError):
     status_code = HTTP_422
 
 
+class UnknownCity(ProblemError, KeyError):
+    """A city we do not cover.
+
+    Also a KeyError, because `cities.get` raised one long before this class
+    existed and non-HTTP callers (pipelines, scripts) still catch that. What
+    changes is the HTTP behaviour: asking for Mysuru used to escape every
+    city-aware endpoint as an unhandled KeyError and surface as a 500 — the
+    status that means "we broke", when the truth is "you asked for a city we
+    do not have".
+    """
+
+    problem_type = f"{PROBLEM_BASE}/unknown-city"
+    title = "City not covered"
+    status_code = status.HTTP_400_BAD_REQUEST
+
+
 class RecordNotAutomatable(ProblemError):
     """The caller asked for something only an OTP-gated portal can answer."""
 

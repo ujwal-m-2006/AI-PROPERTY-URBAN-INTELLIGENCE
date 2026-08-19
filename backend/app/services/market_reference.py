@@ -27,6 +27,8 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
+from app.services import cities
+
 ROOT = Path(__file__).resolve().parents[3]
 STORE = ROOT / "data" / "processed" / "guidance_values.json"
 
@@ -75,7 +77,7 @@ def _write(data: dict[str, Any]) -> None:
 
 def guidance_lookup(city: str, locality: str | None) -> dict[str, Any]:
     """Return a manually-recorded guidance value, or explain how to obtain one."""
-    portal = PORTALS.get(city, PORTALS["bengaluru"])
+    portal = PORTALS[cities.get(city).id]
     data = _read()
 
     match = None
@@ -132,7 +134,7 @@ def record_guidance(
         "recorded_by": recorded_by.strip()[:80],
         "recorded_at": datetime.now(UTC).isoformat(),
         "notified_on": notified_on,
-        "source_portal": PORTALS.get(city, PORTALS["bengaluru"])["name"],
+        "source_portal": PORTALS[cities.get(city).id]["name"],
         "method": METHOD_MANUAL,
     }
     data["entries"] = [

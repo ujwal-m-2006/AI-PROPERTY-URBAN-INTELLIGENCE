@@ -350,6 +350,44 @@ ever softened.
 curl "localhost:8000/api/v1/cross-city"
 ```
 
+### What-if scenarios — and the two things that stop them lying
+
+"What would this be worth with another bedroom?" is easy to answer and easy to
+answer dishonestly. Two guards decide what the tab is allowed to say.
+
+**It is not causal, and it says so in every response.** The model learned from
+properties as they were listed; 3BHK flats differ from 2BHK ones in a hundred
+unlisted ways. So the answer is *what the model predicts for a property it would
+describe as a 3BHK* — never *what adding a room would earn*. Anything shaped like
+a return on investment gets read as one.
+
+**Extrapolation is flagged, not hidden.** Ask for 20,000 sq.ft in a dataset whose
+99th percentile is 4,854 and the model answers — confidently, and with nothing
+behind it. Every input is checked against the trained range, per city:
+
+| | sq.ft | bedrooms | bathrooms |
+|---|---|---|---|
+| Bengaluru | 520–4,854 | 1–6 | 1–6 |
+| Chennai | 565–2,434 | 1–4 | 1–2 |
+
+3,000 sq.ft is ordinary in one city's data and extrapolation in the other. A test
+recomputes both tables from the raw datasets, so the guard cannot silently drift
+away from what was trained.
+
+**A single before/after hides the shape.** The sweep varies one field across its
+range, and the Bengaluru response to floor area is not a line — ₹6,031/sq.ft at
+400 sq.ft, ₹4,858 at 1,000, ₹6,004 at 1,600. One comparison across that span
+would produce a number a reader would take for a trend.
+
+**A near-zero delta is reported as a fact about the model.** Chennai's bedroom
+change moves the prediction 0.82%, and the tab says the model barely uses the
+feature here — not that the market ignores bedrooms.
+
+```bash
+curl -X POST localhost:8000/api/v1/whatif -H 'Content-Type: application/json' \
+  -d '{"city":"bengaluru","sqft":1200,"rooms":2,"change_rooms":3}'
+```
+
 ### Planning ML — does every dataset earn its place?
 
 The shipped price model used 20 features from two layers. Four more had been

@@ -37,6 +37,32 @@ def test_unknown_city_is_rejected_not_defaulted() -> None:
         cities.get("mumbai")
 
 
+def test_unknown_city_is_a_client_error_not_a_server_error() -> None:
+    """Found by the what-if tests, and it was project-wide.
+
+    `cities.get` raised a bare KeyError, so every city-aware endpoint answered
+    `?city=mysuru` with a 500. That reads as "the platform is broken" when the
+    honest answer is "we do not cover that city" — the exact confusion between
+    a gap and a fault this codebase exists to avoid.
+    """
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+
+    client = TestClient(app)
+    for path in ("/api/v1/predict", "/api/v1/valuation/estimate",
+                 "/api/v1/whatif"):
+        r = client.post(path, json={"city": "mysuru", "sqft": 1200, "rooms": 2,
+                                    "change_rooms": 3})
+        assert r.status_code == 400, f"{path} returned {r.status_code}"
+        assert r.json()["available"] == ["bengaluru", "chennai"]
+
+    for path in ("/api/v1/planning/summary", "/api/v1/ml/summary",
+                 "/api/v1/jurisdiction/wards"):
+        r = client.get(path, params={"city": "mysuru"})
+        assert r.status_code == 400, f"{path} returned {r.status_code}"
+
+
 def test_cities_never_share_a_model_directory() -> None:
     dirs = [c.model_dir for c in cities.all_cities()]
     assert len(set(dirs)) == len(dirs)
