@@ -1,7 +1,7 @@
 {
   "city": "bengaluru",
   "display": "Greater Bengaluru",
-  "generated_at": "2026-08-18T17:41:13.664258+00:00",
+  "generated_at": "2026-08-19T05:05:03.972426+00:00",
   "target": "price_per_sqft",
   "target_label": "asking price per sq.ft (INR)",
   "validation": "GroupKFold(5) by ward/locality \u2014 the same spatial-block scheme as every other model here, so these R\u00b2 values are comparable with the headline one",
@@ -74,6 +74,40 @@
     "k": 3,
     "k_selection": "highest silhouette over k=2..6, not assumed",
     "silhouette": 0.2653,
+    "validity_by_k": {
+      "2": {
+        "silhouette": 0.2646,
+        "davies_bouldin": 1.5212,
+        "calinski_harabasz": 123.3
+      },
+      "3": {
+        "silhouette": 0.2653,
+        "davies_bouldin": 1.3811,
+        "calinski_harabasz": 110.3
+      },
+      "4": {
+        "silhouette": 0.2056,
+        "davies_bouldin": 1.4874,
+        "calinski_harabasz": 99.1
+      },
+      "5": {
+        "silhouette": 0.1968,
+        "davies_bouldin": 1.3962,
+        "calinski_harabasz": 91.7
+      },
+      "6": {
+        "silhouette": 0.1952,
+        "davies_bouldin": 1.4689,
+        "calinski_harabasz": 84.2
+      }
+    },
+    "chosen_k_by_index": {
+      "silhouette": 3,
+      "davies_bouldin": 3,
+      "calinski_harabasz": 2
+    },
+    "indices_agree_on_k": false,
+    "validity_note": "The three indices choose DIFFERENT k. The number of ward types is therefore a property of the index, not of the data \u2014 one more reason to treat these groups as exploratory.",
     "wards_clustered": 369,
     "features_used": [
       "area_km2",

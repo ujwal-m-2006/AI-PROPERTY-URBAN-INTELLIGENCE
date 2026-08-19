@@ -294,6 +294,31 @@ def run_city(city: str) -> None:
           code == 200 and len(wards) == expected,
           f"{len(wards)} wards (expected {expected})")
 
+    # --- cluster validity and detector agreement -------------------------
+    code, d = get("/api/v1/planning-ml/typology", city=city)
+    ty = d if code == 200 else {}
+    if ty.get("available"):
+        picks = ty.get("chosen_k_by_index", {})
+        check(city, "typology scored by 3 indices", len(picks) == 3,
+              " · ".join(f"{n.split('_')[0]} k={k}" for n, k in picks.items()))
+        check(city, "typology refuses to classify",
+              ty["usable_for_classification"] ==
+              (bool(ty.get("well_separated")) and bool(ty.get("indices_agree_on_k"))),
+              f"usable={ty['usable_for_classification']} "
+              f"(separated={ty.get('well_separated')}, "
+              f"indices agree={ty.get('indices_agree_on_k')})")
+
+    code, d = get("/api/v1/extra/models", city=city)
+    an = d.get("anomaly", {}) if code == 200 else {}
+    ag = an.get("agreement", {})
+    check(city, "three anomaly detectors", len(an.get("detectors", {})) == 3,
+          " · ".join(f"{n.split('_')[0]} {v['flagged']:,}"
+                     for n, v in an.get("detectors", {}).items()))
+    check(city, "detector agreement measured",
+          bool(ag) and ag.get("flagged_by_all") is not None,
+          f"{ag.get('flagged_by_all')} of {ag.get('flagged_by_any')} unanimous "
+          f"({(ag.get('unanimous_share_of_any') or 0) * 100:.1f}%)")
+
     # --- what-if scenarios -----------------------------------------------
     code, d = post("/api/v1/whatif", {"city": city, "sqft": 1200, "rooms": 2,
                                       "bath": 2, "change_rooms": 3})
@@ -359,8 +384,12 @@ def run_city(city: str) -> None:
 
     code, d = get("/api/v1/planning-ml/typology", city=city)
     if d.get("available"):
+        # Separation alone used to decide this. It no longer does: a
+        # well-separated partition whose k depends on which index you consult
+        # is one defensible grouping, not the grouping.
         check(city, "ward typology honest about separation",
-              d.get("usable_for_classification") == d.get("well_separated"),
+              d.get("usable_for_classification") ==
+              (bool(d.get("well_separated")) and bool(d.get("indices_agree_on_k"))),
               f"k={d.get('k')}, silhouette {d.get('silhouette')}, "
               f"usable={d.get('usable_for_classification')}")
     else:

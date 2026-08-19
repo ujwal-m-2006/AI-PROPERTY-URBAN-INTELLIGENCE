@@ -46,7 +46,11 @@ import numpy as np
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.metrics import silhouette_score
+from sklearn.metrics import (
+    calinski_harabasz_score,
+    davies_bouldin_score,
+    silhouette_score,
+)
 from sklearn.model_selection import GroupKFold, cross_val_score
 from sklearn.preprocessing import StandardScaler
 
@@ -263,14 +267,39 @@ def main() -> int:
             print(f"    refused: {typology['reason']}")
         else:
             Z = StandardScaler().fit_transform(wdf[feat_cols])
-            best_k, best_sil, best_model = None, -1.0, None
+            # Three indices rather than one. Silhouette still decides k — it is
+            # the figure this project has always published — but Davies-Bouldin
+            # and Calinski-Harabasz are computed alongside, so if they prefer a
+            # different k that disagreement is on the record instead of being
+            # invisible behind a single number.
+            by_k: dict[int, dict[str, float]] = {}
+            models: dict[int, KMeans] = {}
             for k in range(2, 7):
                 km = KMeans(n_clusters=k, random_state=RANDOM_STATE, n_init=10)
                 lab = km.fit_predict(Z)
-                sil = silhouette_score(Z, lab)
-                print(f"    k={k}  silhouette {sil:.4f}")
-                if sil > best_sil:
-                    best_k, best_sil, best_model = k, sil, km
+                by_k[k] = {
+                    "silhouette": round(float(silhouette_score(Z, lab)), 4),
+                    "davies_bouldin": round(float(davies_bouldin_score(Z, lab)), 4),
+                    "calinski_harabasz": round(float(calinski_harabasz_score(Z, lab)), 1),
+                }
+                models[k] = km
+                print(f"    k={k}  silhouette {by_k[k]['silhouette']:.4f}  "
+                      f"DB {by_k[k]['davies_bouldin']:.4f}  "
+                      f"CH {by_k[k]['calinski_harabasz']:.1f}")
+
+            picks = {
+                "silhouette": max(by_k, key=lambda k: by_k[k]["silhouette"]),
+                "davies_bouldin": min(by_k, key=lambda k: by_k[k]["davies_bouldin"]),
+                "calinski_harabasz": max(by_k,
+                                         key=lambda k: by_k[k]["calinski_harabasz"]),
+            }
+            indices_agree = len(set(picks.values())) == 1
+            best_k = picks["silhouette"]
+            best_sil = by_k[best_k]["silhouette"]
+            best_model = models[best_k]
+            for name, k in picks.items():
+                print(f"      {name:<20} prefers k={k}")
+            print(f"    indices {'AGREE' if indices_agree else 'DISAGREE'} on k")
             labels = best_model.predict(Z)
             wdf["typology"] = labels
             clusters = []
@@ -304,6 +333,20 @@ def main() -> int:
                 "k": int(best_k),
                 "k_selection": "highest silhouette over k=2..6, not assumed",
                 "silhouette": round(float(best_sil), 4),
+                "validity_by_k": {str(k): v for k, v in by_k.items()},
+                "chosen_k_by_index": {n: int(k) for n, k in picks.items()},
+                "indices_agree_on_k": indices_agree,
+                "validity_note": (
+                    "Silhouette, Davies-Bouldin (lower is better) and "
+                    "Calinski-Harabasz (higher is better) all choose the same "
+                    "k, so the grouping is not an artefact of which index was "
+                    "used to pick it."
+                    if indices_agree else
+                    "The three indices choose DIFFERENT k. The number of ward "
+                    "types is therefore a property of the index, not of the "
+                    "data — one more reason to treat these groups as "
+                    "exploratory."
+                ),
                 "wards_clustered": int(len(wdf)),
                 "features_used": feat_cols,
                 "clusters": clusters,

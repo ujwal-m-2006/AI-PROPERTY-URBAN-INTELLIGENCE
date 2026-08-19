@@ -1,7 +1,7 @@
 {
   "city": "bengaluru",
   "display": "Greater Bengaluru",
-  "generated_at": "2026-08-12T04:01:40.641753+00:00",
+  "generated_at": "2026-08-19T05:02:57.918041+00:00",
   "classification": {
     "task": "Price-band classification (3 classes)",
     "labels": [
@@ -92,6 +92,50 @@
       "7": 0.3626,
       "8": 0.369
     },
+    "validity_by_k": {
+      "2": {
+        "silhouette": 0.531,
+        "davies_bouldin": 1.0642,
+        "calinski_harabasz": 203.2
+      },
+      "3": {
+        "silhouette": 0.5543,
+        "davies_bouldin": 0.9207,
+        "calinski_harabasz": 197.4
+      },
+      "4": {
+        "silhouette": 0.5407,
+        "davies_bouldin": 0.8653,
+        "calinski_harabasz": 201.1
+      },
+      "5": {
+        "silhouette": 0.3867,
+        "davies_bouldin": 1.0309,
+        "calinski_harabasz": 195.3
+      },
+      "6": {
+        "silhouette": 0.3568,
+        "davies_bouldin": 1.0242,
+        "calinski_harabasz": 193.1
+      },
+      "7": {
+        "silhouette": 0.3626,
+        "davies_bouldin": 0.9259,
+        "calinski_harabasz": 191.4
+      },
+      "8": {
+        "silhouette": 0.369,
+        "davies_bouldin": 0.9319,
+        "calinski_harabasz": 187.5
+      }
+    },
+    "chosen_k_by_index": {
+      "silhouette": 3,
+      "davies_bouldin": 4,
+      "calinski_harabasz": 2
+    },
+    "indices_agree_on_k": false,
+    "validity_note": "The three indices do NOT choose the same k. The clustering is reported as one defensible view, not as the structure of the data.",
     "localities_clustered": 413,
     "clusters": [
       {
@@ -574,6 +618,44 @@
     "contamination": 0.05,
     "flagged": 602,
     "total": 12038,
+    "detectors": {
+      "isolation_forest": {
+        "flagged": 602,
+        "defines_unusual_as": "few splits needed to isolate"
+      },
+      "lof": {
+        "flagged": 601,
+        "n_neighbors": 20,
+        "defines_unusual_as": "lower local density than its neighbours"
+      },
+      "dbscan": {
+        "flagged": 396,
+        "eps": 2.401,
+        "min_samples": 5,
+        "defines_unusual_as": "not density-reachable from a core point",
+        "eps_note": "DBSCAN has no contamination parameter. eps is the 95% quantile of the distance to the 5th nearest neighbour, so all three detectors work to the same budget and the comparison is about which rows, not how many."
+      }
+    },
+    "agreement": {
+      "pairwise": {
+        "dbscan vs isolation_forest": {
+          "jaccard": 0.2844,
+          "both": 221
+        },
+        "dbscan vs lof": {
+          "jaccard": 0.0173,
+          "both": 17
+        },
+        "isolation_forest vs lof": {
+          "jaccard": 0.0256,
+          "both": 30
+        }
+      },
+      "flagged_by_all": 10,
+      "flagged_by_any": 1341,
+      "unanimous_share_of_any": 0.0075
+    },
+    "agreement_note": "Three detectors, one feature matrix, one 5% budget. Jaccard is used because agreement on the ~95% of rows nobody flagged is not informative. Rows all three flag are unusual under three different definitions; rows only one flags say more about that detector than about the property.",
     "note": "Flags records that are unusual across their whole feature vector, which is a different question from the price-interval check: that asks whether a price is far from the model, this asks whether the record itself is atypical.",
     "caveat": "An anomaly is not evidence of anything wrong. Contamination is set at 5% by assumption, so roughly 5% of records will be flagged whatever the data looks like."
   }

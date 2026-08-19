@@ -147,8 +147,15 @@ def test_typology_reports_its_separation_quality(city: str) -> None:
         return
     assert t["silhouette"] is not None
     assert t["well_separated"] in (True, False)
-    # The usability flag must follow the silhouette, not the other way round.
-    assert t["usable_for_classification"] == t["well_separated"]
+    # The usability flag must follow the measurements, not the other way round.
+    # It used to follow the silhouette alone. It no longer does: Chennai's
+    # k=2 grouping separates well (0.4445) but the three validity indices do
+    # not agree on k, so the label would be one defensible partition presented
+    # as the partition. Both criteria are published alongside the flag.
+    assert t["usable_for_classification"] == (
+        bool(t["well_separated"]) and bool(t["indices_agree_on_k"]))
+    assert [c["met"] for c in t["usable_for_classification_criteria"]] == [
+        bool(t["well_separated"]), bool(t["indices_agree_on_k"])]
 
 
 def test_weakly_separated_typologies_are_not_usable_for_classification() -> None:

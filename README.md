@@ -350,6 +350,50 @@ ever softened.
 curl "localhost:8000/api/v1/cross-city"
 ```
 
+### Unsupervised results, re-asked with a second method
+
+Two results were published on the strength of one number each: *k* chosen by
+silhouette, and anomalies found by Isolation Forest. Both were re-asked.
+
+**Clustering — three indices, and they never fully agree.**
+
+| Clustering | silhouette | Davies-Bouldin | Calinski-Harabasz |
+|---|---|---|---|
+| Bengaluru ward typologies | k=3 | k=3 | k=2 |
+| Chennai ward typologies | k=2 | k=2 | k=3 |
+| Bengaluru locality clusters | k=3 | k=4 | k=2 |
+
+Silhouette still decides — it is the figure this project has always published —
+but the disagreement is now on the record. **The number of ward types is a
+property of the index, not of the data.**
+
+This changed a published verdict. Chennai's k=2 grouping separates well
+(silhouette 0.4445), so it used to be marked usable for classifying a ward. It
+no longer is: a well-separated partition whose *k* depends on which index you
+consult is one defensible grouping, not *the* grouping. Both criteria are now
+shown next to the flag, so the reversal explains itself rather than looking like
+a number that moved.
+
+**Anomalies — three detectors, and they overlap almost not at all.**
+
+Isolation Forest, Local Outlier Factor and DBSCAN got identical rows, identical
+features and an identical 5% budget. DBSCAN has no contamination parameter, so
+`eps` is set to the 95th percentile of the distance to the 5th nearest neighbour
+— otherwise the comparison would measure flag *rate* instead of flag *agreement*.
+
+| | Bengaluru | Chennai |
+|---|---|---|
+| Isolation Forest ∩ LOF (Jaccard) | 0.026 | 0.068 |
+| DBSCAN ∩ Isolation Forest | 0.284 | 0.007 |
+| DBSCAN ∩ LOF | 0.017 | 0.109 |
+| **Flagged by all three** | **10 of 1,341** (0.8%) | **2 of 678** (0.3%) |
+
+Jaccard rather than raw agreement: each detector flags about 5%, so ~90% of rows
+are "agreed" by default, and reporting that would be arithmetic dressed as a
+result. **On the rows that matter, the detectors disagree almost completely** —
+"anomalous" here is mostly a property of the detector. Which is why no flag in
+this platform is presented as a finding about a property.
+
 ### What-if scenarios — and the two things that stop them lying
 
 "What would this be worth with another bedroom?" is easy to answer and easy to

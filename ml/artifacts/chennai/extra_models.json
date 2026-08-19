@@ -1,7 +1,7 @@
 {
   "city": "chennai",
   "display": "Chennai",
-  "generated_at": "2026-08-12T04:01:25.795013+00:00",
+  "generated_at": "2026-08-19T05:03:19.727532+00:00",
   "classification": {
     "task": "Price-band classification (3 classes)",
     "labels": [
@@ -105,6 +105,44 @@
     "contamination": 0.05,
     "flagged": 356,
     "total": 7109,
+    "detectors": {
+      "isolation_forest": {
+        "flagged": 356,
+        "defines_unusual_as": "few splits needed to isolate"
+      },
+      "lof": {
+        "flagged": 356,
+        "n_neighbors": 20,
+        "defines_unusual_as": "lower local density than its neighbours"
+      },
+      "dbscan": {
+        "flagged": 52,
+        "eps": 1.2817,
+        "min_samples": 5,
+        "defines_unusual_as": "not density-reachable from a core point",
+        "eps_note": "DBSCAN has no contamination parameter. eps is the 95% quantile of the distance to the 5th nearest neighbour, so all three detectors work to the same budget and the comparison is about which rows, not how many."
+      }
+    },
+    "agreement": {
+      "pairwise": {
+        "dbscan vs isolation_forest": {
+          "jaccard": 0.0074,
+          "both": 3
+        },
+        "dbscan vs lof": {
+          "jaccard": 0.1087,
+          "both": 40
+        },
+        "isolation_forest vs lof": {
+          "jaccard": 0.0675,
+          "both": 45
+        }
+      },
+      "flagged_by_all": 2,
+      "flagged_by_any": 678,
+      "unanimous_share_of_any": 0.0029
+    },
+    "agreement_note": "Three detectors, one feature matrix, one 5% budget. Jaccard is used because agreement on the ~95% of rows nobody flagged is not informative. Rows all three flag are unusual under three different definitions; rows only one flags say more about that detector than about the property.",
     "note": "Flags records that are unusual across their whole feature vector, which is a different question from the price-interval check: that asks whether a price is far from the model, this asks whether the record itself is atypical.",
     "caveat": "An anomaly is not evidence of anything wrong. Contamination is set at 5% by assumption, so roughly 5% of records will be flagged whatever the data looks like."
   }

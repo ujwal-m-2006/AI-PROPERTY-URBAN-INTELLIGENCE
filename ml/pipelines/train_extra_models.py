@@ -42,15 +42,18 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
-from sklearn.cluster import KMeans  # noqa: E402
+from sklearn.cluster import DBSCAN, KMeans  # noqa: E402
 from sklearn.ensemble import IsolationForest, RandomForestClassifier  # noqa: E402
 from sklearn.metrics import (  # noqa: E402
+    calinski_harabasz_score,
     classification_report,
     confusion_matrix,
+    davies_bouldin_score,
     roc_auc_score,
     silhouette_score,
 )
 from sklearn.model_selection import GroupShuffleSplit  # noqa: E402
+from sklearn.neighbors import LocalOutlierFactor, NearestNeighbors  # noqa: E402
 from sklearn.preprocessing import StandardScaler  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -61,9 +64,67 @@ from pipelines.train_city_model import GIS_NUMERIC, build_pipeline  # noqa: E402
 warnings.filterwarnings("ignore")
 
 ROOT = Path(__file__).resolve().parents[2]
+CONTAMINATION = 0.05
+DBSCAN_MIN_SAMPLES = 5
 RANDOM_STATE = 42
 NAVY, ACCENT = "#1B365D", "#C2703A"
 BANDS = ["Budget", "Mid-market", "Premium"]
+
+
+def cluster_validity(Z, labels) -> dict[str, float]:
+    """Three indices, because one is a choice and three are a check.
+
+    They disagree by construction: silhouette rewards separation per point,
+    Davies-Bouldin penalises overlapping cluster spreads, Calinski-Harabasz is
+    a variance ratio that rises with k almost by default. Agreement between
+    them is evidence the structure is real; disagreement means the "best" k was
+    a property of the index.
+    """
+    return {
+        "silhouette": round(float(silhouette_score(Z, labels)), 4),
+        "davies_bouldin": round(float(davies_bouldin_score(Z, labels)), 4),
+        "calinski_harabasz": round(float(calinski_harabasz_score(Z, labels)), 1),
+    }
+
+
+def _dbscan_eps(A, min_samples: int, target_rate: float) -> float:
+    """eps that flags about `target_rate` of points as noise.
+
+    DBSCAN has no contamination parameter, so comparing it against detectors
+    that do would otherwise compare flag rates rather than flag agreement.
+    Calibrating eps to the same budget makes the comparison about *which* rows.
+    """
+    nn = NearestNeighbors(n_neighbors=min_samples).fit(A)
+    d, _ = nn.kneighbors(A)
+    return float(np.quantile(d[:, -1], 1.0 - target_rate))
+
+
+def detector_agreement(flags: dict[str, np.ndarray]) -> dict[str, Any]:
+    """How much do the detectors agree about which rows are anomalous?
+
+    Each array is a boolean mask over the same rows. Jaccard is the honest
+    measure here: all three flag ~5% of records, so raw agreement would be ~90%
+    on the rows nobody flagged.
+    """
+    names = sorted(flags)
+    pairs = {}
+    for i, a in enumerate(names):
+        for b in names[i + 1:]:
+            inter = int((flags[a] & flags[b]).sum())
+            union = int((flags[a] | flags[b]).sum())
+            pairs[f"{a} vs {b}"] = {
+                "jaccard": round(inter / union, 4) if union else 0.0,
+                "both": inter,
+            }
+    stack = np.vstack([flags[n] for n in names])
+    all_three = int(stack.all(axis=0).sum())
+    any_one = int(stack.any(axis=0).sum())
+    return {
+        "pairwise": pairs,
+        "flagged_by_all": all_three,
+        "flagged_by_any": any_one,
+        "unanimous_share_of_any": round(all_three / any_one, 4) if any_one else 0.0,
+    }
 
 
 def main() -> int:
@@ -229,18 +290,33 @@ def main() -> int:
     clustering: dict[str, Any] = {"available": False}
     if len(loc) >= 12:
         Z = StandardScaler().fit_transform(loc.to_numpy(dtype=float))
-        best_k, best_sil = None, -1.0
-        scores = {}
+        by_k: dict[int, dict[str, float]] = {}
         for k in range(2, min(9, len(loc) - 1)):
             km = KMeans(n_clusters=k, random_state=RANDOM_STATE, n_init=10).fit(Z)
-            sil = float(silhouette_score(Z, km.labels_))
-            scores[k] = round(sil, 4)
-            if sil > best_sil:
-                best_k, best_sil = k, sil
+            by_k[k] = cluster_validity(Z, km.labels_)
+
+        scores = {k: v["silhouette"] for k, v in by_k.items()}
+        # Each index votes for its own optimum. Silhouette decides — it is the
+        # one this project has always reported — but the other two are recorded
+        # so a disagreement cannot be quietly dropped.
+        picks = {
+            "silhouette": max(by_k, key=lambda k: by_k[k]["silhouette"]),
+            "davies_bouldin": min(by_k, key=lambda k: by_k[k]["davies_bouldin"]),
+            "calinski_harabasz": max(by_k, key=lambda k: by_k[k]["calinski_harabasz"]),
+        }
+        best_k = picks["silhouette"]
+        best_sil = by_k[best_k]["silhouette"]
+        agree = len(set(picks.values())) == 1
+
         km = KMeans(n_clusters=best_k, random_state=RANDOM_STATE, n_init=10).fit(Z)
         loc["cluster"] = km.labels_
         print(f"    k chosen by silhouette: k={best_k} (score {best_sil:.4f})")
         print(f"    silhouette by k: {scores}")
+        for name, k in picks.items():
+            print(f"      {name:<20} prefers k={k}")
+        print(f"    indices {'AGREE' if agree else 'DISAGREE'} on k — "
+              f"{'the structure survives the choice of index'
+                 if agree else 'k is index-dependent, so treat it as one view'}")
 
         summary = []
         for c in sorted(set(km.labels_)):
@@ -267,6 +343,20 @@ def main() -> int:
             "k_selection": "highest silhouette score, not assumed",
             "silhouette": round(best_sil, 4),
             "silhouette_by_k": scores,
+            "validity_by_k": {str(k): v for k, v in by_k.items()},
+            "chosen_k_by_index": {n: int(k) for n, k in picks.items()},
+            "indices_agree_on_k": agree,
+            "validity_note": (
+                "Three indices, one decision. Silhouette selects k; "
+                "Davies-Bouldin (lower is better) and Calinski-Harabasz "
+                "(higher is better) are reported alongside so a disagreement "
+                "is visible. When they disagree, k is a property of the index "
+                "rather than of the data."
+                if agree else
+                "The three indices do NOT choose the same k. The clustering is "
+                "reported as one defensible view, not as the structure of the "
+                "data."
+            ),
             "localities_clustered": int(len(loc)),
             "clusters": summary,
             "assignments": {str(i): int(c) for i, c in
@@ -285,24 +375,74 @@ def main() -> int:
     payload["clustering"] = clustering
 
     # ---------------------------------------------- 3. anomaly detection
-    print("\n[3] ANOMALY DETECTION (Isolation Forest)")
+    print("\n[3] ANOMALY DETECTION (three detectors, then their agreement)")
     anom_feats = [c for c in numeric if df[c].notna().sum() > len(df) * 0.5]
     A = df[anom_feats].fillna(df[anom_feats].median())
-    iso = IsolationForest(contamination=0.05, random_state=RANDOM_STATE,
+    As = StandardScaler().fit_transform(A)
+
+    iso = IsolationForest(contamination=CONTAMINATION, random_state=RANDOM_STATE,
                           n_estimators=200)
-    flags = iso.fit_predict(StandardScaler().fit_transform(A))
+    flags = iso.fit_predict(As)
     n_out = int((flags == -1).sum())
     print(f"    features: {len(anom_feats)} | flagged {n_out:,} of {len(df):,} "
-          f"({n_out / len(df):.1%}) at contamination=0.05")
+          f"({n_out / len(df):.1%}) at contamination={CONTAMINATION}")
+
+    # Two more detectors on the same rows, same features, same 5% budget. They
+    # define "unusual" differently: isolation depth, local density relative to
+    # neighbours, and density-connectivity.
+    lof = LocalOutlierFactor(n_neighbors=20, contamination=CONTAMINATION)
+    lof_flags = lof.fit_predict(As) == -1
+    print(f"    LOF (local density, k=20)          flagged {int(lof_flags.sum()):,}")
+
+    eps = _dbscan_eps(As, DBSCAN_MIN_SAMPLES, CONTAMINATION)
+    db = DBSCAN(eps=eps, min_samples=DBSCAN_MIN_SAMPLES).fit(As)
+    db_flags = db.labels_ == -1
+    print(f"    DBSCAN (eps={eps:.3f} calibrated to {CONTAMINATION:.0%}) "
+          f"flagged {int(db_flags.sum()):,}")
+
+    agreement = detector_agreement({
+        "isolation_forest": flags == -1,
+        "lof": lof_flags,
+        "dbscan": db_flags,
+    })
+    for pair, v in agreement["pairwise"].items():
+        print(f"      {pair:<38} Jaccard {v['jaccard']:.3f} "
+              f"({v['both']:,} rows in common)")
+    print(f"    all three agree on {agreement['flagged_by_all']:,} rows of the "
+          f"{agreement['flagged_by_any']:,} flagged by any "
+          f"({agreement['unanimous_share_of_any']:.1%})")
 
     joblib.dump({"model": iso, "features": anom_feats},
                 models_dir / "anomaly_detector.joblib")
     payload["anomaly"] = {
         "method": "Isolation Forest (unsupervised ML)",
         "features": anom_feats,
-        "contamination": 0.05,
+        "contamination": CONTAMINATION,
         "flagged": n_out,
         "total": int(len(df)),
+        "detectors": {
+            "isolation_forest": {"flagged": n_out,
+                                 "defines_unusual_as": "few splits needed to isolate"},
+            "lof": {"flagged": int(lof_flags.sum()), "n_neighbors": 20,
+                    "defines_unusual_as": "lower local density than its neighbours"},
+            "dbscan": {"flagged": int(db_flags.sum()), "eps": round(eps, 4),
+                       "min_samples": DBSCAN_MIN_SAMPLES,
+                       "defines_unusual_as": "not density-reachable from a core point",
+                       "eps_note": (
+                           "DBSCAN has no contamination parameter. eps is the "
+                           f"{1 - CONTAMINATION:.0%} quantile of the distance to "
+                           f"the {DBSCAN_MIN_SAMPLES}th nearest neighbour, so all "
+                           "three detectors work to the same budget and the "
+                           "comparison is about which rows, not how many.")},
+        },
+        "agreement": agreement,
+        "agreement_note": (
+            "Three detectors, one feature matrix, one 5% budget. Jaccard is "
+            "used because agreement on the ~95% of rows nobody flagged is not "
+            "informative. Rows all three flag are unusual under three "
+            "different definitions; rows only one flags say more about that "
+            "detector than about the property."
+        ),
         "note": (
             "Flags records that are unusual across their whole feature vector, "
             "which is a different question from the price-interval check: that "

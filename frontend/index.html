@@ -1543,16 +1543,40 @@ async function renderPlanningML(){
               <div class="why">${ty.well_separated
                 ? "Above 0.35 — the groups are separated enough to use"
                 : "Below 0.35 — the groups overlap substantially"}</div></td></tr>
+          <tr><th>Three validity indices</th>
+            <td style="text-align:right">
+              <span class="badge ${ty.indices_agree_on_k?'GREEN':'RED'}"></span>
+              <b>${ty.indices_agree_on_k ? "agree on k" : "disagree on k"}</b>
+              <div class="why">${Object.entries(ty.chosen_k_by_index||{})
+                .map(([n,k])=>`${escapeHtml(n.replace(/_/g," "))} &rarr; k=${k}`)
+                .join(" &middot; ")}</div></td></tr>
           <tr><th>Wards grouped</th>
             <td style="text-align:right">${ty.wards_clustered}</td></tr>
           <tr><th>Usable to classify a ward</th>
             <td style="text-align:right">
               <span class="badge ${ty.usable_for_classification?'GREEN':'RED'}"></span>
-              <b>${ty.usable_for_classification ? "Yes" : "No"}</b></td></tr>
+              <b>${ty.usable_for_classification ? "Yes" : "No"}</b>
+              <div class="why">${(ty.usable_for_classification_criteria||[])
+                .map(c=>`${c.met?"&check;":"&times;"} ${escapeHtml(c.criterion)}`)
+                .join("<br>")}</div></td></tr>
         </table>
 
         ${ty.warning ? `<p class="notice red" style="margin-top:10px">
           <b>${escapeHtml(ty.warning)}</b></p>` : ""}
+        ${ty.validity_note ? `<p class="notice ${ty.indices_agree_on_k?"":"red"}"
+          style="margin-top:8px">${escapeHtml(ty.validity_note)}</p>` : ""}
+        ${Object.keys(ty.validity_by_k||{}).length ? `
+        <table class="data" style="margin-top:10px">
+          <tr><th style="width:auto">k</th>
+            <td style="text-align:right;font-size:.7rem;color:var(--muted)">Silhouette<br>higher better</td>
+            <td style="text-align:right;font-size:.7rem;color:var(--muted)">Davies&ndash;Bouldin<br>lower better</td>
+            <td style="text-align:right;font-size:.7rem;color:var(--muted)">Calinski&ndash;Harabasz<br>higher better</td></tr>
+          ${Object.entries(ty.validity_by_k).map(([k,v])=>`
+            <tr><th style="width:auto">${escapeHtml(k)}${Number(k)===ty.k?" <b>&larr; chosen</b>":""}</th>
+              <td style="text-align:right">${v.silhouette}</td>
+              <td style="text-align:right">${v.davies_bouldin}</td>
+              <td style="text-align:right">${v.calinski_harabasz}</td></tr>`).join("")}
+        </table>` : ""}
 
         <table class="data" style="margin-top:10px">
           ${(ty.clusters||[]).map(c=>`
@@ -1999,8 +2023,16 @@ async function renderExtra(){
           <tr><th>Clusters (k)</th><td style="text-align:right"><b>${cu.k}</b>
             <div class="why">${escapeHtml(cu.k_selection)}</div></td></tr>
           <tr><th>Silhouette</th><td style="text-align:right">${cu.silhouette}</td></tr>
+          <tr><th>Three validity indices</th><td style="text-align:right">
+            <span class="badge ${cu.indices_agree_on_k?'GREEN':'RED'}"></span>
+            <b>${cu.indices_agree_on_k ? "agree on k" : "disagree on k"}</b>
+            <div class="why">${Object.entries(cu.chosen_k_by_index||{})
+              .map(([n,k])=>`${escapeHtml(n.replace(/_/g," "))} &rarr; k=${k}`)
+              .join(" &middot; ")}</div></td></tr>
           <tr><th>Localities</th><td style="text-align:right">${cu.localities_clustered}</td></tr>
         </table>
+        ${cu.validity_note ? `<p class="notice ${cu.indices_agree_on_k?"":"red"}"
+          style="margin-top:8px">${escapeHtml(cu.validity_note)}</p>` : ""}
         <table class="data" style="margin-top:8px">
           ${cu.clusters.map(c=>`
             <tr><th style="width:auto">Cluster ${c.cluster}
@@ -2022,6 +2054,34 @@ async function renderExtra(){
       </table>
       <p class="why" style="margin-top:7px">${escapeHtml(an.note||"")}</p>
       <p class="notice" style="margin-top:7px">${escapeHtml(an.caveat||"")}</p>
+
+      ${an.agreement ? `
+      <h2 style="margin-top:14px">Do three detectors flag the same rows?</h2>
+      <table class="data">
+        ${Object.entries(an.detectors||{}).map(([n,v])=>`
+          <tr><th style="width:auto">${escapeHtml(n.replace(/_/g," "))}
+              <div class="why">${escapeHtml(v.defines_unusual_as||"")}</div></th>
+            <td style="text-align:right">${(v.flagged||0).toLocaleString("en-IN")} flagged</td></tr>`).join("")}
+      </table>
+      <table class="data" style="margin-top:8px">
+        ${Object.entries(an.agreement.pairwise||{}).map(([pair,v])=>`
+          <tr><th style="width:auto">${escapeHtml(pair.replace(/_/g," "))}</th>
+            <td style="text-align:right">Jaccard <b>${v.jaccard}</b>
+              <div class="why">${(v.both||0).toLocaleString("en-IN")} rows in common</div></td></tr>`).join("")}
+        <tr><th style="width:auto">All three</th>
+          <td style="text-align:right">
+            <span class="badge RED"></span>
+            <b>${(an.agreement.flagged_by_all||0).toLocaleString("en-IN")}</b> rows
+            <div class="why">of ${(an.agreement.flagged_by_any||0).toLocaleString("en-IN")}
+              flagged by any &mdash;
+              ${((an.agreement.unanimous_share_of_any||0)*100).toFixed(1)}%</div></td></tr>
+      </table>
+      <p class="notice red" style="margin-top:8px"><b>The detectors barely
+        agree.</b> Each was given the same rows, the same features and the same
+        5% budget, and they still flag largely different records. "Anomalous"
+        here is mostly a property of the detector, not of the property &mdash;
+        which is why nothing in this platform treats a flag as a finding.</p>
+      <p class="why" style="margin-top:7px">${escapeHtml(an.agreement_note||"")}</p>` : ""}
     </div>
 
     <div class="section"><h2>Guidance value</h2>

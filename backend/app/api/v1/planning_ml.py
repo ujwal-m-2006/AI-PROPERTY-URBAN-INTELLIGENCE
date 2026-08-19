@@ -128,9 +128,26 @@ async def typology(city: str = Query("bengaluru")) -> dict[str, Any]:
         "k": t.get("k"),
         "k_selection": t.get("k_selection"),
         "silhouette": t.get("silhouette"),
+        "validity_by_k": t.get("validity_by_k", {}),
+        "chosen_k_by_index": t.get("chosen_k_by_index", {}),
+        "indices_agree_on_k": t.get("indices_agree_on_k"),
+        "validity_note": t.get("validity_note"),
         "well_separated": t.get("well_separated"),
         "warning": t.get("warning"),
-        "usable_for_classification": bool(t.get("well_separated")),
+        # Two independent reasons to distrust these groups, and both must hold
+        # before they may be used to classify a ward: the clusters must
+        # actually separate, AND the three validity indices must agree on how
+        # many there are. Either failure alone makes k a modelling choice.
+        "usable_for_classification": bool(t.get("well_separated"))
+                                     and bool(t.get("indices_agree_on_k")),
+        "usable_for_classification_criteria": [
+            {"criterion": "clusters actually separate (silhouette >= 0.35)",
+             "met": bool(t.get("well_separated")),
+             "value": t.get("silhouette")},
+            {"criterion": "all three validity indices choose the same k",
+             "met": bool(t.get("indices_agree_on_k")),
+             "value": t.get("chosen_k_by_index", {})},
+        ],
         "wards_clustered": t.get("wards_clustered"),
         "features_used": t.get("features_used", []),
         "clusters": t.get("clusters", []),

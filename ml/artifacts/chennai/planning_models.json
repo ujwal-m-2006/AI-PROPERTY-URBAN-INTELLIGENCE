@@ -1,7 +1,7 @@
 {
   "city": "chennai",
   "display": "Chennai",
-  "generated_at": "2026-08-18T17:41:43.930384+00:00",
+  "generated_at": "2026-08-19T05:06:03.762729+00:00",
   "target": "price_per_sqft",
   "target_label": "recorded sale price per sq.ft (INR)",
   "validation": "GroupKFold(5) by ward/locality \u2014 the same spatial-block scheme as every other model here, so these R\u00b2 values are comparable with the headline one",
@@ -58,6 +58,40 @@
     "k": 2,
     "k_selection": "highest silhouette over k=2..6, not assumed",
     "silhouette": 0.4445,
+    "validity_by_k": {
+      "2": {
+        "silhouette": 0.4445,
+        "davies_bouldin": 1.0852,
+        "calinski_harabasz": 76.4
+      },
+      "3": {
+        "silhouette": 0.2944,
+        "davies_bouldin": 1.2301,
+        "calinski_harabasz": 82.9
+      },
+      "4": {
+        "silhouette": 0.1993,
+        "davies_bouldin": 1.4113,
+        "calinski_harabasz": 71.7
+      },
+      "5": {
+        "silhouette": 0.2033,
+        "davies_bouldin": 1.3168,
+        "calinski_harabasz": 66.4
+      },
+      "6": {
+        "silhouette": 0.2145,
+        "davies_bouldin": 1.2746,
+        "calinski_harabasz": 61.3
+      }
+    },
+    "chosen_k_by_index": {
+      "silhouette": 2,
+      "davies_bouldin": 2,
+      "calinski_harabasz": 3
+    },
+    "indices_agree_on_k": false,
+    "validity_note": "The three indices choose DIFFERENT k. The number of ward types is therefore a property of the index, not of the data \u2014 one more reason to treat these groups as exploratory.",
     "wards_clustered": 200,
     "features_used": [
       "area_km2",
